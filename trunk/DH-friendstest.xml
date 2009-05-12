@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="friendstest"
+               description="A simple tool,to list all of your friends."
+               author="Hui Deng"
+			   author_email="denghui.1984@googlemail.com" 
+			   author_location="Deutschland"
+			   screenshot="http://farm4.static.flickr.com/3575/3468195032_ef1c2edcb6.jpg"
+               thumbnail="http://farm4.static.flickr.com/3523/3468195034_2c55b76afa_m.jpg"
+			   scrolling="true" 
+			   height="500">
+    <Require feature="opensocial-0.7"/>
+    <Require feature="views"/> 
+  </ModulePrefs>
+ 
+ 
+  <Content type="html">
+
+    <![CDATA[
+    
+       <script type="text/javascript" language="JavaScript" src="https://dl.getdropbox.com/u/1060911/friend/DH-getmore.js"></script>
+	   <script type="text/javascript">
+	   
+  
+
+        var viewer;              // Type：opensocial.Person
+        var viewerFriends;       // Type：opensocial.Collection
+        
+
+
+        
+		
+		
+		
+		
+		
+		
+		
+		
+		/* Display the basic informaiton */
+        function showBasic() {
+          /* Display VIEWER's name. */
+          //document.getElementById('me').innerHTML = friendHTML(viewer.getDisplayName());
+          //document.getElementById('me').innerHTML = '<a href="javascript:alert("Hello World!"); " >' +viewer.getDisplayName() +'</a>';
+         var displayId_v = viewer.getId();
+
+         document.getElementById('me').innerHTML = '<li>'+'<a href ="" onclick="loadViewer('+displayId_v+')" >'+'<img src='+viewer.getField(opensocial.Person.Field.THUMBNAIL_URL)+'>'+viewer.getDisplayName() +'</a>'+'</li>';
+		 document.getElementById('me_url').innerHTML = '<li>'+viewer.getField(opensocial.Person.Field.PROFILE_URL)+'</li>';
+		  /* display the friends' name of VIEWER. */
+          var html = new Array();
+          //html.push('<ul>');
+		  viewerFriends.each(
+          // <a href="javascript:goToView('home')" >Go to home view</a>
+		  //'<li>' + person.getDisplayName() + "</li>"
+		  function(friend) {
+           // html.push('<ul>'+'<a href="http://sandbox.orkut.com/Main#Profile.aspx?uid=2132517253041691433" >' +friend.getDisplayName() + ","+'</a>'+'</ul>');
+           html.push('</li>'+'<ul>'+'<a href="" onclick="getinfo('+friend.getDisplayName+')" >' +'<img src='+friend.getField(opensocial.Person.Field.THUMBNAIL_URL)+'>'+friend.getDisplayName()+'</a>'+'</ul>'+'</li>');
+           //html.push('</li>'+'<ul>'+'<a href="'+friend.getField(opensocial.Person.Field.PROFILE_URL)+'" onclick="getinfo" >' +'<img src='+friend.getField(opensocial.Person.Field.THUMBNAIL_URL)+'>'+friend.getDisplayName()+'</a>'+'</ul>'+'</li>');
+		   //html.push('</li>'+'<ul>'+'<img src='+friend.getField(opensocial.Person.Field.THUMBNAIL_URL)+'>' + friend.getDisplayName() +'<input type="button" onclick="getinfo()" value="getmore"/>'+'</ul>'+'</li>');
+		  }
+          );
+          
+		  
+           
+          //html.push('</ul>');
+		  var len = html.length;
+          document.getElementById('friends').innerHTML = html.join('');
+          };
+
+
+
+ 
+        
+
+       
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/* Send Opensocial API request. */
+        function reloadAll() {
+          var req = new opensocial.DataRequest();//Create a Object"req" of class "opensocial.DataRequest".
+          req.add(req.newFetchPersonRequest('VIEWER'), 'v');
+          req.add(req.newFetchPeopleRequest('VIEWER_FRIENDS'), 'vf');
+          req.send(onReloadAll);
+        };
+
+
+        /* Respond to requests */
+        function onReloadAll(dataResponse) {
+          /* Get the data */
+          viewer = dataResponse.get('v').getData() || {};
+          //var profile_url_v = viewer.getField(opensocial.Person.Field.PROFILE_URL);
+		  viewerFriends = dataResponse.get('vf').getData() || {};
+          
+          /* Show the data */
+          showBasic();
+        };
+
+
+        /*Execute the request function when the application is finished loading.*/
+        function init() {
+           reloadAll();
+         };
+             gadgets.util.registerOnLoadHandler(init);
+       </script>
+
+      <!-- Display all the Information -->
+      <div id='main'>
+        <b>Me：</b>
+        <ul id='me'></ul>
+        <ul id='me_url'></ul>
+		<b>My friends：</b>
+        <ul id='friends'></ul>
+     
+	  </div>
+    ]]>
+  </Content>
+
+
+</Module>
