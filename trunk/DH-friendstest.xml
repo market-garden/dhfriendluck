@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
-  <ModulePrefs title="friendstest"
+  <ModulePrefs title="friendstest2"
                description="A simple tool,to list all of your friends."
                author="Hui Deng"
 			   author_email="denghui.1984@googlemail.com" 
@@ -18,7 +18,7 @@
 
     <![CDATA[
     
-       <script type="text/javascript" language="JavaScript" src="https://dl.getdropbox.com/u/1060911/friend/DH-getmore.js"></script>
+       <script type="text/javascript" language="JavaScript" src="http://dhfriendluck.googlecode.com/svn/trunk/DH-getmore.js"></script>
 	   <script type="text/javascript">
 	   
   
