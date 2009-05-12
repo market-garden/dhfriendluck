@@ -38,7 +38,7 @@
 											opensocial.Person.Field.ABOUT_ME,
 
 										];
-                req.add(req.newFetchPersonRequest(oid,opt_params), 'viewer');	
+                req.add(req.newFetchPersonRequest('oid',opt_params), 'viewer');	
 				//req.add(req.newFetchPersonRequest('VIEWER',opt_params), 'viewer');	
 				req.send(onLoadViewer);
 			}
