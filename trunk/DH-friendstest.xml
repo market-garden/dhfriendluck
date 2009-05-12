@@ -36,7 +36,7 @@
          displayId_v = viewer.getId();
          document.getElementById('me_id').innerHTML = displayId_v;
 
-         document.getElementById('me').innerHTML = '<li>'+'<a href ="" onclick="loadViewer()" >'+'<img src='+viewer.getField(opensocial.Person.Field.THUMBNAIL_URL)+'>'+viewer.getDisplayName() +'</a>'+'</li>';
+         document.getElementById('me').innerHTML = '<li>'+'<a href ="" onclick="loadViewer('+(viewer.getId())+')" >'+'<img src='+viewer.getField(opensocial.Person.Field.THUMBNAIL_URL)+'>'+viewer.getDisplayName() +'</a>'+'</li>';
 		 //document.getElementById('me_url').innerHTML = '<li>'+viewer.getField(opensocial.Person.Field.PROFILE_URL)+'</li>';
 		  /* display the friends' name of VIEWER. */
           var html = new Array();
