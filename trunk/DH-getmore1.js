@@ -1,4 +1,4 @@
-	function onLoadmore() {
+	function onLoadmore_v() {
 				//var viewer = data.get('viewer').getData();
 				var html = "";
 
