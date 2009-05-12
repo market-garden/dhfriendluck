@@ -48,8 +48,8 @@
 		  //'<li>' + person.getDisplayName() + "</li>"
 		  function(friend) {
            // html.push('<ul>'+'<a href="http://sandbox.orkut.com/Main#Profile.aspx?uid=2132517253041691433" >' +friend.getDisplayName() + ","+'</a>'+'</ul>');
-           
-		  html.push('<li>'+'<ul>'+'<a href="" onclick="onLoadmore_f('+friend+')" >' +'<img src='+friend.getField(opensocial.Person.Field.THUMBNAIL_URL)+'>'+friend.getDisplayName()+'</a>'+'</ul>'+'</li>');
+          alert(typeof friend); 
+		  html.push('<li>'+'<ul>'+'<a href="" onclick="onLoadmore_f()" >' +'<img src='+friend.getField(opensocial.Person.Field.THUMBNAIL_URL)+'>'+friend.getDisplayName()+'</a>'+'</ul>'+'</li>');
 		   //html.push('<li>'+friend.getId()+'</li>');
            //html.push('</li>'+'<ul>'+'<a href="'+friend.getField(opensocial.Person.Field.PROFILE_URL)+'" onclick="getinfo" >' +'<img src='+friend.getField(opensocial.Person.Field.THUMBNAIL_URL)+'>'+friend.getDisplayName()+'</a>'+'</ul>'+'</li>');
 		  // html.push('</li>'+'<ul>'+'<img src='+friend.getField(opensocial.Person.Field.THUMBNAIL_URL)+'>' + friend.getDisplayName() +'<input type="button" onclick="onLoadmore_f('+friend+')" value="getmore"/>'+'</ul>'+'</li>');
@@ -69,15 +69,6 @@
         
 
        
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		/* Send Opensocial API request. */
         function reloadAll() {
