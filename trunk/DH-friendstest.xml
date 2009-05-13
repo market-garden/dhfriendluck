@@ -9,7 +9,7 @@
                thumbnail="http://farm4.static.flickr.com/3523/3468195034_2c55b76afa_m.jpg"
 			   scrolling="true" 
 			   height="500">
-    <Require feature="opensocial-0.7"/>
+    <Require feature="opensocial-0.8"/>
     <Require feature="views"/> 
   </ModulePrefs>
  
@@ -76,9 +76,13 @@
 		
 		/* Send Opensocial API request. */
         function reloadAll() {
-          var req = new opensocial.DataRequest();//Create a Object"req" of class "opensocial.DataRequest".
+          var req = new opensocial.newDataRequest();//Create a Object"req" of class "opensocial.DataRequest".
+          var params = {};
+          params[opensocial.IdSpec.Field.USER_ID] = opensocial.IdSpec.PersonId.VIEWER;
+          params[opensocial.IdSpec.Field.GROUP_ID] = opensocial.IdSpec.GroupId.FRIENDS;
+          var idspec = opensocial.newIdSpec(params);
           req.add(req.newFetchPersonRequest('VIEWER'), 'v');
-          req.add(req.newFetchPeopleRequest('VIEWER_FRIENDS'), 'vf');
+          req.add(req.newFetchPeopleRequest(idspec), 'vf');
           req.send(onReloadAll);
         };
 
