@@ -1,5 +1,5 @@
         function loadViewer(id) {
-			    var oid = id;
+			
 				var req = opensocial.newDataRequest();
 				var opt_params = {};
 				opt_params[opensocial.DataRequest.PeopleRequestFields.PROFILE_DETAILS] =
@@ -38,7 +38,9 @@
 											opensocial.Person.Field.ABOUT_ME,
 
 										];
-                req.add(req.newFetchPersonRequest('oid',opt_params), 'viewer');	
+                
+				var idspec = opensocial.newIdSpec(id);
+				req.add(req.newFetchPersonRequest(idspec,opt_params), 'viewer');	
 				//req.add(req.newFetchPersonRequest('VIEWER',opt_params), 'viewer');	
 				req.send(onLoadViewer);
 			}
