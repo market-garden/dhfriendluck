@@ -67,7 +67,7 @@
          var html = new Array();
          viewerFriends.each(
          function(friend) {
-         html.push('<li>'+'<ul>'+'<a href="" onclick="onLoadmore_f('+friend.getId()+')" >' +'<img src='+friend.getField(opensocial.Person.Field.THUMBNAIL_URL)+'>'+friend.getDisplayName()+'</a>'+'</ul>'+'</li>');
+         html.push('<li>'+'<ul>'+'<a href="" onclick="" >' +'<img src='+friend.getField(opensocial.Person.Field.THUMBNAIL_URL)+'>'+friend.getDisplayName()+'</a>'+'</ul>'+'</li>');
 	      }
          );
            document.getElementById('friends').innerHTML = html.join('');
