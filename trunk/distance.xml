@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?> 
 <Module>
-<ModulePrefs title="distance5">
+<ModulePrefs title="distance6">
  <Require feature="opensocial-0.8" /> 
  <Require feature="dynamic-height" /> 
  </ModulePrefs>
@@ -12,7 +12,7 @@
            var req = opensocial.newDataRequest();
            req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER), 'viewer');
            //var viewerFriends = opensocial.newIdSpec({ "userId" : "VIEWER","groupId" : "FRIENDS", "networkDistance" : 3 });
-           var viewerFriends = opensocial.newIdSpec({ "groupId" : "FRIENDS","networkDistance" : 1 });
+           var viewerFriends = opensocial.newIdSpec({"userId" : "VIEWER","networkDistance" : "2"});
            var opt_params = {};
            opt_params[opensocial.DataRequest.PeopleRequestFields.MAX] = 200;
            req.add(req.newFetchPeopleRequest(viewerFriends, opt_params), 'viewerFriends');
