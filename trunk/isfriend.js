@@ -1,11 +1,12 @@
 	  function isFriend() {
-           var withfriendid = document.getElementById('person').value;
-		   alert(withfriendid);
+          // var withfriendid = document.getElementById('person').value;
+		   //alert(withfriendid);
 		   var req = opensocial.newDataRequest();
-           var isFriendspec = opensocial.newIdSpec({ "userId" : "VIEWER","groupId" : "FRIENDS" });
+           var isFriendspec = opensocial.newIdSpec({ "userId" : "OWNER","groupId" : "FRIENDS" });
            var opt_params = {};
            opt_params[opensocial.DataRequest.PeopleRequestFields.MAX] = 200;
-           opt_params[opensocial.DataRequest.FilterType.IS_FRIENDS_WITH] = withfriendid;
+           //opt_params[opensocial.DataRequest.FilterType.IS_FRIENDS_WITH] = withfriendid;
+           opt_params[opensocial.DataRequest.PeopleRequestFields.FILTER] =opensocial.DataRequest.FilterType.HAS_APP;
       	   req.add(req.newFetchPeopleRequest(isFriendspec, opt_params), 'isfr');
            req.send(onLoadFriends);
 }

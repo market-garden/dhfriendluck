@@ -22,7 +22,7 @@
 		  var ownerFriends;
 		  
 		  function showBasic(){
-          document.getElementById('me').innerHTML ='<a href ="javascript:void(0);" onclick="getpersonmore(1)" >'+owner.getDisplayName() +'</a>';
+          document.getElementById('me').innerHTML ='<a href ="javascript:void(0);" onclick="isFriend()" >'+owner.getDisplayName() +'</a>';
           
           var len = ownerFriends.size();
 		  document.getElementById('fnum').innerHTML = len + "  " ;
@@ -129,7 +129,7 @@
         <div id='main'>
           Hello,my name is<b id = 'me'></b>,I have <b id = 'fnum'></b>friends.
 		  <form id='friends_form'>
-            Get commom myfiend with:<span id='friends'></span>. <a href='javascript:void(0);' onclick='isFriend();'>Go!</a>
+            Get commom myfiend with:<span id='friends'></span>. <a href='javascript:void(0);' onclick='pisFriend();'>Go!</a>
           </form>
         </div>
         <div id='info'>
