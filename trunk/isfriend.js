@@ -19,7 +19,7 @@
           var isFriends = data.get('isfr').getData();
 
           html = new Array();
-          html.push('<ul>');
+          html.push('<ul>'+1);
           isFriends.each(function(person) {
             if (person.getId()) {
               html.push('<li>', person.getDisplayName(), '</li>');
