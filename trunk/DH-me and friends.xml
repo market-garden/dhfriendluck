@@ -1,6 +1,6 @@
  <?xml version="1.0" encoding="UTF-8" ?> 
 <Module>
-<ModulePrefs title="Getcommonfriends"
+<ModulePrefs title="Getcommonfriends1"
                description="A simple tool,to list all of your friends."
                author="Hui Deng"
 			   author_email="denghui.1984@googlemail.com" 
@@ -129,7 +129,7 @@
         <div id='main'>
           Hello,my name is<b id = 'me'></b>,I have <b id = 'fnum'></b>friends.
 		  <form id='friends_form'>
-            Get commom myfiend with:<span id='friends'></span>. <a href='javascript:void(0);' onclick='pisFriend();'>Go!</a>
+            Get commom myfiend with:<span id='friends'></span>. <a href='javascript:void(0);' onclick='isFriend();'>Go!</a>
           </form>
         </div>
         <div id='info'>
