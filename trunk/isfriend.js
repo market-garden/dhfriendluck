@@ -1,5 +1,6 @@
 	  function isFriend() {
            var withfriendid = document.getElementById('person').value;
+		   alert(withfriendid);
 		   var req = opensocial.newDataRequest();
            var isFriendspec = opensocial.newIdSpec({ "userId" : "VIEWER","groupId" : "FRIENDS" });
            var opt_params = {};
