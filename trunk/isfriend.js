@@ -6,8 +6,9 @@
            var opt_params = {};
            opt_params[opensocial.DataRequest.PeopleRequestFields.MAX] = 200;
            //opt_params[opensocial.DataRequest.FilterType.IS_FRIENDS_WITH] = withfriendid;
-           opt_params[opensocial.DataRequest.PeopleRequestFields.FILTER] =opensocial.DataRequest.FilterType.HAS_APP;
-      	   req.add(req.newFetchPeopleRequest(isFriendspec, opt_params), 'isfr');
+           //opt_params[opensocial.DataRequest.PeopleRequestFields.FILTER] =opensocial.DataRequest.FilterType.HAS_APP;
+      	   opt_params[opensocial.DataRequest.PeopleRequestFields.FILTER] =opensocial.DataRequest.FilterType.IS_FRIENDS_WITH;
+		   req.add(req.newFetchPeopleRequest(isFriendspec, opt_params), 'isfr');
            req.send(onLoadFriends);
 }
 
