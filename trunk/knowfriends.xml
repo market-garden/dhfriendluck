@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?> 
 <Module>
-<ModulePrefs title="好友知多少1"
-               description="一个简单的工具，快速查看好友的所有信息"
+<ModulePrefs title="Knowfriends"
+               description="Get all information about your firends"
                author="Hui Deng"
 			   author_email="denghui.1984@googlemail.com" 
 			   author_location="Deutschland"
