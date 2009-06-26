@@ -52,7 +52,7 @@
 											  'mainUrl',
 											  'birthday',
 											  'star',
-											  opensocial.Person.Field.ADDRESSES 
+											  opensocial.Person.Field.ADDRESSES, 
 											  'organizations',
 											  'highSchool',
 				                              'university',
