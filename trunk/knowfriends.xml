@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?> 
 <Module>
-<ModulePrefs title="knowfriends"
+<ModulePrefs title="knowfriends(XN)"
                description="A simple tool,to list all information about your friends."
                author="Hui Deng"
 			   author_email="denghui.1984@googlemail.com" 
@@ -45,58 +45,21 @@
 		  opt_params[opensocial.DataRequest.PeopleRequestFields.MAX] = 500;
           opt_params[opensocial.DataRequest.PeopleRequestFields.PROFILE_DETAILS] =
 										[
-											opensocial.Person.Field.PROFILE_URL,
-  										    opensocial.Person.Field.CURRENT_LOCATION,
-											opensocial.Person.Field.ADDRESSES,
-								            opensocial.Person.Field.EMAILS,
-											opensocial.Person.Field.PHONE_NUMBERS,
-											opensocial.Person.Field.ABOUT_ME,
-											opensocial.Person.Field.STATUS,
-											opensocial.Person.Field.PROFILE_SONG,
-											opensocial.Person.Field.PROFILE_VIDEO,
-											opensocial.Person.Field.GENDER,
-											opensocial.Person.Field.SEXUAL_ORIENTATION,
-                                            opensocial.Person.Field.RELATIONSHIP_STATUS,
-                                            opensocial.Person.Field.AGE,
-                                            opensocial.Person.Field.DATE_OF_BIRTH,
-											opensocial.Person.Field.BODY_TYPE,
-											opensocial.Person.Field.ETHNICITY,
-											opensocial.Person.Field.SMOKER,
-											opensocial.Person.Field.DRINKER,
-											opensocial.Person.Field.CHILDREN,
-											opensocial.Person.Field.PETS,
-											opensocial.Person.Field.LIVING_ARRANGEMENT,
-											opensocial.Person.Field.TIME_ZONE,
-											opensocial.Person.Field.LANGUAGES_SPOKEN,
-											opensocial.Person.Field.JOBS,
-											opensocial.Person.Field.JOB_INTERESTS,
-											opensocial.Person.Field.SCHOOLS,
-											opensocial.Person.Field.INTERESTS,
-											opensocial.Person.Field.URLS,
-											opensocial.Person.Field.MUSIC,
-											opensocial.Person.Field.MOVIES,
-											opensocial.Person.Field.TV_SHOWS,
-											opensocial.Person.Field.BOOKS,
-											opensocial.Person.Field.ACTIVITIES,
-											opensocial.Person.Field.SPORTS,
-											opensocial.Person.Field.HEROES,
-											opensocial.Person.Field.QUOTES,
-											opensocial.Person.Field.CARS,
-											opensocial.Person.Field.FOOD,
-											opensocial.Person.Field.TURN_ONS,
-											opensocial.Person.Field.TURN_OFFS,
-											opensocial.Person.Field.TAGS,
-											opensocial.Person.Field.ROMANCE,
-											opensocial.Person.Field.SCARED_OF,
-											opensocial.Person.Field.HAPPIEST_WHEN,
-											opensocial.Person.Field.FASHION,
-											opensocial.Person.Field.HUMOR,
-											opensocial.Person.Field.LOOKING_FOR,
-											opensocial.Person.Field.RELIGION,
-											opensocial.Person.Field.POLITICAL_VIEWS,
-											opensocial.Person.Field.HAS_APP,
-											opensocial.Person.Field.NETWORK_PRESENCE,
-                                    ];
+											  opensocial.Person.Field.NAME, 
+											  opensocial.Person.Field.GENDER, 
+											  opensocial.Person.Field.THUMBNAIL_URL,
+											  'headUrl',
+											  'mainUrl',
+											  'birthday',
+											  'star',
+											  opensocial.Person.Field.ADDRESSES 
+											  'organizations',
+											  'highSchool',
+				                              'university',
+                                               opensocial.Person.Field.AGE,
+                                               opensocial.Person.Field.DATE_OF_BIRTH,
+											   opensocial.Person.Field.HAS_APP,
+                                          ];
 
 		  
 		  
