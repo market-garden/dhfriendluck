@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?> 
 <Module>
-<ModulePrefs title="My friends and Me"
-               description="A simple tool,to list all of your friends."
+<ModulePrefs title="knowfriends"
+               description="A simple tool,to list all information about your friends."
                author="Hui Deng"
 			   author_email="denghui.1984@googlemail.com" 
 			   author_location="Deutschland"
