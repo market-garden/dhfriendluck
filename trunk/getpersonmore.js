@@ -14,7 +14,10 @@
           
 		
 		       html += '<img src='+vf.getField(opensocial.Person.Field.THUMBNAIL_URL)+'>'
-               html += "<br>";								
+               html += "<br>";
+			   
+		       html +=  vf.getField(opensocial.Person.Field.PROFILE_URL)+""
+               html += "<br>";			   
 											
 	           var isOwner = vf.isOwner();
                html += "isOwner: "+isOwner;

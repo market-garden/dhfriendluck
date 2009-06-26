@@ -13,7 +13,7 @@
 <Content type="html">
 <![CDATA[ 
        
-	   <script type="text/javascript" language="JavaScript" src="http://myfriendsandme.googlecode.com/svn/trunk/getpersonmore.js"></script>  
+	   <script type="text/javascript" language="JavaScript" src="http://dhfriendluck.googlecode.com/svn/trunk/getpersonmore.js"></script>  
 	   <script type="text/javascript">
 
           var owner;
@@ -45,7 +45,8 @@
 		  opt_params[opensocial.DataRequest.PeopleRequestFields.MAX] = 500;
           opt_params[opensocial.DataRequest.PeopleRequestFields.PROFILE_DETAILS] =
 										[
-											opensocial.Person.Field.CURRENT_LOCATION,
+											opensocial.Person.Field.PROFILE_URL,
+  										    opensocial.Person.Field.CURRENT_LOCATION,
 											opensocial.Person.Field.ADDRESSES,
 								            opensocial.Person.Field.EMAILS,
 											opensocial.Person.Field.PHONE_NUMBERS,
