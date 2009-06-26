@@ -1,6 +1,6 @@
- <?xml version="1.0" encoding="UTF-8" ?> 
+<?xml version="1.0" encoding="UTF-8" ?> 
 <Module>
-<ModulePrefs title="Getcommonfriends1"
+<ModulePrefs title="My friends and Me"
                description="A simple tool,to list all of your friends."
                author="Hui Deng"
 			   author_email="denghui.1984@googlemail.com" 
@@ -13,16 +13,14 @@
 <Content type="html">
 <![CDATA[ 
        
-	   <script type="text/javascript" language="JavaScript" src="http://dhfriendluck.googlecode.com/svn/trunk/isfriend.js"></script>
-	  
+	   <script type="text/javascript" language="JavaScript" src="http://myfriendsandme.googlecode.com/svn/trunk/getpersonmore.js"></script>  
 	   <script type="text/javascript">
-          //var viewer;
-		  //var viewerFriends;
+
           var owner;
 		  var ownerFriends;
 		  
 		  function showBasic(){
-          document.getElementById('me').innerHTML ='<a href ="javascript:void(0);" onclick="isFriend()" >'+owner.getDisplayName() +'</a>';
+          document.getElementById('me').innerHTML ='<a href ="javascript:void(0);" onclick="getpersonmore(1)" >'+owner.getDisplayName() +'</a>';
           
           var len = ownerFriends.size();
 		  document.getElementById('fnum').innerHTML = len + "  " ;
@@ -37,7 +35,7 @@
           });
           html.push('</select>');
           document.getElementById('friends').innerHTML = html.join('');
-          // gadgets.window.adjustHeight();
+          gadgets.window.adjustHeight();
 		  } 
 		  
 		  
@@ -45,7 +43,7 @@
 		  function loadAll() {
           var opt_params = {};
 		  opt_params[opensocial.DataRequest.PeopleRequestFields.MAX] = 500;
-          /*opt_params[opensocial.DataRequest.PeopleRequestFields.PROFILE_DETAILS] =
+          opt_params[opensocial.DataRequest.PeopleRequestFields.PROFILE_DETAILS] =
 										[
 											opensocial.Person.Field.CURRENT_LOCATION,
 											opensocial.Person.Field.ADDRESSES,
@@ -97,7 +95,7 @@
 											opensocial.Person.Field.POLITICAL_VIEWS,
 											opensocial.Person.Field.HAS_APP,
 											opensocial.Person.Field.NETWORK_PRESENCE,
-                                    ];*/
+                                    ];
 
 		  
 		  
@@ -129,17 +127,11 @@
         <div id='main'>
           Hello,my name is<b id = 'me'></b>,I have <b id = 'fnum'></b>friends.
 		  <form id='friends_form'>
-            Get commom myfiend with:<span id='friends'></span>. <a href='javascript:void(0);' onclick='isFriend();'>Go!</a>
+            Get more infomation about myfiend:<span id='friends'></span>. <a href='javascript:void(0);' onclick='getpersonmore();'>Go!</a>
           </form>
         </div>
         <div id='info'>
-        </div>
-
-
-    
-
-    
-
+        </div>   
   ]]> 
   </Content>
   </Module>
