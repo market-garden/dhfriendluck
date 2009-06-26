@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?> 
 <Module>
-<ModulePrefs title="My friends and Me"
-               description="A simple tool,to list all of your friends."
+<ModulePrefs title="好友知多少1"
+               description="一个简单的工具，快速查看好友的所有信息"
                author="Hui Deng"
 			   author_email="denghui.1984@googlemail.com" 
 			   author_location="Deutschland"
@@ -11,9 +11,8 @@
   <Require feature="dynamic-height" /> 
   </ModulePrefs>
 <Content type="html">
-<![CDATA[ 
-       
-	   <script type="text/javascript" language="JavaScript" src="http://myfriendsandme.googlecode.com/svn/trunk/getpersonmore.js"></script>  
+<![CDATA[      
+	   <script type="text/javascript" language="JavaScript" src="http://dhfriendluck.googlecode.com/svn/trunk/getpersonmore.js"></script>  
 	   <script type="text/javascript">
 
           var owner;
