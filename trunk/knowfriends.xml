@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+<ModulePrefs title="好友知多少1"
+               description="一个简单的工具，快速查看好友的所有信息"
+               author="Hui Deng"
+			   author_email="denghui.1984@googlemail.com" 
+			   author_location="Deutschland"
+			   screenshot="http://farm4.static.flickr.com/3575/3468195032_ef1c2edcb6.jpg"
+               thumbnail="http://farm4.static.flickr.com/3523/3468195034_2c55b76afa_m.jpg">
+  <Require feature="opensocial-0.8" /> 
+  <Require feature="dynamic-height" /> 
+  </ModulePrefs>
+<Content type="html">
+<![CDATA[      
+	   <script type="text/javascript" language="JavaScript" src="http://dhfriendluck.googlecode.com/svn/trunk/getpersonmore.js"></script>  
+	   <script type="text/javascript">
+
+          var owner;
+		  var ownerFriends;
+		  
+		  function showBasic(){
+          document.getElementById('me').innerHTML ='<a href ="javascript:void(0);" onclick="getpersonmore(1)" >'+owner.getDisplayName() +'</a>';
+          
+          var len = ownerFriends.size();
+		  document.getElementById('fnum').innerHTML = len + "  " ;
+		  
+		  
+		  html = new Array();
+          html.push('<select id="person">');
+          ownerFriends.each(function(person) {
+          if (person.getId()) {
+               html.push('<option value="', person.getId(), '">', person.getDisplayName(), '</option>');
+            }
+          });
+          html.push('</select>');
+          document.getElementById('friends').innerHTML = html.join('');
+          gadgets.window.adjustHeight();
+		  } 
+		  
+		  
+		  
+		  function loadAll() {
+          var opt_params = {};
+		  opt_params[opensocial.DataRequest.PeopleRequestFields.MAX] = 500;
+          opt_params[opensocial.DataRequest.PeopleRequestFields.PROFILE_DETAILS] =
+										[
+											opensocial.Person.Field.CURRENT_LOCATION,
+											opensocial.Person.Field.ADDRESSES,
+								            opensocial.Person.Field.EMAILS,
+											opensocial.Person.Field.PHONE_NUMBERS,
+											opensocial.Person.Field.ABOUT_ME,
+											opensocial.Person.Field.STATUS,
+											opensocial.Person.Field.PROFILE_SONG,
+											opensocial.Person.Field.PROFILE_VIDEO,
+											opensocial.Person.Field.GENDER,
+											opensocial.Person.Field.SEXUAL_ORIENTATION,
+                                            opensocial.Person.Field.RELATIONSHIP_STATUS,
+                                            opensocial.Person.Field.AGE,
+                                            opensocial.Person.Field.DATE_OF_BIRTH,
+											opensocial.Person.Field.BODY_TYPE,
+											opensocial.Person.Field.ETHNICITY,
+											opensocial.Person.Field.SMOKER,
+											opensocial.Person.Field.DRINKER,
+											opensocial.Person.Field.CHILDREN,
+											opensocial.Person.Field.PETS,
+											opensocial.Person.Field.LIVING_ARRANGEMENT,
+											opensocial.Person.Field.TIME_ZONE,
+											opensocial.Person.Field.LANGUAGES_SPOKEN,
+											opensocial.Person.Field.JOBS,
+											opensocial.Person.Field.JOB_INTERESTS,
+											opensocial.Person.Field.SCHOOLS,
+											opensocial.Person.Field.INTERESTS,
+											opensocial.Person.Field.URLS,
+											opensocial.Person.Field.MUSIC,
+											opensocial.Person.Field.MOVIES,
+											opensocial.Person.Field.TV_SHOWS,
+											opensocial.Person.Field.BOOKS,
+											opensocial.Person.Field.ACTIVITIES,
+											opensocial.Person.Field.SPORTS,
+											opensocial.Person.Field.HEROES,
+											opensocial.Person.Field.QUOTES,
+											opensocial.Person.Field.CARS,
+											opensocial.Person.Field.FOOD,
+											opensocial.Person.Field.TURN_ONS,
+											opensocial.Person.Field.TURN_OFFS,
+											opensocial.Person.Field.TAGS,
+											opensocial.Person.Field.ROMANCE,
+											opensocial.Person.Field.SCARED_OF,
+											opensocial.Person.Field.HAPPIEST_WHEN,
+											opensocial.Person.Field.FASHION,
+											opensocial.Person.Field.HUMOR,
+											opensocial.Person.Field.LOOKING_FOR,
+											opensocial.Person.Field.RELIGION,
+											opensocial.Person.Field.POLITICAL_VIEWS,
+											opensocial.Person.Field.HAS_APP,
+											opensocial.Person.Field.NETWORK_PRESENCE,
+                                    ];
+
+		  
+		  
+		  var req = opensocial.newDataRequest();
+		  //req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.VIEWER, opt_params), 'v');
+          req.add(req.newFetchPersonRequest(opensocial.IdSpec.PersonId.OWNER, opt_params), 'o');
+		  //var vfidspec = opensocial.newIdSpec({ "userId" : "VIEWER", "groupId" : "FRIENDS" });
+          // req.add(req.newFetchPeopleRequest(vfidspec, opt_params), 'vf');
+		  var ofidspec = opensocial.newIdSpec({ "userId" : "OWNER", "groupId" : "FRIENDS" });
+          req.add(req.newFetchPeopleRequest(ofidspec, opt_params), 'of');
+		  req.send(onloadAll);
+         }
+
+        function onloadAll(data) {
+          owner = data.get('o').getData();
+          ownerFriends = data.get('of').getData();
+          //viewer = data.get('v').getData();
+          //viewerFriends = data.get('vf').getData();
+          showBasic();
+        }
+
+        function init() {
+          loadAll();
+        }
+        
+        gadgets.util.registerOnLoadHandler(init);
+      </script>
+     
+        <div id='main'>
+          Hello,my name is<b id = 'me'></b>,I have <b id = 'fnum'></b>friends.
+		  <form id='friends_form'>
+            Get more infomation about myfiend:<span id='friends'></span>. <a href='javascript:void(0);' onclick='getpersonmore();'>Go!</a>
+          </form>
+        </div>
+        <div id='info'>
+        </div>   
+  ]]> 
+  </Content>
+  </Module>
