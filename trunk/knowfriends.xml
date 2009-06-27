@@ -56,9 +56,7 @@
 											  'organizations',
 											  'highSchool',
 				                              'university',
-                                               opensocial.Person.Field.AGE,
-                                               opensocial.Person.Field.DATE_OF_BIRTH,
-											   opensocial.Person.Field.HAS_APP,
+
                                           ];
 
 		  

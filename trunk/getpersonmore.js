@@ -25,13 +25,14 @@
 			     html += "ID: "+ID;
            html += "<br>";	
 		 
-		        var gender = vf.getField(opensocial.Person.Field.GENDER);
-		        if(gender){
+		   var gender = vf.getField(opensocial.Person.Field.GENDER);
+		    if(gender){
 		          html += "gender: "+gender.getDisplayValue();
 		          html += "<br>";
             };
     
-    		    var HeadUrl = vf.getField('headUrl');
+    		
+		    var HeadUrl = vf.getField('headUrl');
             html += "中头像: "+HeadUrl;
             html += "<br>";  
            
@@ -65,27 +66,6 @@
 		  var University = vf.getField('university');
 		  html += "大学: "+University;
 		  html += "<br>"
-
-
-
-   
-		  var dateOfBirth = vf.getField(opensocial.Person.Field.DATE_OF_BIRTH);
-		  html += "dateOfBirth: "+dateOfBirth;
-		  html += "<br>";
-
-
-
-
-   
-		  var hasApp = vf.getField(opensocial.Person.HAS_APP);
-		  html += "hasApp: "+hasApp;
-		  html += "<br>";
-
-
-
-		  var networkPresence = vf.getField(opensocial.Person.Field.NETWORK_PRESENCE);
-		  html += "networkPresence: "+networkPresence;
-		  html += "<br>";
 
 		document.getElementById('info').innerHTML = html;		
         gadgets.window.adjustHeight();
