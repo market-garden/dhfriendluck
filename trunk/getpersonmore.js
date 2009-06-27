@@ -18,7 +18,7 @@
 			   		  						
 													
            var displayName = vf.getDisplayName();
-           html += "ĞÕÃû: "+displayName;
+           html += "å§“å: "+displayName;
            html += "<br>";	
 			   
            var ID = vf.getId();
@@ -32,19 +32,19 @@
             };
     
     		    var HeadUrl = vf.getField('headUrl');
-            html += "ÖĞÍ·Ïñ: "+HeadUrl;
+            html += "ä¸­å¤´åƒ: "+HeadUrl;
             html += "<br>";  
            
             var MainUrl = vf.getField('mianUrl');
-            html += "´óÍ·Ïñ: "+MainUrl;
+            html += "å¤§å¤´åƒ: "+MainUrl;
             html += "<br>";  
             
             var Birthday = vf.getField('birthday');
-            html += "ÉúÈÕ: "+Birthday;
+            html += "ç”Ÿæ—¥: "+Birthday;
             html += "<br>";          
             
             var Star = vf.getField('star');
-            html += "ĞÇ¼¶: "+Star;
+            html += "æ˜Ÿçº§: "+Star;
             html += "<br>";   
         
 		  
@@ -54,16 +54,16 @@
           html += "<br>";
           
 	            var Organizations = vf.getField('organizations');
-            html += "×éÖ¯: "+Organizations;
+            html += "ç»„ç»‡: "+Organizations;
             html += "<br>"; 	  
 		  
 		      var Highschool = vf.getField('highSchool');
-          html += "¸ßÖĞ: "+Highschool;
+          html += "é«˜ä¸­: "+Highschool;
           html += "<br>";
 
    
 		  var University = vf.getField('university');
-		  html += "´óÑ§: "+University;
+		  html += "å¤§å­¦: "+University;
 		  html += "<br>"
 
 
