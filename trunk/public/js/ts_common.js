@@ -275,7 +275,7 @@ $(function(){
                 ymPrompt.win({
                         message:TS+'/Index/network/type/'+type+'/selected/'+typevalue,
                         width:600,
-                        height:290,
+                        height:420,
                         title:'选择地区',
                         handler:function(){
                                 ymPrompt.close();
