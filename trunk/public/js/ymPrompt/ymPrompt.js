@@ -386,10 +386,8 @@
 		var setWinSize = function(w, h, pos) {
 			if (ym_win.style.display == 'none') return; //当前不可见则不处理
 			/*默认使用配置的宽高*/
-			//h = parseInt(h) || curCfg.height;
-			//w = parseInt(w) || curCfg.width;
-			h = 450;
-			w = 600;
+			h = parseInt(h) || curCfg.height;
+			w = parseInt(w) || curCfg.width;
 			setStyle(ym_wins, {
 				width: w + 'px',
 				height: h + 'px',
