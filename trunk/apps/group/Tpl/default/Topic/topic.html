@@ -1,0 +1,286 @@
+<include file="__THEME__/header" />
+
+
+<script type="text/javascript" src="../Public/Js/Common.js"></script>
+<script type="text/javascript" src="../Public/Js/topic.js"></script>
+<link  href="../Public/group.css" rel="stylesheet" type="text/css"/>
+
+<script>
+	//var opArr = new Array();
+	//var opArr['dist']['title'] = '设置精华';
+	//var opArr['dist']['body'] = '精华设置成功';
+	function admin_set(op) {
+
+		$.ajax({
+			type: "POST",
+ 			url:   "__URL__/"+op,
+			data: 'gid={$gid}&tid={$tid}&op='+op,
+			dataType:"json",
+ 			success: function(data){ajax_msg(data);}
+		});
+	}
+
+	function ajax_msg(data) {
+
+		if(data.flag == 1) {
+			ymPrompt.setDefaultCfg({title:data.title});
+			ymPrompt.succeedInfo({message:data.body,width:320,height:200,handler:reload});
+		}else{
+			ymPrompt.setDefaultCfg({title:data.title});
+			ymPrompt.errorInfo({message:data.body})
+		}
+	}
+	function reload() {
+		window.location.reload();
+	}
+	function delThread(gid, tid)
+   {
+
+		if (confirm("你确定要删除整个话题吗？"))
+		{
+			document.delform.gid.value = gid;
+			document.delform.tid.value = tid;
+			document.delform.type.value = 'thread';
+			document.delform.submit();
+		}
+	}
+	function delPost(gid,pid)
+	{
+		if (confirm("你确定要删除这条回复吗？"))
+		{
+			document.delform.gid.value = gid;
+			document.delform.tid.value = pid;
+			document.delform.type.value = 'post';
+			document.delform.submit();
+		}
+	}
+
+	
+   function quote(id) {
+		ymPrompt.win({message:APP+'/Topic/quote_dialog/gid/'+gid+'/id/'+id,width:600,height:320,title:'引用',iframe:true})
+   }
+  var gid = {$gid};
+  var tid = {$tid};
+
+</script>
+<script>
+function sharePop(id,url,gid2){
+
+	$.post(APP+"/Topic/addShare_check/", {aimId:id,gid:gid2}, function(txt){
+		   if(txt==1){
+			   ymPrompt.win(url+'/addShare/aimId/'+id+'/gid/'+gid2,500,'315','分享',null,null,null,{id:'a'});
+		   }else if(txt==-1){
+			   ymPrompt.errorInfo('请不要分享自己发布的东西!');
+		   }else if(txt==-2){
+			   ymPrompt.errorInfo('您已经分享过,请不要重复分享!');
+		   }else if(txt==-3){
+			   ymPrompt.errorInfo('您没有权限分享!');
+		   }else{
+			   ymPrompt.errorInfo('参数出错,请重试!');
+		   }
+	});
+}
+</script>
+</head>
+
+<body>
+
+<!-- 头部 end -->
+<div class="content"><!-- 内容 begin  -->
+  <!-- 用户组件列表 begin -->
+   <include file="__THEME__/apps" />
+  <!-- 用户组件列表 end -->
+
+
+  <div class="main"> <!-- 右侧内容 begin  -->
+   <div class=page_title> <!-- page_title begin -->
+  	<div class="left" style="width:80px;">
+    	<span class="headpic50"><a href="__APP__/Group/index/gid/{$groupinfo['id']}"><img src="__ROOT__/thumb.php?w=50&h=50&url={$groupinfo['logo']|get_photo_url}"/></a></span>
+    </div>
+    <div class="left" style="width:583px;">
+    	<h2><a href="__APP__/Group/index/gid/{$groupinfo['id']}">{$groupinfo['name']}</a> &gt; <a href="__APP__/Topic/index/gid/{$groupinfo['id']}">话题区</a></h2>
+
+      </div>
+    <div class="left alR lh30" style="width:170px;">
+        <a href="JavaScript:window.history.back()">&lt;&lt;返回上一页</a>
+        &nbsp;&nbsp;
+    {:W('Report',array( 'type'=>'话题举报','appid'=>$APPINFO['APP_ID'],'url'=>'/Topic/topic/gid/'.$gid.'/tid/'.$tid,'title'=>$topic['title'],'recordId'=>$tid))}        
+        </div>
+  <div class="c"></div>
+</div><!-- page_title end -->
+  <form name="delform" action="__URL__/del" method="post">
+	<input type=hidden name=gid value="{$gid}">
+	<input type=hidden name=tid value="{$tid}">
+	<input type=hidden name=type value="">
+  </form>
+
+
+	  <div class="groupBox">
+		 <div class="box1">
+			  <volist name="postlist['data']" id="post" key="key">
+
+			  <if condition="$post['istopic'] eq 1">
+				<h3><span class="right mr5"><a href="javascript:void(0)" class="BtnShare" onClick="sharePop('{$topic.id}','__URL__','{$groupinfo.id}')">分享</a></span>
+					<span style="line-height:30px;">主题：{$topic.title}  <php>if($topic['top']){</php>  <span class="zd">顶</span>  <php>}</php>
+					<php>if($topic['dist']){</php>  <span class="jh">精</span> <php>}</php></span></h3>
+
+			  <div class="li pt10">
+				<div class="left" style="width:8%;"><span class="headpic50"><a href="__TS__/space/{$topic.uid}" class="tips" rel="__TS__/Index/userInfo/uid/{$topic['uid']}"><img src="{$topic.uid|getUserFace}" alt="{$topic.uid|getUserName}" /></a></span><br />
+				</div>
+				<div class="left lh30" style="width:12%; overflow:hidden;"><a href="__TS__/space/{$topic.uid}">{$topic.uid|getUserName}</a><BR>{$post['uid']|getUserGroupIcon}</div>
+				<div class="left" style="width:80%">
+				  <div class="cGray2 lh30"><div class="right">楼主</div>{$topic['addtime']|friendlyDate}</div>
+					<div class="pb10 pt10 f14px" style="line-height:180%;">
+					<div style="padding:0 50px 0 0; " id="topic_content">{$topic.content|stripslashes|stripslashes|h}</div>
+					<php>if($topic['attach']) { $attach = unserialize($topic['attach']);  </php>
+						<volist name="attach" id="data">
+						<php>$data = explode('|',$data);</php>
+						<div>附件：<a href="__TS__/Attach/index/id/{$data['0']}/uid/{$topic['uid']}">{$data[1]}</a></div>
+						</volist>
+					<php>}</php>
+					</div>
+					<php> if($topic['mtime']) { </php> <div class="lh35 alR cGray2">修改于{$topic['mtime']|friendlyDate}</div> <php>} </php>
+					<div class="lh35 alR toplineD">
+					<php>if($isadmin) { </php>
+
+							<a href="__URL__/edit/gid/{$gid}/tid/{$topic['id']}" title="编辑">编辑</a> ┊ 
+							<php>if($topic['dist'] == 1) {</php><a id="dist" href="javascript:admin_set('undist');" title="取消精华">取消精华</a> <php>} else {</php> <a id="dist" href="javascript:admin_set('dist');" title="精华">设置精华</a> <php>}</php>┊ 
+							<php>if($topic['top'] == 1) {</php><a id="top" href="javascript:admin_set('untop');" title="取消置顶">取消置顶</a> <php>} else {</php> <a id="top" href="javascript:admin_set('top');" title="置顶">置顶</a> <php>}</php>┊ 
+							<php>if($topic['lock'] == 1) {</php><a id="top" href="javascript:admin_set('unlock');" title="取消锁定">取消锁定</a> <php>} else {</php> <a id="top" href="javascript:admin_set('lock');" title="锁定">锁定</a> <php>}</php>┊ 
+						<a href="javascript:delThread({$gid},{$tid});" title="删除">删除</a> ┊
+						<php>} elseif($mid == $topic['uid']) {</php>
+						<a href="__URL__/edit/gid/{$gid}/tid/{$topic['id']}" title="编辑">编辑</a> ┊
+						<a href="javascript:delThread({$gid},{$tid});" title="删除">删除</a> ┊
+
+					<php>} </php>
+		
+						<a href="javascript:quote({$topic['pid']})">引用</a> ┊
+						<if condition=" $isCollect ">
+							<a href="javascript:cancel_collect({$gid},{$topic['id']})">取消收藏</a>
+							
+						<else />
+							<a href="javascript:collect({$gid},{$topic['id']})">收藏</a>
+						</if>
+						</div>
+				</div>
+
+                <div class="c"></div>
+			  </div>
+			  <else />
+			  <div class="li pt10 topline">
+				<div class="left" style="width:8%;"><span class="headpic50"><a href="__TS__/space/{$post['uid']}" class="tips" rel="__TS__/Index/userInfo/uid/{$post['uid']}"><img src="{$post['uid']|getUserFace}" alt="用户名" /></a></span><br />
+				</div>
+				<div class="left lh30" style="width:12%; overflow:hidden;"><a href="__TS__/space/{$post['uid']}">{$post['uid']|getUserName}</a> <BR>{$post['uid']|getUserGroupIcon}</div>
+				<div class="left" style="width:80%">
+				  <div class="cGray2 lh30">
+					<div class="right"><php>$p = $_GET['p'] ? intval($_GET['p']) : 1; echo intval($p-1)*$limit+($key-1)</php>楼</div>
+				  {$post['ctime']|friendlyDate}</div>
+					<div class="btmlineD pb10 pt10 f14px" style="line-height:180%;">
+					<div style="padding:0 50px 0 0; " id="reply_content">
+						<php>if($post['quote']){ $qcontent = getPost($post['quote']);$qstr = "<a href='__TS__/space/$qcontent[uid]'>".getUserName($qcontent['uid']).'</a> 回复于：'.friendlyDate($qcontent['ctime']).'<br/>'.h($qcontent['content']); </php><div id="quotes">   {$qstr|stripslashes|ubb} </div>  <php>}</php>
+						{$post['content']|stripslashes|ubb|h}
+
+						<php>if($post['attach']) { $attach = unserialize($post['attach']);  </php>
+						<volist name="attach" id="data">
+						<php>$data = explode('|',$data);</php>
+						<div class="adjunct_list">
+                            <h2>附件:</h2>
+                        <p class="cGray2"><a href="__TS__/Attach/index/id/{$data['0']}/uid/{$post['uid']}">{$data[1]}</a><p>
+                        </div>
+						</volist>
+					<php>}</php>
+
+						</div>
+					</div>
+					<div class="lh35 alR">
+						<a href="javascript:quote({$post['id']})">引用</a>
+						<php>if($mid == $post['uid'] || $isadmin){</php> ┊ <a href="__APP__/Topic/editPost/gid/{$gid}/pid/{$post['id']}">编辑</a> ┊ <a href="javascript:delPost({$gid},{$post['id']});">删除</a><php>}</php>
+					</div>
+				</div>
+				<div class="c"></div>
+			  </div>
+			  </if>
+			  </volist>
+
+			 <div class="page">{$postlist['html']}</div>
+
+			<div class="lh30 alR topline"><a href="__APP__/Topic/index/gid/{$gid}">返回话题列表</a></div>
+
+			<php>if($topic['lock'] == 0){</php>
+			  <form method="post" action="__URL__/post" id="replyForm">
+			  <div class="li">
+				<div class="left alR lh25" style="width:20%"><strong>回复话题：</strong></div>
+				<div class="left" style="width:80%" >
+				<textarea rows="6"  name="content" style="display:none;" id="content"></textarea>
+                <iframe id="Editor" name="Editor" src="__PUBLIC__/js/Editor/editor.html?id=content&amp;height=250&width=700" frameborder="0" marginheight="0" marginwidth="0" scrolling="No" style="width: 95%; height: 250px" ></iframe>
+
+
+				</div>
+
+				<div class="left alR lh25" style="width:20%;"><strong>附件：</strong></div>
+           		<div class="left" style="width:80%">
+			    {:W( 'UploadAttach',array( 'uid'=>$mid , 'type'=>'group_topic' , 'callback'=>'attach_upload_success') )}
+                <input type="hidden" name="gid" value="{$gid}">
+				<input type="hidden" name="tid" value="{$tid}">
+				<input  type="button" class="btn_b mt5"  value="发送" id="send_reply" onclick="replySubmit();"/>
+			   </div>
+			  </div>
+			  </form>
+			 <php>}</php>
+
+		</div>
+	  </div><!-- end  -->  </div><!-- 右侧内容 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+<script>
+
+
+function photo_size(name){
+	$(name+" img").each(function(){
+		var width = 500;
+		var height = 500;
+		var image = $(this);
+		if (image.width() > image.height()){
+		   if(image.width()>width){
+			image.width(width);
+			image.height(width/image.width()*image.height());
+		   }
+		}
+		else{
+		   if(image.height()>height){
+			image.height(height);
+			image.width(height/image.height()*image.width());
+		   }
+		}
+		  image.addClass('hand');
+		  image.bind('click',function(){
+                   window.open(image.attr('src'),'_blank');
+                });
+	});
+}
+
+photo_size('#topic_content');
+photo_size('#reply_content');
+photo_size('#quotes');
+
+
+
+function replySubmit() {
+	
+		var content = $('#content').val();
+		
+		if(checkContent(content) == 0) {
+			alert('回复内容不能为空');
+			return false;
+		}else{
+			$('#send_reply').attr('disabled',true);
+		    $('#send_reply').val('数据正在提交...');
+		    $("#replyForm").submit(); 
+		}
+		return false;
+	}
+</script>
+
+<include file="__THEME__/footer" />
+</body>
+</html>

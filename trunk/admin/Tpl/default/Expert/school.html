@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{&SITE_TITLE}</title>
+	<link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript">
+		var ctrl = function(name){
+			this.elements = document.getElementsByName('id[]');
+			this.length = this.elements.length;
+		} 
+		ctrl.prototype = {
+			reverse:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked= !this.elements[i].checked;
+				}
+			},
+			all:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked = true;
+				}
+			},
+			unAll:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked = false;
+				}
+			},
+			toggle:function(obj){
+				this[obj.checked ? 'all' : 'unAll']();
+			},
+			del:function(id){
+				if(id==undefined){
+					id = [];
+					for(i=0;i<this.length;i++){
+						this.elements[i].checked && id.push(this.elements[i].value);
+					}
+					id = id.join(',');
+				}
+				alert('您选择了id为:'+id);
+			},
+			edit:function(id){
+				alert('您选择了id为:'+id);
+			}
+		}
+		var c = null;
+	</script>
+	</head>
+	<body>
+		<div id="container">
+			<table class="tableborder" width="100%">
+				<tbody>
+					<tr class="top">
+						<td class="border"></td>
+					</tr>
+					<tr>
+						<th class="header">tips</th>
+					</tr>
+					<tr>
+						<td class="tips">
+							<ul>
+								<li>学校列表</li>
+							</ul>
+						</td>
+					</tr>
+					<tr class="bottom">
+						<td class="border" colspan="5">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+			<table class="tableborder" width="100%">
+				<tbody>
+					<tr class="top">
+						<td class="border" colspan="6"></td>
+					</tr>
+					<tr>
+						<th class="header" colspan="6">标题</th>
+					</tr>
+					<tr class="label">
+						<th><input type="checkbox" class="checkbox" onclick="c.toggle(this)" />删？</th>
+						<th>编号</th>
+						<th>名称</th>
+						<th>类型</th>
+						<th>时间</th>
+						<th>操作</th>
+					</tr>
+					<tr class="cell altbg1">
+						<td><input type="checkbox" class="checkbox" name="id[]" value="1" /></td>
+						<td>1</td>
+						<td>flea框架</td>
+						<td>框架</td>
+						<td>2009-8-12</td>
+						<td><button type="button" onclick="c.edit(1)">编辑</button><button type="button" onclick="c.del(1)">删除</button></td>
+					</tr>
+					<tr class="cell altbg2">
+						<td><input type="checkbox" class="checkbox" name="id[]" value="2" /></td>
+						<td>2</td>
+						<td>zend框架</td>
+						<td>框架</td>
+						<td>2009-8-12</td>
+						<td><button type="button" onclick="c.edit(2)">编辑</button><button type="button" onclick="c.del(2)">删除</button></td>
+					</tr>
+					<tr class="cell altbg1">
+						<td><input type="checkbox" class="checkbox" name="id[]" value="3" /></td>
+						<td>3</td>
+						<td>think框架</td>
+						<td>框架</td>
+						<td>2009-8-12</td>
+						<td><button type="button" onclick="c.edit(3)">编辑</button><button type="button" onclick="c.del(3)">删除</button></td>
+					</tr>
+					<tr class="cell altbg2">
+						<td><input type="checkbox" class="checkbox" name="id[]" value="4" /></td>
+						<td>4</td>
+						<td>ci框架</td>
+						<td>框架</td>
+						<td>2009-8-12</td>
+						<td><button type="button" onclick="c.edit(4)">编辑</button><button type="button" onclick="c.del(4)">删除</button></td>
+					</tr>
+					<tr class="cell altbg1">
+						<td><input type="checkbox" class="checkbox" name="id[]" value="5" /></td>
+						<td>5</td>
+						<td>qee框架</td>
+						<td>框架</td>
+						<td>2009-8-12</td>
+						<td><button type="button" onclick="c.edit(5)">编辑</button><button type="button" onclick="c.del(5)">删除</button></td>
+					</tr>
+					<tr class="cell altbg2">
+						<td><input type="checkbox" class="checkbox" name="id[]" value="6" /></td>
+						<td>6</td>
+						<td>yii框架</td>
+						<td>框架</td>
+						<td>2009-8-12</td>
+						<td><button type="button" onclick="c.edit(6)">编辑</button><button type="button" onclick="c.del(6)">删除</button></td>
+					</tr>
+					<tr>
+						<td class="footer" colspan="6">
+							<button type="button" onclick="c.all()">全选</button>
+							<button type="button" onclick="c.unAll()">全不选</button>
+							<button type="button" onclick="c.reverse()">反选</button>
+							<button type="button" onclick="c.del()">删除</button>
+						</td>
+					</tr>
+					<tr class="bottom">
+						<td class="border" colspan="6">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<script type="text/javascript">
+			c = new ctrl('id[]');
+		</script>
+	</body>
+</html>

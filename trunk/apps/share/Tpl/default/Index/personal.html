@@ -1,0 +1,84 @@
+<include file="__THEME__/header" />
+
+
+<script src="../Public/JS/Share.js" type="text/javascript"></script>
+<link href="../Public/share.css" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/js/pagination/pagination.css" rel="stylesheet" type="text/css" />
+<link href="../Public/style.css" rel="stylesheet" type="text/css" />
+<link href="__THEME__/layout.css" rel="stylesheet" type="text/css" />
+<div class="content"><!-- 内容 begin  -->
+  <!-- 用户组件列表 begin -->
+  <include file="__THEME__/apps" />
+  <!-- 用户组件列表 end -->
+  
+  <div class="main"> <!-- 右侧内容 begin  -->
+  <div class="page_title">
+    <!-- Begin 个人资料 -->
+    <div class="left" style="width:66px;;"><span class="headpic50"><a href="__TS__/space/{$uid}"><img src="{$uid|getUserFace}"/></a></span></div>
+      <div class="left">
+      <h2>{$uid|getUserName}的分享</h2>
+      <p class="clear"><a href="__TS__/space/{$uid}">{$uid|getUserName}的个人空间</a> <a href="__ROOT__/index.php?s=/Notify/write/uid/{$uid}">发站内信</a>
+      </p>
+    </div>
+    <!-- #End 个人资料 -->
+  <div class="c"></div>
+</div><!-- page_title end -->
+  <div class="tab-menu"><!-- 切换标签 begin  -->
+      <ul>
+      <li><a class="on" href="#"><span>{$uid|getUserName}的分享</span></a></li>
+      </ul>
+  </div><!-- 切换标签 end  -->
+  <div class="MenuSub"><!--a href="#" class="fB">全部</a> <a href="#">网址</a--> 
+	  <a href="{$vo.id|getNewURL=typeId}" class="{$typeClass}">全部</a>&nbsp;
+	  <volist name='types' id='vo'>
+       <a href="{$key|getNewURL=typeId}" class="{$vo.typeClass}">{$vo.title}</a>&nbsp;&nbsp;
+      </volist>
+	  </div>
+  <div class="Friend"><!-- 好友分享 begin  -->
+	<div class="sidebar">
+    <div class="FSort">
+	<php>if(isset($_GET['time'])){</php>
+        <div class="tit"><a href="__URL__/personal/uid/{$uid}">全部存档({$total})</a></div>
+		<php>}else{</php>
+		<div class="tit"><a href="__URL__/personal/uid/{$uid}">全部存档({$total})</a></div>
+		<php>}</php>
+    	<ul>		
+		<volist name='archive' id='vo'>
+        <li class="{$vo.class}"><a href="__URL__/personal/uid/{$uid}/time/{$vo.time}">{$vo.title} ( {$vo.num} )</a></li>
+		</volist>
+        </ul>
+		<div class="btm"></div>
+    </div>
+	</div>
+  	<div class="FList">
+	  <volist name='content' id='vo'>
+      <div class="Fli">
+          <div class="user_img"><span class="headpic50"><a href="__TS__/space/{$vo.toUid}" class="tips" rel="__TS__/Index/userInfo/uid/{$vo.toUid}"><img src="{$vo.toUid|getUserFace}"/></a></span><br />
+          <div class="name"><a href="__TS__/space/{$vo.toUid}">{$vo.toUid|getUserName}</a></div>
+          </div>
+          <div class="LC">
+            <div class="MC">
+              <h4><span class="right"> <a class="BtnShare" href="javascript:void(0)" onclick="sharePop('{$vo.id}','__URL__')">分享</a></span>分享了一个{$vo.typeId|getTypeName}<span class="cGray2 ml10">{$vo.cTime|friendlyDate}</span></h4>
+              {$vo.data}
+              
+              <php>if(!empty($vo['info'])&&$vo['info']!='&nbsp;') { </php>
+              <div class="quote"><p>{$vo.info}<span class="quoteR">&nbsp;</span></p></div>
+			  <php>} </php>
+			  
+              <p class="alR"><a href="__URL__/content/id/{$vo.id}">评论</a><span class="cGray2">({$vo.comNum})</span> <!-- <a href="#">更多分享 | 举报</a> -->
+			    <php>if($mid==$vo['toUid']) { </php>
+			   | <a href="javascript:void(0)" onclick="del('{$vo.id}')">删除</a>
+			   <php>} </php>
+			   
+			   </p>
+            </div>
+      </div> 
+      <div class="c"></div>     
+  </div></volist> 
+  <div id="Pagination" class="pagination">{$list.html}</div>
+  </div><!-- 好友分享 end  -->
+  </div>
+  </div><!-- 右侧内容 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />

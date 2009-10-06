@@ -1,0 +1,73 @@
+
+<include file="__THEME__/header" />
+
+<link href="../Public/privacy.css" rel="stylesheet" type="text/css" />
+
+
+
+<div class="content"><!-- 内容 begin  -->
+    <include file="__THEME__/apps" />
+    <div class="main"><!-- 画布 begin  -->
+
+        
+ <div class=page_title> <!-- page_title begin -->
+                    <h2><img src="../Public/images/ico_ys.gif" />隐私管理</h2>
+                <div class="c"></div>
+</div><!-- page_title end -->
+                <div class="tab-menu"><!-- 切换标签 begin  -->
+                    <ul>
+                        <li><a href="__URL__"><span>基本选项</span></a></li>
+                        <li><a href="__URL__/feed" class="on"><span>我的动态</span></a></li>
+                        <li><a href="__URL__/visit"><span>访问限制</span></a></li>
+                        <li><a href="__URL__/black"><span>黑名单</span></a></li>
+                    </ul>
+                </div><!-- 切换标签 end  -->
+
+<form action="__URL__/doFeed" method="post" class="form_validator">
+
+  
+<div class="PBox" style="padding-top:30px;"><!-- 我的动态 begin  -->
+                    <h3 class="btmline mb10"><strong>你的哪些动态，会显示到你好友的“好友动态”中：</strong></h3>
+                     <p class="left" style="width:33%; height:30px; margin:0; padding:0;">
+                        <input id="u176" type="checkbox" name="info" value="1" <php>if($privacy["info"] == 1 || $null == 1){</php> checked='true' <php>}</php>  />
+                    修改个人资料（仅好友可见的部分）            </p>
+                    <p class="left" style="width:33%; height:30px; margin:0; padding:0;">
+                        <input id="u" type="checkbox" name="head" value="1" <php>if($privacy["head"] == 1 || $null == 1 ){</php> checked='true' <php>}</php>  />
+                        更新头像
+                    </p>
+                     <p class="left" style="width:33%; height:30px; margin:0; padding:0;">
+                        <input id="u3" type="checkbox" name="mini" value="1" <php>if($privacy["mini"] == 1 || $null == 1){</php> checked='true' <php>}</php>  />
+                        发表心情
+                    </p>
+                     <p class="left" style="width:33%; height:30px; margin:0; padding:0;">
+                        <input id="u2" type="checkbox" name="photo" value="1" <php>if($privacy["photo"] == 1 || $null == 1){</php> checked='true' <php>}</php>  />
+                        上传新照片
+                    </p>
+                     <p class="left" style="width:33%; height:30px; margin:0; padding:0;">
+                        <input id="u3" type="checkbox" name="blog" value="1" <php>if($privacy["blog"] == 1 || $null == 1){</php> checked='true' <php>}</php>  />
+                        发表新日记
+                    </p>
+                    <p class="left" style="width:33%; height:30px; margin:0; padding:0;">
+                        <input id="u4" type="checkbox" name="group_create" value="1" <php>if($privacy["group_create"] == 1 || $null == 1){</php> checked='true' <php>}</php>  />
+                        建立新群
+                    </p>
+                     <p class="left" style="width:33%; height:30px; margin:0; padding:0;">
+                        <input id="u5" type="checkbox" name="group_apply" value="1" <php>if($privacy["group_apply"] == 1 || $null == 1){</php> checked='true' <php>}</php>  />
+                      加入某群</p>
+                    <p class="left" style="width:33%; height:30px; margin:0; padding:0;">
+                        <input id="u6" type="checkbox" name="add_friend" value="1" <php>if($privacy["add_friend"] == 1 || $null == 1){</php> checked='true' <php>}</php>  />
+                    加某人为好友 </p>
+                     <p class="left" style="width:33%; height:30px; margin:0; padding:0;">
+                        <input id="u7" type="checkbox" name="add_app" value="1" <php>if($privacy["add_app"] == 1 || $null == 1){</php> checked='true' <php>}</php>  />
+                    添加新组件 </p>
+        	<div class="c"></div>
+                        <input type="submit" class="btn_b" value="保存修改" />                    
+                </div><!-- 我的动态 -->
+
+</form>     
+
+
+    </div><!-- 画布 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />

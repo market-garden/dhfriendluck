@@ -1,0 +1,340 @@
+<include file="__THEME__/header" />
+
+<link rel="stylesheet" href="../Public/poll.css" type="text/css" media="screen" charset="utf-8" />
+<link href="__PUBLIC__/js/pagination/pagination.css" rel="stylesheet" type="text/css" />
+
+
+<script>
+
+    function commentSuccess(json){
+        //计数
+        $.post(APP+'/Index/commentSuccess',{data:json},function(result){
+            //返回投票计数
+        });
+    }
+    function deleteSuccess(json){
+        //计数
+        $.post(APP+'/Index/deleteSuccess',{data:json},function(result){
+            //返回投票计数
+        });
+    }
+
+    /**
+     * addCategory
+     * 添加分类
+     * @param category $category
+     * @access public
+     * @return void
+     */
+    function addCategory(tp){
+        if( tp!="ok" ){
+            return ymPrompt.close();
+        }
+
+        var name = $( '#newOpt' ).val();
+        var id       = {$vote['id']};
+        if( name != "" ){
+            $.post( APP+"/Index/addOpt",{name:name,id:id},function( txt ){
+                ymPrompt.close();
+                switch ( txt ){
+                    case '0':
+                        Alert( '添加失败' );
+                        break;
+                    case '-1':
+                        Alert( '非合法添加，无法得知投票标识' );
+                        break;
+                    case '-2':
+                        Alert( '非合法添加，投票ID为空' );
+                        break;
+                    case '-3':
+                        Alert( '不允许添加重名的选项' );
+                        break;
+                    default:
+                        location.reload();
+                }
+            });
+    
+        }else{
+            Alert( '请输入选项名' );
+        }
+    }
+
+    function deleteVote( id ){
+        if( Confirm( {message:"是否确定删除这条投票?",handler:function( txt ){
+                if( 'ok' == txt ){
+                    $.post( APP+'/Index/deleteVote',{id:id},function( txt ){
+                        if( -1 != txt ){
+                            location.href=APP+'/Index/my';
+                        }else{
+                            Alert( "删除投票失败" );
+                        }
+                    });
+                }
+            }} ) ){
+
+        }
+    }
+    function getMessage(){
+        ymPrompt.confirmInfo({
+            icoCls:'',
+            msgCls:'confirm',
+            message:'请输入新的选项名：<br><input type=\'text\' id=\'newOpt\' onfocus=\'this.select()\' />',
+            title:'新添加候选项',
+            height:150,
+            handler:addCategory,
+            autoClose:false
+        });
+    }
+
+    function getMessage2(){
+        ymPrompt.confirmInfo({
+            icoCls:'',
+            msgCls:'confirm',
+            message:'请输入新的结束时间：<br>\
+  <select name = \"year\" id=\"year\">\
+<?php for( $i=intval(date( 'Y',time()));$i<intval(date( 'Y',time() ))+10;$i++ ){
+            echo "<option value=\"$i\">".$i."</option>\\";
+        }?>
+            </select>年\
+            <select name = \"month\" id=\"month\">\
+        <?php for( $i=1;$i<13;$i++ ){
+        echo "<option value=\"$i\">".$i."</option>\\";
+    }?>
+        </select>月\
+        <select name = \"day\" id=\"day\">\
+    <?php for( $i=1;$i<32;$i++ ){
+    echo "<option value=\"$i\">".$i."</option>\\";
+}?>
+    </select>日\
+    <select name = \"hour\" id=\"hour\">\
+<?php for( $i=1;$i<25;$i++ ){
+echo "<option value=\"$i\">".$i."</option>\\";
+}?>
+</select>时\
+',
+title:'修改结束时间',
+height:150,
+handler:editDate,
+autoClose:false
+});
+<php>
+$time = explode('-',date( 'Y-n-d-H',$vote['deadline'] ));
+list( $year,$month,$day,$hour ) = $time;
+</php>
+$( '#year option[value={$year}]' ).attr( 'selected',true ) ;
+$( '#month option[value={$month}]' ).attr( 'selected',true ) ;
+$( '#day option[value={$day}]' ).attr( 'selected',true ) ;
+$( '#hour option[value={$hour}]' ).attr( 'selected',true ) ;
+}
+
+
+function editDate( tp ){
+if( tp!="ok" ){
+return ymPrompt.close();
+}
+
+var year = $( '#year' ).val();
+var month = $( '#month' ).val();
+var day = $( '#day' ).val();
+var hour = $( '#hour' ).val();
+var id       = {$vote['id']};
+$.post( APP+"/Index/editDate",{year:year,month:month,day:day,hour:hour,id:id},function( txt ){
+ymPrompt.close();
+switch ( txt ){
+case '0':
+    Alert( '未知原因，修改失败' );
+    break;
+case '-1':
+    Alert( '非合法修改，无法得知投票标识' );
+    break;
+case '-2':
+    Alert( '非合法修改，投票ID为空' );
+    break;
+case '-3':
+    Alert( '不允许修改的时间小于当前时间' );
+    break;
+default:
+    location.reload();
+}
+});
+}
+
+function post_vote(type){
+var most_vote_num = $("#most_vote_num").text();
+if(type == 0){
+var opts = $('input[name=vote_opt]').filter( '[checked]' ).val();
+var opts_ids = $('input[name=vote_opt]').filter( '[checked]' ).attr("id");
+}else{
+var opts = '';
+var opts_ids = '';
+var num = 0;
+$("input[type=checkbox]").filter( '[checked]' ).each(function(i){
+opts = opts + $(this).val()+",";
+opts_ids = opts_ids + $(this).attr("id")+",";
+num = num + 1;
+});
+
+if(num > most_vote_num){
+Alert("嗨，这个投票最多可投"+most_vote_num+"项");
+return;
+}
+}
+
+if(!opts){
+Alert("嗨，你到底投给哪一项呀？");
+return false;
+}
+
+var URL = "__URL__";
+var vote_id = {$vote.id};
+$.post(URL+"/vote",{vote_id:vote_id,opts:opts,opts_ids:opts_ids},function(txt){
+if(txt){
+if( -2 == txt ){
+    Alert("这个投票已经结束");
+}else if( -3 == txt ){
+    Alert("这个投票仅好友可投!");
+}else if( -1 == txt ){
+    Alert( "你已经投过一次了!" );
+}else{
+    location.reload();
+}
+}
+});
+
+}
+
+$(function(){
+<php>
+foreach($vote_pers as $k=>$v){
+//if($v == 100) $v=97;
+echo '$(".vote-per-'.$k.'").animate( { width: "'.$v.'%"}, 2000);';
+}
+</php>
+
+        $('.circs').click(function(){
+        $('.vote_opts').slideToggle('slow');
+    });
+});
+
+
+</script>
+<div class="content"><!-- 内容 begin  -->
+    <include file="__THEME__/apps" />
+    <div class="main"> <!-- 右侧内容 begin  -->
+        <div class="page_title"> <!-- page_title begin -->
+            <div class="left" style="width:66px;;"><span class="headpic50"><a href="__TS__/space/{$vote.uid}"><img src="{$vote.uid|getUserFace}" /></a></span></div>
+            <div class="left">
+                <h2><php>if( $vote['uid'] == $mid ){</php>我<php>}else{</php>{$vote['name']}<php>}</php>发起的投票</h2>
+                <p><a href="__TS__/space/{$vote.uid}"><php>if( $vote['uid'] == $mid ){</php>我<php>}else{</php>{$vote['name']}<php>}</php>
+                        的个人空间</a> ┊ <a href="__URL__/<php>if( $vote['uid'] == $mid ){</php>my<php>}else{</php>personal/uid/{$vote.uid}<php>}</php>">
+                        <php>if( $vote['uid'] == $mid ){</php>我<php>}else{</php>{$vote['name']}<php>}</php>的投票</a></p>
+            </div>
+            <div class="c"></div>
+        </div><!-- page_title end -->
+        <div class="pollBox">
+            <div class="cGray2 pt5 topline">
+                <div class="right lh25"><php>if( $mid == $vote['uid'] ){</php>
+                    <php>if ( $vote['deadline'] > time() ){</php>
+                    <a href="javascript:getMessage()">增加候选项</a><br />
+                    <php>}</php>
+                    <a href="javascript:deleteVote({$vote.id})">删除投票</a><br />
+                    <a href="javascript:getMessage2()">修改结束时间</a><br />
+                    <php>}else{</php>
+                    {:W('Report',array( 'type'=>'投票举报','appid'=>$APPINFO['APP_ID'],'url'=>'Index/pollDetail/id/'.$vote['id'],'title'=>$vote['title'],'recordId'=>$vote['id'] ))}
+                    <a href="javascript:void(0)" class="BtnShare" style="margin-left:10px;" onclick="ts_sharePop('{$vote.id}','__URL__')">分享</a>
+                   
+                    <php>}</php></div>
+                <div>
+                    <p>发起时间：{$vote.cTime|friendlyDate}</p>
+                    <p>已投票数：{$vote.vote_num}</p>
+                    <p>截止时间：<php>echo date('Y-m-d H:i:s',$vote['deadline'])</php></p>
+                </div>
+            </div>
+            <div style="width:70%; margin:0 auto;">
+                <h1 class="alC lh35 f14px"><span class="f14px fB cBlue">{$vote.title}</span><span class="cGray2" >(可选<span id="most_vote_num"><php>echo intval( $vote['type'])+1;</php></span>个)</span></h1>
+                <p class="cGray2">{$vote.explain}</p>
+
+            </div>
+
+            <div class="LogList" style="width:100%; ">
+
+                <form method="post" action="">
+                    <ul style="width:580px;" class="left">
+                        <volist name="vote_opts" id="vo" key="k">
+                            <li>
+                                <div class="left alR" style="width: 245px;">{$vo.name}:</div>
+                                <div class="left" style="width: 204px;">
+                                    <div class="poll">
+                                        <php>$kk = $k%10;</php>
+                                        <div class="vbg v<php>echo $kk?$kk:( $kk+1 );</php> vote-per-{$k-1}" id="bg<php>echo $kk?$kk:( $kk+1 );</php>" style="width:0px;">
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="left" style="width: 81px;">{$vo.num}({$vote_pers[$k-1]}%)</div>
+                                <div class="left" style="width: 30px;">
+                                    <php>
+                                        $des = "投票";
+                                        if( $has_vote == true || $vote['deadline'] <= time() || ( '1' == $vote['onlyfriend'] && $mid != $vote['uid'] && false == $api->friend_areFriends( $mid,$vote['uid'] )  ) ){
+                                        $css = "disabled";
+                                        $des = "仅好友可投票";
+                                        }</php>
+                                    <php>if( $vote['type'] == 0){</php>
+                                    <input name="vote_opt" type="radio" value="{$vo.name}" id="{$vo.id}" {$css}/>
+                                           <php>}else{</php>
+                                    <input name="vote_opt" type="checkbox" value="{$vo.name}" id="{$vo.id}" {$css}/>
+                                           <php>}</php>
+                                </div>
+                                <div class="c"></div>
+                            </li>
+                        </volist>
+                    </ul>
+                    <php>if( $vote['deadline'] <= time() ){</php>
+                    <span class="cRed">已结束</span>
+                    <php>}elseif( $mid != $vote['uid'] && $vote['onlyfriend'] == 1 && false == $api->friend_areFriends( $mid,$vote['uid'] ) ){</php>
+                    <span class="cRed">只允许好友投票</span>
+                    <php>}elseif( $has_vote ){</php>
+                    <span class="cRed">您已经投过票</span>
+                    <php>}else{</php>
+                    <div class="left"><input name="" type="button" style="cursor:pointer" onclick='post_vote( {$vote.type})' class="btn_b" value="{$des}" {$css}/></div>
+                    <php>}</php>
+                </form>
+                <div class="clear"></div>
+            </div><!-- LogList end  -->
+
+            <php>
+
+                if( "friend" == $vote_join ){
+                $join = "好友";
+                }else{
+                $join = "大家";
+                }
+
+            </php>
+
+            <div class="circs" style="padding-bottom:20px;">
+                <php>if( $empty_friend ){</php>
+                {$join}还没有投票
+                <php>}else{</php>
+                <dl>
+                    <dt>{$join}的投票情况：</dt>
+                    <div class ="vote_opts">
+                    <volist name="vote_users" id="vo">
+                        <php>if( true === $vo['isFriend'] || true === $vo['admin'] || true == $vo['Show'] ){</php>
+                        <dd><div class="left mt5" style="width:20px;"><php>if( true == $vo['isFriend'] ){</php><img src="../Public/images/haoyou.gif"><php>}</php><php>if( $mid == $vo['uid'] ){</php><img src="../Public/images/arrow_y.gif"><php>}</php>&nbsp;</div><div class="left" style="width:760px;"><a href="__TS__/space/{$vo.uid}">{$vo.name}</a> {$vo.cTime|friendlyDate}&nbsp;&nbsp;投票给“{$vo.opts}”</div> </dd>
+                        <php>}</php>
+                    </volist>
+                    </div>
+                    <php>}</php>
+                </dl>
+                <div class="c"></div>
+            </div>
+
+
+            <div style="width:637px">{:W('Comment',array( 'type'=>'vote','appid'=>$vote['id'],'mid'=>$vote['uid'],"face"=>getUserFace( $mid ),'role'=>1 ))}</div>
+        </div>
+
+    </div><!-- 右侧内容 end  -->
+    <div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" /> 

@@ -1,0 +1,49 @@
+<include file="__THEME__/header" />
+
+
+<script type="text/javascript" src="../Public/Js/Common.js"></script>
+<link  href="../Public/group.css" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+
+<div class="content"><!-- 内容 begin  -->
+ 
+  <!-- 用户组件列表 begin -->
+   <include file="__THEME__/apps" />      
+  <!-- 用户组件列表 end -->
+  
+  <div class="main"> <!-- 右侧内容 begin  -->
+    <!--  简单头部 -->
+  <include file="../Public/top" />
+ <!--  简单头部结束  -->
+    
+  <div class="MenuSub">
+  	<if condition=" !$_GET['order'] ">所有成员 <else /> <a href="__URL__/index/gid/{$gid}">所有成员</a></if>┊ 
+  	<if condition="$_GET['order'] eq 'ctime'">最新加入成员<else /><a href="__URL__/index/gid/{$gid}/order/ctime">最新加入成员</a></if>┊ 
+  	<if condition="$_GET['order'] eq 'mtime'">最近来访成员<else /><a href="__URL__/index/gid/{$gid}/order/mtime">最近来访成员</a></if>
+  </div>
+  <div class="groupBox">
+    <div class="boxL" style="width:100%;">
+    <ul class="ListBox">
+          <volist name="memberInfo['data']" id="member">
+    		<li style="width:118px; height:120px;">
+    			<span class="headpic50"><a href="__TS__/space/{$member['uid']}"><img src="{$member['uid']|getUserFace}" width="50px" height="50px"/></a></span>
+    			<div  class="alC"><a href="__TS__/space/{$member['uid']}">{$member['uid']|getUserName}</a><span style="background-color:#09F; color:#FFF; display:inline-block;" title="创建者"><eq name="member['level']" value="1">创建者</eq></span>	<span style="background-color:#09F; color:#FFF; display:inline-block;" title="管理者"><eq name="member['level']" value="2">管理者</eq></span></div>
+    			
+    			<em>最近访问：{$member['mtime']|friendlyDate}</em>
+    			
+    		</li>
+          </volist>
+       	  </ul>
+    	<p>共{$memberInfo['count']}名成员</p>
+     <div class="page">{$memberInfo['html']}</div>
+    </div>
+  <!-- end  -->
+  </div>  </div><!-- 右侧内容 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />
+</body>
+</html>

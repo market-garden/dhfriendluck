@@ -1,0 +1,33 @@
+
+<input id="mini_comm_num_{$feed['id']}" value="{$feed['comment_num']}" type="hidden">
+<div id="mini_comment_item_{$feed['id']}">
+  <volist name="feed['comment']" id="comm" key="k">
+    <php>if($k ==2 && $feed["comment_num"] != 2){</php>
+    <span id="feed_comm_middle_{$feed['id']}">
+    <div class="RLI bg01 btmline"><a href="javascript:getOtherComm({$feed['id']})" id="zhan_kai_{$feed['id']}">显示全部{$feed["comment_num"]}条</a></div>
+    </span>
+    <php>}</php>
+    <div class="RLI bg01 btmline">
+      <div class="user_img"><a href="__APP__/space/{$comm.uid}"><img src="{$comm.uid|getUserFace}" /></a></div>
+      <div class="RLC">
+        <h4><a href="__APP__/space/{$comm.uid}"><strong>{$comm.uid|getUserName}</strong></a><span class="cGray2">{$comm.cTime|friendlyDate}</span></h4>
+        <p>{$comm.comment}<a href="javascript:huifu_other({$feed['id']},{$comm.uid},'{$comm.uid|getUserName}');">回复</a></p>
+      </div>
+      <div class="c"></div>
+    </div>
+  </volist>
+</div>
+<div class="RLI bg01" id="post_con_{$feed['id']}" style="display:none;">
+  <div class="user_img"><img src="{$mid|getUserFace}" /></div>
+  <div class="RLC">
+    <div class="input_box" style="width:370px">
+      <textarea name="textarea" cols="" style="height:50px; line-height:18px; width:368px;"  id="mini_con_{$feed['id']}" onblur="blur_mini_con({$feed['id']});"></textarea>
+      <input type="button" class="btn_b" value="回 复" onclick="post_mini_con({$feed['id']});"/>
+    </div>
+  </div>
+  <div class="c"></div>
+</div>
+<div class="input_box bg01" id="small_con_{$feed['id']}">
+  <textarea name="textarea2" cols="" rows="3" style="height:25px; line-height:25px; margin:5px; width:412px;" class="cGray2" onclick="pre_comment(this,{$feed['id']});"> 添加回复</textarea>
+</div>
+<input type="hidden" id="hf_other_uid_{$feed['id']}">

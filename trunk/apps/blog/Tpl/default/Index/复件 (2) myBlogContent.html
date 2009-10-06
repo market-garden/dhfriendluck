@@ -1,0 +1,46 @@
+<include file="__THEME__/header" />
+
+<script type="text/javascript" src="../Public/Js/Common.js"></script>
+<link rel="stylesheet" href="../Public/blog.css" type="text/css" media="screen" charset="utf-8" />
+<div class="content"><!-- 内容 begin  -->
+  <include file="__THEME__/apps" />
+  <div class="main"><!-- 画布 begin  -->
+    <div class="page_title"> <!-- page_title begin -->
+      <div class="left" style="width:66px;"><span class="headpic50"><img src="{$uid|getUserFace}" /></span></div>
+      <div class="left">
+        <h2>我的日志</h2>
+        <p><a href="#">我的首页</a> <a href="__URL__/my/">我的日志</a></p>
+      </div>
+    <div class="c"></div>
+</div><!-- page_title end -->
+    <div class="BlogBox">
+      <div class="LogList"><!-- 好友日志 begin  -->
+        <div class="btmline lh30"><div class="right"><a href="__URL__/show/id/{$id}/action/lt/mid/{$uid}">上一篇</a> / <a href="__URL__/show/id/{$id}/action/gt/mid/{$uid}">下一篇</a></div>
+
+          第{$num}/{$count}篇日志</div>
+        <div style="margin-bottom:20px;">
+          <h3 class="f14px lh30">
+            <span class="right f12px">
+              <a href="#">编辑</a> | <a href="###" onclick="deleteBlog('__URL__/doDeleteBlog/id/{$id}')">删除</a></span><strong>{$title}</strong></a>
+        </h3>
+        <p>{$cTime|friendlyDate}&nbsp;(分类:<a href="__URL__/my/cateId/{$category['id']}">{$category['name']}</a>)</p>
+        <php>if ( $type <>0 ){</php><p class="imported-article cGray2">这是一篇被导入的日志</p><php>}</php>
+        <div style="padding:20px 0px;" class="f14px">{$content}</div>
+        <neq name="mention" value="">
+        <div class="cGray2">日志相关好友: 
+          <php>foreach( $mention as $friends ){</php>
+          <a href="$friends['uid']">{$friends['name']}</a>
+          <php>}</php>
+        </div>
+        </neq>
+
+        <div class="cGray2 topline lh20"><span class="right"><a href="#">发表评论</a> | <a href="#">举报日志</a></span>阅读({$readCount}) | 评论({$commentCount})</div>
+      </div>
+          {:W('Comment',array( 'type'=>'blog','appid'=>$id,'mid'=>$uid) )}
+        </div>
+    </div><!-- 好友日志 end  -->
+  </div>
+  </div><!-- 画布 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />

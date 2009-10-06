@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{&SITE_TITLE}</title>
+	<link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript">
+		var ctrl = function(name){
+			this.elements = document.getElementsByName('id[]');
+			this.length = this.elements.length;
+		}
+		ctrl.prototype = {
+			reverse:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked= !this.elements[i].checked;
+				}
+			},
+			all:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked = true;
+				}
+			},
+			unAll:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked = false;
+				}
+			},
+			toggle:function(obj){
+				this[obj.checked ? 'all' : 'unAll']();
+			},
+			del:function(id){
+				if(id==undefined){
+					id = [];
+					for(i=0;i<this.length;i++){
+						this.elements[i].checked && id.push(this.elements[i].value);
+					}
+					id = id.join(',');
+				}
+				location.href = "__URL__/delnode/id/"+id;
+			},
+			edit:function(id){
+				location.href = "__URL__/node/id/"+id;
+			}
+		}
+		var c = null;
+	</script>
+    
+	</head>
+	<body>
+		<div id="container">
+			<table class="tableborder" width="100%">
+				<tbody>
+					<tr class="top">
+						<td class="border"></td>
+					</tr>
+					<tr>
+						<th class="header">tips</th>
+					</tr>
+					<tr>
+						<td class="tips">
+							<ul>
+								<li>地区管理</li>
+							</ul>
+						</td>
+					</tr>
+					<tr class="bottom">
+						<td class="border" colspan="5">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+			<table class="tableborder" width="100%">
+				<tbody>
+					<tr class="top">
+						<td class="border" colspan="7"></td>
+					</tr>
+					<tr>
+						<th class="header" colspan="7">标题</th>
+					</tr>
+					<tr class="label">
+						<th>编号</th>
+						<th >地区名</th>
+						<th width="200">描述</th>
+						<th>操作</th>
+					</tr>
+<volist id="vo" name="list">
+		<tr class="cell altbg2" style="height:30px;">
+		<td >{$vo.id}</td>
+		<td ><a href="__APP__/Expert/network/pid/{$vo.id}">{$vo.title}</a></td>
+		<td >{$vo.tag}</td>
+		<td style="width:15%">编辑 删除</td>
+	</tr>
+</volist>					
+					<tr>
+						<td class="footer" colspan="7">
+							&nbsp;
+						</td>
+					</tr>
+					<tr class="bottom">
+						<td class="border" colspan="7">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+			<table class="tableborder" width="100%">
+			<form action="__URL__/addgroup" method="POST">
+				<tbody>
+					<tr class="top">
+						<td class="border" colspan="2"></td>
+					</tr>
+					<tr>
+						<th class="header" colspan="2">添加地区</th>
+					</tr>
+					<tr class="label">
+						<th>说明</th>
+						<th>设置</th>
+					</tr>
+					<tr class="cell">
+						<td class="altbg1">
+							<b>地区名:</b>
+							<br/>
+							<span class="smalltxt">地区名称</span>
+						</td>
+						<td class="altbg2"><input name="name" class="txt"/> </td>
+					</tr>
+													
+	
+					<tr class="cell">
+						<td class="altbg1">
+							<b>上级分类:</b>
+							<br/>
+							<span class="smalltxt">对节点的描述</span>
+						</td>
+						<td class="altbg2">
+							<select name="">
+								<option value="0">顶级分类</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="footer" colspan="2">
+							<input type="submit" class="button" value="添加" />
+						</td>
+					</tr>
+					<tr class="bottom">
+						<td class="border" colspan="5">&nbsp;</td>
+					</tr>
+				</tbody>
+			  </form>
+			</table>
+		</div>
+		<script type="text/javascript">
+			c = new ctrl('id[]');
+		</script>
+	</body>
+</html>

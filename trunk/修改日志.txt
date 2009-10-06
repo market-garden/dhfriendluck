@@ -1,0 +1,6 @@
+2009.10.5
+\public\js\ymPrompt\ymPrompt.js 391行，392行 改动 h=450, w=600;
+更换数据表ts_network
+2009.10.6
+\thinksns\Tpl\default\Info\education.html  110行 班级或院系 改为 专业
+                

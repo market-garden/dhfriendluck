@@ -1,0 +1,37 @@
+<volist name="fri_feeds" id="feed">
+  <div class="Fli" id="a_feed_{$feed.id}">
+    <div class="ico_img"><img src="{$feed.icon}" /></div>
+    <div class="LC" style="overflow:hidden;">
+      <!--动态title-->
+      <div class="tit" alt="{$feed.id}" id="feed_title_{$feed.id}">
+        <div class="cl">{$feed.title}</div>
+        <php>if(MODULE_NAME == "Home" || ($mid == $uid) ){</php>
+        <div class="cr">
+          <div class="lh20"><em>{$feed.cTime|friendlyDate='month'}</em></div>
+          <php>if(MODULE_NAME == "Home"){</php>
+          <div class="pt5"> <a href="javascript:del_feed({$feed.id});" class="del">删除</a></div>
+          <php>}else{</php>
+          <div class="pt5"> <a href="javascript:del_feed({$feed.id},1);" class="del">删除</a></div>
+          <php>}</php>
+        </div>
+        <php>}</php>
+        <div class="c"></div>
+      </div>
+      <!--end-->
+      <!--动态body-->
+      <div class="RC" id="feed_body_{$feed.id}">
+      <div <php>if($feed["type"] == "mini"){</php> class="bg_huifu" <php>}</php> >
+        <php>if($feed['type'] == 'mini'){</php>
+        <include file="../Public/feed_comment" /> {$feed.body}
+        <php>}else{</php>
+        {$feed.body|html_output2}
+        <php>}</php>
+      </div>
+      <div class="c"></div>
+
+    </div>
+    <!--end-->
+  </div>
+
+  </div>
+</volist>

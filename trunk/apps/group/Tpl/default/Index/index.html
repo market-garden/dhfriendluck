@@ -1,0 +1,107 @@
+<include file="__THEME__/header" />
+
+
+<script type="text/javascript" src="../Public/Js/Common.js"></script>
+<link  href="../Public/group.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+
+
+
+<div class="content"><!-- 内容 begin  -->
+   <!-- 用户组件列表 begin -->
+   <include file="__THEME__/apps" />      
+  <!-- 用户组件列表 end -->
+  
+  <div class="main"> <!-- 右侧内容 begin  -->
+  <div class=page_title> <!-- page_title begin -->
+  <h2><img src="../Public/images/ico_app05.gif" />群组</h2>
+  <div class="c"></div>
+</div><!-- page_title end -->
+  
+  <div class="tab-menu"><!-- 切换标签 begin  -->
+      <ul>
+      <li><a href="__URL__/index/" class="on"><span> 我的群组</span></a></li>
+      <li><a href="__URL__/flist/"><span>好友的群组</span></a></li>
+      <li><a href="__URL__/search"><span>全部群组</span></a></li>
+      <li><a href="__URL__/allTopic"><span>最新话题</span></a></li>
+       <li><a href="__URL__/issue"><span><div class="ico_add">&nbsp;</div>发表话题</span></a></li>
+      <li><a href="__URL__/add"><span><div class="ico_add">&nbsp;</div>创建新群</span></a></li>
+      </ul>
+  </div><!-- 切换标签 end  -->
+  <div class="MenuSub"><a href="__URL__/index/" class="cGray">所在群组的最新动态</a>|<a href="__URL__/newtopic/">最新话题</a></div>
+  
+  
+  <div class="groupBox">
+  	<div class="sidebar">
+    	<div class="FSort">
+    	<div class="tit">我管理的群组</div>
+    	<volist name="mymanagegroup" id="group">
+    	<div class="rlist">
+    		<eq name="group.type" value="close"><div class="left alR" style="width:15%">&nbsp;&nbsp;<img src="../Public/images/ico_lock.gif" /></div></eq>
+    		<div class="left lh20" style="padding-left:15px;"><a href="__APP__/Group/index/gid/{$group['id']}">{$group['name']|msubstr=0,15}({$group['membercount']})</a></div>
+    		<eq name="group.type" value="close"><div class="left" style="width:10%"><img src="../Public/images/ico_amend.gif" /></div></eq>
+    	</div>
+    	</volist>
+		<div class="btm"></div>
+        </div>
+        
+        <div class="FSort">
+    	<div class="tit"> <php>if($mid != $uid){ </php>{$uid|getUserName}<php>} else {</php> 我<php>}</php>加入的群组</div>
+    	
+    	<volist name="myjoingroup" id="group">
+    	<div class="rlist">
+    		<eq name="group.type" value="close"><div class="left alR" style="width:15%">&nbsp;&nbsp;<img src="../Public/images/ico_lock.gif" /></div></eq>
+    		<div class="left lh20" style="padding-left:15px;"><a href="__APP__/Group/index/gid/{$group['id']}">{$group['name']|msubstr=0,15}({$group['membercount']})</a></div>
+    	    <eq name="group.type" value="close"><div class="left" style="width:10%"><img src="../Public/images/ico_amend.gif" /></div></eq>
+    	</div>
+        </volist>
+        <div class="btm"></div>
+        </div>
+        
+    </div>
+  <div class="boxL"><!-- 好友日志 begin  -->
+  		<ul>
+  		<volist name="volist['data']" id="list">
+			
+  		  <php>if(count($list['feed'])){</php>
+       	  <li style="margin-bottom:10px;">
+          		<div class="left" style="width: 70px;"><span class="headpic50"><a href="__APP__/Group/index/gid/{$list['gid']}"><img src="__ROOT__/thumb.php?w=50&h=50&url={$list.gid|getgroupinfo='logo'|get_photo_url}"/></a></span></div>
+
+          		<div class="left" style="width: 550px;">
+       			  <h3 class="f14px lh30 btmlineD"><span class="right"> <a href="__APP__/Group/index/gid/{$list['gid']}" class="f12px">更多&gt;&gt;</a></span><a href="__APP__/Group/index/gid/{$list['gid']}"><strong>{$list['gid']|getgroupinfo='name'|msubstr=0,20}</strong> </a>
+       			  <php>if(isadmin($uid,$list['gid'])){ </php><span class="amend"><a href="__APP__/Manage/index/gid/{$list['gid']}">管理</a></span>  <php>}</php> </h3>
+                <ul class="list">
+                	  <sublist name="list['feed']" id="data"> 
+                	  	
+                	   
+                	  		<if condition="$data['type'] eq 'group_join' ">
+                	  			<li class="btmlineD"><div class="right"><em>{:date('m-d H:i',$data['cTime'])}</em></div>{$data.title|stripGroupName}</li>
+                	  			
+                	  		<else />                     
+                       			<li class="btmlineD"><div class="right"><em>{:date('m-d H:i',$data['cTime'])}</em></div>{$data.title|stripGroupName}: {$data.body} </li>
+                      		</if>
+                      
+                      		
+                      </sublist>
+                      
+               </ul>
+            </div>
+			<div class="clear"/>
+       	  </li>
+       	   <php>}</php>
+       	  
+       </volist>
+        </ul>
+       <div class="page">{$volist['html']}</div>
+  </div><!-- 好友日志 end  -->
+  </div>  </div><!-- 右侧内容 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+
+<include file="__THEME__/footer" />
+
+</body>
+</html>
+

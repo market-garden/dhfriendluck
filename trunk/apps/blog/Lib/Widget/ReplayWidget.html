@@ -1,0 +1,40 @@
+<div class="RC" id = "RC{$id}">
+  <neq name="first" value="">
+                  <div class="RLI" id="first{$id}" >
+                    <div class="user_img"><img src="../Public/images/userimg.jpg" /></div>
+                    <div class="RLC">
+                      <h4><a href="#{$first['uid']}" class ="name{$first['uid']}">{$first['name']}</a><span>{$first['cTime']|friendlyDate}</span>|<span><a href="__APP__/Index/friends/uid/{$first['uid']}">更多状态</a></span></h4>
+                      <p>{$first['comment']}<a href="#input{$first['appid']}" onclick="replay({$first['uid']},{$id})">回复</a></p>
+                    </div>              
+
+                  </div>              
+                  </neq>
+
+                  <php>if( $count > 2 ){</php>
+                  <div class="RLI" id ="showMore{$id}"><a href="###" onclick="showMore({$first['appid']})">显示全部{$count}条</a></div>
+                  <php>}</php>
+
+                  <neq name="last" value="">
+                  <div class="RLI"  id="last{$id}">
+                    <div class="user_img"><img src="../Public/images/userimg.jpg" /></div>
+
+                    <div class="RLC">
+                      <h4><a href="#{$last['uid']}" class ="name{$last['uid']}">{$first['name']}</a><span>{$last['cTime']|friendlyDate}</span>|<span><a href="__APP__/Index/friends/uid/{$last['uid']}">更多状态</a></span></h4>
+                      <p>{$last['comment']}<a href="#input{$last['appid']}" onclick="replay({$last['uid']},{$id})">回复</a></p>
+                    </div>              
+                  </div>              
+                  </neq>
+                </div>
+
+                  <div class="RLI bg01" id="RLI{$id}" >
+                    <div class="user_img" style="display:none" id="image{$id}"><img src="http://www.qiniao.com/product/thinksns/Tpl/default/Public/images/userimg.jpg" /></div>
+                    <div class="RLC">
+                      <div class="input_box">
+
+                        <textarea id="input{$id}" name="comment" cols="" rows="3"  style="height:25px; line-height:25px; margin:5px; width:97%;<eq name='last' value = ''>display:none;</eq>" class="cGray2" > 添加回复</textarea>
+
+                        <input id = "button{$id}" <?php if( $count<=2 ){echo "showmore=false";}else{echo "showmore=true";}?> type="button" class="btn_b" onclick="replayComment({$id},true)" style="display:none;" value="回 复" />
+                        <input id="uid" type="hidden" value="1">
+                    </div>              
+                  </div>
+                </div>

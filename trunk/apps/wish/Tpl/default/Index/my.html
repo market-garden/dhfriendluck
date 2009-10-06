@@ -1,0 +1,77 @@
+<include file="__THEME__/header" />
+<link href="../Public/mood.css" rel="stylesheet" type="text/css" />
+
+<div class="content"><!-- 内容 begin  -->
+  <include file="__THEME__/apps" />
+  <div class="main"><!-- 画布 begin  -->
+  <script type="text/javascript" src="../Public/Js/Common.js" ></script>
+  <script type="text/javascript" src="../Public/Js/Wish.js" ></script>
+<link href="__PUBLIC__/js/pagination/pagination.css" rel="stylesheet" type="text/css" />
+
+
+    <div class=page_title> <!-- page_title begin -->
+      <div class="tit"><img src="../Public/images/ico_app02.gif" class="img"  />{%wish}</div>
+ <div class="status_editor">	
+	<div style="float:left; width:100%" class="lh25"><span class="f14px fn cGray" id="wish-content">{$content}</span><span class="cGray2 fn f12px ml10" id="wish-time">{$cTime|friendlyDate}</span><span class="f12px fn ml5"><a href="__URL__/my">{%more}</a></span></div>
+        <!-- <div class="jishuan"><span id='wish-count'></span></div> -->
+        <include file="wish_input" />   
+        <div class="c" ></div>
+      </div>
+    <div class="c"></div>
+</div><!-- page_title end -->
+    <div class="tab-menu"><!-- 切换标签 begin  -->
+      <ul>
+        <li><a href="__URL__"><span>{%friends}</span></a></li>
+        <li><a href="__URL__/my" class="on"><span>{%my}</span></a></li>
+        <php>if( $all == 'true' ){</php>
+        <li><a href="__URL__/all"><span>{%all}</span></a></li>
+        <php>}</php>
+      </ul>
+    </div><!-- 切换标签 end  -->
+    <div class="MenuSub">
+    <!--
+    <php>if( isset( $_GET['replay'] ) ){</php><a class="fB" href="__URL__/my/"><php>}</php>{%my}</a> | <php>if( !isset( $_GET['replay'] ) ){</php><a class="fB" href="__URL__/my/replay/do"><php>}</php>{%myReplay}</a>-->
+    </div>
+    <div class="Friend"><!-- 好友愿望 begin  -->
+	<div class="sidebar">
+        {:W( 'FileAway',$file_away)}<!-- 愿望归档 -->
+	</div>
+      <div class="FList">
+        <volist name ="data" id="vo">
+          <div class="Fli" id="Fli{$vo['id']}">
+            <div class="c1"><span class="headpic50"><a href="__TS__/space/{$vo['uid']}"><img src="{$vo['uid']|getUserFace}" /></a></span></div>
+            <div class="c2 bg_ico_arrow">
+              <div class="MC bg01" id="MCG{$vo['id']}">
+                <php>if( $vo['isDelete'] ){</php>
+                  <h4 class="lh20"><span class="right mt5"><a id="d-{$vo['id']}" class="del" title="删除" href="javascript:deleteWish({$vo['id']})" style="display:none;">删除</a></span><span class="left"><a href="__TS__/space/{$vo['uid']}"><strong>{$vo['name']}</strong></a><span class="time">{$vo['cTime']|friendlyDate}</span></span></h4>
+                  <php>}else{</php>
+                  <h4 class="lh20"><span class="left"><a href="__TS__/space/{$vo['uid']}"><strong>{$vo['name']}</strong></a><span class="time">{$vo['cTime']|friendlyDate}</span>|&nbsp;<a href="__APP__/Index/friends/uid/{$vo['uid']}">{%more}</a></span></h4>
+                  <php>}</php>
+                <p class="WB">{$vo['content']}
+                <php>if( isset( $vo['replay'] ) && 2 < $vo['replay_numbel'] ){</php>
+                <a id="closeReplay{$vo['id']}" href="###" onclick="closeReplay({$vo['id']},{$vo['uid']})">收起回复</a>
+                <php>}else{</php>
+                <a href="javascript:replay('false',{$vo['id']})">{%replay}</a>
+                <php>}</php></p>
+              </div>
+              {:W('Replay',$vo['replay'])}
+            </div>
+            <div class="c"></div>
+          </div>
+        </volist>
+ <div id="Pagination" class="pagination">{$html}</div>
+      </div>
+    </div><!-- 好友愿望 end  -->
+    <input id="page" type="hidden" value="{$_GET['p']}">
+
+
+
+
+
+
+
+  </div><!-- 画布 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />
+

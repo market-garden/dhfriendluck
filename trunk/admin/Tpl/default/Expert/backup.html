@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{&SITE_TITLE}</title>
+	<link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
+	
+	</head>
+	<body>
+	
+		<div id="container">
+		<table width="100%" border="0" cellpadding="4" cellspacing="0" class="form">
+		<form method="post" action="__URL__/dobackup">
+		<tr>
+			<td>
+				<input type="radio" name="type" value="all" onclick="$('#custom').slideUp('slow');"checked>全部备份</td>
+			<td>&nbsp;</td>
+		</tr>
+		
+		
+		<tr>
+			<td><input type="radio" name="type" value="custom" onclick="$('#custom').slideDown('slow');">选择备份</td>
+			<td id="custom" style="display:none;">
+				
+				<volist name="tables" id="data">
+				<input type="hidden" name="setup" value="1">
+				<span style="margin:10px;width:200px;float:left;"><input type="checkbox" name="tablecustom[]" value="{$data.Name}">{$data.Name}({$data['Data_length']|formatsize})</span> 
+				</volist>
+				
+			</td>
+		</tr>
+		<tr>
+			<td>分卷大小：<input type="text" value="1000" name="sizelimit">(KB)</td>
+			<td><input type="submit" value="备份"></td>
+		</tr>
+		</form>
+		</table>
+		
+	
+		
+		<form method="POST" action="__URL__/delBackUpFile"> 
+		<table width="100%" border="0" cellpadding="4" cellspacing="0" class="form">
+		
+		<tr>
+			<td>数据备份记录</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<th>文件名</th>
+			<th>备份时间</th>
+			<th>文件大小</th>
+			<th>导入</th>
+			<th>删除</th>
+		</tr>
+		<volist name="log" id="data">
+		<tr>
+				<td><input type="checkbox" name="filename[]" value="{$data['filename']}"><a href="{$data['filepath']}">{$data['filename']}</a></td><td>{$data['addtime']}</td><td>{$data['filesize']}</td><td><a href="__URL__/import/filename/{$data['filename']}">导入</a></td>
+				<td><a href="__URL__/delBackUpFile/filename/{$data['filename']}">删除</a></td>
+		</tr>
+		</volist>
+		
+		<tr>
+			<td colspan="5"><input type="checkbox" name="sel" onclick="selectAll('sel','filename');">全选/反选<input type="submit" value="删除"></td>
+		</tr>
+		</form>
+		</table>
+		</div>
+	<script>
+		function selectAll(name,selectdName){
+    	if($("input[name='"+name+"']").attr('checked')){
+    		$("input[name='"+selectdName+"[]']").each(function(){
+                $(this).attr('checked',true);
+            });
+
+    	}else{
+    		$("input[name='"+selectdName+"[]']").each(function(){
+                $(this).attr('checked',false);
+            });
+
+    	}
+    }
+	
+	</script>
+		
+		
+	</body>
+</html>

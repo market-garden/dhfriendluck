@@ -1,0 +1,122 @@
+<include file="__THEME__/header" />
+
+
+<script type="text/javascript" src="../Public/Js/Common.js"></script>
+ <script type="text/javascript" src="../Public/Js/json2select.js" ></script>
+<link  href="../Public/group.css" rel="stylesheet" type="text/css"/>
+<script>
+	function checkaddform(v_form)
+{
+	if (getstrlen(v_form.name.value) == 0)
+	{
+		alert("请输入群名称！");
+		v_form.name.focus();
+		return false;
+	}
+	else if (getstrlen(v_form.name.value) > 60)
+	{
+		alert("群名称超长！");
+		v_form.name.focus();
+		return false;
+	}
+	else if (getstrlen(v_form.intro.value) == 0)
+	{
+		alert("请输入群介绍！");
+		v_form.intro.focus();
+		return false;
+	}
+	
+	//$("btn_qd").disabled  = true;
+	
+	return true;
+}
+
+
+	function getstrlen(chars){ 
+		
+		chars = chars.replace(/^\s+|\s+$/g,"");
+		return chars.replace(/[^\x00-\xff]/g,"xx").length; 
+   }
+</script>
+</head>
+
+<body>
+
+<div class="content"><!-- 内容 begin  -->
+  <!-- 用户组件列表 begin -->
+   <include file="__THEME__/apps" />      
+  <!-- 用户组件列表 end -->
+  <div class="main"> <!-- 右侧内容 begin  -->
+  <div class=page_title> <!-- page_title begin -->
+  	<div class="left" style="width:30px;"><img src="../Public/images/ico_app05.gif" /></div>
+    <div class="left" style="width:583px;">
+    	<h2>创建新的群</h2>
+      </div>
+    <div class="left alR lh30" style="width:220px;">
+        <a href="javascript:history.go(-1)">&lt;&lt;返回上一页</a></div>
+  <div class="c"></div>
+</div><!-- page_title end -->
+  <!-- 切换标签 end  -->
+  <div class="groupBox">
+  <div class="boxL" style="width:100%;">
+  <form name="addform" action="__URL__/doAdd" method="post" onsubmit="javascript:return checkaddform(this);" enctype="multipart/form-data">
+    <div class="box1">
+  	<h3>填写群名称等信息：</h3>
+    <ul class="pt10">
+          <li class="li">
+          	<div class="lh20 alR left" style="width:10%"><strong>群名称：</strong></div>
+            <div class="left" style="width:85%"><span class="left" style="width:90%">
+              <input name="name" class="TextH20" style="width: 50%;" onBlur="this.className='TextH20'" onFocus="this.className='Text2'" type="text" />
+            </span></div>
+       	  </li>
+          <li class="li pt10">
+          	<div class="lh20 alR left" style="width:10%"><strong>隐私类型：</strong></div>
+            <div class="left" style="width:85%">
+            	<input type="radio" name="type" value="open" checked>公开
+            	<input type="radio" name="type" value="close">私密
+              
+            </div>
+       	  </li>
+          <li class="li pt10">
+          	<div class="left alR" style="width:10%"><strong>群介绍：</strong></div>
+            <div class="left" style="width:85%"><textarea rows="10" style="padding: 8px; width: 70%;" class="Text" onBlur="this.className='Text'" onFocus="this.className='Text1'" name="intro"></textarea>
+            </div>
+       	  </li>
+          <li class="li pt10">
+          	<div class="lh20 alR left" style="width:10%"><strong>群分类：</strong></div>
+            <div class="left" style="width:85%" id="pid">
+
+
+            </div>
+       	  </li>
+          <li class="li pt10">
+          	<div class="lh20 alR left" style="width:10%"><strong>群图标：</strong></div>
+            <div class="left" style="width:85%"><input style="height:20px" type="file"  name="logo"/>
+            </div>
+       	  </li>
+          
+          <li class="li pt10">
+          	<div class="lh20 alR left" style="width:10%">&nbsp;</div>
+            <div class="left" style="width:85%">
+            <input type="hidden" name="dosubmit" value="1">
+            <input name="button" type="submit" class="btn_b mt5" id="button" value="确定" />
+
+            </div>
+       	  </li>
+          </ul>
+    </div>
+    </form>
+  </div> <!-- end  -->  </div><!-- 右侧内容 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+<div class="c"></div>
+</div>
+<script type="text/javascript">
+	 	
+		 var category_json	=	{:getCategorySelect(0)};
+		 $("#pid").json2select(category_json,'','cid');
+</script>
+
+<include file="__THEME__/footer" />
+</body>
+</html>

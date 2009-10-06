@@ -1,0 +1,159 @@
+<include file="__THEME__/header" />
+<link rel="stylesheet" href="../Public/event.css" type="text/css" media="screen" charset="utf-8" />
+<script  type="text/javascript" src="__PUBLIC__/js/rcalendar.js" ></script>
+<script type="text/javascript" src="../Public/js/event.js"></script>
+<div class="content"><!-- 内容 begin  -->
+
+  <include file="__THEME__/apps" />
+  <div class="main"><!-- 画布 begin  -->
+  <div class=page_title> <!-- page_title begin -->
+    <h2><span class="right fn f12px"><a href="javascript:history.back( -1 )">返回上一页</a></span><img src="{$APPINFO['APP_ICON']}" /><a href="__URL__/my">活动</a>-{$title}</h2>
+  <div class="c"></div>
+</div><!-- page_title end -->
+  <div class="tab-menu"><!-- 切换标签 begin  -->
+	  
+      <div class="right">{:W('Report',array( 'type'=>'举报','appid'=>$APPINFO['APP_ID'],'url'=>'/Index/eventDetail/id/'.$id.'/uid/'.$uid,'title'=>$title,'recordId'=>$id))}<a onclick="ts_sharePop('{$id}','__URL__')" href="javascript:void(0)"  class="BtnShare">分享</a>
+      </div>
+      <ul>
+        <li><a href="__URL__/eventDetail/id/{$id}/uid/{$uid}" class="on"><span>活动</span></a></li>
+      <li><a href="__URL__/member/id/{$id}"><span>成员</span></a></li>
+      <li><a href="__URL__/photos/id/{$id}/uid/{$uid}"><span>照片</span></a></li>	 
+      </ul>
+	   
+  </div><!-- 切换标签 end  -->
+  <div class="groupBox">
+  	<div class="sidebar">
+  	  <div class="FSort">
+    	<div class="tit">组织者</div>
+		<ul class="ListBox">
+      <li><span class="headpic50"><a href="__TS__/space/{$uid}"  class="tips" rel="__TS__/Index/userInfo/uid/{$uid}"><img src="{$uid|getUserFace}" /></a></span><a href="__TS__/space/{$uid}">{$name}</a></li>
+          </ul>
+		  <div class="btm"></div>
+        </div>
+		<div class="FSort">
+    	<div class="tit">关注的人</div>
+		<ul class="ListBox">
+          <volist name="attention" id ="vo">
+            <li><span class="headpic50"><a href="__TS__/space/{$vo['uid']}"  class="tips" rel="__TS__/Index/userInfo/uid/{$vo['uid']}"><img src="{$vo['uid']|getUserFace}" /></a></span><a href="__TS__/space/{$vo['uid']}">{$vo['name']}</a></li>
+          </volist>
+          <div class="c"></div>
+       	</ul>
+          <p class="alR"><a href="__URL__/member/id/{$id}/action/att">所有的人>></a></p>
+		  <div class="btm"></div>
+        </div>
+        <!--     <div class="boxR">
+    	<h3>参加这个活动的人也参加了</h3>
+        <volist name="other" id="vo">
+            <p class="btmlineD">
+            <a href="__URL__/eventDetail/id/{$vo['id']}/uid/{$vo['uid']}">{$vo['title']}</a> <br />
+            <span class="cGray2">{$vo['cTime']} {$vo['joinCount']}人参加/{$vo['attentionCount']}人关注</span><br />
+              <a href="#">1 张照片( TODO )</a> 
+            </p>
+        </volist>
+        </div>-->
+        
+    </div>
+  <div class="boxL" style="width:640px;">
+  	<div class="box1">
+  		<div class="info">
+        <div class="img"><img src="<php>echo C( 'TS_URL' );</php>/thumb.php?url={$cover}&w=200&h=200" /></div>
+        <div class="list">
+        <ul>
+          <li><div class="c1">发起者：</div><div class="c2"><a href="__TS__/space/{$uid}">{$name}</a></div></li>
+          <li><div class="c1"> 活动类型：</div>
+            <div class="c2"> {$type} </div>
+          </li>
+          <li><div class="c1"> 活动区域：</div>
+            <div class="c2"> {$city} </div>
+          </li>
+          <li><div class="c1"> 活动地点：</div>
+            <div class="c2"> {$address} </div>
+          </li>
+          <li><div class="c1"> 活动时间：</div>
+          <div class="c2"> {$time} </div>
+          </li>
+          <li><div class="c1"> 截止报名：</div>
+          <div class="c2"> {$dl} </div>
+          </li>
+          <li><div class="c1"> 剩余名额：</div>
+          <div class="c2"> {$lc} </div>
+          </li>
+          <li><div class="c1">  需要审核：</div>
+          <div class="c2"><?php if( $opts['alow'] ) {echo'是';}else{echo'否';}?> </div>
+          </li>
+          <li>参加人数（{$joinCount}） 关注人数（{$attentionCount}）</li>
+          <?php if( $deadline>time()){ ?>
+          <li>
+          <span class="cGreen lh35">此活动正在进行中……</span>
+          </li>
+          <li>
+              <?php if( $admin ){ ?>
+              <button class="btn_b" style="margin-right:5px;" onclick="javascript:endEvent( '{$id}' )">提前结束</button>
+              <button class="btn_b" style="margin-right:5px;" onclick="javascript:location.href='__URL__/edit/id/{$id}'; ">编辑活动</button>
+              <?php } ?>
+                <?php if( $canJoin ){ ?>
+                <?php if( $limitCount>0 ) { ?>
+                <button class="btn_b" style="margin-right:5px;"  onclick="javascript:EventAction( {$id},{$opts['alow']},'joinIn')">我要参加</button>
+                <?php }else{ ?>
+                          <span class="cGreen lh35">名额已满</span>
+                <?php } ?>
+              <?php }else if( false == $admin ){ ?>
+              <?php if( $opts['alow'] == 1 && $hasMembel != 1){ ?>
+              <span class="cGreen lh35">已提交申请,等待审核中,<a href="javascript:EventDelAction( {$id},{$opts['alow']},'joinIn')">取消申请</a></span>
+              <?php }else{ ?>
+                <button class="btn_w" style="margin-right:5px;"  onclick="javascript:EventDelAction( {$id},{$opts['alow']},'joinIn')">取消参加</button>
+              <?php } ?>
+              <?php } ?>
+
+              <?php if( $canAtt ){ ?>
+<button class="btn_b"  style="margin-right:5px;"  onclick="javascript:EventAction( {$id},null,'attention')">我要关注</button>
+              <?php }else if( false == $admin && true == $canJoin){ ?>
+<button class="btn_w"  style="margin-right:5px;"  onclick="javascript:EventDelAction( {$id},null,'attention')">取消关注</button>
+              <?php } ?>
+      </li>
+          <li>
+          <?php }else { ?> 
+          <span class="cGreen lh35">此活动已经结束,报名时间已到</span>
+          <?php } ?>
+
+          </li>
+        </ul>
+        </div>
+        <div class="c"></div>
+        </div>
+    </div>
+    <div class="box1">
+  	<h3><strong>活动介绍</strong></h3>
+    <div class="lh180" style="width:640px;word-wrap:break-word;">{$explain}</div>
+    </div>
+    <div class="box1">
+      <h3><span class="alR lh30n right f12px"><a href="__URL__/member/id/{$id}/action/join">查看全部>></a></span><strong>活动成员</strong>(共{$joinCount}人)</h3>
+    <ul class="pic50box">
+      <volist name="member" id="vo">
+        <li><span class="headpic50"><a href="__TS__/space/{$vo['uid']}"  class="tips" rel="__TS__/Index/userInfo/uid/{$vo['uid']}"><img src="{$vo['uid']|getUserFace}" /></a></span><a href="__TS__/space/{$vo['uid']}">{$vo['name']}</a></li>
+      </volist>
+      <div class="c"></div>
+       	  </ul>	
+    </div>
+    <div class="box1">
+      <h3><span class="right mr5 f12px"><a href="__URL__/upload/eventId/{$id}">上传照片</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="__URL__/photos/id/{$id}/uid/{$uid}">查看全部>></a></span><strong>相册</strong></h3>
+  		<ul class="piclist">
+        <volist name="photolist" id="vo">
+       	  <li>
+          <a href="__URL__/photo/id/{$vo['id']}/uid/{$vo['uid']}/eid/{$id}"><img rel=<php>echo UPLOAD_URL</php>"{$vo['filepath']}{$vo['filepath']}" src="<php>echo C( 'TS_URL' );</php>/thumb.php?url=<php>echo UPLOAD_URL;</php>{$vo['filepath']}{$vo['filename']}&w=130&h=100" /><br /></a><a href="__URL__/photo/id/{$vo['id']}/uid/{$vo['uid']}/eid/{$id}">{$vo['savename']}</a>
+		  
+          </li>
+          </volist>
+          <div class="c"></div>
+        </ul>
+    </div>
+      {:W('Comment',array( 'type'=>'event','appid'=>$id,'mid'=>$uid,"face"=>getUserFace( $mid ),'role'=>$opts['comment']))}
+      
+    </div>
+  <!-- end  -->
+  </div>
+  </div><!-- 画布 end  -->
+<script  type="text/javascript" src="../Public/js/preview.js" ></script>
+<div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />

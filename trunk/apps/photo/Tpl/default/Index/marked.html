@@ -1,0 +1,51 @@
+<include file="__THEME__/header" />
+<link href="../Public/css/photo.css" rel="stylesheet" type="text/css" />
+<!-- 头部 end -->
+<div class="content"><!-- 内容 begin  -->
+	<include file="__THEME__/apps" />
+	<div class="main"> <!-- 右侧内容 begin  -->
+
+		<div class="page_title"> <!-- page_title begin -->
+			<h2><img src="../Public/images/ico_app02.gif" />相册</h2>
+		<div class="c"></div>
+</div><!-- page_title end -->
+
+		<div class="tab-menu"><!-- 切换标签 begin  -->
+		<span class="right"><a class="published" href="__APP__/Upload/flash">上传照片</a></span>
+			<ul>
+				<li><a href="__APP__/Index/friends_photos"><span>好友的照片</span></a></li>
+				<li><a href="__APP__/Index/photos/uid/{$mid}" <if condition=" $mid eq $uid">class="on"</if>><span>我的照片</span></a></li>
+				<li><a href="__APP__/Index/all_photos"><span>大家的照片</span></a></li>
+                <if condition=" $mid neq $uid">
+                	<li><a href="__APP__/Index/photos/uid/{$uid}" class="on"><span>{$uid|getUserName}的照片</span></a></li>
+				</if>
+            </ul>
+		</div><!-- 切换标签 end  -->
+
+		<div class="photoBox">
+			<div class="MenuSub"> <a href="__URL__/photos/uid/{$uid}">{$user.name}的全部照片</a> ┊ <a href="__URL__/albums/uid/{$uid}">{$user.name}的照片专辑</a> ┊ 圈有{$user.name}的照片 </div>
+			<div>
+				<ul class="mark">
+				  <li><a href="#"><img src="../Public/images/11757750_75492151_mid.jpg" width="130" height="87" /></a><div class="name" onmouseover="this.className='name2'" onmouseout="this.className='name'"><div class="c1"><a href="#">花花</a>上专</div><div class="c2"><a href="#" class="del">删除</a></div></div>
+				  </li>
+				  <li><a href="#"><img src="../Public/images/11757750_75492151_mid.jpg" width="130" height="87" /></a><div class="name" onmouseover="this.className='name2'" onmouseout="this.className='name'"><div class="c1"><a href="#">花花</a>上专</div><div class="c2"><a href="#" class="del">删除</a></div></div>
+				  </li>
+				  <li><a href="#"><img src="../Public/images/11757750_75492151_mid.jpg" width="130" height="87" /></a><div class="name" onmouseover="this.className='name2'" onmouseout="this.className='name'"><div class="c1"><a href="#">花花</a>上专</div><div class="c2"><a href="#" class="del">删除</a></div></div>
+				  </li>
+				  <li><a href="#"><img src="../Public/images/11757750_75492151_mid.jpg" width="130" height="87" /></a><div class="name" onmouseover="this.className='name2'" onmouseout="this.className='name'"><div class="c1"><a href="#">花花</a>上专</div><div class="c2"><a href="#" class="del">删除</a></div></div>
+				  </li>
+				  <li><a href="#"><img src="../Public/images/11757750_75492151_mid.jpg" width="130" height="87" /></a><div class="name" onmouseover="this.className='name2'" onmouseout="this.className='name'"><div class="c1"><a href="#">花花</a>上专</div><div class="c2"><a href="#" class="del">删除</a></div></div>
+				  </li>
+				  <li><a href="#"><img src="../Public/images/11757750_75492151_mid.jpg" width="130" height="87" /></a><div class="name" onmouseover="this.className='name2'" onmouseout="this.className='name'"><div class="c1"><a href="#">花花</a>上专</div><div class="c2"><a href="#" class="del">删除</a></div></div>
+				  </li>
+				 
+				 </ul>
+			</div>
+		</div>
+		<div style="clear:both">&nbsp;</div>
+		<div class="page"><span class="disabled"> &lt;  上一页</span><span class="current">1</span><a href="#?page=2">2</a><a href="#?page=3">3</a><a href="#?page=4">4</a><a href="#?page=5">5</a><a href="#?page=6">6</a><a href="#?page=7">7</a>...<a href="#?page=199">199</a><a href="#?page=200">200</a><a href="#?page=2">下一页  &gt;</a></div>
+  </div>
+  </div><!-- 右侧内容 end  -->
+  <div class="c"></div>
+  </div><!-- 内容 end -->
+<include file="__THEME__/footer" />

@@ -1,0 +1,217 @@
+@charset "utf-8";
+/*
+赵杰 2009-5-28 
+个人首页
+*/
+.user_info {
+	padding-bottom: 10px;
+	width: 100%;
+	overflow: hidden;
+	border-bottom-width: 1px;
+	border-bottom-style: dashed;
+	border-bottom-color: #dfdfdf;
+}
+.user_info .user_img{
+	width:120px;
+	float:left;
+	overflow: hidden;
+}
+.user_info .user_img .img {
+	height: 112px;
+	width: 112px;
+	margin-right: auto;
+	margin-left: auto;
+	display: block;
+	text-align: center;
+	background-image: url(images/user_img_bg.gif);
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	overflow: hidden;
+}
+.user_info .user_img .img img{
+	height: 100px;
+	width: 100px;
+	margin-top: 5px;
+	border: 1px solid #FFFFFF;
+}
+.user_info .user_img .menu {
+	display: block;
+	margin-top: 10px;
+	padding: 0px;
+	width: 120px;
+}
+.user_info .user_img .menu a {
+	width: 60px;
+	text-align: center;
+	line-height: 25px;
+	display: block;
+	float: left;
+}
+
+
+.user_info .Linfo{
+	text-align:left;
+	overflow: hidden;
+	float: left;
+	margin-left: 8px;
+	width: 430px;
+}
+.user_info .Linfo .info{}
+.user_info .Linfo .info h2 {font-size: 14px;font-weight: bold;}
+.user_info .Linfo .info p {
+	font-size: 12px;
+	padding: 0px;
+	margin: 10px 0 10px 0;
+	color: #666;
+	
+}
+.user_info .Linfo .info p span{margin-right:10px}
+.user_info .Linfo .info ul{}
+.user_info .Linfo .info ul li{
+	clear: both;
+	line-height: 25px;
+	overflow: hidden;
+	width: 100%;
+}
+.user_info .Linfo .info ul li .l{
+	text-align: right;
+	width: 20%;
+	display: block;
+	float: left;
+}
+.user_info .Linfo .info ul li .r{
+	display: block;
+	float: left;
+	width: 80%;
+}
+.user_info .Linfo .{
+	overflow: hidden;
+
+}
+.user_info .Linfo .edit_box .status_edit{
+	background-repeat:no-repeat;
+	background-position:0px 0px;
+	text-align:left;
+	width:100%;
+	margin:0px;
+	position:relative;
+	padding:0px;
+	background-image:url(images/status_edit_bgl.gif);
+	top: 0px;
+	height: 44px;
+}
+
+.system_info {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: left;
+	padding-left: 20px;
+	font-size: 12px;
+	background-color: #FCFCFC;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #E4EEFF;
+	font-family: "宋体";
+}
+.system_info span {
+	width: 130px;
+	display: inline-block;
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+.system_info span img {
+	margin-right: 5px;
+	height: 16px;
+	width: 16px;
+}
+
+
+
+/* 个人动态 */
+.Feed{
+	clear:both;
+	overflow:hidden;
+	margin-bottom: 10px;
+}
+.Feed .FList{width:100%}
+.Feed .FList .Fli{
+	width:100%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #dfdfdf;
+}
+.Feed .FList .Fli .ico_img{
+	height:20px;
+	width:20px;
+	float:left;
+	text-align: center;
+	padding-top:5px;
+}
+.Feed .FList .Fli .ico_img img{height:16px;	width:16px;}
+.Feed .FList .Fli .LC{
+	text-align:left;
+	padding-left:5px;
+	margin-left:20px;
+	font-size: 12px;
+	line-height: 25px;
+}
+.Feed .FList .Fli .LC .tit{}
+.Feed .FList .Fli .LC .tit .cl{
+	width: 440px;
+	float: left;
+	overflow: hidden;
+	margin-right: 5px;
+}
+.Feed .FList .Fli .LC .tit .cl a{  }
+.Feed .FList .Fli .LC .tit .cr{
+	float: right;
+	width: 70px;
+	height: 25px;
+	color: #999999;
+	line-height: 22px;
+}
+.Feed .FList .Fli .LC .tit .cr div{ float: left; }
+
+.Feed .FList .Fli .RC{
+	width:80%;
+	padding-left:20px;
+	color:#666;
+}
+.Feed .FList .Fli .RC .RLI{clear:both;display:table;display:inline-block;margin-bottom:1px;padding:5px 0px;width:100%;font-size: 12px;}
+.Feed .FList .Fli .RC .user_img{
+	float:left;
+	height:38px;
+	margin-left:5px;
+	overflow:hidden;
+	text-align:center;
+	width:38px;
+}
+.Feed .FList .Fli .RC .user_img img{height:30px;width:30px}
+.Feed .FList .Fli .RC .RLC{
+	float:left;
+	padding-left:5px;
+	padding-right:5px;
+	text-align:left;
+	width:310px;
+	margin-left: 5px;
+}
+.Feed .FList .Fli .RC .RLC h4{
+	line-height:20px;
+	margin:0px;
+	padding:0px;
+	font-size: 12px;
+}
+.Feed .FList .Fli .RC .RLC h4 span{font-weight:normal;margin-left:5px;margin-right:5px}
+.Feed .FList .Fli .RC .RLC p{dispaly:block;font-size:12px;line-height:18px;margin:0px;padding:0px;word-break:break-all}
+.Feed .FList .Fli .RC .RLC p img{margin:0px}
+.Feed .FList .Fli .RC .RLC p a{margin-left:5px;text-decoration:underline}
+.Feed .FList .Fli .input_box{clear:both;margin:0px;overflow:hidden;padding-bottom:0px;padding-left:0px;padding-right:0px}
+.Feed .FList .Fli .input_box textarea{border:1px solid #BDC7D8;font-size:12px;overflow:hidden}
+.Feed .FList .Fli .input_box .btn2{margin-bottom:5px;margin-top:5px}
+.mini_tip{background:yellow}
+.bg_huifu{background-image:url(images/bg_huifu.gif);background-position:0px 0px;background-repeat:no-repeat;padding-top:5px}
+
+
+

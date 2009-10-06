@@ -1,0 +1,41 @@
+	<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+	<title>上传结果</title>
+	<script type="text/javascript">
+		
+	function submitImg(){		
+		 var imageInput = document.getElementById('img');
+		 var imgPattern = new RegExp('^.*\.(bmp|gif|jpg|png){1}$','gi');
+		 if( !imageInput.value ){
+			 return;
+		 }
+		 if(!imgPattern.test(imageInput.value)){
+			 alert('该文件不是图片！');
+			 return;
+		 }
+		 document.getElementById('uploadFrom').submit();
+//		 document.getElementById('uploadFrom').style.display='none';
+//		 document.getElementById('uploadingDiv').style.display='';
+	}
+	
+	</script>
+	<style type="text/css">
+	
+	body { font-size:12px; padding:0; margin:0; background-color:#f7f7f7; }
+	form { margin:0; }
+	img{ vertical-align:middle;}
+	
+	</style>
+	</head>
+	<body>
+	<div id="uploadingDiv" style="display: none; text-align: center;">
+	<img src="http://images.zhenxi.com/images/indicator.gif"/>
+		正在上传，请稍等...
+	</div>
+	<form id="uploadFrom" enctype="multipart/form-data" action="__URL__/doUploadFaceImg" method="post">
+		上传头像：
+	<input id="img" type="file" onchange="submitImg()" value="xx" name="file" size="35"/>
+	</form>
+	</body>
+	</html>

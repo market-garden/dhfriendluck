@@ -1,0 +1,91 @@
+<include file="__THEME__/header" />
+
+<link href="../Public/friend.css" rel="stylesheet" type="text/css" />
+
+
+<div class="content"><!-- 内容 begin  -->
+    <div id="flashcopier"></div>
+    <include file="__THEME__/apps" />
+
+
+    <!-- 用户组件列表 end -->
+    <div class="main">
+        <!-- 右侧内容 begin  -->
+        <div class=page_title>
+            <!-- page_title begin -->
+             <h2><span class="right fn f12px"> <a href="javascript:window.history.back();">&lt;&lt;返回上一页</a></span><img src="../Public/images/web_mail.gif" />邀请朋友加入{$site_name}网</h2>
+        <div class="c"></div>
+</div><!-- page_title end -->
+
+        <div class="friendBox">
+            <div class="FList">
+
+                <form action="__URL__/doDirectSendEmail" method="post" onsubmit="return check_emails()">
+
+                    <div class="f14px lh25" style="padding:20px 0px;"><strong>直接发送Email邀请</strong></a>
+                        <p class="f12px cGray">&nbsp;</p>
+                        <ul>
+                            <li class="li">
+                                <div class="left alR cGray2 f12px lh25" style="width: 20%;">对方Email：</div>
+                                <div class="left cGray2" style="width: 80%;">
+                                    <div class="left" style="width:200px;">
+                                        <textarea  id="emails" name="emails" style="width:98%;" rows="5" class="Text" dataType="LimitB" min="1" msg="email不能为空"></textarea>
+                                    </div>
+                                    <div class="clue">
+                                        <div style="padding:10px 10px 10px 20px;">一次填写多个Email地址请用回车换行分隔</div>
+                                        <div class="clue_btm"></div>
+                                    </div>
+                                </div>
+								<div class="c"></div>
+                            </li>
+                            <li class="li">
+                                <div class="left alR cGray2 f12px lh25" style="width: 20%;"> 好友类型：</div>
+                                <div class="left cGray2" style="width: 80%;">
+                                    <select name="code" class="TextH20" id="groupsel">
+                                        <volist name="groups" id="vo">
+                                            <php>
+                                                $code_arr = array($mid,$my_name,$vo["id"],$gid);
+                                                $code = json_encode($code_arr);
+                                                $code = jiami($code);
+                                            </php>
+                                            <option value="{$code}">{$vo.name}</option>
+                                        </volist>
+
+                                    </select>
+                                </div>
+								<div class="c"></div>
+                            </li>
+                            <li class="li">
+                                <div class="left alR cGray2 f12px lh25" style="width: 20%;"> 邀请留言：</div>
+                                <div class="left cGray2" style="width: 80%;">
+                                  <textarea  style="width: 490px; height: 150px;" name="content">ThinkSNS升级到1.6版啦，全新的构架，全新的组件，全新的用户体验，一切都是热辣新鲜，快来体验吧！</textarea>
+                                </div>
+								<div class="c"></div>
+                            </li>
+                            <li class="li">
+                                <div class="left alR cGray2 f12px lh25" style="width: 20%;"> 你的姓名：</div>
+                                <div class="left cGray2" style="width: 80%;">
+                                    <input type="text" name="name" class="Text2" value="{:getUserName($mid);}">
+                                </div>
+								<div class="c"></div>
+                            </li>
+                            <li class="li">
+                                <div class="left alR" style="width: 20%;">&nbsp;</div>
+                                <div class="left cGray2" style="width: 80%;">
+                                    <input  type="submit" class="btn_b" id="button" value="发送邀请" />
+                                </div>
+								<div class="c"></div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </form>
+           
+            </div><!-- 邀请表单 end  -->
+        </div>
+    </div>
+    <!-- 右侧内容 end  -->
+
+<div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />

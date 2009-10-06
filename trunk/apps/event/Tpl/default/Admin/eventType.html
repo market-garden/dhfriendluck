@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
+<link type="text/css" rel="stylesheet" href="__PUBLIC__/theme_default/layout.css"/>
+<title>警告</title>
+<link href="layout.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.pop {
+	text-align: left;
+	width: 100%;
+}
+.pop .tit {
+	background-image: url(images/pop_tit.jpg);
+	background-repeat: repeat-x;
+	line-height: 27px;
+	border: 1px solid #3a84c3;
+	margin: 1px;
+	font-weight: bold;
+	color: #FFFFFF;
+	padding-left: 5px;
+}
+.pop .con{
+	padding: 5px;
+	margin-bottom: 5px;
+}
+.pop .con .msg {
+	background-color: #fffff5;
+	border: 1px solid #ffe361;
+	color: #FF0000;
+	padding: 5px;
+	margin-bottom: 5px;
+}
+.pop .btm{
+	background-color: #eeeeee;
+	text-align: right;
+	padding: 5px;
+	clear: both;
+}
+.gd {
+	overflow: auto;
+	border: 1px solid #C6DDEE;
+	height: 140px;
+	line-height: 25px;
+	padding: 5px;
+	width: 95%;
+}
+-->
+</style>
+<script type="text/javascript" charset="utf-8">
+	var	APP		=	'__APP__';
+function deleteAll( formCate ){
+  switch ( true ){
+    case $( '#radio1' ).attr( 'checked' ):
+      parent.deleteTypeEvent( $( '#select' ).val(),formCate )
+      break;
+      case $( '#radio2' ).attr( 'checked' ):
+      $( '#select' ).attr( 'disabled',true );
+      parent.deleteCategoryBlog( "",formCate );
+      break;
+  }
+}
+</script>
+</head>
+
+<body>
+<div class="pop">
+  <div class="con">
+    <div class="msg">该分类下有{$_GET['count']}篇活动，是否同时删除？</div>
+        <div class="clear OverH">
+        <div class="left" style="width:60%;">
+          <input type="radio" name="radio" id="radio1" value="radio" checked />  否，将这些活动转移到   <br />
+
+          <input type="radio" name="radio" id="radio2" value="radio" />  是，将这些活动全部删除
+         </div>
+        <div class="left" style="width:40%">
+          <select name="select" id="select">
+            <volist name="type" id="vo">
+              <option value="{$vo['id']}" <eq name="vo.name" value="默认分类">selected</eq>>{$vo['name']}</option>
+              </volist>
+          </select>
+          </div>
+    </div>
+  </div>
+  <div class="btm">
+    <input name="input" type="button" class="btn_b" onclick="deleteAll('{$_GET['id']}')" value="确 定" />
+          <input name="input2" type="button" class="btn_w" onclick="parent.ymPrompt.close()" value="取 消" />
+  </div>
+</div>
+</body>
+</html>

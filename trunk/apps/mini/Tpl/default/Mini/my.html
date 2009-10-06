@@ -1,0 +1,159 @@
+<include file="__THEME__/header" />
+
+
+<div class="content"><!-- 内容 begin  -->
+  <include file="__THEME__/apps" />
+  <div class="main"><!-- 画布 begin  -->
+ <link href="../Public/mood.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../Public/Js/Common.js" ></script>
+  <script type="text/javascript" src="../Public/Js/Mini.js" ></script>
+
+    <div class=page_title> <!-- page_title begin -->
+          <h2><img src="../Public/images/ico_app02.gif" />心情</h2>
+          <div class="status_editor">
+            <div class="userstatus"><span class="f14px" id="mini-content">{$content}</span><span class="cGray" id="mini-time">{$cTime|friendlyDate}</span><span><a href="__APP__/Mini/my">更多</a></span></div>
+            <div class="status_edit"><!-- 心情状态页显示编辑框 -->
+              <div class="status_edit_r"></div>
+              <textarea id ="mini-coment" name="content" rows="" wrap="virtual" class="WB"></textarea>
+              <div class="phiz">
+                <div class="jishuan"><span id='mini-count'></span></div>
+                <div class="ico_link" style="display:block;">
+                  <php>foreach ( $ico_list as $k=>$value){$i++;</php>
+                  <img onclick="insert(this,$i);" title="{$value.title}" emotion="{$value.emotion}" src="./thinkphp/../public/images/biaoqing/mini/{$value.filename}"/>
+                    <php>}</php>
+                </div>
+              </div>
+              <input type="submit" class="btn" onclick="doAdd()" value="发布" />
+            </div>
+          </div>
+        <div class="c"></div>
+</div><!-- page_title end -->
+        <div class="tab-menu"><!-- 切换标签 begin  -->
+          <ul>
+            <li><a href="__APP__/Mini"><span>好友的心情</span></a></li>
+            <li><a href="__APP__/Mini/my" class="on"><span>我的心情</span></a></li>
+          </ul>
+        </div><!-- 切换标签 end  -->
+        <div class="Friend"><!-- 好友心情 begin  -->
+          <div class="sidebar">
+            <h4 class="lh30">心情归档</h4>
+            {$file_away}
+          </div>
+          <div class="FList">
+            <div class="cGray lh30">{$html}</div>
+            <volist name ="data" id="vo">
+              <div class="Fli" id="Fli{$vo['id']}">
+              <div class="user_img"><img src="../Public/images/userimg.jpg" /></div>
+              <div class="LC">
+                <div class="MC bg01">
+                  <h4><a href="#">{$vo['name']}</a><span>{$vo['cTime']|friendlyDate}</span></h4>
+                  <p class="WB">{$vo['content']}<a href="#">回复</a></p>
+                  <a id="d-{$vo.id}"href='###' onclick="deleteMini('{$vo.id }')" class="del" title="删除" style="display:none;">删除</a>
+                </div>
+                <!--这里是回复信息
+                <div class="RC">
+                  <div class="RLI">
+                    <div class="user_img"><img src="../Public/images/userimg.jpg" /></div>
+                    <div class="RLC">
+                      <h4><a href="#">魏莹</a><span>09-05-24 13:00</span>|<span><a href="#">更多状态</a></span></h4>
+                      <p>我在无聊。。。<a href="#">回复</a></p>
+                    </div>              
+                  </div>              
+                  <div class="RLI"><a href="#">显示全部36条</a></div>
+                  <div class="RLI">
+                    <div class="user_img"><img src="../Public/images/userimg.jpg" /></div>
+                    <div class="RLC">
+                      <h4><a href="#">魏莹</a><span>09-05-24 13:00</span>|<span><a href="#">更多状态</a></span></h4>
+                      <p>我在无聊我在无聊我在无聊我在无聊我在无聊我在无聊我在无聊我在无聊。。。<a href="#">回复</a></p>
+                    </div>              
+                  </div>              
+                  <div class="input_box bg01">
+                    <textarea name="textarea2" cols="" rows="2"></textarea>
+                    <input type="button" class="btn_b" value="回 复" />
+                  </div>
+                </div>
+                回复结束-->
+              </div>
+            </div>
+            </volist>
+
+          </div>
+        </div><!-- 好友心情 end  -->
+        <div class="my" style="display:none;"><!-- 我的心情 begin  -->
+          <div class="sidebar">
+            <h4 class="lh30">选择好友 <select>
+                <option>请选择</option>
+            </select></h4>
+            <ul>
+              <li class="on"><a href="#">全部好友(3)</a></li>
+              <li><a href="#">现在同事</a></li>
+              <li><a href="#">以前同事</a></li>
+              <li><a href="#">大学同学</a></li>
+              <li><a href="#">高中同学</a></li>
+              <li><a href="#">家人亲戚</a></li>
+              <li><a href="#">挚交好友</a></li>
+              <li><a href="#">普通朋友</a></li>
+              <li><a href="#">朋友的朋友</a></li>
+              <li><a href="#">其他</a></li>
+            </ul>
+          </div>
+          <div class="FList">
+            <div class="lh30"><span class="cGray"><a href="#">我发表的</a></span> | <span><a href="#">我的回复</a></span></div>
+            <div class="cGray lh30">当前显示1 - 4 条/共 4 条</div>
+            <div class="Fli">
+              <div class="user_img"><img src="../Public/images/userimg.jpg" /></div>
+              <div class="LC">
+                <div class="MC">
+                  <h4><a href="#">魏莹</a><span>09-05-24 13:00</span>|<span><a href="#">更多状态</a></span></h4>
+                  <p>我在无聊。。。<a href="#">回复</a></p>
+                </div>
+                <div class="RC">
+                  <div class="RLI">
+                    <div class="user_img"><img src="../Public/images/userimg.jpg" /></div>
+                    <div class="RLC">
+                      <h4><a href="#">魏莹</a><span>09-05-24 13:00</span>|<span><a href="#">更多状态</a></span></h4>
+                      <p>我在无聊。。。<a href="#">回复</a></p>
+                    </div>              
+                  </div>              
+                  <div class="RLI"><a href="#">显示全部36条</a></div>
+                  <div class="RLI">
+                    <div class="user_img"><img src="../Public/images/userimg.jpg" /></div>
+                    <div class="RLC">
+                      <h4><a href="#">魏莹</a><span>09-05-24 13:00</span>|<span><a href="#">更多状态</a></span></h4>
+                      <p>我在无聊我在无聊我在无聊我在无聊我在无聊我在无聊我在无聊我在无聊。。。<a href="#">回复</a></p>
+                    </div>              
+                  </div>              
+                  <div class="input_box">
+                    <textarea name="textarea2" cols="" rows="2"></textarea>
+                    <input type="button" class="btn" value="回 复" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="Fli">
+              <div class="user_img"><img src="../Public/images/userimg.jpg" /></div>
+              <div class="LC">
+                <div class="MC">
+                  <h4><a href="#">魏莹</a><span>09-05-24 13:00</span>|<span><a href="#">更多状态</a></span></h4>
+                  <p>我在无聊。。。<a href="#">回复</a></p>
+                </div>              
+              </div>
+            </div>
+
+          </div>
+        </div><!-- 我的心情 end  -->
+
+
+
+
+
+
+
+
+
+  
+  </div><!-- 画布 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />
+

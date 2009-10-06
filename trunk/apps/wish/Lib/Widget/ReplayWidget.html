@@ -1,0 +1,56 @@
+<div>
+<div class="RC" id = "RC{$id}">
+<neq name="first" value="">
+    <div class="RLI btmline" id="first{$id}" >
+      <div class="user_img"><a href="__TS__/space/{$first['uid']}"><img src="{$first['uid']|getUserFace}" /></a></div>
+      <div class="RLC">
+        <h4>
+          <span class="right mt5"><?php
+          if( $uid == $first['uid'] || $mid == $uid){
+          echo "<a id= \"d-first".$first['appid']."\" style=\"display:none;\" class=\"del\" title=\"删除\" href=\"javascript:deleteComment( ".$first['id'].",".$first['appid'].",\'first\',".$mid.")\">删除</a>";
+          }
+          ?></span>
+          <span class="left"><strong>
+          <a href="__TS__/space/{$first['uid']}" class ="name{$first['uid']}">{$first['name']}</a>
+        </strong><span class="time">{$first['cTime']|friendlyDate}</span></span>
+
+        </h4>
+        <p>{$first['comment']}<a href="javascript:replay({$first['uid']},{$id})" onclick="">回复</a></p>
+      </div>              
+	<div class="c" ></div>
+    </div>              
+ </neq>
+ <php>if( $count > 2 ){</php>
+ <div class="RLI btmline" id ="showMore{$id}"><a href="###" onclick="showMore('{$first['appid']}',{$mid})">显示全部{$count}条</a></div>
+<php>}</php>
+<neq name="last" value="">
+    <div class="RLI btmline"  id="last{$id}">
+      <div class="user_img"><a href="__TS__/space/{$last['uid']}"><img src="{$last['uid']|getUserFace}" /></a></div>
+
+      <div class="RLC">
+        <h4><span class="right mt5"><?php
+          if( $uid == $last['uid'] || $mid == $uid ){
+          echo "<a id= \"d-last".$last['appid']."\" style=\"display:none;\" class=\"del\" title=\"删除\" href=\"javascript:deleteComment( ".$last['id'].",".$last['appid'].",\'last\',".$mid.")\" >删除</a>";
+          }
+          ?></span>
+<span class="left"><strong>
+          <a href="__TS__/space/{$last['uid']}" class ="name{$last['uid']}">{$last['name']}</a>
+        </strong><span class="time">{$last['cTime']|friendlyDate}</span></span>
+                  </h4>
+        <p>{$last['comment']}<a href="javascript:replay({$last['uid']},{$id})">回复</a></p>
+      </div>  
+	  <div class="clear" ></div>    
+    </div>              
+ </neq>
+</div>
+</div>
+<div class="Input_box" id="RLI{$id}" >
+    <div class="pic" style="display:none;" id="image{$id}"><a href="__TS__/space/{$uid}"><img src="{$uid|getUserFace}" /></a></div>
+    <div class="box">
+        <textarea id="input{$id}" name="comment" rows="3"  style="height:25px; width:368px;line-height:25px; <eq name='first' value = ''>display:none;</eq>" class="cGray2 inputReplay" >添加回复</textarea>
+
+        <input id = "button{$id}" <?php if( $count<=2 ){echo "showmore=false";}else{echo "showmore=true";}?> type="button" class="btn_b" onclick="replayComment({$id},true,{$mid})" style="display:none;" value="回 复" />
+        <input type="button" id="button2{$id}" name="replayHide($( '#button{$id}' ))" style="display:none;" value="取消">
+        <input id="uid" type="hidden" value="1" >
+ </div>
+ </div>

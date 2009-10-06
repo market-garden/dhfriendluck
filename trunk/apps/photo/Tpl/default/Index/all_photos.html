@@ -1,0 +1,39 @@
+<include file="__THEME__/header" />
+<link href="../Public/css/photo.css" rel="stylesheet" type="text/css" />
+<!-- 头部 end -->
+<div class="content"><!-- 内容 begin  -->
+	<include file="__THEME__/apps" />
+	<div class="main"> <!-- 右侧内容 begin  -->
+
+		<div class="page_title"> <!-- page_title begin -->
+			<h2><img src="../Public/images/ico_app02.gif" />相册</h2>
+		<div class="c"></div>
+</div><!-- page_title end -->
+
+		<div class="tab-menu"><!-- 切换标签 begin  -->
+			<ul>
+				<li><a href="__APP__/Index/friends_photos"><span>好友的照片</span></a></li>
+				<li><a href="__APP__/Index/photos/uid/{$mid}"><span>我的照片</span></a></li>
+				<li><a href="__APP__/Index/all_photos" class="on"><span>大家的照片</span></a></li>
+				<li><a href="__APP__/Upload/flash"><span><div class="ico_add">&nbsp;</div>上传照片</span></a></li>
+            </ul>
+		</div><!-- 切换标签 end  -->
+
+		<div class="photoBox">
+			<div class="MenuSub"> 大家的最新照片 ┊ <a href="__URL__/all_albums">大家的最新专辑</a> </div>
+			<div>
+				<ul class="piclist">
+                <volist name="data.data" id="li">
+					<li>
+						<a href="__APP__/Index/photo/id/{$li.id}/aid/{$li.albumId}/uid/{$li.userId}/type/mAll" rel="__ROOT__/thumb.php?w=400&h=400&t=f&url={$li.savepath|get_photo_url}" title="{$li.name}" ><img src="__ROOT__/thumb.php?w=120&h=100&t=f&url={$li.savepath|get_photo_url}" /><br />{$li.name|getShort='10'}</a>
+					</li> 
+                </volist>
+				</ul>
+			</div>
+		</div>
+		<div style="clear:both">&nbsp;</div>
+		<div class="page">{$data.html}</div>  </div><!-- 右侧内容 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />
+<script src="../Public/js/preview.js" type="text/javascript"></script>

@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><?php echo ($site_opts["site_name"]); ?>后台管理系统</title>
+<link href="../Public/css/admin.css" type="text/css" rel="stylesheet" />
+<script src="../Public/script/app.js" type="text/javascript"></script>
+<script type="text/javascript"> 
+App.BOOT_URL	= '__URL__';
+App.MENU_URL	= '__URL__/menu';
+</script>
+
+
+</head>
+<body scroll="no">
+	<div id="topPannel">
+		<a href="__ROOT__/admin.php" class="logo"></a>
+		<ul class="menunav" id="topMenu">
+		</ul>
+	
+		<ul class="navmanage">
+			<!--
+			<li><em><a onclick="" href="javascript:;">后退</a></em></li>
+			<li><em><a onclick="App.refurbish()" href="javascript:;">刷新</a></em></li>
+			<li><em><a onclick="" href="javascript:;">前进</a></em></li>
+			-->
+			<li>&nbsp;</li>
+			<li><em><a onclick="App.refurbish()" href="javascript:;">刷新</a></em></li>
+
+		</ul>
+
+				
+		<div class="linknav">
+			您好,<b><a href="#"><?php echo (getUserName($userId)); ?></a></b>[<a href="__APP__/Public/logout">退出</a>]<span class="separator">|</span><a href="__TS__/Home">返回前台</a>
+		</div>
+	</div>
+	<div id="sidePannel">
+    <div id="left_top"></div>
+		<div style="margin-left:8px;">
+        <ul id="sideNavigator"></ul>
+		<div id="listPannel"></div>
+        </div>
+	</div>
+
+	
+	<div id="spliter" class="spliter_hide" onclick="App.switchExpandSide()"></div>
+	<div id="mainPannel" class="main_pannel">
+		<div class="bodyTop"><p id="locateNav"></p></div>
+		<div id="container">
+			<iframe id="loader" class="loader" frameborder="0" scrolling="yes" src="about:blank" name="main"></iframe>
+		</div>
+		<div class="copyright">
+			<span><?php echo $copyright; ?></span>
+		</div>
+	</div>
+	<script type="text/javascript">
+		App.init();
+		fbind(window, 'resize', App.adapt);
+		fbind(window, 'load', App.adapt);
+		fbind(window, 'load', App.initApp);
+	</script>
+</body>
+</html>

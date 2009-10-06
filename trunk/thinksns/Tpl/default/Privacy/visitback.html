@@ -1,0 +1,56 @@
+
+      <div style="margin-top:100px;">
+      <h3 class="btmline lh30 mb10 f14px"><strong>以下好友不能访问我的这些内容</strong></h3>
+		<div style="width:270px; float:left;" class="mr10">
+        <fieldset title="我的日记" style="padding:5px;">
+          <legend><strong>我的日记</strong></legend>
+          <form action="__URL__/doVisit" method="post" class="form_validator">
+              <div style="width:100%;"> {:W("SelectFriend",array("id"=>"blog","no"=>true))}</div>
+                
+                <input type="hidden" name="type" id="c" value="blog">
+                <input type="submit" class="btn_b" style="margin-top:5px;" value="添 加" />
+        
+            </form>
+            <div style="margin-top:5px;">
+            <volist name="blog_data" id="vo">
+              <div class="prohibiter" id="hide_{$vo.type}_{$vo.id}"> <span class="pt5"> <img src="../Public/images/ico_estop.gif" alt="限制访问我的首页" /> </span> <span>{$vo.fname}</span> <span class="pt5"><a href="javascript:removePing({$vo.id},'{$vo.type}')"><img src="../Public/images/ico_xdel.gif" alt="删除" /></a></span> </div>
+            </volist>
+            {$space_page}
+            </div>
+            </fieldset>
+		</div>
+        <div style="width:270px; float:left;" class="mr10">
+          <fieldset title="我的照片" style="padding:5px;">
+          <legend><strong>我的照片</strong></legend>
+            <form action="__URL__/doVisit" method="post" class="form_validator">
+              <div style="width:100%;"> {:W("SelectFriend",array("id"=>"photo","no"=>true))}</div>
+                <input type="hidden" name="type" id="c" value="photo">
+                <input type="submit" class="btn_b" style="margin-top:5px;" value="添 加" />
+            </form>
+            <div style="margin-top:5px;">
+            <volist name="photo_data" id="vo">
+              <div class="prohibiter" id="hide_{$vo.type}_{$vo.id}"> <span class="pt5"> <img src="../Public/images/ico_estop.gif" alt="限制访问我的首页" /> </span> <span>{$vo.fname}</span> <span class="pt5"><a href="javascript:removePing({$vo.id},'{$vo.type}')"><img src="../Public/images/ico_xdel.gif" alt="删除" /></a></span> </div>
+            </volist>
+            {$space_page}
+            </div>
+            </fieldset>
+		</div>
+		<div style="width:270px; float:left;">
+          <fieldset title="我的记录" style="padding:5px;">
+          <legend><strong>我的记录</strong></legend>
+            <form action="__URL__/doVisit" method="post" class="form_validator">
+              <div style="width:100%;"> {:W("SelectFriend",array("id"=>"mini","no"=>true))}</div>
+                <input type="hidden" name="type" id="c" value="mini">
+                <input type="submit" class="btn_b" style="margin-top:5px;" value="添 加" />
+              
+            </form>
+         <div style="margin-top:5px;">
+         <volist name="mini_data" id="vo">
+              <div class="prohibiter" id="hide_{$vo.type}_{$vo.id}"> <span class="pt5"> <img src="../Public/images/ico_estop.gif" alt="限制访问我的首页" /> </span> <span>{$vo.fname}</span> <span class="pt5"><a href="javascript:removePing({$vo.id},'{$vo.type}')"><img src="../Public/images/ico_xdel.gif" alt="删除" /></a></span> </div>
+            </volist>
+            {$space_page}
+            </div>
+            </fieldset>
+		</div>
+        <div class="c"></div>
+    </div>

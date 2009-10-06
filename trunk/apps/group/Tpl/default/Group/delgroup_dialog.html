@@ -1,0 +1,59 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="__PUBLIC__/js/ymPrompt/ymPrompt.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
+<link href="__ROOT__/public/theme_default/layout.css" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" id='skin' type="text/css" href="__PUBLIC__/js/ymPrompt/skin/qq/ymPrompt.css" />
+
+<script>
+	function addsubmit() {
+		$.ajax({
+ 			type: "POST",
+ 			url: "__APP__/Group/delgroup",
+ 			data:   "gid={$gid}",
+ 			success: function(msg){
+ 				
+ 				$('#pop1').hide();
+ 				$('#pop2').show();
+ 			} 
+		}); 
+	}
+</script>
+
+
+
+<div class="pop" id="pop1">
+  <div class="con">
+	<table width="100%" border="0" cellspacing="2" cellpadding="0">
+  <tr>
+<!--    <td valign="top"><img src="__ROOT__/thumb.php?w=50&h=50&url={$groupinfo['logo']|get_photo_url}" alt="{$groupinfo.name}"></td>
+-->    <td height="60" align="center">
+		你确定要删除该群组吗？删除之后不可以恢复。
+      </td>
+  </tr>
+</table>
+
+  </div>
+  <div class="btm">
+          <input name="input" type="button" class="btn_b" value="确 定" onclick="addsubmit();"/>
+          <input name="input2" type="button" class="btn_w" value="取 消" onclick="javascript:parent.ymPrompt.close();"/>
+  </div>
+</div>
+
+<div class="pop" id="pop2" style="display:none">
+  <div class="con">
+	<table width="100%" border="0" cellspacing="2" cellpadding="0">
+  <tr>
+    <td valign="top"><img src="__ROOT__/thumb.php?w=50&h=50&url={$groupinfo['logo']|get_photo_url}" alt="{$groupinfo.name}"></td>
+    <td>
+		该群组被删除成功
+      </td>
+  </tr>
+</table>
+
+  </div>
+  <div class="btm">
+          <input name="input" type="button" class="btn_b" value="确 定" onclick="javascript:parent.window.location.href='__APP__/Index/index';parent.ymPrompt.close();"/>
+  </div>
+</div>
+

@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>动态</title>
+<link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="container">
+<form action="__URL__/doFeed" method="post" class="form_validator">
+  <table class="form" width="100%" cellspacing="0" cellpadding="4" border="0">
+    <tr class="top">
+      <td class="tit" colspan="2">你的哪些动态，会显示到你好友的“好友动态”中：</td>
+    </tr>
+    <tr>
+      <th width="37%" valign="top" class="td"><input id="u176" type="checkbox" name="privacy[info]" value="1" 
+        <php>if($privacy["info"] == 1 ){</php>
+        checked='true'
+        <php>}</php>
+        />修改个人资料（仅好友可见的部分）</th>
+      <td width="63%" class="td"><input id="u" type="checkbox" name="privacy[head]" value="1" 
+        <php>if($privacy["head"] == 1  ){</php>
+        checked='true'
+        <php>}</php>
+        />更新头像</td>
+    </tr>
+    <tr>
+      <td class="td"><input id="u3" type="checkbox" name="privacy[mini]" value="1" 
+        <php>if($privacy["mini"] == 1 ){</php>
+        checked='true'
+        <php>}</php>
+        />发表心情</td>
+      <td class="td"><input id="u2" type="checkbox" name="privacy[photo]" value="1" 
+        <php>if($privacy["photo"] == 1 ){</php>
+        checked='true'
+        <php>}</php>
+        />上传新照片</td>
+    </tr>
+    <tr>
+      <td class="td"><input id="u3" type="checkbox" name="privacy[blog]" value="1" 
+        <php>if($privacy["blog"] == 1 ){</php>
+        checked='true'
+        <php>}</php>
+        />发表新日记</td>
+      <td class="td"><input id="u4" type="checkbox" name="privacy[c_group]" value="1" 
+        <php>if($privacy["c_group"] == 1 ){</php>
+        checked='true'
+        <php>}</php>
+        />建立新群</td>
+    </tr>
+    <tr>
+      <td class="td"><input id="u5" type="checkbox" name="privacy[j_group]" value="1" 
+        <php>if($privacy["j_group"] == 1 ){</php>
+        checked='true'
+        <php>}</php>
+        />加入某群</td>
+      <td class="td"><input id="u6" type="checkbox" name="privacy[add_friend]" value="1" 
+        <php>if($privacy["add_friend"] == 1 ){</php>
+        checked='true'
+        <php>}</php>
+        />加某人为好友</td>
+    </tr>
+    <tr>
+      <td class="td"><input id="u7" type="checkbox" name="privacy[add_app]" value="1" 
+        <php>if($privacy["add_app"] == 1 ){</php>
+        checked='true'
+        <php>}</php>
+        />添加新组件</td>
+      <td class="td"><input type="checkbox" name="privacy[wall]" id="radio4" value="1" 
+        <php>if($privacy["wall"] == 1 ){</php>
+        checked='true'
+        <php>}</php>
+        />在好友的留言板添加留言</td>
+    </tr>
+    <tr>
+      <td class="td"><input type="submit" class="button" value="保存修改" /></td>
+      <td class="td"></td>
+    </tr>
+  </table>
+ 
+</form> 
+</div>
+</body>
+</html>

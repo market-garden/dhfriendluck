@@ -1,0 +1,88 @@
+ /*----------------------------------------------------------------
+// Copyright (C) 2006-2008 萤火虫网络科技有限公司
+// 萤火虫版权所有。 
+//
+// 文件名：im.css
+// 文件功能描述：网页版聊天工具样式
+//
+// 
+// 创建标识：zhoupeng 2008-08-18
+//
+// 修改标识：
+// 修改描述：
+//----------------------------------------------------------------*/
+
+body{background-color:#FFFFFF;font-family:Verdana,"宋体";color:#303030;font-size:12px;margin:0 auto;padding:0;}
+ul,li{margin:0;padding:0;list-style-type:none;float:left;}
+h1,h2,h3,h4,h5,h6{margin:0;padding:0;font-size:12px;float:left;}
+p{margin:0;padding:0;margin-bottom:5px; float:left;text-indent:2em;}
+div{overflow:hidden;}
+input,select,textarea{margin:0;padding:0;font-size:12px;}
+img,form{border:none;padding:0;margin:0;}
+
+/*----------网页聊天头部----------*/
+.header{width:950px;height:100px;margin:0 auto;margin-bottom:7px;padding-right:4px;}
+.logo{width:946px;height:45px;margin-top:15px;line-height:45px;color:#0c95f3;font-size:14px;}
+  .logo img{float:left;margin-right:12px;}
+.news{width:946px;height:30px;margin-top:10px;background:#0c95f3 url(../images/news_bg.gif) top left no-repeat;color:#FFFFFF;} 
+  .news span{width:922px;padding:0 12px;float:left;line-height:30px;background:url(../images/news_bg.gif) bottom right no-repeat;}
+  
+/*----------网页聊天主体区域----------*/
+.container{width:950px;margin:0 auto;margin-bottom:10px;}
+.left{width:722px;float:left;height:480px;background:url(../images/bottom_right.gif) bottom right no-repeat;}
+  .left h1{width:722px;height:36px;background:url(../images/top_bg.gif) repeat-x;}
+  .left h1 ul{width:681px;padding-left:10px;height:23px;padding-top:13px;background:url(../images/top_left.gif) left no-repeat;}
+  .left h1 ul a{color:#FFFFFF;font-weight:normal;height:16px;padding:4px 12px 0 12px; float:left;background:url(../images/link_cut.gif) right center no-repeat;text-decoration:none;}
+  .left h1 ul a:hover{text-decoration:underline;}
+  .left h1 ul a.a1{background:url(../images/link_rightbg.gif) right bottom no-repeat;color:#185e83;padding:4px 20px 0 12px;}
+  .left h1 li.a1{background:url(../images/link_leftbg.gif) left top no-repeat;height:20px;padding-left:2px;}
+  .left h1 em{float:right;width:31px; background:url(../images/top_right.gif) right no-repeat;height:22px;padding-top:14px;}
+  .left h2{width:722px;height:307px;background:url(../images/middle_left.gif) left repeat-y;}
+  .left h2 span{width:722px;height:307px;float:left;background:url(../images/middle_right.gif) right repeat-y;padding:0;margin:0;}
+  .left h2 textarea{width:692px;height:294px;margin-left:7px;border:#4aa4e2 1px solid;padding:5px;overflow:auto;}
+  .left h3{width:722px;height:137px;background:url(../images/bottom_left.gif) left no-repeat;}
+  .left h3 span{width:704px;height:137px;float:left;margin-left:7px;background:#d7edfd url(../images/bottom_bg.gif) bottom repeat-x;}
+  .left h3 li{background:url(../images/link_cut2.gif) right center no-repeat;width:35px;height:25px;text-align:center;margin-top:2px;}
+  .left h3 a{float:left;margin-left:6px;padding:2px 1px 1px 1px;}
+  .left h3 a:hover{background-color:#aac8e6;border:#6d92ba 1px solid;float:left;margin-left:6px;padding:1px 0 0 0;}
+  .left h3 li.a1{background:none;}
+  .left h3 li.a2{background:none;padding-left:498px;width:80px;font-weight:normal;padding-top:5px;height:16px;}
+  .left h3 li.a2 a{color:#185e83;text-decoration:none;padding:0;}
+  .left h3 li.a2 a:hover{text-decoration:underline;background:none;border:none;padding:0;}
+  .left h3 b{width:692px;height:90px;padding:5px;float:left;border:#4aa4e2 1px solid;background-color:#f3f3f3;}
+  .left h3 b textarea{width:550px;height:77px;float:left;padding:5px;overflow:auto;}
+  .left h3 b input{margin-top:30px;margin-left:30px;width:72px;height:31px;background:url(../images/button.gif) no-repeat;border:none;color:#FFFFFF;font-size:14px;}
+.right{width:218px;float:right;height:480px;background:url(../images/right_bg.gif) bottom left repeat-y;}
+  .right h1{width:219px;height:33px;background:url(../images/right_topbg.gif) top left no-repeat;line-height:20px;color:#0477c8;}
+  .right img{margin:0 8px;float:left;}
+  .right h1 strong{float:left;padding-top:10px;margin-left:5px;padding:10px 0 0 24px;background:url(../images/friends.gif) 3px 10px no-repeat}
+  .right h1 span{float:right;padding-top:3px;}
+  .right h2{font-weight:normal;line-height:30px;width:195px;padding:5px 10px 5px 6px;height:402px;overflow:auto;SCROLLBAR-FACE-COLOR: #fcfcfc;
+ SCROLLBAR-HIGHLIGHT-COLOR: #6c6c90;
+ SCROLLBAR-SHADOW-COLOR: #fcfcfc;
+ SCROLLBAR-3DLIGHT-COLOR: #fcfcfc;
+ SCROLLBAR-ARROW-COLOR: #240024;
+ SCROLLBAR-TRACK-COLOR: #fcfcfc;
+ SCROLLBAR-DARKSHADOW-COLOR: #48486c;
+ SCROLLBAR-BASE-COLOR: #fcfcfc;overflow-x:hidden; }
+  .right h2 ul{width:100%;}
+  .right h2 li{width:100%;line-height:23px;}
+  .right h2 a{width:100%;height:25px;float:left;padding:2px;text-decoration:none;color:#303030;}
+  .right h2 a:hover{background-color:#eef9ff;border:#b4e1ff 1px solid;width:100%;height:25px;padding:1px;}
+  .right h2 span{color:#949494;margin-left:5px;}
+  .right h2 li img{margin-top:2px;}
+  .right h3{width:218px;height:35px;background:url(../images/right_bottombg.gif) bottom no-repeat;}
+  .right h3 span{background-color:#dbeffd;border:#3eb1f9 1px solid;width:190px;height:25px;float:left;padding-left:8px;margin:0 0 15px 6px;font-weight:normal;color:#0477c8;line-height:25px;}
+.right2{width:218px;float:right;height:480px;}
+  .right2 h1{width:219px;height:33px;background:url(../images/right_topbg2.gif) top left no-repeat;line-height:20px;color:#0477c8;}
+  .right2 img{margin:0 8px;float:left;}
+  .right2 h1 strong{float:left;padding-top:10px;margin-left:5px;padding:10px 0 0 24px;background:url(../images/friends.gif) 3px 10px no-repeat}
+  .right2 h1 span{float:right;padding-top:3px;}
+  .right2 h2{width:208px;height:437px;padding:4px 0 4px 0;}
+  .right2 h2 a{float:left;margin-bottom:30px;}
+  .right2 h2 img{float:left;margin:0;}
+.imbox{width:218px;}
+  .imbox h1{width:219px;height:33px;background:url(../images/right_topbg2.gif) top left no-repeat;line-height:20px;color:#0477c8;}
+  .imbox img{margin:0 8px;float:left;}
+  .imbox h1 strong{float:left;padding-top:10px;margin-left:5px;padding:10px 0 0 24px;background:url(../images/friends.gif) 3px 10px no-repeat}
+  .imbox h1 span{float:right;padding-top:3px;}

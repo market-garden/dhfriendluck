@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>站点配置</title>
+        <link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div id="container">
+            <form action="__URL__/doPrivacy" method="post">
+
+
+                <table width="100%" border="0" cellpadding="4" cellspacing="0" class="form">
+                    <tr class="top">
+                        <td colspan="2" class="tit">隐私设置</td>
+                    </tr>
+                    <tr>
+                        <th class="th" width="140" valign="top">游客浏览：</th>
+                        <td class="td"><p>
+                                <input type="radio" name="privacy[youke]" id="radio3" value="1" class="radio"  <php>if($privacy["youke"] == 1){</php> checked='true' <php>}</php>/>
+                                是
+                                <input type="radio" name="privacy[youke]" id="radio4" value="0" class="radio" <php>if($privacy["youke"] == 0){</php> checked='true' <php>}</php>/>
+                            否</p>
+                        <p>用户不需要登录也能浏览随便看看、未设置隐私的个人空间，同时，站内的信息也可以被搜索引擎收录。</p></td>
+                    </tr>
+                    <tr>
+                        <th class="th" valign="top">允许访问的IP列表：</th>
+                        <td class="td"><p>
+                                <textarea name="allow_ips" cols="50" rows="5" id="textfield2">{$allow_ips}</textarea>
+                            </p>
+                            <p>只有当用户处于本列表中的 IP 地址时才可以访问站点，列表以外的地址访问将视为 IP 被禁止。每个 IP 一行，既可输入完整地址，也可只输入  IP 开头，例如 &quot;192.168.&quot;(不含引号) 可匹配 192.168.0.0～192.168.255.255  范围内的所有地址，留空为所有 IP 均可访问。 <br />
+                        您当前的IP: {:get_ip();} </p></td>
+                    </tr>
+                    <tr>
+                        <th class="th" valign="top">禁止访问的IP列表：</th>
+                        <td class="td"><p>
+                                <textarea name="deny_ips" cols="50" rows="5" id="textfield">{$deny_ips}</textarea>
+                            </p>
+                        <p>用户处于本列表中的 IP 地址禁止访问站点。每个 IP 一行，既可输入完整地址，也可只输入 IP 开头。 </p></td>
+                    </tr>
+                </table>
+                <table width="100%" border="0" cellpadding="2" cellspacing="0" class="form">
+                    <tr class="top">
+                        <td colspan="2" class="tit">“我的首页”访问权限</td>
+                    </tr>
+                    <tr>
+                        <th class="th" width="140" valign="top">空间首页：</th>
+                        <td class="td"><p>
+                                <input type="radio" name="privacy[space]" id="radio" value="0"  <php>if($privacy["space"] == 0){</php> checked='true' <php>}</php>/>任何人
+                                <input type="radio" name="privacy[space]" id="radio2" value="1" <php>if($privacy["space"] == 1){</php> checked='true' <php>}</php>/>仅好友
+                                <input type="radio" name="privacy[space]" id="radio3" value="2" <php>if($privacy["space"] == 2){</php> checked='true' <php>}</php>/>隐藏
+                        </p>              </td>
+                    </tr>
+                    <tr>
+                        <th class="th" valign="top">谁能给我留言和评论：</th>
+                        <td class="td"><p>
+                                <input type="radio" name="privacy[wall]" id="radio4" value="0" <php>if($privacy["wall"] == 0){</php> checked='true' <php>}</php>/>任何人
+                                <input type="radio" name="privacy[wall]" id="radio5" value="1" <php>if($privacy["wall"] == 1){</php> checked='true' <php>}</php>/>仅好友
+                                <input type="radio" name="privacy[wall]" id="radio6" value="2" <php>if($privacy["wall"] == 2){</php> checked='true' <php>}</php>/>关闭留言和评论功能
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="th" valign="top">谁能请求加我为好友：</th>
+                        <td class="td"><p>
+                                <input type="radio" name="privacy[friend]" id="radio7" value="0" <php>if($privacy["friend"] == 0){</php> checked='true' <php>}</php>/>任何人
+                                <input type="radio" name="privacy[friend]" id="radio8" value="1" <php>if($privacy["friend"] == 1){</php> checked='true' <php>}</php>/>仅好友的好友 &nbsp;&nbsp;&nbsp;
+
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="th" valign="top">是否允许别人搜索到我：</th>
+                        <td class="td">
+                            <input type="radio" name="privacy[search]" id="radio9" value="0" <php>if($privacy["search"] == 0){</php> checked='true' <php>}</php>/>是
+                        <input type="radio" name="privacy[search]" id="radio10" value="1" <php>if($privacy["search"] == 1){</php> checked='true' <php>}</php>/>否</td>
+                    </tr>
+                    <tr>
+                        <th class="th" valign="top">陌生人来看我时，是否留下访问脚印：</th>
+                        <td class="td"><p>
+                                <input name="privacy[foot]" type="radio" value="0" <php>if($privacy["foot"] == 0){</php> checked='true' <php>}</php>/>是 &nbsp;
+                                <input name="privacy[foot]" type="radio" value="1" <php>if($privacy["foot"] == 1){</php> checked='true' <php>}</php>/>否
+                            </p>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <th valign="top">&nbsp;</th>
+                        <td class="td"><input type="submit" class="button" id="button2" value="提交" /></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </body>
+</html>

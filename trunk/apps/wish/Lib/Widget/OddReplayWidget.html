@@ -1,0 +1,10 @@
+<php>foreach( $replay as $vo ){</php>
+                  <div class="RLI">
+                    <div class="user_img"><img src="/product/apps/wish/Tpl/default/Public/images/userimg.jpg" /></div>
+                      <div class="RLC">
+                      <h4><a href="#{$vo['uid']}" class ="name{$vo['uid']}">{$vo['name']}</a><span>{$vo['cTime']|friendlyDate}</span>|<span><a href="index.php?s=/Index/friends/uid/{$vo['uid']}">更多状态</a></span></h4>
+                      <p>{$vo['comment']}<a href="#input{$vo['appid']}" onclick="replay({$vo['uid']},{$vo['appid']})">回复</a></p>
+                    </div>         
+                  </div>
+                    <php>}</php>
+

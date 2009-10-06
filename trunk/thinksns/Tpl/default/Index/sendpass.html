@@ -1,0 +1,65 @@
+<include file="__THEME__/header" />
+
+<style>
+    <!--
+    .LoginBox {
+	width: 500px;
+	margin-right: auto;
+	margin-left: auto;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin-top: 50px;
+	margin-bottom: 100px;
+	padding-bottom: 10px;
+	text-align: left;
+    }
+    .LoginBox h1 {
+        line-height: 40px;
+        font-size: 14px;
+        background-image: url(../Public/images/ico_key.gif);
+        background-repeat: no-repeat;
+        background-position: left center;
+        padding-left: 30px;
+    }
+    .LoginBox ul { margin-top: 10px; }
+    .LoginBox ul li{
+        display:table;
+        display:inline-block;
+        clear:both;
+        margin-bottom: 10px;
+    }
+    .LoginBox ul li .l{
+        width: 60px;
+        text-align: right;
+        float: left;
+        line-height: 20px;
+        font-size: 14px;
+    }
+    .LoginBox ul li .r{
+        width: 222px;
+        float: left;
+        overflow: hidden;
+        line-height: 20px;
+    }
+    .text1{ border:1px solid #BDC7D8; font-size:12px; height:20px; line-height: 20px; font-family: Arial, Helvetica, sans-serif; color: #333333; float: left; }
+    .text2{ border:1px solid #005FAB; font-size:12px; height:20px; line-height: 20px; font-family: Arial, Helvetica, sans-serif; color: #000000; float: left; }
+
+    -->
+</style>
+
+    <div class="LoginBox border bg01">
+        <h1 class="btmline"><span class="right f12px">忘记登录Email？<a href="#">请点击这里</a></span><strong>找回密码</strong></h1>
+        <ul>
+            <form action="__URL__/getPass" method="post">
+                <li class="cGray">请输入您登录ThinkSNS所使用的Email，我们会将该密码发送到该邮箱里</li>
+                <li><div class="l">Email：</div>
+                    <div class="r"><input type="text" class="text1" style="width:220px" onBlur="this.className='text1'" onFocus="this.className='text2'" name="email"/>
+                </div></li>
+                <li><div class="l">&nbsp;</div>
+                    <div class="r"><input type="submit" class="btn_b" value="取回密码" />
+                </div></li>
+            </form>
+        </ul>
+    </div>
+
+<include file="__THEME__/footer" />

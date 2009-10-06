@@ -1,0 +1,71 @@
+<include file="__THEME__/header" />
+
+<link href="../Public/basic.css" rel="stylesheet" type="text/css" />
+
+<link href="../Public/friend.css" rel="stylesheet" type="text/css" />
+
+
+
+<div class="content"><!-- 内容 begin  -->
+    <include file="__THEME__/apps" />
+
+
+    <div class="main"> <!-- 右侧内容 begin  -->
+
+        <div class=page_title> <!-- page_title begin -->
+            <h2><img src="../Public/images/ico_Friend.gif" />好友</h2>
+        <div class="c"></div>
+</div><!-- page_title end -->
+        <div class="tab-menu"><!-- 切换标签 begin  -->
+            
+            <ul>
+                <li><a href="__URL__/index"><span>我的好友</span></a></li>
+                <li><a href="__URL__/ping"><span>好友屏蔽</span></a></li>
+                <li><a href="__URL__/track" class="on"><span>访问脚印</span></a></li>
+                <li><a href="__URL__/find"><span>查找朋友</span></a></li>
+                <li><a href="__APP__/Invite"><span><div class="ico_add">&nbsp;</div>邀请好友</span></a></li>
+            </ul>
+        </div><!-- 切换标签 end  -->
+
+        <div class="friendBox">
+          <div class="MenuSub"><a <php>if(!isset($_GET['t'])) echo 'class="fB"';</php> href="__URL__/track">谁来看过我</a> | <a <php>if(isset($_GET['t'])) echo 'class="fB"';</php> href="__URL__/track/t/visit">我去看过谁</a></div>
+            <div class="FList" style="width:830px;"><!-- 访问脚印 begin  -->
+                <ol class="xlist">
+                    <volist name="visitors" id="user">
+                        <php>if($_GET["t"] != "visit"){</php>
+                            <li>
+                                <span class="headpic50">
+                                    <a href="__APP__/space/{$user.visitId}"><img src="{$user.visitId|getUserFace}" /></a>
+                                </span>
+                                <p><a href="__APP__/space/{$user.visitId}">{$user.visitId|isOnlineIcon}{$user.name}</a></p>
+                                <em class="cGray2">{$user.cTime|friendlyDate}</em>
+                            </li>             
+                        <php>}else{</php>
+                            <li>
+                                <span class="headpic50">
+                                    <a href="__APP__/space/{$user.uid}"><img src="{$user.uid|getUserFace}" /></a>
+                                </span>
+                                <p><a href="__APP__/space/{$user.uid}">{$user.uid|isOnlineIcon}{$user.uid|getUserName}</a></p>
+                                <em class="cGray2">{$user.cTime|friendlyDate}</em>
+                            </li>
+                        <php>}</php>
+                    </volist>
+					<div class="c"></div>
+				</ol>
+                <div class="page">
+                    {$page}
+                </div>
+            </div><!-- 访问脚印 end  -->
+        </div>
+
+
+
+
+
+
+
+    </div><!-- 右侧内容 end  -->
+
+<div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />

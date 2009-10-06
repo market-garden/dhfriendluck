@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$site_opts.site_name}后台管理系统</title>
+<link href="__PUBLIC__/admin/css/layout.css" rel="stylesheet" type="text/css" />
+<script src="../Public/script/app.js" type="text/javascript"></script>
+<script type="text/javascript">
+App.BOOT_URL	= '__URL__';
+App.MENU_URL	= '__URL__/menu';
+</script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
+<script type="text/javascript" src="../Public/script/json2select.js"></script>
+</head>
+<body>
+<style type="text/css">
+	ul ul {margin: auto; padding:0 0 0 40px;	list-style-type: none;}
+</style>
+<div id="container">
+  <form method="post" id="basic_setting" name="form" action="__URL__/doAddCategory">
+    <TABLE width="100%" cellpadding=3 cellspacing=3  class="form">
+      <TR>
+        <TD width="80"  class="th" ><strong>分类标题：</strong></TD>
+        <TD class="td" ><INPUT TYPE="text" class="large bLeftRequire" NAME="title"></TD>
+      </TR>
+      <TR>
+        <TD class="th" ><strong>英文名：</strong></TD>
+        <TD class="td" ><INPUT TYPE="text" class="large bLeftRequire" NAME="name"></TD>
+      </TR>
+      <TR>
+        <TD class="th" ><strong>父分类：</strong></TD>
+        <TD class="td" ><div id="category"></div></TD>
+      </TR>
+      <TR>
+        <TD ></TD>
+        <TD class="center"><INPUT TYPE="submit" value="添 加" class="button"></TD>
+      </TR>
+    </TABLE>
+  </form>
+  <table class="form" width="100%">
+    <tbody>
+      <tr class="top">
+        <td class="border" colspan="6"></td>
+      </tr>
+      <tr>
+        <td class="tit" colspan="6">分类管理
+          </th>
+      </tr>
+      <tr class="label">
+        <th>ID/分类名</th>
+        <th></th>
+        <th align="right">操作</th>
+      </tr>
+      <tr class="cell altbg1">
+        <td colspan="3">{$categoryList}</td>
+      </tr>
+      <tr class="bottom">
+        <td class="border" colspan="6">&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+  <form name="editCagegoryForm" method="post" action="__URL__/editCategory">
+    <input type="hidden" name="id" value="0">
+  </form>
+  <form name="delCagegoryForm" method="post" action="__URL__/delCategory">
+    <input type="hidden" name="id" value="0">
+  </form>
+  <script type="text/javascript">
+
+var category_json={$category_json};
+
+$("#category").json2select(category_json,'1','category','1');
+
+</script>
+  <script type="text/javascript">
+		/* 编辑分类 */
+		function edit(id){
+			document.editCagegoryForm.id.value = id;
+			document.editCagegoryForm.submit();
+		}
+	
+	</script>
+  <script type="text/javascript">
+		
+		/* 删除分类 */
+		function del(id){
+			if (window.confirm('确实要删除选择项吗？'))
+			{	
+				document.delCagegoryForm.id.value = id;
+				document.delCagegoryForm.submit();
+			}
+		}
+
+	</script>
+  <!-- 主页面结束 -->
+</div>

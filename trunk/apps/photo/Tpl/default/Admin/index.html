@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{&SITE_TITLE}</title>
+    <link href="__PUBLIC__/admin/css/layout.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../Public/Js/jquery-1.2.6.js" ></script>
+  </head>
+  <body>
+    <div id="container">
+		<div class="tab">
+		<ul>
+			<li><a href="__URL__/index" class="on">相册全局设置</a></li>
+            <li><a href="__URL__/photo_list">照片审核</a></li>
+			<li><a href="__URL__/album_list">相册审核</a></li>
+			<li><a href="__URL__/photo_recycle">照片回收站</a></li>
+            <li><a href="__URL__/album_recycle">相册回收站</a></li>
+		</ul>
+		</div>
+		<form action ="__URL__/do_change_config" method="post" >
+        <table class="tableborder" width="90%">
+          <tbody>
+            <tr class="top">
+              <td class="border" colspan="2"></td>
+            </tr>
+            <tr>
+              <th class="header" colspan="2">相册全局设置</th>
+            </tr>
+            <tr class="label">
+              <th>说明</th>
+              <th>设置</th>
+            </tr>
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>每页显示相册数:</b>
+                <br/>
+                <span class="smalltxt">设置相册列表页每页显示条数。默认为6条记录。</span>
+              </td>
+              <td class="altbg2"><input name="album_raws" class="txt" value ="{$album_raws}" /></td>
+            </tr>
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>每页显示照片数:</b>
+                <br/>
+                <span class="smalltxt">设置照片列表页每页显示条数。默认为15条记录。</span></td>
+              <td class="altbg2"><input name="photo_raws" class="txt" value ="{$photo_raws}" /></td>
+            </tr>
+            
+            <tr class="cell">
+              <td class="altbg1">
+                <b>图片文件大小限制:</b>
+                <br/>
+                <span class="smalltxt">受php配置中对上传文件最小的限制影响，以最小的为标准，0为跟随php限制。</span></td>
+              <td class="altbg2"><input name="photo_max_size" class="txt" value ="{$photo_max_size}" /></td>
+            </tr>
+            
+<!--             <tr class="cell">
+              <td class="altbg1">
+                <b>每用户最多创建相册数:</b>
+                <br/>
+                <span class="smalltxt">0为不限制。</span>
+              </td>
+              <td class="altbg2"><input name="max_album_num" class="txt" value ="{$max_album_num}" /></td>
+            </tr>
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>每用户最多上传照片数:</b>
+                <br/>
+                <span class="smalltxt">0为不限制。</span></td>
+              <td class="altbg2"><input name="max_photo_num" class="txt" value ="{$max_photo_num}" /></td>
+            </tr> -->
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>flash上传一次最多上传照片数:</b>
+                <br/>
+                <span class="smalltxt">必须是大于0的整数，如果数值不正确，默认为10张。</span></td>
+              <td class="altbg2"><input name="max_flash_upload_num" class="txt" value ="{$max_flash_upload_num}" /></td>
+            </tr>
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>好友最新照片统计的时间间隔:</b>
+                <br/>
+                <span class="smalltxt">默认为7天。</span></td>
+              <td class="altbg2"><input name="friends_new_photo_limit" class="txt" value ="{$friends_new_photo_limit}" /></td>
+            </tr>
+<!-- 
+             <tr class="cell">
+              <td class="altbg1">
+                <b>每用户上传空间大小:</b>
+                <br/>
+                <span class="smalltxt">0为不限制。</span></td>
+              <td class="altbg2"><input name="max_storage_size" class="txt" value ="{$max_storage_size}" /></td>
+            </tr> -->
+            
+<!--             <tr class="cell">
+              <td class="altbg1">
+                <p><b>开启安全模式:</b>
+                  <br/>
+              <span class="smalltxt">开启安全模式，将会隐藏真实的图片路径。这项设置将消耗更多</span>内存。</p></td>
+              <td class="altbg2">
+                <input class="radio" type="radio" name="open_safemode" value="1"  <eq name="open_safemode" value="1">checked</eq> />
+                开启
+                <input class="radio" type="radio" name="open_safemode" value="0"  <eq name="open_safemode" value="0">checked</eq> />
+                关闭
+              </td>
+            </tr> -->
+
+
+<!--             <tr class="cell">
+              <td class="altbg1">
+                <b>开启照片圈人:</b>
+                <br/>
+                <span class="smalltxt">开启后，用户可以在照片中圈出自己的朋友。</span>
+              </td>
+              <td class="altbg2">
+                <input class="radio" type="radio" name="open_photo_mark" value="1"  <eq name="open_photo_mark" value="1">checked</eq> />
+                开启
+                <input class="radio" type="radio" name="open_photo_mark" value="0"  <eq name="open_photo_mark" value="0">checked</eq> />
+                关闭
+              </td>
+            </tr> -->
+
+<!--             <tr class="cell">
+              <td class="altbg1">
+                <b>开启摄像头拍照:</b>
+                <br/>
+                <span class="smalltxt">开启后，用户可以使用摄像头照相。</span>
+              </td>
+               <td class="altbg2">
+                <input class="radio" type="radio" name="open_camera" value="1"  <eq name="open_camera" value="1">checked</eq> />
+                开启
+                <input class="radio" type="radio" name="open_camera" value="0"  <eq name="open_camera" value="0">checked</eq> />
+                关闭
+              </td>
+            </tr>
+ -->
+            <tr class="cell">
+              <td class="altbg1">
+                <b>相册中默认照片排列方式:</b>
+                <br/>
+                <span class="smalltxt">默认新照片排在前面</span>
+              </td>
+              <td class="altbg2">   
+              	<select id="album_default_order" name="album_default_order">
+                  <option value = "id DESC" <eq name="album_default_order" value="id DESC">selected='selected'</eq>>按上传时间倒序</option>
+                  <option value = "id ASC" <eq name="album_default_order" value="id ASC">selected='selected'</eq>>按上传时间正序</option>
+                </select>
+			  </td>
+            </tr>
+
+<!--             <tr class="cell">
+              <td class="altbg1"><b>开启照片水印:</b> <br/>
+                <span class="smalltxt">开启后，可以给用户照片大图增加水印。</span></td>
+              <td class="altbg2">
+                <input class="radio" type="radio" name="open_watermark" value="1"  <eq name="open_watermark" value="1">checked</eq> />
+                开启
+                <input class="radio" type="radio" name="open_watermark" value="0"  <eq name="open_watermark" value="0">checked</eq> />
+                关闭
+              </td>
+            </tr>
+
+             <tr class="cell">
+              <td class="altbg1">
+                <b>水印图片:</b>
+                <br/>
+                <span class="smalltxt">0为不限制。</span></td>
+              <td class="altbg2"><input name="watermark_file" class="txt" value ="{$watermark_file}" /> 
+              (默认为public/images/watermark.png，请将水印图片自行传到可访问的目录下)</td>
+            </tr> -->
+            
+            <tr>
+              <td class="footer" colspan="2">
+                <input type="submit" class="button" value="提交" />
+              </td>
+            </tr>
+            <tr class="bottom">
+              <td class="border" colspan="5">&nbsp;</td>
+            </tr>
+
+          </tbody>
+        </table>
+        </form>
+	  </div>
+   </body>
+</html>

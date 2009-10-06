@@ -1,0 +1,7 @@
+<h4 class="lh30">心情归档</h4>
+<ul>
+  <li <?php if( empty( $_GET['date'] )) echo "class='on'"; ?>><a href="{$APP}/{$link}/">全部时间</a></li>
+  <volist name="date" id="vo">
+    <li <?php if( $_GET['date'] == $key ) echo "class='on' ";?>><a  href="{$APP}/{$link}/date/{$key}">{$vo['content']}( {$vo['count']} )</a></li>
+  </volist>
+</ul>

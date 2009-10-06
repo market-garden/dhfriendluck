@@ -1,0 +1,40 @@
+<include file="__THEME__/header" />
+
+
+<div class="content"><!-- 内容 begin  -->
+
+        <include file="__THEME__/apps" />
+<link href="__PUBLIC__/js/pagination/pagination.css" rel="stylesheet" type="text/css" />
+        <div class="main"> <!-- 右侧内容 begin  -->
+                <div class=page_title> <!-- page_title begin -->
+                        <h2><img src="../Public/images/applications.gif" />帐号管理</h2>
+                        <div class="c"></div>
+                </div><!-- page_title end -->
+                <div class="tab-menu"><!-- 切换标签 begin  -->
+                        <ul>
+                                <li><a href="__URL__"><span>修改密码</span></a></li>
+                                <li><a href="__URL__/account"><span>修改账号</span></a></li>
+                                <li><a href="__URL__/security"><span>账号安全</span></a></li>
+                                <li><a href="__URL__/score" class="on"><span>积分记录</span></a></li>
+                                <li><a href="__URL__/score_faq" ><span>积分说明</span></a></li>
+                                <!--   <li><a href="__URL__/subscribe"><span>邮件提醒</span></a></li> -->
+                        </ul>
+                </div><!-- 切换标签 end  -->
+                <div class="data">
+                <ul>
+                <li class="btmline lh30 cGray2" style="height:30px;"><div class="left" style=" width:50px;">编号</div><div class="left" style=" width:300px;">记录</div><div class="left" style=" width:100px;">操作时间</div></li>
+
+                        <volist name="data" id="vo" k="key">
+                        <li class="btmline lh30" style="height:30px;">
+                                <div class="left" style=" width:50px;">{$key}</div>
+                                 <div class="left" style=" width:300px;">{$vo.info}</div>
+                                 <div class="left" style=" width:100px;">{$vo.cTime|friendlyDate}</div>
+                        </li>
+                        </volist>
+                </ul>
+                        <div id="Pagination" class="pagination">{$html}</div>
+		</div>
+  </div><!-- 右侧内容 end  -->
+        <div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />

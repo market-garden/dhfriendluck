@@ -1,0 +1,72 @@
+<include file="__THEME__/header" />
+<script>
+    function changeverify(){
+        var date = new Date();
+        var ttime = date.getTime();
+        $('#verifyimg').attr('src',URL+'/verify/time/'+ttime);
+    }
+
+</script>
+
+<div style="height:30px;">&nbsp;</div>
+<php>if($_GET["t"]==1){</php>
+    <div class="LoginBox_msg"><font color="red">email或密码错误!</font></div>
+    <php>}elseif($_GET["t"]==2){</php>
+    <div class="LoginBox_msg"><font color="red">该账号尚未完成注册步骤，请点击注册确认邮件的确认链接！<a href="__URL__/reSendEmail/email/{.email}/uid/{.uid}">点击这里</a>重新发送确认邮件。</font></div>
+    <php>}elseif( $_GET['t'] == 3 ){</php>
+    <div class="LoginBox_msg"><font color="red">验证码错误!</font></div>
+    <php>}</php>
+
+
+    <div class="LoginBox border bg01">
+        <h1 class="cBlue">登录ThinkSNS</h1>
+        <form action="__URL__/doLogin" method="post">
+            <ul>
+                <li>
+                    <div class="l">Email：</div>
+                    <div class="r">
+                        <input type="text" tabindex="1" class="TextH20" style="width:220px" onblur="this.className='TextH20'" onfocus="this.className='Text2'" name="email" value="{.email}"/>
+                    </div>
+                </li>
+                <li>
+                    <div class="l">密码：</div>
+                    <div class="r">
+                        <input type="password" tabindex="2" class="TextH20" style="width:220px" onblur="this.className='TextH20'" onfocus="this.className='Text2'" name="passwd"/>
+                    </div>
+                </li>
+
+                <php>if($login_verify_allow){</php>
+                <li>
+                     <div class="l">验证码：</div>
+                    <div class="r">
+                        <input name="verify" tabindex="3" type="text" class="TextH20" style="width:50px; float:left;" onFocus="this.className='Text2'" onBlur="this.className='TextH20'"/>
+                        <div class="left ml5"><img src="__URL__/verify" id="verifyimg"/><a href="###" onclick="changeverify()"> 看不清 换一张</a>
+                        </div>
+                    </div>
+                </li>
+                <php>}</php>
+                <li>
+                    <div class="l">&nbsp;</div>
+                    <div class="r"> <label><input name="remembor" tabindex="4" type="checkbox" value="1" />下次自动登录</label></div>
+                </li>
+
+                <li>
+                    <div class="l">&nbsp;</div>
+                    <div class="r">
+                        <input type="submit" tabindex="5" class="btn_b" value="确 定" /> <a href="__URL__/sendpass">取回密码</a>
+                    </div>
+                </li>
+
+
+
+            </ul>
+        </form>
+</div> 
+<div class="LoginBox_btm">还没有开通你的ThinkSNS帐号？ <br /><a href="__URL__/reg" class="U f14px">立刻加入</a></div>
+   
+
+
+
+
+
+<include file="__THEME__/footer" />

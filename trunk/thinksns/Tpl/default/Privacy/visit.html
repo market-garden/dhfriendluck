@@ -1,0 +1,78 @@
+<include file="__THEME__/header" />
+<link href="../Public/privacy.css" rel="stylesheet" type="text/css" />
+<script>
+    //解除屏蔽
+    function removePing(id,type) {
+        $.post(URL+"/removeHide",{id:id},function(txt){
+                 if(txt){
+                     $("#hide_"+type+"_"+ id).hide("slow");
+                 }else{
+                     Alert("解除失败!")
+                 }
+             });
+    }
+</script>
+
+<div class="content">
+  <!-- 内容 begin  -->
+  <include file="__THEME__/apps" />
+  <div class="main">
+    <!-- 画布 begin  -->
+    <div class=page_title>
+      <!-- page_title begin -->
+      <h2><img src="../Public/images/ico_ys.gif" />隐私管理</h2>
+    <div class="c"></div>
+</div><!-- page_title end -->
+    <div class="tab-menu">
+      <!-- 切换标签 begin  -->
+      <ul>
+        <li><a href="__URL__"><span>基本选项</span></a></li>
+        <li><a href="__URL__/feed"><span>我的动态</span></a></li>
+        <li><a href="__URL__/visit" class="on"><span>访问限制</span></a></li>
+        <li><a href="__URL__/black"><span>黑名单</span></a></li>
+      </ul>
+    </div>
+    <!-- 切换标签 end  -->
+    <div class="PBox" style="padding-top:30px;">
+      <!-- 访问权限 begin  -->
+      <h3 class="btmline"><strong>以下好友来看我时，“我的首页”显示为“隐藏”</strong></h3>
+      <ul>
+        <li>
+          <div class="cl">我的首页：</div>
+          <div class="cc">
+            <form action="__URL__/doVisit" method="post" class="form_validator">
+              <div style="width:90%;"> {:W("SelectFriend",array("id"=>"space"))}</div>
+                <input type="hidden" name="type" id="c" value="space">
+                <input type="submit" class="btn_b" style="margin-top:5px;" value="添 加" />
+              
+            </form>
+          </div>
+          <div class="cr" >
+            <div class="clue">
+              <p>这些好友来看你时，你的首页显示为“隐藏”，你的动态也不会发送给他们</p>
+              <span class="clue_btm"></span></div>
+          </div>
+          <div class="c"></div>
+        </li>
+        <li>
+          <div class="cl">&nbsp;</div>
+          <div class="cc">
+            <volist name="space_data" id="vo">
+              <div class="prohibiter" id="hide_{$vo.type}_{$vo.id}"> <span class="pt5"> <img src="../Public/images/ico_estop.gif" alt="限制访问我的首页" /> </span> <span>{$vo.fname}</span> <span class="pt5"><a href="javascript:removePing({$vo.id},'{$vo.type}')"><img src="../Public/images/ico_xdel.gif" alt="删除" /></a></span> </div>
+            </volist>
+            {$space_page} </div>
+             <div class="c"></div>
+        </li>
+      </ul>
+      </div>
+      
+      
+
+    <!-- 访问权限end -->
+      
+
+  </div> <!-- 画布 end  -->
+  
+  <div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" /> 

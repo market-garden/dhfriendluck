@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <include file="../Public/inc_header" />
+        <title>{&SITE_TITLE}</title>
+        <link href="../Public/images/base.css" rel="stylesheet" type="text/css" />
+        <script language="JavaScript" src="../Public/blog/js/blog.js"></script>
+        <base target="_self" />
+    </head>
+    <body>
+        <div id="doc"> <include file="../Public/space_inc_top" /> <include file="../Public/inc_left_bak" />
+            <!-- Begin 主内容 -->
+            <div class="contant-main">
+                <h3 class="space-titile"><php>if($uid = $_GET["uid"]) echo getUserName($uid)."发起的";</php>投票</h3>
+                <p class="return-lastpage"><a href="#"></a></p>
+                <div class="clearer"></div>
+                <div class="contanter">
+                    <ul id="member_favo_links">
+                        <li><a  href="__URL__/index">发起投票</a></li>
+                        <li><a href="__URL__/mine">我的投票</a></li>
+                        <li><a href="__URL__/friend" class="current">好友的投票</a></li>
+                        <li><a href="__URL__/random">随便看看</a></li>
+                    </ul>
+                    <div class="contant clear">
+                        <volist name="votes:data" id="vo">
+                            <div class="myrecord-list">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr valign="top">
+                                        <td width="10%" rowspan="2">
+                                            <div class="face">
+                                                {~getNewUserFace($vo->user_id,44)}
+                                            </div>
+                                        </td>
+                                        <td width="2%" rowspan="4"></td>
+                                        <td height="21" colspan="5"><strong><a href="__URL__/detail/id/{$vo.id}">{$vo.title}</a></strong></td>
+                                    </tr>
+                                    <tr  valign="top">
+
+                                        <td height="21" colspan="5">
+                                            <volist name="vo:opts" id="opt">
+                                                <label>
+                                                    <php>if($vo->type == "0"){</php>
+                                                    <input type="radio" name="checkbox" id="checkbox" disabled="true"/>
+                                                    <php>}else{</php>
+                                                    <input type="checkbox" name="checkbox" id="checkbox" disabled="true"/>
+                                                    <php>}</php>
+                                                    {$opt.name}
+                                                </label><br/>
+                                            </volist>
+                                            ．．．
+                                        </td>
+
+                                    </tr>
+                                    <tr  valign="top">
+                                        <td>&nbsp;</td>
+                                        <td width="12%" height="21"></td>
+                                        <td width="32%"></td>
+                                        <td width="24%"><em>时间：{$vo.cTime|friendlyDate}</em></td>
+                                        <td width="15%"><em>投票：{$vo.vote_num}</em></td>
+                                        <td width="5%"><a href="__URL__/detail/id/{$vo.id}">进入</a></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </volist>
+                    </div>
+                    &nbsp;<br/>
+                    <div class="page-nav" style="display:inline;float:right;margin-right:10px;text-align:right;width:400px;">
+                        {$votes.html}
+                    </div>
+                </div>
+            </div>
+            <!-- End 主内容 -->
+  <!-- begin 右侧信息 -->
+            <div class="contant-sub">
+            <include file="../Public/inc_right_bak" />
+            </div>
+            <!-- End 右侧信息 -->
+            <div class="clear"></div>
+        <include file="../Public/inc_footer" /> </div>
+    </body>
+</html>
