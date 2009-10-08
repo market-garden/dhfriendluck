@@ -13,9 +13,11 @@
 <script type="text/javascript" src="../Public/home_index.js"></script>
 <script type="text/javascript" src="../Public/feed.js"></script>
 
+<head>
+
 <style type="text/css">
 <!--
-.index_info { margin-right: auto; margin-left: auto; text-align: left; background-image: url(../Public/images/index_bg.jpg); background-repeat: repeat-x; background-position: 0px 0px; height: 270px; overflow: hidden; background-color: #FFF; }
+.index_info { margin-right: auto; margin-left: auto;text-align: left; background-image: url(../Public/images/index_bg.jpg); background-repeat: repeat-x; background-position: 0px 0px; height: 388px; overflow: hidden; background-color: #FFF; }
 .index_info .info {
 	font-size: 12px;
 	color: #346996;
@@ -53,31 +55,21 @@
 }
 .index_info .product_pic {
 	float: left;
-	width: 350px;
+	width: 550px;
+	height:388px;
 	text-align: center;
 }
 -->
 </style>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+</head>
+
 <div class="content"><!-- 内容 begin  -->
 
 <include file="__THEME__/apps" />
-<div class="main"> <!-- 右侧内容 begin  -->
+<div class="main" style="padding-bottom:0px;"> <!-- 右侧内容 begin  -->
 <div class="index_info">
-<div class="product_pic"><img src="../Public/images/product_pic.jpg" /></div>
-<div class="info">
-
-<h1>ThinkSNS 1.6 公开测试了！！</h1>
-<p>ThinkSNS，立志做中国具有国际水平的开源软件。大型项目的经验和积累，使得ThinkSNS已经实现了质的飞跃。从核心的代码重构到开放式的API接口。从优秀的运营团队到全新的运营理念，处处都充满着激情和希望。</p>
-<p>免费!开源!真正免费开源的核心代码。核心代码基于GPL协议发行，国内社会化网络第一个真正的开源产品。</p>
-<div class="alC"><a href="__URL__/reg"><img src="../Public/images/btn_zc.gif" alt="立即注册" width="172" height="61" border="0" /></a></div>
-
-</div>
-</div>
-<div class="news">
-<h2>我们一直在努力：</h2>
-<volist name="gonggao" id="data">
-<p><span class="cGray2">{:date('m月d日',$data['publish_time']);}  </span>{$data.title}</p>
-</volist>
+<div class="product_pic"><img src="../Public/images/product.jpg" height="388" /></div>
 </div>
 </div>
 
