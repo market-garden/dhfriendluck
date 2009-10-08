@@ -4,7 +4,7 @@
 */
 @import url("public.css");
 
-.header { height:40px; width:1000px; text-align:left; position:relative; margin-right: auto; margin-left: auto; background-image: url(images/header_bg.gif); background-repeat: repeat-x; background-position: 0px 0px; background-color: #1f73bb; }
+.header { height:40px; width:1000px; text-align:left; position:relative; margin-right: auto; margin-left: auto; background-image: url(images/header_bg.gif); background-repeat:repeat-x; background-position: 0px 0px; background-color: #1f73bb; }
 .header .logo { float:left; position:absolute; top:0px; left:0px; }
 .header .logo a { height: 40px; width: 137px; display: block; text-decoration: none; background-image: url(images/logo.jpg); background-repeat: no-repeat; background-position: 0px 0px; }
 .header .logo a:hover { height: 40px; width: 137px; display: block; text-decoration: none; }
@@ -37,11 +37,11 @@
 .page_title h2 img {float:left;height:24px;margin-right:5px;width:24px;}
 
 /* 尾部内容样式 */
-.footer { clear:both; width:1000px; border-top-width:1px; border-top-style:solid; border-top-color:#CCCCCC; line-height:30px; text-align:left; color:#666666; margin-right: auto; margin-left: auto; }
+.footer { clear:both; width:1000px; border-top-width:1px; border-top-style:solid; border-top-color:#CCCCCC; line-height:30px; text-align:left; color:#666666; margin-right: auto; margin-left: auto; background:transparent url('images/footer_bg.gif') repeat-x;}
 .footer .menu { float:right; color:#005FAB; }
 /* 组件部分样式 */
 .user_app { float:left; width:145px; padding-bottom: 40px; }
-.user_app .user_app_top { height:15px; overflow:hidden; background-image: url(images/app_top_bg.jpg); background-repeat: repeat-x; background-position: 0px 0px; background-color: #095ea5; }
+.user_app .user_app_top { height:15px; overflow:hidden; background-image: url(images/app_top_bg.jpg); background-repeat:no-repeat; background-position: 0px 0px; }
 .user_app .user_app_list { overflow:hidden; margin-right:2px; margin-left:2px; margin-top: 10px; }
 .user_app .user_app_list ul { margin:0px; padding:0px; border-top-width:0px; border-right-width:0px; border-bottom-width:0px; border-left-width:0px; }
 .user_app .user_app_list li { height:40px; position:relative; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; }
