@@ -5,10 +5,8 @@
 \thinksns\public\js\ts_common.js 278行 height改为420
 2009.10.7
 增加xueyou01 style
-=======
 2009.10.7
 commit test!! from 冯志强
-=======
 2009年10月14日
 \thinksns\thinksns\Tpl\default\Info\education.html入学年份分为春秋两季 by冯志强
 
