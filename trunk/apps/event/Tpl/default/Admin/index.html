@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{&SITE_TITLE}</title>
+    <link href="__PUBLIC__/admin/css/layout.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../Public/Js/jquery-1.2.6.js" ></script>
+
+  <script type="text/javascript" charset="utf-8">
+      function addType( name ){
+        $.post( "__URL__/doAddType",{name:name},function( id ){
+            if( id != -1 ){
+                var html = "<tr class=\"cell altbg1\" id = \"type"+id+"\">\
+                    <td><input type=\"checkbox\" class=\"checkbox\" name=\"id[]\" value=\""+id+"\" /></td>\
+                    <td ><input type=\"input\" name=\"name["+id+"]\" class=\"txt\" id=\"c"+id+"\" value=\""+name+"\" /></td>\
+                    <td><button type=\"button\" onclick=\"c.del("+id+")\">删除</button></td>\
+                    </tr>\
+                ";
+                $( 'tr['+'id=\'type\']' ).before( html );
+            }else{
+              alert( "添加分类失败" );
+            }
+            });
+      }
+
+
+		var ctrl = function(name){
+			this.elements = document.getElementsByName('id[]');
+			this.length = this.elements.length;
+		}
+
+		ctrl.prototype = {
+			reverse:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked= !this.elements[i].checked;
+				}
+			},
+			all:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked = true;
+				}
+			},
+			unAll:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked = false;
+				}
+			},
+			toggle:function(obj){
+				this[obj.checked ? 'all' : 'unAll']();
+			},
+			del:function(id){
+				if(id==undefined){
+					id = [];
+					for(i=0;i<this.length;i++){
+						this.elements[i].checked && id.push(this.elements[i].value);
+					}
+					id = id.join(',');
+				}
+        //ajax删除id
+        $.post( '__URL__/doDeleteType',{id:id},function( text ){
+            //返回1，是只是选择了一个id,返回2，选择了多个
+            if( text == 1 ){
+                 $( 'tr['+'id=\'type'+id+'\']' ).remove();
+              }else if( text == 2 ){
+                  var id_list = id.split( ',' );   
+                  for (var j=0 ;j<id_list.length ; j++   ){
+                      $( 'tr['+'id=\'type'+id_list[j]+'\']' ).remove();
+                  }
+              }else{
+                alert( '删除失败,该分类下已有活动' );
+              }
+            });
+			},
+			edit:function(id){
+				//alert('您选择了id为:'+id);
+			}
+		}
+		var c = null;
+  </script>
+
+  </head>
+  <body>
+    <div id="container">
+                              <div class="tab">
+                                <ul>
+                                        <li> <a class="on" href="__URL__/index/">全局设置</a></li>
+                                        <li><a href="__URL__/eventlist/">活动管理</a></li>
+                                </ul>
+                        </div>
+
+      <form action ="__URL__/doChangeBase/" method="post" >
+        <table class="tableborder" width="100%">
+          <tbody>
+            <tr class="top">
+              <td class="border" colspan="2"></td>
+            </tr>
+            <tr>
+              <th class="header" colspan="2">活动全局设置</th>
+            </tr>
+            <tr class="label">
+              <th>说明</th>
+              <th>设置</th>
+            </tr>
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>每页显示活动条数:</b>
+                <br/>
+                <span class="smalltxt">设置活动列表页每页显示条数。默认为10条记录。</span>
+              </td>
+              <td class="altbg2"><input name="limitpage" class="txt" value ="{$limitpage}" /></td>
+            </tr>
+
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>上传图片限制</b>
+                <br/>
+                <span class="smalltxt">限制哪部分的人群可以上传图片</span>
+              </td>
+              <td class="altbg2">
+                <input class="radio" type="radio" name="membel" value="1" <php>if( isset( $membel ) || $membel ){</php> checked  <php>}</php>/>
+               管理员 
+                <input class="radio" type="radio" name="membel" value="0" <php>if( !isset( $membel ) || false == $membel ){</php> checked  <php>}</php>/>
+                成员
+              </td>
+            </tr>
+
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>上传图片大小限制</b>
+                <br/>
+                <span class="smalltxt">上传图片大小限制,单位M</span>
+              </td>
+              <td class="altbg2"><input name="limitphoto" class="txt" value ="{$limitphoto}" /></td>
+            </tr>
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>上传图片格式限制</b>
+                <br/>
+                <span class="smalltxt">上传图片大小限制,以 ｜ 号分割</span>
+              </td>
+              <td class="altbg2"><input name="limitsuffix" class="txt" value ="{$limitsuffix}" /></td>
+            </tr>
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>是否限制创建活动</b>
+                <br/>
+                <span class="smalltxt">是否限制创建活动</span>
+              </td>
+              <td class="altbg2">
+                <input class="radio" type="radio" name="canCreat" value="1" <php>if( isset( $canCreat ) || $canCreat ){</php> checked  <php>}</php>/>
+                开启
+                <input class="radio" type="radio" name="canCreat" value="0" <php>if( !isset( $canCreat ) || false == $canCreat ){</php> checked  <php>}</php>/>
+                关闭
+              </td>
+            </tr>
+
+
+
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>创建积分限制:</b>
+                <br/>
+                <span class="smalltxt">创建者的积分必须大于设定积分才允许设置。</span>
+              </td>
+              <td class="altbg2"><input name="score" class="txt" value ="{$score}" /></td>
+            </tr>
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>创建组限制:</b>
+                <br/>
+                <span class="smalltxt">创建者的积分必须属于设定的群组才允许设置。</span>
+              </td>
+              <td class="altbg2"><input name="group" class="txt" value ="{$group}" /></td>
+            </tr>
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>创建注册时间限制:</b>
+                <br/>
+                <span class="smalltxt">创建者的积分必须大于设定的注册时间才允许设置。</span>
+              </td>
+              <td class="altbg2"><input name="limittime" class="txt" value ="{$limittime}" /></td>
+            </tr>
+
+            <tr>
+              <td class="footer" colspan="2">
+                <input type="submit" class="button" value="提交" />
+              </td>
+            </tr>
+            <tr class="bottom">
+              <td class="border" colspan="5">&nbsp;</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+        </form>
+
+
+
+
+
+
+        <table class="tableborder" width="100%">
+          <tbody>
+            <tr class="top">
+              <td class="border" colspan="2"></td>
+            </tr>
+            <tr>
+              <th class="header" colspan="2">活动分类管理</th>
+            </tr>
+            <tr class="label">
+              <th>说明</th>
+              <th>设置</th>
+            </tr>
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>新添加默认分类</b>
+                <br/>
+                <span class="smalltxt">添加活动分类</span>
+              </td>
+              <td class="altbg2"><input id="newType"name="limitpage" class="txt" value ="" /></td>
+            </tr>
+            <tr>
+              <td class="footer" colspan="2">
+                <input type="submit" class="button" onclick="addType($( '#newType' ).val() )" value="提交" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <form action="__URL__/doEditType/" method="post">
+          <table class="tableborder" width="100%">
+            <tbody>
+              <tr class="top">
+                <td class="border" colspan="6"></td>
+              </tr>
+              <tr>
+                <th class="header" colspan="6">分类管理</th>
+              </tr>
+              <tr class="label">
+                <th><input type="checkbox" class="checkbox" onclick="c.toggle(this)" />删？</th>
+                <th>序号</th>
+                <th>分类名</th>
+                <th>操作</th>
+              </tr>
+              <php>foreach( $type_list as $key=>$vo ){</php>
+              <tr class="cell altbg1" id = 'type{$key}'>
+                <php>$i++</php>
+                <td><input type="checkbox" class="checkbox" name="id[]" value="{$vo['id']}" /></td>
+                <td>{$key}</td>
+                <td ><input type='input' name="name[{$vo['id']}]" class="txt" id="c{$vo['id']}" value="{$vo['name']}" /></td>
+                <td><button type="button" onclick="c.del({$vo['id']})">删除</button></td>
+              </tr>
+              <php>}</php>
+              <tr id = "type">
+                <td class="footer" colspan="6">
+                  <button type="button" onclick="c.all()">全选</button>
+                  <button type="button" onclick="c.unAll()">全不选</button>
+                  <button type="button" onclick="c.reverse()">反选</button>
+                  <button type="button" onclick="c.del()">删除</button>
+                  <button type="submit" >提交</button>
+                </td>
+              </tr>
+              <tr class="bottom">
+                <td class="border" colspan="6">&nbsp;</td>
+              </tr>
+            </tbody>
+          </table>
+    <script type="text/javascript">
+      c = new ctrl('id[]');
+    </script>
+
+        </form>
+      </div>
+    </body>
+</html>

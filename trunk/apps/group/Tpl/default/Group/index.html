@@ -1,0 +1,178 @@
+<include file="__THEME__/header" />
+
+
+<script type="text/javascript" src="../Public/Js/Common.js"></script>
+<link  href="../Public/group.css" rel="stylesheet" type="text/css"/>
+<script>
+function download(fid) {
+		
+		document.downloadform.fid.value = fid; 
+		document.downloadform.submit();
+}
+</script>
+</head>
+
+<body>
+
+<form method="POST" action="__APP__/Dir/download" name="downloadform">
+  		<input type="hidden" name="gid" value="{$gid}">
+  		<input type="hidden" name="fid" value="">
+ </form>
+ 
+<div class="content"><!-- 内容 begin  -->
+   <!-- 用户组件列表 begin -->
+   <include file="__THEME__/apps" />      
+  <!-- 用户组件列表 end -->
+  
+  <div class="main"> <!-- 右侧内容 begin  -->
+  
+  <include file="../Public/top" />
+  
+  <div class="groupBox">
+  	<div class="sidebar">
+    	<div class="FSort">
+    	<div class="tit">群公告</div>
+		<p>{$groupinfo['announce']}</p>
+		<div class="btm"></div>
+        </div>
+        <div class="FSort">
+    	<div class="tit">创始人与管理员</div>
+		<ul class="pic_list">
+			<volist name="adminList" id="member">
+            <li><span class="headpic50"><a href="__TS__/space/{$member.uid}"><img src="{$member.uid|getUserFace}" /></a></span><a href="__TS__/space/{$member.uid}">{$member.uid|getUserName}</a></li>
+            </volist>
+       	  </ul>
+          <div class="more"><a href="__APP__/Member/index/gid/{$gid}">所有成员>></a></div>
+		  <div class="btm"></div>
+        </div>
+        <div class="FSort">
+    	<div class="tit">新加入成员</div>
+		<ul class="pic_list">
+			<volist name="newJoinList" id="member">
+				<li><span class="headpic50"><a href="__TS__/space/{$member.uid}"><img src="{$member.uid|getUserFace}" /></a></span><a href="__TS__/space/{$member.uid}">{$member.uid|getUserName}</a></li>
+            </volist>
+       	  </ul>
+          <div class="more"><a href="__APP__/Member/index/gid/{$gid}">所有新成员>></a></div>
+		  <div class="btm"></div>
+        </div>
+        <div class="FSort">
+    	<div class="tit">最近访问成员</div>
+		<ul class="pic_list">
+			<volist name="recentVList" id="member">
+            	<li><span class="headpic50"><a href="__TS__/space/{$member.uid}"><img src="{$member.uid|getUserFace}" /></a></span><a href="__TS__/space/{$member.uid}">{$member.uid|getUserName}</a><em>{:date('H:i:s',$member['mtime'])}</php></em></li>
+            </volist>
+  
+
+       	  </ul>
+		  <div class="btm"></div>
+        </div>
+        
+    </div>
+  <div class="boxL" style="width:640px;">
+  	<div class="box1">
+  	<h3>成员动态</h3>
+  		<ul class="list pl10">
+  		  <volist name="groupFeed" id="feed">
+       	   
+       	     <if condition="$feed['type'] eq 'group_join' ">
+       	     		
+                	  			 <li class="btmlineD">
+                                 <div class="right alR" style="width:14%;"><em>{:date('m-d H:i',$feed['cTime'])}</em></div>
+       	     	<div class="cGray2" style="width:85%;">{$feed.title|stripGroupName}</div>
+       	     	
+       	     </li>
+                	  		<else />                     
+                       			 <li class="btmlineD">
+                                 <div class="right alR" style="width:14%;"><em>{:date('m-d H:i',$feed['cTime'])}</em></div>
+       	     	<div class="cGray2" style="width:85%;">{$feed.title|stripGroupName}:  {$feed.body}</div>
+       	     	
+       	     </li>
+                      		</if>
+       	     
+       	     
+          </volist>
+        </ul>
+    </div>
+    <div class="box1">
+  	<h3>群话题区(共{$threadCount}条)</h3>
+  		<ul class="ul">
+       	<php> if(!$threadList) { </php>
+  		
+       	  <li>  还没有话题，你可以发表话题</li>
+       	<php> } else{ </php>
+       	 <li>
+   	    	<div class="c1">话题</div>
+            <div class="c2">浏览</div>
+            <div class="c3">回复</div>
+            <div class="c4">作者</div>
+            <div class="c5">回复时间</div>
+       	  </li>
+        <volist name="threadList" id="thread">
+          <li>
+   	    	<div class="c1 OverH"><php>if($thread['top']){</php>  <span class="zd">顶</span>  <php>}</php>
+   	    		<php>if($thread['dist']){</php>  <span class="jh">精</span> <php>}</php><a href="__APP__/Topic/topic/gid/{$gid}/tid/{$thread.id}">{$thread.title|msubstr=0,20}</a></div>
+            <div class="c2">{$thread['viewcount']}</div>
+            <div class="c3">{$thread['replycount']}</div>
+            <div class="c4"><a href="__TS__/space/{$thread.uid}"><img src="{$thread.uid|getUserFace}" width="20px" height="20px"/></a> <a href="__TS__/space/{$thread.uid}">{$thread.uid|getUserName}</a></div>
+            <div class="c5">{$thread.replytime|friendlyDate}</div>
+       	  </li>
+       	</volist>
+       	<php> } </php>
+        </ul>
+        <div class="alR lh30"><a href="__APP__/Topic/add/gid/{$gid}">发表话题</a> ┊<a href="__APP__/Topic/index/gid/{$gid}"> 进入话题区>></a></div>
+    </div>
+    
+    <if condition=" $groupinfo['openAlbum'] ">
+    <div class="box1">
+  	<h3>群相册(共{$photoCount}张)</h3>
+  		<ul class="piclist">
+  		<volist name="photoList" id="photo">
+  		
+       	  <li>
+   	    	 <a href="__APP__/Photo/getPhoto/gid/{$gid}/albumId/{$photo.albumId}/photoId/{$photo.id}" class="preview" rel="{$photo.savepath|get_photo_url}" title="{$photo.name}"><img src="__ROOT__/thumb.php?w=134&h=91&t=f&url={$photo.savepath|get_photo_url}"/></a><br /><a href="__APP__/Photo/getPhoto/gid/{$gid}/albumId/{$photo.albumId}/photoId/{$photo.id}">{$photo.name|msubstr=0,13}</a>
+   	    </li>
+   	   
+          
+   	    </volist>
+        </ul>
+        <div class="alR lh30"><a href="__APP__/Photo/upload/gid/{$gid}">上传照片</a> ┊<a href="__APP__/Album/index/gid/{$gid}">进入群相册>></a></div>
+    </div>
+    </if>
+    
+    
+    <if condition=" $groupinfo['openUploadFile'] ">
+    <div class="box1">
+  	<h3>群文件(共{$fileCount}个)</h3>
+    	<p class="cGray2"> 该群还没有人上传文件 <a href="__APP__/Dir/upload/gid/{$gid}">上传文件</a></p>
+  		<ul class="file">
+  		  	<php> if(!$fileList) { </php>
+  		
+       	   <li>  还没有文件</li>
+       	 <php> } else{ </php>
+  		
+       	  <li>
+   	    	<div class="c1">文件名称</div>
+            <div class="c2">大小</div>
+            <div class="c3"></div>
+       	  </li>
+       	  <volist name="fileList" id="file">
+          <li>
+   	    	<div class="c1"><img src="../Public/images/icon/{$file.filetype}.gif" /> <a href="__APP__/Dir/file/gid/{$gid}/fid/{$file.id}">{$file.name}</a></div>
+            <div class="c2">{$file.filesize|formatsize}</div>
+            <div class="c3"><a href="javascript: download({$file['id']});">下载</a></div>
+       	  </li>
+       	  </volist>
+       	  <php>}</php>
+        </ul>
+        <div class="alR lh30"><a href="__APP__/Dir/index/gid/{$gid}">进入文件共享区>></a></div>
+    </div>
+    </if>
+    
+    </div>
+  <!-- end  -->
+  </div>  </div><!-- 右侧内容 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />
+</body>
+</html>

@@ -1,0 +1,37 @@
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<link href="public.css" rel="stylesheet" type="text/css">
+<link href="layout.css" rel="stylesheet" type="text/css">
+</head>
+
+<php>if($mid && !$is_im_closed && $site_opts["is_im_open"]){</php>
+	<include file="__THEME__/im" />
+<php>}</php>
+
+<div class="app_bbg" style="display:none;"></div>
+<php>if($ad["contentbottom"]){</php>
+<div class="ad_footer">{$ad.contentbottom}</div>
+<php>}</php>
+<div style="height:15px;"></div>
+<div class="footer_bg">
+<div class="footer">
+	<div class="menu">
+		<a href="__TS__/Information/index/cid/2">关于我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="__TS__/Information/index/cid/3">联系方式</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="__TS__/Information/index/flink/1">友情链接</a></div>
+  Copyright © XUEYOU {$site_opts.icp} </div>
+<div style="height:30px;" >&nbsp;</div>
+</div>
+<php>if($ad["footer"]){</php>
+<div class="ad_footer">{$ad.footer}</div>
+<php>}</php>
+
+<div style="display:none;">
+
+<php>if($site_opts['cnzz_id']){</php>
+<script src="http://s87.cnzz.com/stat.php?id={$site_opts['cnzz_id']}&web_id={$site_opts['cnzz_id']}" language="JavaScript" charset="gb2312"></script>
+<php>}</php>
+<script type="text/javascript" src="__PUBLIC__/js/tip/jquery.cluetip.js"></script>
+
+</div>
+
+</body>
+</html>

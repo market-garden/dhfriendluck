@@ -1,0 +1,72 @@
+<include file="__THEME__/header" />
+<link href="../Public/app_list.css" rel="stylesheet" type="text/css" />
+
+<script>
+    //xxx
+    function del_app(id) {
+        Confirm({message:'确定要删除这个应用？',handler:function(tp){
+                if(tp=='ok'){
+                    location.href = "__URL__/del/id/"+id;
+                }
+                if(tp=='cancel'){
+                    ymPrompt.close();
+                }
+                if(tp=='close'){
+                    ymPrompt.close();
+                }
+            }});
+
+    }
+</script>
+<div class="content"><!-- 内容 begin  -->
+
+ <include file="__THEME__/apps" />
+
+<div class="main"> <!-- 右侧内容 begin  -->
+    <div class="page_title btmline"> <!-- page_title begin -->
+        <div class="left" style="width:583px;">
+            <h2>全部组件列表</h2>
+        </div>
+        <div class="left alR lh30" style="width:248px;">
+        <a href="javascript:window.history.go(-1)">&lt;&lt;返回上一页</a></div>
+    <div class="c"></div>
+</div><!-- page_title end -->
+  <!-- 切换标签 end  -->
+    <div class="app_box">
+        <ul>
+            <volist name="apps" id="vo">
+                <li>
+                    <div class="left" style="width:12%;">
+                    <php>if($vo['bicon']){</php>
+                            <img src="__THEME__/images/icon/{$vo.bicon}" height="80" width="80" />
+                    <php>}else{</php>
+                    		<img src="__THEME__/images/icon/noico.gif" height="80" width="80" />
+                    <php>}</php>
+                    </div>
+                    <div class="left btmline" style="width:87%">
+                        <h3><a href="__URL__/view/{$vo.id}">{$vo.name}</a></h3>
+                        <p>{$vo.describe}</p>
+                        <p class="cGray2">开发者：{$vo.author}</p>
+                        <php>if(isAppAdd($vo["id"],$mid)){</php>
+                          <p class="alR">
+                          你已经添加此组件&nbsp;&nbsp;<a href="javascript:del_app({$vo.id});" >卸载</a> 
+                        </p>
+                        <php>}else{</php>
+                                                 <p class="alR">
+	<a href="__URL__/add/{$vo.id}" style="background: url(../Public/images/addzj.gif) no-repeat 0 3px; display:inline-block; padding-left:18px;">我要添加此组件</a>
+                        </p>
+
+                        <php>}</php>
+
+                    </div>
+                </li>
+            </volist>
+
+        </ul>
+        <!-- end  -->
+    </div>
+
+</div>
+<div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />

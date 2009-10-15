@@ -1,0 +1,357 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{&SITE_TITLE}</title>
+    <link href="__PUBLIC__/admin/css/layout.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../Public/Js/jquery-1.2.6.js" ></script>
+
+	<script type="text/javascript">
+        $( document ).ready( function(){
+              $( "#smiletype option[value='{$smiletype}']" ).attr( 'selected',true );
+            })
+      function addCategory( name ){
+        $.post( "__URL__/doAddCategory",{name:name},function( id ){
+            if( id != -1 ){
+                var html = "<tr class=\"cell altbg1\" id = \"category"+id+"\">\
+                    <td><input type=\"checkbox\" class=\"checkbox\" name=\"id[]\" value=\""+id+"\" /></td>\
+                    <td>"+id+"</td>\
+                    <td ><input type=\"input\" name=\"name["+id+"]\" class=\"txt\" id=\"c"+id+"\" value=\""+name+"\" /></td>\
+                    <td><button type=\"button\" onclick=\"c.del("+id+")\">删除</button></td>\
+                    </tr>\
+                ";
+                $( 'tr['+'id=\'category\']' ).before( html );
+            }else{
+              alert( "添加分类失败" );
+            }
+            });
+      }
+
+
+		var ctrl = function(name){
+			this.elements = document.getElementsByName('id[]');
+			this.length = this.elements.length;
+		}
+
+		ctrl.prototype = {
+			reverse:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked= !this.elements[i].checked;
+				}
+			},
+			all:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked = true;
+				}
+			},
+			unAll:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked = false;
+				}
+			},
+			toggle:function(obj){
+				this[obj.checked ? 'all' : 'unAll']();
+			},
+			del:function(id){
+				if(id==undefined){
+					id = [];
+					for(i=0;i<this.length;i++){
+						this.elements[i].checked && id.push(this.elements[i].value);
+					}
+					id = id.join(',');
+				}
+                alert( id );
+        //ajax删除id
+        $.post( '__URL__/doDeleteCategory',{id:id},function( text ){
+            //返回1，是只是选择了一个id,返回2，选择了多个
+            if( text == 1 ){
+                 $( 'tr['+'id=\'category'+id+'\']' ).remove();
+              }else if( text == 2 ){
+                  var id_list = id.split( ',' );   
+                  for (var j=0 ; j< id_list.length ; j++   ){
+                      $( 'tr['+'id=\'category'+id_list[j]+'\']' ).remove();
+                  }
+              }else{
+                alert( '删除失败' );
+              }
+            });
+			},
+			edit:function(id){
+				alert('您选择了id为:'+id);
+			}
+		}
+		var c = null;
+</script>
+        
+  </head>
+  <body>
+      <div id="container">
+                        <div class="tab">
+                                <ul>
+                                        <li> <a class="on" href="__URL__/index/">全局设置</a></li>
+                                        <li><a href="__URL__/bloglist/">日志管理</a></li>
+                                        <li> <a href="__URL__/recycle/">回收站管理</a></li>
+                                </ul>
+                        </div>
+
+          <form action ="__URL__/doChangeBase/" method="post" >
+              <table class="tableborder" width="100%">
+                  <tbody>
+                      <tr class="top">
+                          <td class="border" colspan="2"></td>
+                      </tr>
+                      <tr>
+                          <th class="header" colspan="2">日志全局设置</th>
+                      </tr>
+            <tr class="label">
+              <th>说明</th>
+              <th>设置</th>
+            </tr>
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>每页显示日志条数:</b>
+                <br/>
+                <span class="smalltxt">设置日志列表页每页显示条数。默认为10条记录。</span>
+              </td>
+              <td class="altbg2"><input name="limitpage" class="txt" value ="{$limitpage}" /></td>
+            </tr>
+
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>日志缩略字数:</b>
+                <br/>
+                <span class="smalltxt">设置日志的列表上日志内容的缩略字数。默认100个字符</span>
+              </td>
+              <td class="altbg2"><input name="titleshort" class="txt" value ="{$titleshort}" /></td>
+            </tr>
+            <tr class="cell">
+              <td class="altbg1">
+                <b>日志缩微后后缀:</b>
+                <br/>
+                <span class="smalltxt">设置日志缩微后的后缀。默认为"..."</span>
+              </td>
+              <td class="altbg2"><input name="suffix" class="txt" value ="{$suffix}" /></td>
+            </tr>
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>回收站功能:</b>
+                <br/>
+                <span class="smalltxt">用户和管理员删除日志不是物理删除。可以恢复。如果空间小请关闭此功能。默认打开</span>
+              </td>
+              <td class="altbg2">
+                <input class="radio" type="radio" name="delete" value="0"  <php>if( !isset( $delete ) || false == $delete ){</php> checked  <php>}</php>/>
+                开启
+                <input class="radio" type="radio" name="delete" value="1" <php>if( $delete ){</php> checked  <php>}</php> />
+                关闭
+              </td>
+            </tr>
+
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>查看全站日志:</b>
+                <br/>
+                <span class="smalltxt">开启后每个用户可以查看和评论全站日志</span>
+              </td>
+              <td class="altbg2">
+                <input class="radio" type="radio" name="all" value="1" <php>if( isset( $all ) || $all ){</php> checked  <php>}</php>/>
+                开启
+                <input class="radio" type="radio" name="all" value="0" <php>if( !isset( $all ) || false == $all ){</php> checked  <php>}</php>/>
+                关闭
+              </td>
+            </tr>
+            <tr class="cell">
+              <td class="altbg1">
+                <b>日志归档功能:</b>
+                <br/>
+                <span class="smalltxt">开启后，用户在个人日志内可以对日志归档查看</span>
+              </td>
+              <td class="altbg2">
+                <input class="radio" type="radio" name="fileaway" value="1" <php>if( $fileaway ){</php> checked  <php>}</php>/>
+                开启
+                <input class="radio" type="radio" name="fileaway" value="0" <php>if( !isset( $fileaway ) || false == $fileaway ){</php> checked  <php>}</php>/>
+                关闭
+              </td>
+            </tr>
+            <tr class="cell">
+              <td class="altbg1">
+                <b>保留归档月份:</b>
+                <br/>
+                <span class="smalltxt">设置归档显示月份。默认为6个月。推荐6－8个月为佳</span>
+              </td>
+              <td class="altbg2"><input name="fileawaypage" class="txt" value ="{$fileawaypage}" /></td>
+            </tr>
+            <tr class="cell">
+              <td class="altbg1">
+                <b>是否启用提醒好友功能:</b>
+                <br/>
+                <span class="smalltxt">是否开启回复:</span>
+              </td>
+              <td class="altbg2">
+                <input class="radio" type="radio" name="notifyfriend" value="1" <php>if( $notifyfriend ){</php> checked  <php>}</php>/>
+                开启
+                <input class="radio" type="radio" name="notifyfriend" value="0" <php>if( !isset( $notifyfriend ) || false == $notifyfriend ){</php> checked  <php>}</php>/>
+                关闭
+              </td>
+            </tr>
+            <tr class="cell">
+              <td class="altbg1">
+                <b>是否允许用户导入日志:</b>
+                <br/>
+                <span class="smalltxt">开启后用户可以从外站导入日志</span>
+              </td>
+              <td class="altbg2">
+                <input class="radio" type="radio" name="leadingin" value="1" <php>if( $leadingin ){</php> checked  <php>}</php>/>
+                开启
+                <input class="radio" type="radio" name="leadingin" value="0" <php>if( !isset( $leadingin ) || false == $leadingin ){</php> checked  <php>}</php>/>
+                关闭
+              </td>
+            </tr>
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>日志单次导入最大数:</b>
+                <br/>
+                <span class="smalltxt">提高本设置数会增大对服务器压力</span>
+              </td>
+              <td class="altbg2"><input name="leadingnum" class="txt" value ="{$leadingnum}" /></td>
+            </tr>
+            <tr class="cell">
+              <td class="altbg1">
+                <b>自动保存间隔时间:</b>
+                <br/>
+                <span class="smalltxt">自动刷新保存间隔时间,时间单位分钟</span>
+              </td>
+              <td class="altbg2">
+                <input name="savetime" class="txt" value ="{$savetime}" />
+              </td>
+            </tr>
+            <tr class="cell">
+              <td class="altbg1">
+                <b>全部日志查看时间:</b>
+                <br/>
+                <span class="smalltxt">全部日志分类查看排序时间</span>
+              </td>
+              <td class="altbg2">   <select id="allorder" name="allorder">
+                  <option value = "all">全部</option>
+                  <option value = "oneDay">一天</option>
+                  <option value = "threeDay">三天</option>
+                  <option value = "oneWeek">一周</option>
+                  <option value = "three">三个月</option>
+                  <option value = "half">半年</option>
+                  <option value = "year">一年</option>
+                </select>
+</td>
+            </tr>
+					<tr class="cell">
+						<td class="altbg1">
+							<b>选择使用表情:</b>
+							<br/>
+							<span class="smalltxt">选择使用哪一种表情</span>
+						</td>
+                        <td class="altbg2">
+                          <select id="smiletype" name="smiletype">
+                            <php>foreach( $smilelist as $vo){</php>
+                              <option value="{$vo['type']}">{$vo['type']}</option>
+                              <php>}</php>
+                          </select>
+					</tr>
+
+            <tr>
+              <td class="footer" colspan="2">
+                <input type="submit" class="button" value="提交" />
+              </td>
+            </tr>
+            <tr class="bottom">
+              <td class="border" colspan="5">&nbsp;</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+        </form>
+
+
+
+
+
+
+        <table class="tableborder" width="100%">
+          <tbody>
+            <tr class="top">
+              <td class="border" colspan="2"></td>
+            </tr>
+            <tr>
+              <th class="header" colspan="2">日志分类管理</th>
+            </tr>
+            <tr class="label">
+              <th>说明</th>
+              <th>设置</th>
+            </tr>
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>新添加默认分类</b>
+                <br/>
+                <span class="smalltxt">添加日志分类</span>
+              </td>
+              <td class="altbg2"><input id="newCategory"name="limitpage" class="txt" value ="" /></td>
+            </tr>
+            <tr>
+              <td class="footer" colspan="2">
+                <input type="submit" class="button" onclick="addCategory($( '#newCategory' ).val() )" value="提交" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+
+
+        <form action="__URL__/doEditCategory/" method="post">
+          <table class="tableborder" width="100%">
+            <tbody>
+              <tr class="top">
+                <td class="border" colspan="6"></td>
+              </tr>
+              <tr>
+                <th class="header" colspan="6">分类管理</th>
+              </tr>
+              <tr class="label">
+                <th><input type="checkbox" class="checkbox" onclick="c.toggle(this)" />删？</th>
+                <th>分类名</th>
+                <th>操作</th>
+              </tr>
+              <php>foreach( $category_list as $key=>$vo ){</php>
+              <tr class="cell altbg1" id = 'category{$key}'>
+                <td><input type="checkbox" class="checkbox" name="id[]" value="{$key}" /></td>
+                <td>{$key}</td>
+                <td ><input type='input' name="name[{$key}]" class="txt" id="c{$key}" value="{$vo['name']}" /></td>
+                <td><button type="button" onclick="c.del('{$key}')">删除</button></td>
+              </tr>
+              <php>}</php>
+              <tr id = "category">
+                <td class="footer" colspan="6">
+                  <button type="button" onclick="c.all()">全选</button>
+                  <button type="button" onclick="c.unAll()">全不选</button>
+                  <button type="button" onclick="c.reverse()">反选</button>
+                  <button type="button" onclick="c.del()">删除</button>
+                  <button type="submit" >提交</button>
+                </td>
+              </tr>
+              <tr class="bottom">
+                <td class="border" colspan="6">&nbsp;</td>
+              </tr>
+            </tbody>
+          </table>
+    <script type="text/javascript">
+      c = new ctrl('id[]');
+      $( "#allorder option[@value='{$allorder}']" ).attr( 'selected','selected' );
+    </script>
+
+        </form>
+      </div>
+    </body>
+</html>

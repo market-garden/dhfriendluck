@@ -1,0 +1,75 @@
+
+<script>
+
+    function pre_comment(_this,aid) {
+        $("#small_con_"+aid).hide();
+        $("#post_con_"+aid).show();
+        $("#mini_con_"+aid).focus();
+
+    }
+
+    function post_mini_con(aid){
+        var con = $("#mini_con_"+aid).val();
+        $.post(APP+"/Home/post_mini_comment",{appid:aid,comment:con},function(txt){
+            if(txt){
+                //增加一条
+               // var item =
+
+
+               //隐藏和显示输入
+                $("#post_con_"+aid).hide();
+                $("#small_con_"+aid).show();
+            }else{
+
+            }
+        });
+    }
+
+    function blur_mini_con(aid){
+        var con = $.trim($("#mini_con_"+aid).val());
+        if(!con) {
+            $("#post_con_"+aid).hide();
+            $("#small_con_"+aid).show();
+
+        }
+    }
+</script>
+
+
+
+
+<div class="RLI bg01 btmline">
+    <div class="user_img"><img src="../Public/images/userimg.jpg" /></div>
+    <div class="RLC">
+        <h4><a href="#"><strong>魏莹</strong></a><span class="cGray2">09-05-24 13:00</span></h4>
+        <p>我在无聊。。。<a href="#">回复</a></p>
+    </div>
+</div>
+<div class="RLI bg01 btmline"><a href="#">显示全部36条</a></div>
+<div class="RLI bg01 btmline">
+    <div class="user_img"><img src="../Public/images/userimg.jpg" /></div>
+    <div class="RLC">
+        <h4><a href="#"><strong>魏莹</strong></a><span class="cGray2">09-05-24 13:00</span></h4>
+        <p>我在无聊我在无聊我在无聊我在无聊我在无<a href="#">回复</a></p>
+    </div>
+</div>
+
+<div class="RLI bg01" id="post_con_{$aid}" style="display:none;">
+    <div class="user_img"><img src="{$mid|getUserFace}" /></div>
+    <div class="RLC">
+        <div class="input_box">
+            <textarea name="textarea" cols="" style="height:50px; line-height:18px; width:99%"  id="mini_con_{$aid}" onblur="blur_mini_con({$aid});"></textarea>
+            <input type="button" class="btn2" value="回 复" onclick="post_mini_con({$aid});"/>
+        </div>
+    </div>
+</div>
+
+<div class="input_box bg01" id="small_con_{$aid}">
+    <textarea name="textarea2" cols="" rows="3" style="height:25px; line-height:25px; margin:5px; width:97%" class="cGray2" onclick="pre_comment(this,{$aid});"> 添加回复</textarea>
+</div>
+
+
+  
+
+
+

@@ -1,0 +1,93 @@
+
+<include file="__THEME__/header" />
+
+<link href="../Public/notify.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../Public/msg.js"></script>
+ <link href="__PUBLIC__/js/pagination/pagination.css" rel="stylesheet" type="text/css" />
+
+
+
+<div class="content"><!-- 内容 begin  -->
+    <include file="__THEME__/apps" />
+    <div class="main"><!-- 画布 begin  -->
+
+
+        <div class=page_title> <!-- page_title begin -->
+            <h2><img src="../Public/images/mail_down.gif" />消息</h2>
+        <div class="c"></div>
+</div><!-- page_title end -->
+        <div class="tab-menu"><!-- 切换标签 begin  -->
+            <ul>
+                <li><a href="__URL__/inbox" class="on"><span>收件箱</span></a></li>
+                <li><a href="__URL__/send"><span>发件箱</span></a></li>
+                <li><a href="__URL__/index"><span>通知</span></a></li>
+                <li><a href="__URL__/write"><span><div class="ico_add">&nbsp;</div>写短消息</span></a></li>
+            </ul>
+        </div><!-- 切换标签 end  -->
+
+        <div class="MessageBox">
+            <div class="MList border" style="width:830px;"><!-- 好友日志 begin  -->
+                <div class="MenuSub pl5"><label for="message_selector">选择:</label>
+                    <select id="message_selector2" name="message_selector2" onchange="select_change(this)" class="mt5">
+                        <option selected="selected" value="^_^">---</option>
+                        <option value="unAll">不选</option>
+                        <option value="read">已读</option>
+                        <option value="unread">未读</option>
+                        <option value="all">全部</option>
+                    </select>
+                    <a href="javascript:bj_unread();" class="cGray2 bj_unread bj_all">标记未读</a>
+                    <a href="javascript:bj_read();" class="cGray2 bj_read bj_all">标记已读</a>
+                <a href="javascript:del_some();" class="cGray2 bj_all">删除</a></div>
+                <div>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="3">
+                        <form method="post" action="" id="the_box">
+
+
+                            <volist name="msgs" id="msg">
+                                <tr id="msg_{$msg.id}" class="<php>if($msg['is_read'] == 0) echo 'bg01';</php>">
+                                    <td width="24" align="cente r" class="btmline">
+
+                                    <input type="checkbox" name="checkbox" id="checkbox" value="{$msg.id}" class='checkbox <php>if($msg["is_read"] == 0) { echo "unread"; }else{ echo "read"; } </php>' />                                </td>
+                                    <td width="24" align="cente r" class="btmline" id="bj_pic_{$msg.id}">
+                                        <php>   if($msg["is_read"] == 0) {</php>
+                                            <img src="__PUBLIC__/images/ico_mail1.gif" alt="未读" width="14" height="10" />
+                                        <php>  }else{ </php>
+                                            <img src="__PUBLIC__/images/ico_mail3.gif" alt="已读" width="14" height="12" />
+                                        <php>  }</php>
+
+                                    </td>
+                                    <td width="70" class="btmline"><a href="__APP__/space/{$msg.fromUserId}"><img src="{$msg.fromUserId|getUserFace}" width="50" height="50" /></a></td>
+                                    <td width="184" class="btmline"><a href="__APP__/space/{$msg.fromUserId}">{$msg.fromUserId|getUserName}</a><br />
+                                    {$msg.cTime|friendlyDate="full"} </td>
+                                    <td width="473" class="btmline">
+
+                                        <php>   if($msg["is_read"] == 0) {</php>
+                                          <strong><a href="__URL__/msg/t/inbox/lid/{$msg['id']}/id/<php> if($msg['replyMsgId'] == 0){ echo $msg['id']; }else{ echo $msg['replyMsgId']; } </php> ">{$msg.subject}</a> <br />
+                                              {$msg.content}
+                                          <a href="#nogo"></a></strong></td>
+                                        <php>  }else{ </php>
+                                          <a href="__URL__/msg/t/inbox/lid/{$msg['id']}/id/<php> if($msg['replyMsgId'] == 0){ echo $msg['id']; }else{ echo $msg['replyMsgId']; } </php> ">{$msg.subject}</a> <br />
+                                              {$msg.content}
+                                          <a href="#nogo"></a></td>
+                                        <php>  }</php>
+                                        <!--未读的加粗显示-->
+                                    <td width="60" class="btmline"><a href="javascript:del_msg({$msg.id})">删除</a></td>
+                                </tr>
+                            </volist>
+                        </form>
+                    </table>
+                </div>
+                           <div id="Pagination" class="pagination">{$page}</div>
+                
+            </div><!-- 好友日志 end  -->
+        </div>
+
+
+
+
+
+
+    </div><!-- 画布 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />

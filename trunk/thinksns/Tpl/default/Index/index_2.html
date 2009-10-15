@@ -1,0 +1,267 @@
+
+<include file="__THEME__/header" />
+
+<script>
+    function changeverify(){
+        var date = new Date();
+        var ttime = date.getTime();
+        $('#verifyimg').attr('src',URL+'/verify/time/'+ttime);
+    }
+
+</script>
+
+<script type="text/javascript" src="../Public/home_index.js"></script>
+<script type="text/javascript" src="../Public/feed.js"></script>
+
+<style type="text/css">
+<!--
+.login_con {
+	width: 1000px;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: left;
+	margin-top: 15px;
+}
+.login_con .cl {
+	width: 752px;
+	float: left;
+	overflow: hidden;
+}
+.login_con .cl .placard {
+	background-position: center;
+	height: 227px;
+	position: relative;
+}
+.login_con .cl .placard .list {
+	position: absolute;
+	top: 90px;
+	left: 40px;
+	width: 340px;
+	height: 120px;
+	overflow: hidden;
+}
+.login_con .cl .placard .list h2{
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 30px;
+}
+.login_con .cl .placard .list p{
+	margin: 0px;
+	padding: 0px;
+	line-height: 20px;
+}
+.login_con .cl .user_list{
+	border: 1px solid #ccc;
+	overflow: hidden;
+	height: 335px;
+}
+.login_con .cl .user_list h2{
+	background-color: #f7f7f7;
+	margin: 1px;
+	font-size: 12px;
+	line-height: 35px;
+	font-weight: bold;
+	height: 35px;
+	color: #1a6fb6;
+	padding-left: 5px;
+}
+.login_con .cl .user_list ul{
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	list-style-type: none;
+	overflow: hidden;
+	display: block;
+	clear: both;
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+.login_con .cl .user_list ul li{
+	width: 25%;
+	height: 72px;
+	line-height: 20px;
+	display: block;
+	float: left;
+}
+.login_con .cr {
+	width: 232px;
+	float: right;
+}
+.login_con .cr .box {
+	background-color: #f7f7f7;
+	border: 1px solid #ccc;
+	overflow: hidden;
+}
+.login_con .cr .box h2 {
+	font-size: 12px;
+	line-height: 27px;
+	height: 28px;
+	margin: 0px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 5px;
+	font-weight: bold;
+	background-image: url(../Public/images/login_con_tit.gif);
+	background-repeat: repeat-x;
+	background-color: #FFF;
+	background-position: 0px 0px;
+	color: #1a6fb6;
+}
+.login_con .cr .box ul {
+	width: 100%;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	margin: 0px;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+.login_con .cr .box ul li {
+	line-height: 22px;
+	height: 22px;
+	margin-bottom: 6px;
+}
+-->
+</style>
+<div class="login_con mb10"><!-- 内容 begin  -->
+<div class="cl">
+<div class="placard mb10">
+	<div class="list">
+     <h2>看看大家在做什么</h2>
+     <volist name = "feed" id="vo">
+       <p>{$vo['title']}</p>
+     </volist>
+    </div>
+  <img src="../Public/images/placard_bg.jpg" width="752" height="227" border="0" usemap="#Map" />
+</div>
+<map name="Map" id="Map">
+    <area shape="rect" coords="503,152,682,202" href="__URL__/reg" alt="马上注册" />
+  </map>
+<div class="user_list">
+<h2>欢迎和大家一起交流</h2>
+<ul>
+  <volist name="user" id="vo">
+	<li>
+  <div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left">
+        <a href="__APP__/space/{$vo['id']}">{$vo['name']}</a><br /><php>if(is_numeric( $vo['current_province'] ) && is_numeric( $vo['current_city'] )) echo getAreaInfo( $vo['current_province'].",".$vo['current_city'] );</php><br />{$vo['friend_num']}位好友
+	  </div>
+	</li>
+  </volist>
+    <div class="c"></div>
+</ul>
+</div>
+</div>
+
+<div class="cr">
+
+<php>if($_GET["t"]==1){</php>
+<div class="msg"><font color="red">email或密码错误!</font></div>
+<php>}elseif($_GET["t"]==2){</php><!--http://www.qiniao.com/product/index.php?s=/Privacy/visit>-->
+<div class="msg"><font color="red">该账号尚未完成注册步骤，请点击注册确认邮件的确认链接！<a href="__URL__/reSendEmail/email/{.email}/uid/{.uid}">点击这里</a>重新发送确认邮件。</font></div>
+<php>}elseif( $_GET['t'] == 3 ){</php>
+<div class="msg"><font color="red">验证码错误!</font></div>
+<php>}</php>
+
+
+<div class="box mb10" style="height:226px;">
+<h2>请登录</h2>
+<form name="loggin" method="post" action="__URL__/doLogin">
+<ul>
+	<li>
+	<div class="left alR" style="width:66px;">Email：</div>
+  <div class="left" style="width:160px;"><input name="email" type="text" class="TextH20" id="textfield3" onfocus="this.className='Text2'" onblur="this.className='TextH20'" style="width:140px;" tabindex="1" value="{.email}"/></div>
+    </li>
+    <li>
+	<div class="left alR" style="width:66px;">密码：</div>
+    <div class="left" style="width:160px;"><input name="passwd" tabindex="2" type="password" class="TextH20" id="textfield3" onfocus="this.className='Text2'" onblur="this.className='TextH20'" style="width:140px;" /></div>
+    </li>
+    <li>
+
+                <php>if($login_verify_allow){</php>
+	<div class="left alR" style="width:66px;">验证码：</div>
+    <div class="left" style="width:160px;">
+                        <div class="left"><input name="verify" tabindex="3"  class="TextH20" id="textfield3" onfocus="this.className='Text2'" onblur="this.className='TextH20'" style="width:50px;"/></div>
+                        <div class="ml5 left"><img src="__URL__/verify" id="verifyimg"/><br /><a href="###" onclick="changeverify()"> 看不清 换一张</a>
+                        </div>
+      </div>
+  <php>}</php>
+    </li>
+    <li>
+	<div class="left alR" style="width:66px;">&nbsp;</div>
+    <div class="left" style="width:160px;"><input name="remembor" tabindex="4" type="checkbox" value="1" />下次自动登录</div>
+    </li>
+    <li>
+	<div class="left alR" style="width:66px;">&nbsp;</div>
+    <div class="left" style="width:160px;">
+      <label>
+        <input name="button" type="submit" class="btn_b left" id="button" value="登 录" />
+      </label>
+    &nbsp;&nbsp;<a href="__URL__/reg">立刻注册</a></div>
+    </li>
+    <li>
+	<div class="left alR" style="width:66px;">&nbsp;</div>
+    <div class="left" style="width:160px;"><a href="/product/index.php?s=/Index/sendpass">忘记密码？</a></div>
+    </li>
+</ul>
+</form>
+</div>
+<div class="box mb10" style="height:240px;">
+<h2>找人</h2>
+<ul>
+	<li>
+	<div class="left alR" style="width:66px;">姓名：</div>
+    <div class="left" style="width:160px;"><input name="email" type="text" class="TextH20" id="textfield3" onfocus="this.className='Text2'" onblur="this.className='TextH20'" style="width:140px;"/></div>
+    </li>
+    <li>
+	<div class="left alR" style="width:66px;">性别：</div>
+    <div class="left" style="width:160px;"><span class="left" style="width:160px;">
+      <select name="select3" id="select3">
+        <option>男</option>
+        <option>女</option>
+        <option>不限</option>
+      </select>
+    </span></div>
+    </li>
+    <li>
+	<div class="left alR" style="width:66px;">出生日期：</div>
+    <div class="left" style="width:160px;">
+      <select name="select" id="select">
+        <option>2009</option>
+      </select>
+      年
+      <select name="select2" id="select2">
+        <option>1</option>
+      </select>
+      月
+    </div>
+    </li>
+    <li>
+	<div class="left alR" style="width:66px;">居住城市：</div>
+    <div class="left" style="width:160px;">
+      <input name="textfield" type="text" class="TextH20" id="textfield" onfocus="this.className='Text2'" onblur="this.className='TextH20'" style="width:140px;"/>
+    </div>
+    </li>
+    <li>
+	<div class="left alR" style="width:66px;">家乡：</div>
+    <div class="left" style="width:160px;"><span class="left" style="width:160px;">
+      <input name="textfield2" type="text" class="TextH20" id="textfield2" onfocus="this.className='Text2'" onblur="this.className='TextH20'" style="width:140px;"/>
+    </span></div>
+    </li>
+    <li>
+	<div class="left alR" style="width:66px;">&nbsp;</div>
+    <div class="left" style="width:160px;"><input name="button" type="submit" class="btn_b" id="button" value="搜 索" /></div>
+    </li>
+</ul>
+</div>
+
+<div class="box" style="height:82px;">
+<h2>公告</h2>
+{$gonggao}
+</div>
+</div>
+<div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />

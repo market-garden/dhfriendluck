@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{&SITE_TITLE}</title>
+    <link href="__PUBLIC__/admin/css/layout.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../Public/Js/jquery-1.2.6.js" ></script>
+	<script src="../Public/JS/Common.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="container">
+		<div class="tab">
+		<ul>
+			<li><a class="on" href="__URL__/index/">全局设置</a></li>
+            <li><a href="__URL__/type/">分类管理</a></li>
+			<li><a href="__URL__/ShareList/">内容管理</a></li>
+			<li><a href="__URL__/recycle/">回收站管理</a></li>
+		</ul>
+		</div>	
+      <form action ="__URL__/doEditConfig/" method="post" >
+        <table class="tableborder" width="100%">
+          <tbody>
+            <tr class="top">
+              <td class="border" colspan="2"></td>
+            </tr>
+            <tr>
+              <th class="header" colspan="2">分享全局设置</th>
+            </tr>
+            <tr class="label">
+              <th>说明</th>
+              <th>设置</th>
+            </tr>
+            <tr class="cell">
+              <td class="altbg1">
+                <b>每页显示分享条数:</b>
+                <br/>
+                <span class="smalltxt">设置分享列表页每页显示条数。默认为10条记录。</span>              </td>
+              <td class="altbg2"><input name="limitpage" class="txt" value ="{$config.limitpage}" /></td>
+            </tr>
+            <tr class="cell">
+              <td class="altbg1">
+                <b>回收站功能:</b>
+                <br/>
+                <span class="smalltxt">用户和管理员删除分享不是物理删除。可以恢复。如果空间小请关闭此功能。默认打开</span>              </td>
+              <td class="altbg2">
+                <input class="radio" type="radio" name="isDel" value="0"  <php>if( !isset( $config['isDel'] ) || 0 == $config['isDel'] ){</php> checked  <php>}</php>/>
+                开启
+                <input class="radio" type="radio" name="isDel" value="1" <php>if( $config['isDel'] ){</php> checked  <php>}</php> />
+                关闭             </td>
+            </tr>
+            <tr>
+              <td class="footer" colspan="2">
+                <input type="submit" class="button" value="提交" />  </td>
+            </tr>
+            <tr class="bottom">
+              <td class="border" colspan="5">&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+<!--        <table class="tableborder" width="100%">
+          <tbody>
+            <tr class="top">
+              <td colspan="2"></td>
+            </tr>
+            <tr>
+              <th colspan="2"><input type="button" class="button" value="清理分享垃圾" onclick="location.href='__URL__/RemoveRefuse'"/></th>
+            </tr>
+          </tbody>
+        </table>	-->
+			  
+        <table class="tableborder" width="100%">
+          <tbody>
+            <tr class="top">
+              <td class="border" colspan="2"></td>
+            </tr>
+            <tr>
+              <th class="header" colspan="2">增加分享类型说明</th>
+            </tr>
+            <tr class="label">
+              <th colspan="2" align="left" class="smalltxt"> <ol>
+                <ul>
+                  <li>输入类型信息,包括该类型的列表模板</li>
+                  <li>增加分享动态模板,具体请参考增加动态模板的规则</li>
+                  <li>增加分享内容页,文件名规定为: content_类型别名,如视频的别名是:video,则内容页为: content_video.html</li>
+                  <li>在调用分享的应用里实现通过分享的API插入分享的内容,具体请参考分享的API说明.注:数组参数data里的所需要的变量由列表模板和动态模板所需要的变量决定.</li>
+                </ul>
+              </th>
+            </tr>
+            
+            <tr class="bottom">
+              <td class="border" colspan="5">&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>	  
+  </div>
+    </body>
+</html>

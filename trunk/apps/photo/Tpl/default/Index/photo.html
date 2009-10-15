@@ -1,0 +1,173 @@
+<include file="__THEME__/header" />
+
+<link href="../Public/css/photo.css" rel="stylesheet" type="text/css" />
+<link href="../Public/css/mark_photo.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+
+	var photo_id		=	'{$photo.id}';
+	var photo_name		=	'{$photo.name}';
+	var album_id		=	'{$album.id}';
+	var now_index_id	=	'{$now}';
+	var uid				=	'{$uid}';
+	var now_play		=	'{.play}';
+	/**
+	//载入大图
+	$(document).ready(function(){
+		//大图预载
+		var maxWidth	=	700; // 最大宽度700
+		var image_url	=	"__ROOT__/thumb.php?w=700&h=700&t=f&url={$photo.savepath|get_photo_url}";
+		image			=	new Image();
+		image.onload	=	function(){
+			$('#big_pic').attr('src',image_url);
+			if(	$('#big_pic').attr('width') > 700 ){
+				$('#big_pic').css('width','700px');
+			}
+		}
+		image.src		=	image_url;
+	});
+	**/
+	function deleteCommentCount( appid ){
+		//计数
+		$.post(APP+'/Index/deleteSuccess',{id:appid},function(result){
+			//result返回时当前计数
+		});
+	}
+
+	function commentSuccess(json){
+		//计数
+		$.post(APP+'/Index/commentSuccess',{data:json},function(result){
+			//result返回时当前计数
+				});
+	}
+</script>
+<script type="text/javascript" src="../Public/js/drag_sort.js"></script>
+<script type="text/javascript" src="../Public/js/photo.js"></script>
+<!-- 头部 end -->
+<div class="content"><!-- 内容 begin  -->
+	
+	<include file="__THEME__/apps" />
+	
+	<div class="main"> <!-- 右侧内容 begin  -->
+
+	<div class="page_title"> <!-- page_title begin -->
+  		<div class="left" style="width:70px;">
+    		<span class="headpic50"><a href="__TS__/space/{$user.id}"><img src="{$user.id|getUserFace}" /></a></span>
+		</div>
+		<div class="left" style="width:650px;">
+			<if condition=" ($type eq 'mAll') || ($type eq 'fAll') ">
+				<h2>{$user.name}的全部照片</h2>
+			<else />
+    			<h2>{$user.name}的专辑“{$album.name}”</h2>
+			</if>
+			<p><a href="__TS__/space/{$user.id}">{$user.name}的空间</a> ┊ <a href="__TS__/Notify/write/uid/{$uid}">发站内信</a></p>
+		</div>
+		<div class="left alR lh30" style="width:100px;"><a href="javascript:window.history.back(-1)">返回上一页</a></div>
+	<div class="c"></div>
+</div><!-- page_title end -->
+
+	<!-- 切换标签 end  -->
+	<div class="lh30">
+			<div class="btmline">
+			
+<!-- 				<a href="javascript:void(0)" onclick="start_quanren()" id="start-quanren">开始圈人</a>
+				<span id="finish-quanren"  style="display:none;background:#FFFBCC none repeat scroll 0 0;border:1px solid #FFEC19;">
+					把认识的朋友圈出来!&nbsp;&nbsp;
+					<a href="javascript:void(0)" onclick="cancel_quanren()"  style="color:green">点击完成圈人</a>
+				</span> -->
+
+				<div class="right">
+					<div class="left"><a href="__APP__/Index/photo/id/{$pre.id}/aid/{$pre.albumId}/uid/{$pre.userId}<neq name="type" value="">/type/{$type}</neq>">上一张</a> | 
+					<a href="__APP__/Index/photo/id/{$next.id}/aid/{$next.albumId}/uid/{$next.userId}<neq name="type" value="">/type/{$type}</neq>">下一张</a>
+					<!-- <a href="javascript:void(0)" onclick="play('button');" id="play_button">幻灯播放</a> --></div>
+					<div class="left"><eq name="album.share" value="1">
+					<input type="button" style="margin-left:5px;" value="分享" class="BtnShare" onclick="sharePop('{$photo.id}','__URL__','photo')" id="BtnShare_{$photo.id}"/>
+					</eq></div>
+				</div>
+			第{$now}张，共{$photoCount}张
+			<if condition=" ($type eq 'mAll') || ($type eq 'fAll') ">
+				┊ <a href="__APP__/Index/photos/uid/{$uid}" title="返回{$user.name}的照片">返回{$user.name}的照片</a>
+			<else />
+    			┊ <a href="__APP__/Index/album/id/{$album.id}/uid/{$uid}" title="返回专辑{$album.name}">返回该专辑</a>
+			</if>
+			</div>
+	</div>
+	<div class="photoBox">
+		<div class="view">
+			<div class="c1" style="width:710px;overflow:hidden;">
+				<!-- 主图 -->
+				<div class="alC" id="big_photo">
+                	<a href="__APP__/Index/photo/id/{$next.id}/aid/{$next.albumId}/uid/{$next.userId}<neq name="type" value="">/type/{$type}</neq>"><img src="__ROOT__/thumb.php?w=700&h=700&t=f&url={$photo.savepath|get_photo_url}" pid="{$photo.id}" rel="{$photo.id}" id="big_pic" /></a>
+                </div>
+				<div class="info" id="photo_info">
+					<div><strong>{$photo.name}</strong></div>
+					<div>专辑：<a href="__APP__/Index/album/id/{$album.id}/uid/{$album.userId}">{$album.name}</a>({$album.photoCount})</div>
+					<div>时间：{$photo.cTime|friendlyDate}</div>
+				</div>
+			</div>
+			<!-- 滚动小图 -->
+			<div class="c2" style="overflow:hidden;height:325px;">
+				<volist name="previews" id="p">
+				<li><a href="__APP__/Index/photo/id/{$p.id}/aid/{$p.albumId}/uid/{$uid}<neq name="type" value="">/type/{$type}</neq>#show_pic"><img src="__ROOT__/thumb.php?w=50&h=50&url={$p.savepath|get_photo_url}" <if condition=" $p[id] eq  $photo[id]">style="border:solid 2px #0000ff;"</if> /></a></li>
+				</volist>
+			</div>
+             <div class="clear" style="height:10px;"></div>
+		</div>
+		<div class="viewRC">
+		<div class="c1">
+			{:W('Comment',array( 'type'=>'photo','appid'=>$photo['id'],'mid'=>$uid,"face"=>getUserFace($mid),'role'=>1))}
+		</div>
+		<div class="c2">
+			<div><a href="{$photo.savepath|get_photo_url}" target="_blank">查看原图</a></div>
+			<if condition="$setting['open_camera'] eq 1"><div><a href="javascript:exif('{:base64_encode('../../data/uploads/'.$p['savepath'])}')">查看EXIF信息</a></div></if>
+			<!-- <div><a href="javascript:tag();" title="照片里出现了自己或者朋友？  圈出来，朋友就会自动看到哦">圈出照片中的人物</a></div> -->
+			<if condition="$photo['userId'] eq $mid">
+			<!-- <div>
+				<div class="left mr10"><a href="javascript:dbrotate(-1);">左旋 <img alt="左旋" src="../Public/images/xz_l.gif" align="absmiddle" /></a></div>
+				<div class="left"><a href="javascript:dbrotate(1);"><img alt="右旋" src="../Public/images/xz_r.gif" align="absmiddle" /> 右旋 </a></div>
+			</div> -->
+			<!-- <div><a href="javascript:sendtogrpalbum();">复制到群相册</a></div> -->
+			<div><a href="javascript:editphoto();">修改标题和属性</a></div>
+			<div id="divdelphoto"><a href="javascript:delphoto();">删除该照片</a></div>
+			<div><a href="javascript:setcover();">设为专辑封面</a></div>
+			<!-- <div><a href="javascript:setface();">设为我的头像</a></div> -->
+			<else />
+			<div>{:W('Report',array( 'type'=>'相片举报','appid'=>$APPINFO['APP_ID'],'url'=>'Index/photo/id/'.$p['id'].'/aid/'.$p['albumId'].'/uid/'.$uid,'title'=>$photo['name'],'recordId'=>$p['id']))}</div>
+			</if>
+		</div>
+      </div>
+	</div>
+  </div><!-- 右侧内容 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+
+<!-- <div id="quanren" style="display:none;">
+	<div style="border: 7px solid rgb(216, 223, 234); width: 95px; height: 93px; left: 452px; top: 266px;" class="frameDiv_css" id="frameDiv">
+        <div style="border: 2px solid rgb(0, 94, 172); width: 91px; height: 89px; cursor: move;" class="inner_css" id="inner"></div>
+        <div style="cursor: se-resize;" class="rightBottom_css" id="rightBottom"></div>
+    </div>
+    <div style="left: 570px; top: 266px;" class="panDiv_css" id="panDiv">
+        <div id="target">
+            <form action="#">
+            <h3>输入名字或标签: </h3>
+            <input id="targetId" onkeyup="newlist(event)" type="text">
+            <h3>或选择一个好友: </h3>
+            <div id="target-body" class="target-body">
+                <ul id="flist" style="overflow: auto; height: 200px;">
+                    <li><input id="f52495261" name="f52495261" onclick="return submitAction(52495261);" type="checkbox"><label for="f52495261">刘晓庆(我自己)</label></li>
+                    <li><hr></li>
+                    <li><input id="f247912619" name="f247912619" onclick="return submitAction(247912619);" type="checkbox"><label for="f247912619">马冀</label></li>
+                    <li><input id="f235804173" name="f235804173" onclick="return submitAction(235804173);" type="checkbox"><label for="f235804173">鲁华锋</label></li>
+                    <li><input id="f246143374" name="f246143374" onclick="return submitAction(246143374);" type="checkbox"><label for="f246143374">陈勇</label></li>
+                </ul>
+            </div>
+            <p class="target-action">
+                <input value="确定" class="inputsubmit" type="submit"> 
+                <input value="取消" class="inputsubmit gray" onclick="cancelAction()" type="button">
+            </p>
+            </form>
+        </div>
+	</div>
+</div> -->
+
+<include file="__THEME__/footer" />

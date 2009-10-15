@@ -1,0 +1,217 @@
+@charset "utf-8";
+/*
+
+心情样式
+*/
+.page_title1 {padding-bottom: 10px;}
+.page_title1 .tit_img{height:50px;width:50px;float:left}
+.page_title1 .tit_l{text-align:left;padding-right:5px;padding-left:5px;margin-left:60px}
+.page_title1 .tit_l h2 {
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 30px;
+}
+
+.page_title .tit{
+	font-size:14px;
+	color:#000000;
+	font-weight:bold;
+	line-height:25px;
+	height:25px;
+	float: left;
+}
+.page_title .tit .img{height:24px;width:24px;float:left;margin-right:5px}
+.page_title .status_editor{
+	width:700px;
+	margin-left: 75px;
+}
+.page_title .userstatus span{margin-right:10px}
+.page_title .status_edit{
+	background-repeat:no-repeat;
+	background-position:0px 0px;
+	height:44px;
+	text-align:left;
+	width:350px;
+	margin:0px;
+	padding:0px;
+	background-image:url(images/status_edit_bg.gif);
+	float: left;
+}
+.page_title .status_edit textarea{
+	font-size:12px;
+	line-height:16px;
+	border-top-width:0px;
+	border-right-width:0px;
+	border-bottom-width:0px;
+	border-left-width:0px;
+	border-top-style:none;
+	border-right-style:none;
+	border-bottom-style:none;
+	border-left-style:none;
+	padding:0px;
+	width:340px;
+	height:30px;
+	text-align:left;
+	overflow: hidden;
+	margin-top: 10px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 5px;
+}
+.page_title .status_edit .btn_big{
+
+
+}
+.page_title .status_editor .jishuan{
+	width: 360px;
+	margin-bottom: -5px;
+	text-align: right;
+	height: 15px;
+
+}
+/* 好友心情 */
+.Friend{clear:both;overflow:hidden}
+.Friend .FList{
+	width:630px;
+	padding-top: 10px;
+	overflow: hidden;
+}
+.Friend .FList .Fli{
+	margin-bottom:5px;
+	width: 630px;
+}
+.Friend .FList .Fli .c1{
+	width: 66px;
+	float: left;
+}
+
+.Friend .FList .Fli .c2{
+	float: left;
+	text-align:left;
+	width: 532px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 6px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 20px;
+}
+.Friend .FList .Fli .MC{
+	padding: 5px;
+}
+
+.Friend .FList .Fli .MC h4{
+	line-height:23px;
+	margin:0px;
+	padding:0px;
+	font-size: 12px;
+	height: 23px;
+	color: #808080;
+}
+.Friend .FList .Fli .MC h4 span{
+	margin-right:5px;
+	margin-left:5px;
+}
+.Friend .FList .Fli .MC p{
+	margin:0px;
+	line-height:20px;
+	padding-top: 5px;
+	padding-right: 0px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	display: block;
+	overflow: hidden;
+	font-size: 14px;
+	width: 100%;
+}
+.Friend .FList .Fli .MC p img{
+	margin-top: 0px;
+	margin-right: 1px;
+	margin-bottom: 3px;
+	margin-left: 1px;
+}
+.Friend .FList .Fli .MC p a{
+	margin-left:5px;
+	line-height: 20px;
+}
+.Friend .FList .Fli .RC{
+	width:380px
+}
+.Friend .FList .Fli .RC .RLI{
+	padding-top:5px;
+	padding-bottom:5px;
+	clear:both;
+	width: 100%;
+}
+.Friend .FList .Fli .RC .RLI .user_img{height:38px;width:38px;float:left;overflow:hidden}
+.Friend .FList .Fli .RC .RLI .user_img img{height:38px;width:38px}
+.Friend .FList .Fli .RC .RLI .RLC{
+	text-align:left;
+	margin-left:5px;
+	float:left;
+	padding-left:5px;
+	width: 332px;
+}
+.Friend .FList .Fli .RC .RLI .RLC h4{
+	line-height:20px;
+	margin:0px;
+	padding:0px;
+	font-size: 12px;
+	font-weight: normal;
+	height: 20px;
+}
+.Friend .FList .Fli .RC .RLI .RLC h4 span{
+	margin-right:5px;
+	margin-left:5px;
+}
+.Friend .FList .Fli .RC .RLI .RLC p{
+	margin:0px;
+	word-break:break-all;
+	dispaly: block;
+	font-size: 12px;
+	line-height: 18px;
+	text-align: left;
+	text-indent: 0px;
+	display: block;
+	padding: 0px 0px 0px 5px;
+	clear: both;
+}
+.Friend .FList .Fli .RC .RLC p img{
+	margin: 0px;
+}
+.Friend .FList .Fli .RC .RLC p a{ margin-left:5px; }
+.Input_box{
+	padding-top:5px;
+	padding-bottom:5px;
+	clear: both;
+	overflow: hidden;
+	width: 380px;
+}
+.Input_box .pic{
+	height:38px;
+	width:38px;
+	float:left;
+	overflow:hidden;
+	margin-right: 5px;
+}
+.Input_box .pic img{height:38px;width:38px}
+.Input_box  .box{
+	overflow:hidden;
+	float: left;
+	text-align: left;
+}
+.Input_box  .box  textarea{
+	border:1px solid #BDC7D8;
+	font-size:12px;
+	overflow: hidden;
+	padding-top: 0px;
+	padding-right: 5px;
+	padding-bottom: 0px;
+	padding-left: 5px;
+}
+.Input_box  .box  .btn2{
+	margin-bottom:5px;
+	margin-top: 5px;
+} 

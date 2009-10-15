@@ -1,0 +1,530 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{&SITE_TITLE}</title>
+    <link href="__PUBLIC__/admin/css/layout.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../Public/Js/jquery-1.2.6.js" ></script>
+     <script type="text/javascript" src="../Public/Js/json2select.js" ></script>
+
+	<script type="text/javascript">
+
+	</script>
+
+  </head>
+  <body>
+    <div id="container">
+	   <div class="tab">
+                       <ul>
+                           <li> <a class="on" href="__URL__/index/">全局设置</a></li><li><a href="__URL__/manage/">批量管理</a></li><li><a href="__URL__/recycle/">回收站管理</a></li>
+                        </ul>
+      </div>
+
+      <form action ="__URL__/index" method="post" >
+        <table class="tableborder" width="100%">
+          <tbody>
+            <tr class="top">
+              <td class="border" colspan="2"></td>
+            </tr>
+            <tr>
+              <th class="header" colspan="2">基本设置</th>
+            </tr>
+            <tr class="label">
+              <th>说明</th>
+              <th>设置</th>
+            </tr>
+
+
+
+			 <tr class="cell">
+              <td class="altbg1">
+                <b>最多加入群组数:</b>
+                <br/>
+                <span class="smalltxt"></span>
+              </td>
+              <td class="altbg2"><input type="text" name="joinMaxGroup" value="{$setting['joinMaxGroup']}"></td>
+            </tr>
+
+             <tr class="cell">
+              <td class="altbg1">
+                <b>单个文件大小:</b>
+                <br/>
+                <span class="smalltxt">单个上传文件大小(MB)</span>
+              </td>
+              <td class="altbg2"><input type="text" name="simpleFileSize" value="{$setting['simpleFileSize']}"></td>
+            </tr>
+
+             <tr class="cell">
+              <td class="altbg1">
+                <b>文件存储空间大小:</b>
+                <br/>
+                <span class="smalltxt">大小(MB)</span>
+              </td>
+              <td class="altbg2"><input type="text" name="spaceSize" value="{$setting['spaceSize']}"></td>
+            </tr>
+
+             <tr class="cell">
+              <td class="altbg1">
+                <b>上传文件类型:</b>
+                <br/>
+                <span class="smalltxt">若有多个用|分割</span>
+              </td>
+              <td class="altbg2"><input type="text" name="uploadFileType" value="{$setting['uploadFileType']}" ></td>
+            </tr>
+
+
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>是否开启相册:</b>
+                <br/>
+                <span class="smalltxt"></span>
+              </td>
+              <td class="altbg2"><input type="radio" value="1" name="openAlbum" <if condition=" $setting['openAlbum']"> checked </if> onclick="doSwitch(1,'openalbum')" >是<input type="radio" value="0" name="openAlbum" <if condition=" !$setting['openAlbum']"> checked </if> onclick="doSwitch(0,'openalbum')">否</td>
+            </tr>
+
+            <tr class="cell" id="openalbum">
+              <td class="altbg1">
+                <b>谁可可以创建相册:</b>
+                <br/>
+                <span class="smalltxt"></span>
+              </td>
+              <td class="altbg2"><input type="radio" value="1" name="whoCreateAlbum" <eq name="setting['whoCreateAlbum']" value="1"> checked</eq> >仅管理员<input type="radio" value="2" name="whoCreateAlbum" <eq name="setting['whoCreateAlbum']" value="2"> checked</eq> >成员</td>
+            </tr>
+
+            <tr class="cell" id="openalbum">
+              <td class="altbg1">
+                <b>谁可以上传图片:</b>
+                <br/>
+                <span class="smalltxt"></span>
+              </td>
+              <td class="altbg2"><input type="radio" name="whoUploadPic" <eq name="setting['whoUploadPic']" value="1"> checked</eq> value="1">仅管理员<input type="radio" value="2" name="whoUploadPic" <eq name="setting['whoUploadPic']" value="2"> checked</eq> >成员</td>
+            </tr>
+
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>是否开启群文件:</b>
+                <br/>
+                <span class="smalltxt">用户上传文件</span>
+              </td>
+              <td class="altbg2"><input type="radio" name="openUploadFile" value="1" onclick="doSwitch(1,'file')" <eq name="setting['openUploadFile']" value="1"> checked</eq> >开启 <input type="radio" name="openUploadFile" value="0" <eq name="setting['openUploadFile']" value="0"> checked</eq> onclick="doSwitch(0,'file')" >关闭</td>
+            </tr>
+
+             <tr class="cell" id="file">
+              <td class="altbg1">
+                <b>谁可以上传文件:</b>
+                <br/>
+                <span class="smalltxt"></span>
+              </td>
+              <td class="altbg2"><input type="radio" value="1" name="whoUploadFile" <eq name="setting['whoUploadFile']" value="1"> checked</eq> >仅管理员<input type="radio" value="2" name="whoUploadFile" <eq name="setting['whoUploadFile']" value="2"> checked</eq> >成员</td>
+            </tr>
+
+
+
+          </tbody>
+        </table>
+
+
+
+	     <!-- 群组内设置-->
+         <table class="tableborder" width="100%">
+          <tbody>
+            <tr class="top">
+              <td class="border" colspan="2"></td>
+            </tr>
+            <tr>
+              <th class="header" colspan="2">默认组内设置</th>
+            </tr>
+            <tr class="label">
+              <th>说明</th>
+              <th>设置</th>
+            </tr>
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>公开群组</b>
+                <br/>
+                <span class="smalltxt">公开</span>
+              </td>
+              <td class="altbg2">
+              	  <table class="tableborder" width="100%">
+				  <!-- 公开群设置方法开始 -->
+					   <tr class="cell">
+						  <td class="altbg1">
+							<b>是否需要邀请</b>
+							<br/>
+
+						  </td>
+						  <td class="altbg2">
+							<input  name="open_isInvite" type="radio" value="1" onclick="doSwitch(1,'open_isInvite')" <eq name="setting['open_isInvite']" value="1"> checked</eq>  >是
+							<input name="open_isInvite" type="radio" value="0" onclick="doSwitch(0,'open_isInvite')" <eq name="setting['open_isInvite']" value="0"> checked</eq>  >否
+						  </td>
+						</tr>
+
+						 <tr class="cell" id="open_isInvite">
+						  <td class="altbg1">
+							<b>邀请</b>
+							<br/>
+
+						  </td>
+						  <td class="altbg2">
+						  	<input name="open_invite" type="radio" value="1" <eq name="setting['open_invite']" value="1"> checked</eq>  >仅管理员邀请
+							<input  name="open_invite" type="radio" value="2" <eq name="setting['open_invite']" value="2"> checked</eq> >成员邀请
+
+						  </td>
+						</tr>
+
+
+
+						 <tr class="cell">
+						  <td class="altbg1">
+							<b>是否需要审核</b>
+							<br/>
+
+						  </td>
+						  <td class="altbg2">
+							<input  name="open_review" type="radio" <eq name="setting['open_review']" value="1"> checked</eq> value="1"> 是
+							<input  name="open_review" type="radio" <eq name="setting['open_review']" value="0"> checked</eq> value="0">否
+						  </td>
+						</tr>
+
+						 <tr class="cell">
+						  <td class="altbg1">
+							<b>什么人可以发言</b>
+							<br/>
+
+						  </td>
+						  <td class="altbg2">
+							<input  name="open_sayMember" type="radio" <eq name="setting['open_sayMember']" value="1">  checked </eq> value="1"> 成员
+							<input name="open_sayMember" type="radio" <eq name="setting['open_sayMember']" value="0"> checked </eq> value="0">非成员
+						  </td>
+						</tr>
+
+						 <tr class="cell">
+						  <td class="altbg1">
+							<b>什么人可以浏览</b>
+							<br/>
+
+						  </td>
+						  <td class="altbg2">
+						  	<input  name="open_viewMember" type="radio" value="1" <eq name="setting['open_viewMember']" value="1"> checked</eq> > 成员
+							<input  name="open_viewMember" type="radio" value="0" <eq name="setting['open_viewMember']" value="0"> checked</eq> > 非成员
+							<input name="open_viewMember" type="radio" value="-1" <eq name="setting['open_viewMember']" value="-1"> checked</eq> >游客
+						  </td>
+						</tr>
+						<!-- 公开群设置方法结束 -->
+              	  </table>
+              </td>
+            </tr>
+
+           <!-- 私密开始 -->
+           <tr class="cell">
+              <td class="altbg1">
+                <b>私密群组</b>
+                <br/>
+                <span class="smalltxt">私密</span>
+              </td>
+              <td class="altbg2">
+              	  <table class="tableborder" width="100%">
+				 		 <!-- 公开群设置方法开始 -->
+					   <tr class="cell">
+						  <td class="altbg1">
+							<b>是否需要邀请</b>
+							<br/>
+
+						  </td>
+						  <td class="altbg2">
+							<input  name="close_isInvite" type="radio" value="1" onclick="doSwitch(1,'close_isInvite')" <eq name="setting['close_isInvite']" value="1"> checked</eq>  >是
+							<input name="close_isInvite" type="radio" value="0" onclick="doSwitch(0,'close_isInvite')"  <eq name="setting['close_isInvite']" value="0"> checked</eq>  >否
+						  </td>
+						</tr>
+
+						 <tr class="cell" id="close_isInvite">
+						  <td class="altbg1">
+							<b>邀请</b>
+							<br/>
+
+						  </td>
+						  <td class="altbg2">
+						  	<input name="close_invite" type="radio" value="1" <eq name="setting['close_invite']" value="1"> checked</eq>  >仅管理员邀请
+							<input  name="close_invite" type="radio" value="2" <eq name="setting['close_invite']" value="2"> checked</eq> >成员邀请
+
+						  </td>
+						</tr>
+
+
+
+						 <tr class="cell">
+						  <td class="altbg1">
+							<b>是否需要审核</b>
+							<br/>
+
+						  </td>
+						  <td class="altbg2">
+							<input  name="close_review" type="radio" <eq name="setting['close_review']" value="1"> checked</eq> value="1"> 是
+							<input  name="close_review" type="radio" <eq name="setting['close_review']" value="0"> checked</eq> value="0">否
+						  </td>
+						</tr>
+
+						 <tr class="cell">
+						  <td class="altbg1">
+							<b>什么人可以发言</b>
+							<br/>
+
+						  </td>
+						  <td class="altbg2">
+							<input  name="close_sayMember" type="radio" <eq name="setting['close_sayMember']" value="1">  checked </eq> value="1"> 成员
+							<input name="close_sayMember" type="radio" <eq name="setting['close_sayMember']" value="0"> checked </eq> value="0">非成员
+						  </td>
+						</tr>
+
+						 <tr class="cell">
+						  <td class="altbg1">
+							<b>什么人可以浏览</b>
+							<br/>
+
+						  </td>
+						  <td class="altbg2">
+						  	<input  name="close_viewMember" type="radio" value="1" <eq name="setting['close_viewMember']" value="1"> checked</eq> > 成员
+							<input  name="close_viewMember" type="radio" value="0" <eq name="setting['close_viewMember']" value="0"> checked</eq> > 非成员
+							<input name="close_viewMember" type="radio" value="-1" <eq name="setting['close_viewMember']" value="-1"> checked</eq> >游客
+						  </td>
+						</tr>
+						<!-- 公开群设置方法结束 -->
+              	  </table>
+              </td>
+            </tr>
+
+            <!--  私密结束-->
+
+
+          </tbody>
+        </table>
+
+        <!-- 创建新群组条件 -->
+         <!--积分设置 -->
+        <table class="tableborder" width="100%">
+          <tbody>
+            <tr class="top">
+              <td class="border" colspan="2"></td>
+            </tr>
+            <tr>
+              <th class="header" colspan="2">创建新群组条件</th>
+            </tr>
+            <tr class="label">
+              <th>说明</th>
+              <th>设置</th>
+            </tr>
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>是否限制</b>
+                <br/>
+                <span class="smalltxt">限制</span>
+              </td>
+              <td class="altbg2">
+              <input type="radio" name="isLimit"  value ="0" onclick="doSwitch(0,'create_group_limit')"  <eq name="setting['isLimit']" value="0"> checked</eq> />关闭
+              <input type="radio" name="isLimit"  value ="1" onclick="doSwitch(1,'create_group_limit')" <eq name="setting['isLimit']" value="1"> checked</eq> />开启
+              </td>
+            </tr>
+
+       
+            <tr class="cell" id="create_group_limit">
+              <td class="altbg1">
+                <b>用户拥有的积分</b>
+                <br/>
+                <span class="smalltxt">积分</span>
+              </td>
+              <td class="altbg2">
+              <input type="text" name="userScore"  value ="{$setting['userScore']}" />
+
+              </td>
+            </tr>
+
+            <tr class="cell" id="create_group_limit">
+              <td class="altbg1">
+                <b>用户发帖子数量</b>
+                <br/>
+                <span class="smalltxt">发贴量</span>
+              </td>
+              <td class="altbg2">
+              <input type="text" name="userThreadCount"  value ="{$setting['userThreadCount']}" />
+
+              </td>
+            </tr>
+
+
+
+             <tr class="cell" id="create_group_limit">
+              <td class="altbg1">
+                <b>最多创建群组数:</b>
+                <br/>
+                <span class="smalltxt"></span>
+              </td>
+              <td class="altbg2"><input type="text" name="createMaxGroup" value="{$setting['createMaxGroup']}"></td>
+            </tr>
+
+
+         </tbody>
+        </table>
+
+
+
+        <!--积分设置 -->
+        <table class="tableborder" width="100%">
+          <tbody> 
+            <tr>
+              <td class="footer" colspan="2">
+                <input type="hidden" name="editSubmit" value="1">
+                <input type="submit" class="button"  value="保存" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        </form>
+
+
+
+		<form method="post" id="basic_setting" name="form" action="__URL__/addCategory" onsubmit="return checkForm();">
+        <table class="tableborder" width="100%">
+          <tbody>
+            <tr class="top">
+              <td class="border" colspan="2"></td>
+            </tr>
+            <tr>
+              <th class="header" colspan="2">群组分类管理</th>
+            </tr>
+            <tr class="label">
+              <th>说明</th>
+              <th>设置</th>
+            </tr>
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>分类名称</b>
+                <br/>
+                <span class="smalltxt">添加群组分类</span>
+              </td>
+              <td class="altbg2"><input type="text" name="title" id="title" value=""></td>
+            </tr>
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>上一级分类</b>
+                <br/>
+                <span class="smalltxt">分类</span>
+              </td>
+              <td class="altbg2"><div id="pid"></div></td>
+            </tr>
+
+            <tr>
+              <td class="footer" colspan="2">
+                <input type="submit" class="button"  value="提交" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+		</form>
+
+
+
+          <table class="tableborder" width="100%">
+            <tbody>
+              <tr class="top">
+                <td class="border" colspan="6"></td>
+              </tr>
+              <tr>
+                <th class="header" colspan="6">分类管理</th>
+              </tr>
+              <tr class="label">
+                <th>分类id</th>
+                <th>分类名</th>
+                <th>操作</th>
+              </tr>
+
+              <tr class="cell altbg1">
+              	<td colspan="3">{$categoryList}</td>
+              </tr>
+
+              <tr id = "category">
+                <td class="footer" colspan="6">
+                  <button type="button" onclick="c.all()">全选</button>
+                  <button type="button" onclick="c.unAll()">全不选</button>
+                  <button type="button" onclick="c.reverse()">反选</button>
+                  <button type="button" onclick="c.del()">删除</button>
+                  <button type="submit" >提交</button>
+                </td>
+              </tr>
+              <tr class="bottom">
+                <td class="border" colspan="6">&nbsp;</td>
+              </tr>
+            </tbody>
+          </table>
+
+
+   <form name="editCagegoryForm" method="post" action="__APP__/Admin/editCategory">
+   		<input type="hidden" name="id" value="0">
+   </form>
+
+    <form name="delCagegoryForm" method="post" action="__APP__/Admin/delCategory">
+   		<input type="hidden" name="id" value="0">
+   </form>
+
+	 <script type="text/javascript">
+
+		 var category_json	=	{:getCategorySelect(0)};
+		 $("#pid").json2select(category_json,'','pid');
+		 function checkForm() {
+		 	if($.trim($('#title').val()) == '') {
+		 		alert('分类名称不能为空');
+		 		return false;
+		 	}
+		 	return true;
+		 }
+	 </script>
+     <script type="text/javascript">
+		/* 编辑分类 */
+		function edit(id){
+			document.editCagegoryForm.id.value = id;
+			document.editCagegoryForm.submit();
+		}
+
+	</script>
+     <script type="text/javascript">
+
+		/* 删除分类 */
+		function del(id){
+			if (window.confirm('确实要删除选择项吗？'))
+			{
+				document.delCagegoryForm.id.value = id;
+				document.delCagegoryForm.submit();
+			}
+		}
+
+	</script>
+	<script>
+		function doSwitch(i,name){
+
+			if(i == 1) {
+				//$('#openalbum').each(function(j){ $(this)[0].style.display=''; });
+				$("tr[id='"+name+"']").css('display','');
+			}else{
+
+				$("tr[id='"+name+"']").css('display','none');
+			}
+		}
+
+		doSwitch({$setting['openAlbum']},'openalbum');
+		doSwitch({$setting['openUploadFile']},'file');
+
+		doSwitch({$setting['open_isInvite']},'open_isInvite');
+
+		doSwitch({$setting['close_isInvite']},'close_isInvite');
+		
+		doSwitch({$setting['isLimit']},'create_group_limit');
+
+	</script>
+      </div>
+    </body>
+</html>

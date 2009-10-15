@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<style type="text/css">
+<!--
+.STYLE1 {color: #990000}
+-->
+</style>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>AreaOPT jquery插件</title>
+<script src="./jquery.js"></script>
+<script src="./jquery.areaopt.js"></script>
+<script src="./areaopt.data.js"></script>
+<script type="text/javascript">
+$().ready(function(){
+	//alert(province[0]);
+	$.areaopt.bind('#textfield,#textfield2');
+});
+</script>
+<style type="text/css">
+<!--
+body,td,th { font-size: 12px; }
+body { background-color: #fefefe; }
+p	{ width:80%; height:auto; padding:10px; background-color:#D6F097; border:solid 1px #FF9900; color:#333; margin-left:auto; margin-right:auto;}
+input	{ background-color:#F5D99E; color:#333; border:solid 1px #993300; font-size:12px;}
+.STYLE2 {color: #000033}
+-->
+</style></head>
+<link type="text/css" href="theme/jquery.areaopt.css" rel="stylesheet" />
+</head>
+
+<body>
+<h2>JQUEYR PLUGIN - <span class="STYLE1">AreaOPT (BETA_1.01_081101)</span>版权所有 &copy; <a href="http://www.corrie.net.cn" target="_blank">www.corrie.net.cn</a>赵戈</h2>
+<p>说明信息：<br />
+ AreaOPT插件是corrie开发的第二个插件，可以通过绑定输入框，来完成省市县的友好输入界面。<br />
+  <span class="STYLE1">完美支持IE6+,FF,OPREA,CHROME</span><br />
+<span class="STYLE2">后期制作：增加可配置选项，美化界面，AJAX数据，数据自由绑定</span>，函数扩展<br />
+查看第一个插件：<a href="http://www.corrie.net.cn/demo/messager" target="_blank">jquery messager 弹出消息插件</a></p>
+<p><strong>更新说明：</strong>  <br />
+1、更新了界面显示效果<br />
+2、优化了选择方式<br />
+3、优化了CSS控制<br />
+4、默认为在输入框右边，超过网页右边自动调整位置<br />
+5、设置输入框为只读属性，默认格式“省 市 县”<br />
+6、优化了选择方式，可以选择到任意一级地名</p>
+<p>请选择您所在地区：
+  <input type="text" name="textfield" id="textfield" />
+  <!--<input type="button" onclick="alert(textfield_id.value);" value="测试1-Id" />-->
+</p>
+<p>请选择您所在地区：
+  <input type="text" name="textfield2" id="textfield2" />
+  <!--<input type="button" onclick="alert(textfield2_id.value);" value="测试2-id" />-->
+</p>
+<p>请输入您所在地区：
+  <input type="text" name="textfield3" id="textfield3" />
+</p>
+<div><a href="./jquery.areaopt.js">JS文件下载</a> | <a href="./areaopt.data.js">数据文件</a> | <a href="./jquery.areaopt.rar">完整包下载</a><br />
+讨论技术和有任何问题请发邮件，非诚勿扰！corrie#sina.com</div>
+<div align="center"><!-- *** Vdoing Code *** -->
+<script type="text/javascript">var wea_sid = 13864;</script>
+<script type="text/javascript" charset="UTF-8" src="http://s.vdoing.com/u/27/13864.js"></script>
+<noscript><a href="http://www.vdoing.com" title="Vdoing StatsX No.13864"><img src="http://simg.vdoing.com/m/13864/x01.gif?noscript" border="0"></a></noscript>
+<!-- *** End of Vdoing Code *** --> </div>
+</body>
+</html>

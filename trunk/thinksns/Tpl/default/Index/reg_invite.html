@@ -1,0 +1,44 @@
+<include file="__THEME__/header" />
+
+<div class="content">
+	<!-- 内容 begin  -->
+	<include file="__THEME__/apps" />
+	<div class="main">
+		<!-- 画布 begin  -->
+		<div class="left" style="width:510px;">
+			<div class="left" style="width:120px;">
+			<span class="headpic100"><a href="__TS__/space/{$fuid}"><img src="{$fuid|getUserFace='middle'}" /></a></span>
+				<div class="alC lh30">{$fuid|getUserName}</div>
+			</div>
+			<div class="left" style=" margin:0 0 0 10px;width:380px;">
+				<div class="border" style="padding:10px;">
+					<div class="info"><strong>Hi，我是{$fuid|getUserName}，</strong> <strong>我邀请你加入{$site_opts['site_name']}<if condition="$gid">，并加入“{$gname}”群</if></strong>
+						
+						<p>{$site_opts.invite_content}</p>
+						
+					</div>
+				</div>
+				<div class="mt10"><input type="button" class="btn_b" value="注册，并加我为好友" onclick="window.location.href='__APP__/Index/reg/code/{$code}'" /></div>
+			</div>
+		</div>
+		<div class="cr">
+			<!-- cr begin  -->
+			<div class="UserList">
+				<div class="tit">已有<php>echo count($frinds)</php>位好友</div>
+				<div class="ListBox">
+					<ul>
+						<volist name="frinds" id="frind" offset="0" length='11'>
+						<li> <span><img src="{$frind|getUserFace}" /></span>
+							<div>{$frind|getUserName}</div>
+						</li>
+						</volist>
+					</ul>
+				</div>
+				<div class="btm"></div>
+			</div>
+		</div>
+		<div class="c"></div>
+	</div>
+	<div class="c"></div>
+</div>
+<include file="__THEME__/footer" /> 

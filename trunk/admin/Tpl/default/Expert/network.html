@@ -1,0 +1,222 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{&SITE_TITLE}</title>
+	<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
+	<link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+	<link href="__PUBLIC__/js/pagination/pagination.css" rel="stylesheet" type="text/css" />	
+	<script type="text/javascript">
+		var ctrl = function(name){
+			this.elements = document.getElementsByName('id[]');
+			this.length = this.elements.length;
+		}
+		ctrl.prototype = {
+			reverse:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked= !this.elements[i].checked;
+				}
+			},
+			all:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked = true;
+				}
+			},
+			unAll:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked = false;
+				}
+			},
+			toggle:function(obj){
+				this[obj.checked ? 'all' : 'unAll']();
+			},
+			del:function(id){
+				if(id==undefined){
+					id = [];
+					for(i=0;i<this.length;i++){
+						this.elements[i].checked && id.push(this.elements[i].value);
+					}
+					id = id.join(',');
+				}
+				location.href = "__URL__/delnode/id/"+id;
+			},
+			edit:function(id){
+				location.href = "__URL__/node/id/"+id;
+			}
+		}
+		var c = null;
+	</script>
+    
+	</head>
+	<body>
+		<div id="container">
+			<table class="tableborder" width="100%">
+			<form action="__APP__/Expert/donetwork" method="POST">
+				<tbody>
+					<tr class="top">
+						<td class="border"></td>
+					</tr>
+					<tr>
+						<th class="header">tips</th>
+					</tr>
+					<tr>
+						<td class="tips">
+							<ul>
+								<li>地区管理</li>
+							</ul>
+						</td>
+					</tr>
+					<tr class="bottom">
+						<td class="border" colspan="5">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+			<table class="tableborder" width="100%">
+				<tbody>
+					<tr class="top">
+						<td class="border" colspan="7"></td>
+					</tr>
+					<tr>
+						<th class="header" colspan="7">标题 (一共 {$count} 条记录)</th>
+					</tr>
+					<tr class="label">
+						<th style="width:50px;"><input type="checkbox" onclick="c.toggle(this)" class="checkbox"/></th>
+						<th style="width:100px;">编号</th>
+						<th style="width:200px;">地区名 <present name="prepid"><a href="__APP__/Expert/network/pid/{$prepid}">返回上级</a></present></th>
+						<th style="width:200px;">子级数目</th>
+						<th style="width:200px;">状态</th>
+						<th>操作</th>
+					</tr>
+<volist id="vo" name="list">
+		<tr class="cell altbg2" style="height:30px;" id="tr_{$vo.id}">
+		<td><input type="checkbox" class="checkbox" name="id[]" value="{$vo.id}" /></td>
+		<td >{$vo.id}</td>
+		<td id="htitle_{$vo.id}"><a href="__APP__/Expert/network/pid/{$vo.id}">{$vo.title}</a></td>
+		<td >{:D('Network')->where('pid='.$vo['id'])->count()}</td>
+		<td id="hstatus_{$vo.id}"><PHP>if($vo['status']=='1'){</PHP>
+				<font color="Blue">已启用</font>
+			 <PHP>}else{</PHP>
+			 	<font color="red">未启用</font>
+			 <PHP>}</PHP>
+		</td>
+		<td id="hoperation_{$vo.id}"><a href="javascript:void(0)" onclick="doedit({$vo.id},'{$vo.title}',{$vo.status})">编辑</a></td>
+	</tr>
+</volist>
+					<tr>
+						<td class="footer" colspan="7">
+								
+					<tr>
+					<td colspan="5"><div style="float:left">全选<input type="checkbox" onclick="c.toggle(this)" class="checkbox"/>&nbsp;&nbsp;&nbsp;操作:<select name="type" style="margin-right:10px;" onchange="changeDoType(this);">
+						<option value="commend">已启用</option>
+						<option value="uncommend">未启用</option>
+						<option value="del">删除</option>
+				    </select>
+				    </span>
+				    <input type="submit" value="提交">
+						
+					</div>
+					
+					</td>
+						<td class="footer" colspan="2">
+						<div class="pagination" style="float:right;">
+							{$pages}
+						</div>
+						</td>
+					</tr>
+					<tr class="bottom">
+						<td class="border" colspan="7">&nbsp;</td>
+					</tr>
+				</tbody>
+				</form>
+			</table>
+			<table class="tableborder" width="100%">
+			<form action="__APP__/Expert/donetwork" method="POST">
+			<input type="hidden" name="type" value="add">
+				<tbody>
+					<tr class="top">
+						<td class="border" colspan="2"></td>
+					</tr>
+					<tr>
+						<th class="header" colspan="2">添加地区</th>
+					</tr>
+					<tr class="label">
+						<th>说明</th>
+						<th>设置</th>
+					</tr>
+					<tr class="cell">
+						<td class="altbg1">
+							<b>地区名:</b>
+							<br/>
+							<span class="smalltxt">地区名称</span>
+						</td>
+						<td class="altbg2"><input name="title" class="txt"/> </td>
+					</tr>
+													
+	
+					<tr class="cell">
+						<td class="altbg1">
+							<b>上级分类:</b>
+							<br/>
+							<span class="smalltxt">对节点的描述</span>
+						</td>
+						<td class="altbg2" style="color:blue;">
+							<input type="hidden" name="pid" value="{$pid}"> {$pidName}
+						</td>
+					</tr>
+					<tr>
+						<td class="footer" colspan="2">
+							<input type="submit" class="button" value="添加" />
+						</td>
+					</tr>
+					<tr class="bottom">
+						<td class="border" colspan="5">&nbsp;</td>
+					</tr>
+				</tbody>
+			  </form>
+			</table>
+		</div>
+		<script type="text/javascript">
+			c = new ctrl('id[]');
+			
+			function doedit(id,title,statue){
+				var selecthtml;
+				if(statue==0){
+					selecthtml = "<option value='0' selected><font color='red'>未启用</font></option><option value='1'>已启用</option>";	
+				}else{
+					selecthtml = "<option value='0'><font color='red'>未启用</font></option><option value='1' selected>已启用</option>";
+				}
+				$("#htitle_"+id).html("<input name='title_"+id+"' id='title_"+id+"' value='"+title+"'>");
+				$("#hstatus_"+id).html("<select name='status_"+id+"' id='status_"+id+"'>"+selecthtml+"</select>");
+				$("#hoperation_"+id).html("<input type='button' onclick='update("+id+")' value='修改'> <input type='button' onclick='doclose("+id+")' value='取消'>");
+				
+				
+			}
+			
+			function update(id){
+				var title      = $("#title_"+id).val();
+				var status     = $("#status_"+id).val();				
+				if(id && title){
+			      $.post('__APP__/Expert/donetwork',{id:id,type:'edit',title:title,status:status},function(result){
+			          if(result){
+						$("#tr_"+id).css('background-color','#FEF8B5');
+			          	doclose(id);
+			          }else{
+			          	alert('修改失败');
+			          }
+			      });
+				}else{
+					alert('提交失败');
+				}
+			}
+
+			function doclose(id){
+				var title      = $("#title_"+id).val();
+				var statue     = $("#status_"+id).val();
+				var statuename = $("select[id=status_"+id+"]").find('option:selected').text();
+				$("#htitle_"+id).html('<a href="__APP__/Expert/network/pid/'+id+'">'+$("#title_"+id).val()+'</a>');
+				$("#hstatus_"+id).html(statuename);
+				$("#hoperation_"+id).html("<a href='javascript:void(0)' onclick=doedit("+id+",'"+title+"',"+statue+")>编辑</a>");
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,98 @@
+<include file="__THEME__/header" />
+
+<link rel="stylesheet" href="../Public/blog.css" type="text/css" media="screen" charset="utf-8" />
+
+<div class="content"><!-- 内容 begin  -->
+  <include file="__THEME__/apps" />
+  <div class="main"><!-- 画布 begin  -->
+
+    <div class="page_title"> <!-- page_title begin -->
+      <div class="left" style="width:66px;"><span class="headpic50"><a href="__TS__/space/{$uid}"><img src="{$uid|getUserFace}" /></a></span></div>
+      <div class="left" style="width:765px;">
+        <h2><span  class="right fn f12px"><a href="javascript:history.back(-1)">返回上一页</a></span>{$name}的日志</h2>
+        <p><a href="__TS__/space/{$uid}">{$name}的个人空间</a> <a href="__TS__/Notify/write/uid/{$uid}">发站内信</a></p>
+        
+      </div>
+    <div class="c"></div>
+</div><!-- page_title end -->
+    <div class="tab-menu"><!-- 切换标签 begin  -->
+      <php>if( isset( $mention ) ){
+          $class1="class='on'";
+        }else{
+          $class2="class='on'";
+        }</php>
+      <ul>
+        <li><a href="__URL__/personal/uid/{$uid}" {$class2}><span>{$name}的日志</span></a></li>
+        <li><a href="__URL__/personal/uid/{$uid}/mention/do" {$class1}><span>提到{$name}的日志</span></a></li>
+      </ul>
+    </div><!-- 切换标签 end  -->
+    <div class="BlogBox">
+      <div class="sidebar mt10">
+	  <div class="FSort">
+        <php>if( !isset( $mention ) ){</php>
+        <div class="tit">日志分类</div>
+        <ul>
+          <li <?php if( empty( $cateId ) ) echo "class='on'"; ?>><a href="__URL__/personal/uid/{$uid}" >所有分类</a></li>
+          <php>foreach( $category as $key=>$value ) {</php>
+          <li  <php>if ( $cateId == $value['id'] ){</php>class="on"<php>}</php>><a href="__URL__/personal/uid/{$uid}/cateId/{$value['id']}">{$value['name']} ( {$value['count']} )</a> </li>
+          <php>}</php>
+        </ul>
+		<div class="btm"></div>
+      </div>
+            {:W( 'FileAway',$file_away)}<!-- 日志归档 -->
+ 
+        <php>}else{</php>
+             </div>
+        <php>}</php>
+
+     </div>
+      <div class="LogList"><!-- 好友日志 begin  -->
+       <ul>
+          <php>foreach( $data as $vo){</php>
+         <li class="btmline">
+         <div class="left" style="width: 10%;"><span class="headpic50"><a href="__TS__/space/{$uid}"><img src="{$vo['uid']|getUserFace}" /></a></span></div>
+          <div class="left" style="width: 90%;">
+            <h3 class="f14px lh30"><span class="right"> <input type="button" value="分享" class="BtnShare" onclick="ts_sharePop('{$vo.id}','__URL__')" id="BtnShare_{$vo.id}"/></span><a href="__URL__/show/id/{$vo['id']}/mid/{$vo['uid']}"><strong>{$vo['title']}</strong></a></h3>
+            <p><a href="__TS__/space/$friends['uid']">{$vo['name']}</a> <span class="cGray2">{$vo['cTime']|friendlyDate}</span>
+            &nbsp;(分类:
+            <a href="__URL__/personal/uid/{$uid}/cateId/{$vo['category']['id']}">{$vo['category']['name']}</a>
+            )
+</p>
+            </p>
+            <php>if( 3 == $vo['private'] && $vo['uid'] != $mid ){</php>
+                <div class="bg_msg"><div class="bg_msg_btm"><table width="100%" border="0" cellpadding="0" cellspacing="0"><tr><td width="40" align="center"><img src="../Public/images/ico_yaoshi.png" width="20" height="20" /></td>
+                	<td>本日志需要密码才能访问</td>
+                </tr>
+                </table></div></div>
+            <php>}elseif( 1 == $vo['private'] && !$api->friend_areFriends( $mid,$vo['uid'] ) && $vo['uid'] != $mid){</php>
+                <div class="bg_msg"><div class="bg_msg_btm"><table width="100%" border="0" cellpadding="0" cellspacing="0"><tr>
+               	<td width="40" align="center"><img src="../Public/images/ico_suo.png" width="20" height="20" /></td>
+                	<td>只有主人的好友可以查看此日志</td>
+                </tr>
+                </table></div></div>
+            <php>}else{</php>
+            
+              <php>if( $vo['type'] != 0 ){</php><span class="imported-article cGray2">{%type1}<php>}</php></span>
+            <p style="margin:10px 0px; line-height:180%;" class="f14px">{$vo['content']}</p>
+  <neq name="vo['mention']" value="">
+            <p class="cGray2">{%mention}: 
+                <php>foreach( $vo['mention'] as $friends ){</php>
+                <a href="__TS__/space/{$friends['uid']}">{$friends['name']}</a>
+                <php>}</php>
+            </p>
+            </neq>
+			<php>}</php>
+      
+            <p class="cGray2 alR"><a href="__URL__/show/id/{$vo['id']}/mid/{$vo['uid']}">阅读</a>({$vo['readCount']})&nbsp;&nbsp;|&nbsp;&nbsp;<a href="__URL__/show/id/{$vo['id']}/mid/{$vo['uid']}/#content">评论</a>({$vo['commentCount']})</p>
+          </div>
+          <php>}</php>
+        </li>
+        </ul>
+        <div class="page">{$html}</div>
+      </div><!-- 好友日志 end  -->
+    </div>
+
+  </div><!-- 画布 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />

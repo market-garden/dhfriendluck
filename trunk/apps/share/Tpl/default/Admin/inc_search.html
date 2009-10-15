@@ -1,0 +1,78 @@
+      <form action = "" method="post">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tableborder">
+          <tbody>
+            <tr class="top">
+              <td class="border" colspan="2"></td>
+            </tr>
+            <tr>
+              <th class="header" colspan="2">查询</th>
+            </tr>
+            <tr class="label">
+              <th>说明</th>
+              <th>设置</th>
+            </tr>
+<!--            <tr class="cell">
+              <td class="altbg1">
+                <b>用户名:</b>
+                <br/>
+                <span class="smalltxt">根据用户名查询</span>              </td>
+              <td class="altbg2"><input name="toUserName" class="txt" value="{$search.toUserName}"/></td>
+            </tr>-->
+            <tr class="cell">
+              <td class="altbg1">
+                <b>用户Id</b>
+                <br/>
+                <span class="smalltxt">根据用户id</span>              </td>
+              <td class="altbg2"><input name="toUid" class="txt" value="{$search.toUid}"/></td>
+            </tr>
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>分享标题</b>
+                <br/>
+                <span class="smalltxt">根据分享标题,支持模糊查询。</span>              </td>
+              <td class="altbg2"><input name="title" class="txt" value="{$search.title}"/></td>
+            </tr>
+            <tr class="cell">
+              <td class="altbg1">
+                <b>分享类型</b>
+                <br/>
+                <span class="smalltxt">根据分享的类型查询</span>              </td>
+              <td class="altbg2">
+                <select name="typeId">
+                  <option value = "" <php>if(!isset($search[typeId])||$search[typeId]=='') echo 'selected';</php> >全部</option>
+				  <volist name='types' id='vo'>
+                  <option value = "{$vo.id}" <php>if($search[typeId]==$vo['id']) echo 'selected';</php> >{$vo.title}</option>
+				  </volist>
+                </select>
+			  </td>
+            </tr>
+
+            <tr class="cell">
+              <td class="altbg1">
+                <b>结果排序</b>
+                <br/>              </td>
+              <td class="altbg2">
+                <select name="sorder">
+                  <option value = "cTime" <php>if(!isset($search[sorder])||$search[sorder]=='cTime') echo 'selected';</php> >时间排序</option>
+                  <option value = "id" <php>if($search[sorder]=='id') echo 'selected';</php> >发布id排序</option>
+                  <option value = "toUserName" <php>if($search[sorder]=='toUserName') echo 'selected';</php> >分享者排序</option>
+                </select>
+                <select name="eorder">
+                  <option value = "DESC" <php>if(!isset($search[eorder])||$search[eorder]=='DESC') echo 'selected';</php> >降序</option>
+                  <option value = "ASC" <php>if($search[eorder]=='ASC') echo 'selected';</php> >升序</option>
+                </select>
+                <select name="limit">
+                  <option value = "10" <php>if($search[limit]=='10') echo 'selected';</php> >每页显示10条</option>
+                  <option value = "20" <php>if($search[limit]=='20') echo 'selected';</php> >每页显示20条</option>
+                  <option value = "30" <php>if(!isset($search[limit])||$search[limit]=='30') echo 'selected';</php> >每页显示30条</option>
+                  <option value = "100" <php>if($search[limit]=='100') echo 'selected';</php> >每页显示100条</option>
+                </select>              </td>
+            </tr>
+            <tr>
+              <td class="footer" colspan="2">
+                <input type="submit" class="submit" value="提交" /> </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>

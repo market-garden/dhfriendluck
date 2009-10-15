@@ -1,0 +1,292 @@
+@charset "utf-8";
+/*
+赵杰 
+活动样式
+*/
+.page_title h2 img{height:24px;width:24px;float:left;margin-right:5px}
+.page_title h2{
+	font-size:14px;
+	color:#000000;
+	font-weight:bold;
+	line-height:25px;
+	height:25px;
+	clear:both
+}
+.page_title p {
+	padding: 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+	line-height: 18px;
+	color: #666666;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+.page_title .rmenu{}
+.page_title .rmenu a{
+	display: block;
+	line-height: 20px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #CCCCCC;
+	padding-left: 5px;
+}
+.page_title .rmenu a:hover {
+	color: #FFFFFF;
+	background-color: #005FAB;
+	text-decoration: none;
+}
+
+.groupBox {
+	clear:both;
+	overflow:hidden;
+	margin-top: 10px;
+}
+
+.boxL{ float: left; 
+}
+.box1 {
+	padding-bottom: 8px;
+	clear: both;
+	width: 640px;
+	margin-right: auto;
+	margin-left: auto;
+	overflow: hidden;
+}
+.box1 h3 {
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 30px;
+	padding-left: 5px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #A4C4DD;
+}
+.box1 h4{
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 30px;
+}
+
+.zd{
+	font-size: 12px;
+	background-color: #0066CC;
+	display: inline-block;
+	color: #FFFFFF;
+	padding-top: 1px;
+	padding-right: 3px;
+	padding-bottom: 1px;
+	padding-left: 3px;
+	margin-right: 5px;
+	line-height: 140%;
+}
+.jh{
+	font-size: 12px;
+	background-color: #FF9900;
+	display: inline-block;
+	color: #FFFFFF;
+	padding-top: 1px;
+	padding-right: 3px;
+	padding-bottom: 1px;
+	padding-left: 3px;
+	margin-right: 5px;
+	line-height: 140%;
+}
+/*活动信息*/
+.info{ height: 260px; }
+.info .img {
+	height: 200px;
+	width: 200px;
+	margin-right: 20px;
+	float: left;
+	text-align: center;
+	overflow: hidden;
+}
+.info .list {
+	float: left;
+	width: 415px;
+}
+.info .list ul {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+}
+.info .list ul li {
+	clear: both;
+	line-height: 180%;
+}
+.info .list ul li .c1{
+	float: left;
+	width: 66px;
+	color: #999999;
+}
+.info .list ul li .c2{
+	float: left;
+	width: 348px;
+}
+
+/*全部活动式*/
+.search{clear: both;
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+
+}
+.search li{
+	clear: both;
+	padding: 5px;
+	margin-bottom: 5px;
+	display: inline-block;
+}
+.search li h3 {
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 25px;
+}
+.search li p {
+	line-height: 18px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.search li .rmenu{}
+.search li .rmenu a{
+	display: block;
+	line-height: 20px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #CCCCCC;
+	padding-left: 5px;
+}
+.search li .rmenu a:hover {
+	color: #FFFFFF;
+	background-color: #005FAB;
+	text-decoration: none;
+}
+.rSort {
+	float: right;
+	width: 200px;
+}
+.rSort h4 {
+	font-weight: bold;
+	line-height: 25px;
+	font-size: 12px;
+}
+.rSort ul { width: auto; }
+.rSort ul li { line-height: 18px; }
+.rSort ul li.on a{
+	color: #FF0000;
+	text-decoration: underline;
+	padding-left: 8px;
+	background-image: url(../images/ico-xiaosanjiao.gif);
+	background-repeat: no-repeat;
+	background-position: 0px center;
+}
+
+/*参加成员列表*/
+.flist{clear: both;width: 830px;padding-bottom: 10px;}
+.flist li{float:left;margin-right:20px;margin-top:20px;padding:5px;width:380px}
+.flist li h3{font-size:14px;font-weight:bold;line-height:30px}
+.flist li p{line-height:20px;margin:0px;padding:0px}
+/*右边列表样式*/
+.boxR{
+	border-bottom-color:#A4C4DD;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	border-left-color:#A4C4DD;
+	border-left-style:solid;
+	border-left-width:1px;
+	border-right-color:#A4C4DD;
+	border-right-style:solid;
+	border-right-width:1px;
+	border-top-color:#A4C4DD;
+	border-top-style:solid;
+	border-top-width:0px;
+	clear:both;
+	margin-bottom:10px;
+	padding-bottom:5px;
+	overflow: hidden;
+}
+.boxR h3{background-color:#E7EFF5;border-top-color:#A4C4DD;border-top-style:solid;border-top-width:1px;font-size:12px;font-weight:bold;line-height:30px;margin:0px;padding:0px 0px 0px 5px}
+.boxR p{line-height:18px;margin:0px;padding:5px 0px 5px 5px}
+.ListBox{
+	clear:both;
+	overflow:hidden;
+	width: 100%;
+}
+.ListBox li{background-image:none;display:block;float:left;height:auto;margin-top:8px;text-align:center;width:75px}
+.ListBox li span{display:block;margin-left:auto;margin-right:auto}
+.ListBox li a{display:block;line-height:20px;margin:0px;padding:0px}
+.ListBox li em{color:#666666;display:block;line-height:16px;text-align:center}
+/*活动成员*/
+.pic50box {
+	overflow: hidden;
+	clear: both;
+}
+.pic50box li {
+	width: 80px;
+	float: left;
+	text-align: center;
+	display: block;
+	background-image: none;
+	margin-top: 8px;
+	height: auto;
+}
+.pic50box li span {
+	margin-right: auto;
+	margin-left: auto;
+	display: block;
+}
+.pic50box li a {
+	display: block;
+	line-height: 20px;
+	margin: 0px;
+	padding: 0px;
+}
+
+
+/*相册样式*/
+.piclist{
+	width: 640%;
+	margin: 0px;
+	padding: 0px;
+}
+.piclist li{
+	float: left;
+	width: 159px;
+	text-align: center;
+	margin-top: 5px;
+}
+.piclist li img {
+	padding: 2px;
+	border: 1px solid #CCCCCC;
+	margin-bottom: 5px;
+	background-color: #FFFFFF;
+}
+/*发起活动*/
+.add_event{ width: 100%; }
+.add_event li{
+	clear: both;
+	line-height: 20px;
+	margin-bottom: 10px;
+	display: table;
+	width: 100%;
+}
+.add_event li .c1{
+	float: left;
+	width: 100px;
+	text-align: right;
+}
+.add_event li .c2{
+	float: left;
+	width: 500px;
+}
+
+/*鼠标经过边框样式*/
+.bx1{
+	border: 1px solid #E3EDF4;
+	background-color: #FDFDFD;
+}
+.bx2{
+	border: 1px solid #FFE222;
+	background-color: #FFFDEF;
+}

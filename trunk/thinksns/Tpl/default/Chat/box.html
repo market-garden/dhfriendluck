@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link href="__THEME__/im/css/box.css"	rel="stylesheet" />
+        <title>ThinkSNS聊吧</title>
+    </head>
+
+    <body>
+        <!--头部开始-->
+        <div class="header">
+            <div class="logo"><a href="###"><img src="__THEME__/im/images/ts_logo.jpg"/></a></div>
+        </div>
+        <!--头部结束-->
+
+        <!--主体区域开始-->
+        <div class="container">
+            <div class="left">
+                <h1>
+                    <ul id="chatfriend">
+                    </ul>
+                    <!-- <em><a href="#" id="closeChat"><img	src="__THEME__/im/images/close.gif" /></a></em> -->
+                </h1>
+                <h2 id="chatcontent">
+                    <div class="msgwrap"><!--div id="con_101" style="display:none;"></div--></div>
+                    <span id="play_swf"></span>
+                </h2>
+                <h3>
+                    <div id="sendmsgWrap">
+                        <ul>
+                            <li class="a0"><a href="#" id="setFont"><img src="__THEME__/im/images/font.gif" title="字体颜色和格式设置" /></a> </li>
+                            <li class="a0"><a href="#" id="sendFace"><img src="__THEME__/im/images/face.gif" title="选择表情"/>
+                                    <span id="facepanel">
+                                        <img alt="biggrin" src="__THEME__/im/images/face/biggrin.gif"/>
+                                        <img alt="call" src="__THEME__/im/images/face/call.gif"/>
+                                        <img alt="cry" src="__THEME__/im/images/face/cry.gif"/>
+                                        <img alt="funk" src="__THEME__/im/images/face/funk.gif"/>
+                                        <img alt="handshake" src="__THEME__/im/images/face/handshake.gif"/>
+                                        <img alt="huffy" src="__THEME__/im/images/face/huffy.gif"/>
+                                        <img alt="hug" src="__THEME__/im/images/face/hug.gif"/>
+                                        <img alt="kiss" src="__THEME__/im/images/face/kiss.gif"/>
+                                        <img alt="lol" src="__THEME__/im/images/face/lol.gif"/>
+                                        <img alt="loveliness" src="__THEME__/im/images/face/loveliness.gif"/>
+                                        <img alt="mad" src="__THEME__/im/images/face/mad.gif"/>
+                                        <img alt="sad" src="__THEME__/im/images/face/sad.gif"/>
+                                        <img alt="shocked" src="__THEME__/im/images/face/shocked.gif"/>
+                                        <img alt="shy" src="__THEME__/im/images/face/shy.gif"/>
+                                        <img alt="smile" src="__THEME__/im/images/face/smile.gif"/>
+                                        <img alt="star_level1" src="__THEME__/im/images/face/star_level1.gif"/>
+                                        <img alt="sweat" src="__THEME__/im/images/face/sweat.gif"/>
+                                        <img alt="time" src="__THEME__/im/images/face/time.gif"/>
+                                        <img alt="titter" src="__THEME__/im/images/face/titter.gif"/>
+                                        <img alt="tongue" src="__THEME__/im/images/face/tongue.gif"/>
+                                        <img alt="victory" src="__THEME__/im/images/face/victory.gif"/>
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li	class="a1"><a href="#" id="sendImg"><img src="__THEME__/im/images/transmit.gif" title="发送图片"/></a></li>
+                             <li class="a4">
+                                <a href="###" id="mofa_bq"><img src="__THEME__/im/images/face_mf.gif" title="魔法表情"/></a>
+                                <div class="mafa" id="mofa_lists" style="display:none;">
+                                    <a href="javascript:send_mofa(300)">打你</a>
+                                    <a href="javascript:send_mofa(301)">害羞</a>
+                                    <a href="javascript:send_mofa(302)">跑路</a>
+                                    <a href="javascript:send_mofa(303)">生气</a>
+                                    <a href="javascript:send_mofa(304)">亲你</a>
+                                    <a href="javascript:send_mofa(305)">呼噜</a>
+                                    <a href="javascript:send_mofa(306)">感动</a>
+                                    <a href="javascript:send_mofa(307)">哭闹</a>
+                                    <a href="javascript:send_mofa(308)">依偎</a>
+                                    <a href="javascript:send_mofa(309)">心碎</a>
+                                    <a href="javascript:send_mofa(310)">献花</a>
+                                    <a href="javascript:send_mofa(311)">疑问</a>
+                                    <a href="javascript:send_mofa(312)">嘻嘻</a>
+                                    <a href="javascript:send_mofa(313)">跳跳</a>
+                                    <a href="javascript:send_mofa(314)">哈哈</a>
+                                    <a href="javascript:send_mofa(315)">害怕</a>
+                                    <a href="javascript:send_mofa(316)">淫笑</a>
+                                    <a href="javascript:send_mofa(317)">耍酷</a>
+                                    <a href="javascript:send_mofa(318)">哼哼</a>
+                                    <a href="javascript:send_mofa(319)">大笑</a>
+                                </div>
+                            </li>
+
+
+                        </ul>
+                        <div id="sendmsg">
+                            <textarea name="" cols="" rows="" id="msg"></textarea>
+
+                            <input	id="sendMsg" type="button" value="发 送"	title="按Ctrl+Enter发送消息" />&nbsp;<span style="color:#FFF">[Ctrl+Enter 发送]</span>
+                        </div>
+                    </div>
+                </h3>
+            </div>
+            <div class="rightbox">
+                <div id="imboxAd" class="right">
+                    <h4><a href="#"><img src="__THEME__/im/images/ad01.gif" /></a><a	href=""><img src="__THEME__/im/images/ad02.gif" /></a></h4>
+                </div>
+                <div id="imbox" class="right">
+                    <h1><strong>我的好友</strong><span><img id="right_top" src="__THEME__/im/images/minimize.gif"	/></span></h1>
+                    <h2>
+                        <ul id="friend_list">
+                        </ul>
+                    </h2>
+                    <h3>
+                        <span id="online_num"></span>
+                    </h3>
+                </div>
+            </div>
+            <div id="errorInfo"><div id="errorInfoContent"></div><button>确定</button></div>
+            <span id="font">
+                <select id="fontFamily">
+                    <option>宋体</option>
+                    <option>黑体</option>
+                    <option>幼圆</option>
+                    <option>楷体</option>
+                    <option>微软雅黑</option>
+                </select>
+                <select id="fontSize">
+                    <option>8</option>
+                    <option selected="selected">9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                    <option>16</option>
+                    <option>17</option>
+                    <option>18</option>
+                    <option>19</option>
+                    <option>20</option>
+                    <option>21</option>
+                    <option>22</option>
+                </select>
+                <b>B</b>
+                <i>I</i>
+                <u>U</u>
+                <input type="text" id="colorHex" value="rgb(0,0,0)"/>
+                <div style="position:relative;" id="colorpickerWrap">
+                    <img src="__THEME__/im/images/color.bmp" alt="调色板" id="colorpicker"/>
+                </div>
+
+            </span>
+            <div id="imgurlInputWrap"><label for="imgurlInput">请输入图片地址</label><input type="text" id="imgurlInput" value="http://"/><br /><button class="ok">确定</button>　　　<button class="cancel">取消</button></div>
+        </div>
+        <!--主体区域结束-->
+        <script>
+            var site_url = '<php>echo SITE_URL;</php>';
+            var theme_url = '<php>echo THEME_URL;</php>';
+        </script>
+        <script type="text/javascript" charset="utf-8" src="__THEME__/im/js/jquery.js"></script>
+        <script type="text/javascript" charset="utf-8" src="__THEME__/im/js/chat.js"></script>
+    </body>
+</html>

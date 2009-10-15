@@ -1,0 +1,230 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="cache-control" content="no-cache, must-revalidate">
+            <title>{&SITE_TITLE}</title>
+            <link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+            <script type="text/javascript" src="../Public/script/jquery.js" ></script>
+            <script type="text/javascript">
+  
+                {// 加载尾部公共文件 }
+                    function change_one(x){
+                            <?php foreach($fields as $key=>$vo) {  ?>
+                                var <?php echo $key; ?>  =	$("#<?php echo $key; ?>_"+x).val();
+
+                                <?php
+                            $post[] = $key.":".$key;
+                        } ?>
+                            //alert(action +' '+ credit + ' ' + info);
+                        $.post("__URL__/doEdit",{<?php  echo implode(',',$post); ?>},function(txt){
+                            if(txt==1){
+                                alert("修改成功！");
+                            }else{
+                                alert(txt);
+                            }
+                        });
+
+                    }
+                    function change_type_one(x){
+                        var id = $('#type_id_'+x).val();
+                        var name = $('#type_name_'+x).val();
+                        var alias   = $('#type_alias_'+x).val();
+
+                        $.post("__URL__/doEditType",{id:id,name:name,alias:alias},function(txt){
+                            if(txt==1){
+                                window.location.href='__URL__/scores';
+                            }else{
+                                alert(txt);
+                            }
+                        });
+     
+                    }
+
+     function deleteCredit(cid) {
+                        if   (confirm('确定删除这条积分规则吗？') ){
+                            $.post("__URL__/deleteCredit",{id:cid},function(txt){
+                                if(txt==1){
+                                    window.location.href='__URL__/scores';
+                                }else{
+                                    alert(txt);
+                                }
+                            });
+                        }else{
+                            return   false;
+                        }
+                    }
+
+       function deleteCreditType(cid) {
+                        if   (confirm('确定删除这条积分种类吗？将删除这个积分下的所有原始积分！') ){
+                            $.post("__URL__/deleteCreditType",{id:cid},function(txt){
+                                if(txt==1){
+                                    window.location.href='__URL__/scores';
+                                }else{
+                                    alert(txt);
+                                }
+                            });
+                        }else{
+                            return   false;
+                        }
+                    }
+            </script>
+
+    </head>
+
+
+    <body>
+        <div id="container">
+            <form action="__URL__/doAdd" method="post">
+                <table class="tableborder" width="100%">
+                    <tbody>
+                        <tr class="top">
+                            <td class="border" colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <th class="header" colspan="2">添加新的积分策略</th>
+                        </tr>
+                        <tr class="label">
+                            <th>说明</th>
+                            <th>设置</th>
+                        </tr>
+                        <volist name="fields" id="vo" k="key">
+                            <php>if($key == 'id' || $key=='type'){ continue;}</php>
+                            <tr class="cell">
+                                <td class="altbg1">
+                                    <b>{$vo}</b>
+                                    <br/>
+                                    <span class="smalltxt"><php>if('info'== $key){</php>
+                                                                                    {sign}:积分正数为增加。负数为减少；{action}:动作名；{typecn}:积分种类
+                                                                                <php>}</php></span>
+                                </td>
+                                <td class="altbg2"><input name="{$key}" class="txt" value ="" /></td>
+                            </tr>
+                        </volist>
+                        <tr>
+                            <td class="footer" colspan="2">
+                                <input type="submit" class="button"  value="提交" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+
+
+            <form method="post" id="form_all" name="form_all" action="__URL__/doEditAll">
+                <table class="tableborder" width="100%">
+                    <tbody>
+                        <tr class="top">
+                            <td class="border" colspan="<php>echo count($fields)+2;</php>"></td>
+                        </tr>
+                        <tr>
+                            <th class="header" colspan="<php>echo count($fields)+2;</php>">积分策略管理</th>
+                        </tr>
+                        <tr class="label">
+                            <th><input type="checkbox" class="checkbox" onclick="c.toggle(this)" />删？</th>
+                            <volist name="fields" id="vo">
+                                <th>{$vo}</th>
+                            </volist>
+                            <th>操作</th>
+                        </tr>
+                        <volist name="list" id="vo">
+                            <tr class="cell altbg1">
+                                <td><input type="button" onclick="deleteCredit({$vo.id});" value="删除" class="button" /></td>
+                                <sublist name="vo" id="svo" k="key">
+                                    <td> <input  <eq name="key" value="id">disabled</eq> <eq name="key" value="type">disabled</eq> id="{$key}_{$vo.id}" type="text" class="large bLeftRequire" name="{$key}[{$vo.id}]" style="width:100px;" value="{$svo}" /></td>
+                                </sublist>
+                                <td>
+                                    <input type="button" onclick="change_one({$vo.id|trim});" value="修改这一条" class="button" />
+                            </tr>
+                        </volist>
+                        <tr class="bottom">
+                            <td class="border" colspan="<php>echo count($fields)+2;</php>"> <input type="submit" value="修改全部" class="button" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            <form action="__URL__/doAddScoresType" method="post">
+                <table class="tableborder" width="100%">
+                    <tbody>
+                        <tr class="top">
+                            <td class="border" colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <th class="header" colspan="2">积分种类管理</th>
+                        </tr>
+                        <tr class="label">
+                            <th>说明</th>
+                            <th>设置</th>
+                        </tr>
+
+                        <tr class="cell">
+                            <td class="altbg1">
+                                <b>新添加积分种类</b>
+                                <br/>
+                                <span class="smalltxt">添加积分种类</span>
+                            </td>
+                            <td class="altbg2"><input name="type" class="txt" value ="" /></td>
+                        </tr>
+
+                        <tr class="cell">
+                            <td class="altbg1">
+                                <b>别名</b>
+                                <br/>
+                                <span class="smalltxt">新积分的别名</span>
+                            </td>
+                            <td class="altbg2"><input name="alias" class="txt" value ="" /></td>
+                        </tr>
+                        <tr>
+                            <td class="footer" colspan="2">
+                                <input type="submit" class="button"  value="提交" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+
+
+            <form method="post" id="form_all" name="form_all" action="__URL__/doEditTypeAll">
+                <table class="tableborder" width="100%">
+                    <tbody>
+                        <tr class="top">
+                            <td class="border" colspan="5"></td>
+                        </tr>
+                        <tr>
+                            <th class="header" colspan="5">类型编辑</th>
+                        </tr>
+                        <tr class="label">
+                            <th><input type="checkbox" class="checkbox" onclick="c.toggle(this)" />删？</th>
+                            <th>编号</th>
+                            <th>名字</th>
+                            <th>别名</th>
+                            <th>操作</th>
+                        </tr>
+                        <volist name="typeList" id="vo">
+                            <tr class="cell altbg1">
+                                <td><input type="button" onclick="deleteCreditType({$vo.id});" value="删除" class="button" /></td>
+                                <sublist name="vo" id="svo" k="key">
+                                    <td> <input  <eq name="key" value="id">disabled</eq>  id="type_{$key}_{$vo.id}" type="text" class="large bLeftRequire" name="{$key}[{$vo.id}]" style="width:100px;" value="{$svo}" /></td>
+                                </sublist>
+                                <td>
+                                    <input type="button" onclick="change_type_one({$vo.id|trim});" value="修改这一条" class="button" />
+                            </tr>
+                        </volist>
+                        <tr class="bottom">
+                            <td class="border" colspan="5"> <input type="submit" value="修改全部" class="button" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+
+        </div>
+
+
+
+
+
+
+
+    </body>
+</html>

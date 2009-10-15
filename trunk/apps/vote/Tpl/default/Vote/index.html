@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <include file="../Public/inc_header" />
+        <title>{&SITE_TITLE}</title>
+        <link href="../Public/images/base.css" rel="stylesheet" type="text/css" />
+        <script language="JavaScript" src="../Public/blog/js/blog.js"></script>
+        <base target="_self" />
+        <style>
+        .choice-list li{display:block;}
+        
+        </style>
+        <script>
+            $(function(){
+                $("#tog_explain").toggle(function(){
+                    $("#vote_explain").show();
+                    $(this).text("隐藏投票详细说明");
+                },function(){
+                    $("#vote_explain").hide();
+                    $(this).text("添加投票详细说明");
+                });
+
+                //截止时间
+                $('#year option[@value="{$date.year}"]').attr('selected','selected');
+                $('#month option[@value="{$date.month}"]').attr('selected','selected');
+                $('#day option[@value="{$date.day}"]').attr('selected','selected');
+                $('#hour option[@value="{$date.hour}"]').attr('selected','selected');
+            });
+
+            function more(){
+                $("#more_options").show();
+                $("#add_more").hide();
+            }
+
+
+        </script>
+    </head>
+    <body>
+        <div id="doc"> <include file="../Public/space_inc_top" /> <include file="../Public/inc_left_bak" />
+
+
+
+            <!-- Begin 主内容 -->
+            <div class="contant-main">
+                <h3 class="space-titile">投票</h3>
+                <p class="return-lastpage"><A HREF="javascript:history.back()"> </a></p>
+                <div class="clearer"></div>
+                <div class="contanter">
+                    <ul id="member_favo_links">
+                        <li><a class="current" href="__URL__/index">发起投票</a></li>
+                        <li><a href="__URL__/mine">我的投票</a></li>
+                    <!--     <li><a href="__URL__/friend">好友的投票</a></li> -->
+                        <li><a href="__URL__/random">随便看看</a></li>
+                    </ul>
+                    <div class="contant clear" style="padding:0;">
+                        <p class="tips"> <span>为买哪款手机烦恼？给宝宝起一个什么名？今年生日怎么过？那就发动所有好友投票帮你决定吧！
+                        你也可以用“投票”来做其他方面的小调查。</span></p>
+						<script>
+							function check_vote() {
+								var title = $.trim($("#title").val());
+								if(!title){
+									alert("投票主题不能为空!");
+									return false;
+								}
+								var flag = 0;
+								$(".vote_opt").each(function (i) {
+									if($.trim($(this).val())) flag++;									
+								})
+								if(flag<2){
+									alert("至少填写2个选项!");
+									return false;
+								}
+
+							}
+						</script>
+                        <form method="post" action="__URL__/add" onsubmit="return check_vote()">
+                            <ul class="choice-list" style="border-bottom:1px solid #dfe9f0;">
+                                <li>
+                                    <label>投票主题： </label>
+                                    <input name="title" type="text" class="text-input" id="title">
+                                <span class="arrow_drop"><a id="tog_explain" href="javascript:void(0)">添加投票详细说明</a></span></li>
+                                <li id="vote_explain" style="display:none">
+                                    <label>详细说明： </label><textarea name="explain" cols="" rows="" class="textarea-inout"></textarea>
+                                </li>
+                            </ul>
+                            <ul class="choice-list" style="border-bottom:1px solid #dfe9f0;">
+                                <li>
+                                    <label>侯选项1： </label>
+                                    <input name="opt[]" type="text" class="text-input-name vote_opt" />
+                                </li>
+                                <li>
+                                    <label>侯选项2： </label>
+                                    <input name="opt[]" type="text" class="text-input-name vote_opt" />
+                                </li>
+                                <li>
+                                    <label>侯选项3： </label>
+                                    <input name="opt[]" type="text" class="text-input-name vote_opt" />
+                                </li>
+                                <li>
+                                    <label>侯选项4： </label>
+                                    <input name="opt[]" type="text" class="text-input-name vote_opt" />
+                                </li>
+                                <li>
+                                    <label>侯选项5： </label>
+                                    <input name="opt[]" type="text" class="text-input-name vote_opt" />
+                                </li>
+                                <li>
+                                    <label>侯选项6： </label>
+                                    <input name="opt[]" type="text" class="text-input-name vote_opt" />
+                                </li>
+                                <li>
+                                    <label>侯选项7： </label>
+                                    <input name="opt[]" type="text" class="text-input-name vote_opt" />
+                                </li>
+                                <li>
+                                    <label>侯选项8： </label>
+                                    <input name="opt[]" type="text" class="text-input-name vote_opt" />
+                                </li>
+                                <li>
+                                    <label>侯选项9： </label>
+                                    <input name="opt[]" type="text" class="text-input-name vote_opt" />
+                                </li>
+                                <li>
+                                    <label>侯选项10： </label>
+                                    <input name="opt[]" type="text" class="text-input-name vote_opt" />
+                                    &nbsp;&nbsp;<span class="arrow_drop" id="add_more"><a class="sl" href="javascript:more();">增加更多候选项</a></span>
+                                </li>
+                                <span id="more_options" style="display:none">
+                                    <li>
+                                        <label>侯选项11： </label>
+                                        <input name="opt[]" type="text" class="text-input-name vote_opt" />
+                                    </li>
+                                    <li>
+                                        <label>侯选项12： </label>
+                                        <input name="opt[]" type="text" class="text-input-name vote_opt" />
+                                    </li>
+                                    <li>
+                                        <label>侯选项13： </label>
+                                        <input name="opt[]" type="text" class="text-input-name vote_opt" />
+                                    </li>
+                                    <li>
+                                        <label>侯选项14： </label>
+                                        <input name="opt[]" type="text" class="text-input-name vote_opt" />
+                                    </li>
+                                    <li>
+                                        <label>侯选项15： </label>
+                                        <input name="opt[]" type="text" class="text-input-name vote_opt" />
+                                    </li>
+                                    <li>
+                                        <label>侯选项16： </label>
+                                        <input name="opt[]" type="text" class="text-input-name vote_opt" />
+                                    </li>
+                                    <li>
+                                        <label>侯选项17： </label>
+                                        <input name="opt[]" type="text" class="text-input-name vote_opt" />
+                                    </li>
+                                    <li>
+                                        <label>侯选项18： </label>
+                                        <input name="opt[]" type="text" class="text-input-name vote_opt" />
+                                    </li>
+                                    <li>
+                                        <label>侯选项19： </label>
+                                        <input name="opt[]" type="text" class="text-input-name vote_opt" />
+                                    </li>
+                                    <li>
+                                        <label>侯选项20： </label>
+                                        <input name="opt[]" type="text" class="text-input-name vote_opt" />
+                                    </li>
+                                </span>
+                            </ul>
+                            <ul class="choice-list" style="border-bottom:1px solid #dfe9f0;">
+                                <li>
+                                    <label>可投选项： </label>
+                                    <select style="width: 10em;" name="type" id="type">
+                                        <option value="0">单选</option>
+                                        <option value="1">可多选，最多2项</option>
+                                        <option value="2">可多选，最多3项</option>
+                                        <option value="3">可多选，最多4项</option>
+                                        <option value="4">可多选，最多5项</option>
+                                        <option value="5">可多选，最多6项</option>
+                                        <option value="6">可多选，最多7项</option>
+                                        <option value="7">可多选，最多8项</option>
+                                        <option value="8">可多选，最多9项</option>
+                                        <option value="9">可多选，最多10项</option>
+                                        <option value="10">可多选，最多11项</option>
+                                        <option value="11">可多选，最多12项</option>
+                                        <option value="12">可多选，最多13项</option>
+                                        <option value="13">可多选，最多14项</option>
+                                        <option value="14">可多选，最多15项</option>
+                                        <option value="15">可多选，最多16项</option>
+                                        <option value="16">可多选，最多17项</option>
+                                        <option value="17">可多选，最多18项</option>
+                                        <option value="18">可多选，最多19项</option>
+                                        <option value="19">可多选，最多20项</option>
+                                    </select>
+                                </li>
+								
+                                <!--<li>
+                                    <label>投票限制： </label>
+                                    <select style="width: 10em;" name="glimit" id="glimit">
+                                        <option value="0">不限</option>
+                                        <option value="1">仅限女性</option>
+                                        <option value="2">仅限男性</option>
+                                    </select>
+                                </li>-->
+                                <li>
+                                    <label>截止日期： </label>
+                                    <select  style="width: 55px;" name="year" id="year">
+                                        <option value="2008">2008</option>
+                                        <option value="2009">2009</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2012">2012</option>
+                                    </select>
+                                    年
+                                    <select  style="width: 42px;" name="month" id="month">
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+                                    月
+                                    <select style="width: 42px;" name="day" id="day">
+                                        <option value="01">01</option>
+
+                                    <option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select>
+                                    日
+                                    <select style="width: 42px;" name="hour" id="hour">
+                                        <option value="0">00</option>
+                                        <option value="1">01</option>
+                                        <option value="2">02</option>
+                                        <option value="3">03</option>
+                                        <option value="4">04</option>
+                                        <option value="5">05</option>
+                                        <option value="6">06</option>
+                                        <option value="7">07</option>
+                                        <option value="8">08</option>
+                                        <option value="9">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                    </select>
+                                时 </li>
+                                <li>
+								<input type="hidden" name="onlyfriend" value="0"/>
+<!--                                     <label>隐私权限： </label>
+                                    <select style="width: 10em;" name="onlyfriend" id="onlyfriend">
+                                        <option value="0">任何人可参与</option>
+                                        <option value="1">仅好友可参与</option>
+                                    </select> -->
+                                </li>
+                            </ul>
+                            <input type="submit" value="发起投票" class="button-saveset" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- End 主内容 -->
+
+
+
+  <!-- begin 右侧信息 -->
+            <div class="contant-sub">
+            <include file="../Public/inc_right_bak" />
+            </div>
+            <!-- End 右侧信息 -->
+            <div class="clear"></div>
+        <include file="../Public/inc_footer" /> </div>
+    </body>
+</html>

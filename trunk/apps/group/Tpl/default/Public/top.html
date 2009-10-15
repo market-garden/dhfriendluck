@@ -1,0 +1,83 @@
+<script>
+function sharePop(id,url,gid2){
+	var classId = '#BtnShare_'+id;
+	$(classId).attr('disabled','true');
+		
+	$.post(APP+"/Group/addShare_check/", {aimId:id,gid:gid2}, function(txt){
+		   if(txt==1){
+			   ymPrompt.win(APP+'/Group/addShare/aimId/'+id+'/gid/'+gid2,500,'315','分享',null,null,null,{id:'a'});
+		   }else if(txt==-1){
+			   ymPrompt.errorInfo('请不要分享自己发布的东西!');
+		   }else if(txt==-2){
+			   ymPrompt.errorInfo('您已经分享过,请不要重复分享!');
+		   }else if(txt==-3){
+			   ymPrompt.errorInfo('您没有权限分享!');
+		   }else{
+			   ymPrompt.errorInfo('参数出错,请重试!');
+		   }
+		   
+		   $(classId).attr('disabled','');
+	});
+}
+</script>
+<div class=page_title> <!-- page_title begin -->
+  	<div class="left" style="width:100px;">
+    	<span class="pic80"><img src="__ROOT__/thumb.php?w=80&h=80&url={$groupinfo['logo']|get_photo_url}"/></span>
+    </div>
+    <div class="left" style="width:580px;">
+    	<h2>{$groupinfo['name']}</h2>
+        <p><strong>成员：</strong>{$groupinfo['membercount']}人   <if condition=" $groupinfo['need_verify'] "> <if condition=" $isadmin "><strong>等待审核成员：</strong>{$gid|getApplyCount}人</if></if>         </p>
+        
+        <p><strong>创建：</strong>{$groupinfo['ctime']|friendlyDate}</p>
+        <p><strong>介绍：</strong>{$groupinfo['intro']}</p>
+        
+    </div>
+    <div class="rmenu left" style="width:150px;">
+      <if condition=" $mid ">
+	    <a href="javascript:void(0)"
+			onclick="sharePop('{$gid}','__URL__','{$gid}')"  id="BtnShare_{$gid}">分享该群组</a>
+    	<php>if(isadmin($mid,$gid)){</php>
+    		<a href="__APP__/Manage/index/gid/{$groupinfo['id']}">管理该群</a>
+    	<php>}else{</php>
+    	{:W('Report',array( 'type'=>'群组举报','appid'=>$APPINFO['APP_ID'],'url'=>'Group/index/gid/'.$groupinfo['id'],'title'=>$groupinfo['name'],'recordId'=>$groupinfo['id']))}
+    	<php>}</php>
+    	<php>if(checkPriv('invite',$groupinfo['need_invite'],$mid,$gid)) { </php>
+    		
+        	 <a href="__APP__/Invite/create/gid/{$groupinfo['id']}">邀请朋友加入</a>
+       		 <a href="__TS__/Invite/index/uid/{$mid}/gid/{$gid}">邀请站外好友加入</a>
+            
+    	<php>} </php>
+    	
+        
+        <php>if(!isadmin($mid,$gid) && !ismember($mid,$gid)){</php>
+      		<php>if($groupinfo['membercount'] == $config['groupMaxUser']){</php>
+      			人数已经满({$groupinfo['membercount']})
+      		<php>}else{</php>
+      			<a href="javascript:joingroup({$gid})">申请加入该群</a>
+      		<php>}</php>
+      	<php>} elseif(iscreater($mid,$gid)){</php>
+      		<a href="javascript:delgroup({$gid})">删除该群</a>
+      	<php>} else {</php>
+      		<a href="javascript:quitgroup({$gid})">脱离该群</a>
+      	<php>}</php>
+      	</if>
+      </div>
+  <div class="c"></div>
+</div><!-- page_title end -->
+  
+  <div class="tab-menu"><!-- 切换标签 begin  -->
+  	<if condition="$current eq 'topic'"><span class="right lh25">
+  	<if condition=" $dist"> <a href="__APP__/Topic/index/gid/{$gid}">返回全部话题</a> <else/ ><a href="__APP__/Topic/index/gid/{$gid}/isdist/1">精华区</a></if> ┊ <a href="__APP__/Topic/search/gid/{$gid}">搜索话题</a> ┊ <a href="__APP__/Topic/add/gid/{$gid}">发表话题</a></span> </if>
+    <php> if(isJoinGroup($mid,$gid)){ </php> <if condition="$current eq 'album'"><span class="right lh25"><a href="__APP__/Photo/upload/gid/{$gid}/">上传照片</a> ┊ <a href="Javascript:create_album({$gid});">创建新专辑</a></span></if> <php>}</php>
+    <if condition="$current eq 'dir'"><span class="right lh25"><a href="__APP__/Dir/upload/gid/{$gid}">上传文件</a></span> </if>
+ 
+      <ul>
+      <li><a href="__APP__/Group/index/gid/{$groupinfo['id']}" <if condition="$current eq 'group'">class="on" </if> > <span>群首页</span></a></li>
+      <li><a href="__APP__/Topic/index/gid/{$groupinfo['id']}" <if condition="$current eq 'topic'">class="on" </if>><span>群话题</span></a></li>
+       <if condition=" $groupinfo['openAlbum']"><li><a href="__APP__/Album/index/gid/{$groupinfo['id']}" <if condition="$current eq 'album'">class="on" </if> ><span>群相册</span></a></li></if>
+      <if condition=" $groupinfo['openUploadFile']"><li><a href="__APP__/Dir/index/gid/{$groupinfo['id']}" <if condition="$current eq 'dir'">class="on" </if> ><span>群文件</span></a></li> </if>
+      <li><a href="__APP__/Member/index/gid/{$groupinfo['id']}" <if condition="$current eq 'member'">class="on" </if> ><span>成员</span></a></li>
+	  <if condition="$current eq 'group'"><li><a href="__APP__/Topic/add/gid/{$gid}"><span><div class="ico_add">&nbsp;</div>发表话题</span></a></li> </if> 
+  	
+      </ul>
+  </div><!-- 切换标签 end  -->

@@ -1,0 +1,105 @@
+
+<include file="__THEME__/header" />
+<script type="text/javascript" charset="utf-8">
+var mini_zishu = '{$stringcount}';
+</script>
+
+<link href="../Public/index.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../Public/home_index.js"></script>
+<script type="text/javascript" src="../Public/feed.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/Share.js"></script>
+<div class="content"><!-- 内容 begin  -->
+    <include file="__THEME__/apps" />
+    <div class="main"><!-- 画布 begin  -->
+			<php>if($ad["contenttop"]){</php>
+					<div class="ad_r_top">{$ad.contenttop}</div>
+			<php>}</php>
+		
+        <div>
+            <include file="../Public/home_right" />
+            <div class="cc">
+			<php>if($gonggao && $gonggao_open){</php>
+                <div class="ad_info" id='gonggao' style='display:none;'><div class="right"><a href="javascript:void(0)" onclick='closeGongGao({$mid})' style="display:block;"><img src="../Public/images/ico_del_b.gif" width="9" height="9" alt="关闭" /></a></div><div style="width:506px;">{$gonggao}</div></div>
+			<php>}</php>
+                <div class="user_info"><!-- 用户资料 begin  -->
+                    <div class="user_img">
+                        <span id="my_face"><img src="{$mid|getUserFace='middle'}?<?php echo time();?>" /></span>
+                        <a href="__APP__/Info/face" class="a" title="更换头像">更换头像</a>
+                    </div>
+                    <div class="Linfo">
+                        <div class="info">
+                            <h2 class="h21" onmouseover="this.className='h22'" onmouseout="this.className='h21'" ><div class="progress right" style="display:none;"><a href="#" class="hand cGray2"><span>资料完整度</span><span class="percent"><span style="background-color: #ffd9a0;width: 30%;">&nbsp;</span></span>&nbsp;30%</a> <a href="__APP__/Info" class="U">完善资料</a></div><span id="my_name">{$my_name}</span> {$uid|getUserGroupIcon}</h2>
+                          <p><span id="my_mini">{$my_mini.content}</span><span id="my_mini_time"><em>{$my_mini.cTime|friendlyDate}</em></span><span><a href="__ROOT__/apps/mini/index.php?s=/Index/my/">更多</a></span></p>
+                        </div>
+                        <div class="edit_box">
+                            <div class="box1" style="display:none">这里是弹出的内容</div>
+                            <div class="alR" style="width:350px; margin-bottom:-5px;"><span id="mb-hint"><b><span id="zishu">{$stringcount}</span></b>/{$stringcount}</span></div>
+                            <div>
+                            <div class="status_edit"><!-- 状态编辑框 begin -->
+                                <div>
+                                <textarea id="xq_con" name="textarea3" rows="" wrap="virtual" class="WB" onclick='bq_show();' onKeyDown="fot(this)" onKeyUp="fot(this)"></textarea>
+                               </div>                               
+                              <div class="phiz_box">
+                                <div class="phiz" style="display:none;top: 2px;left: 0px;" id="smileylist">
+                                    <volist name="bq_emotion" id="bq" key="k">
+                                        <div class="ico_link hand">
+                                          <img src="__PUBLIC__/images/biaoqing/{$smiletype}/{$bq.filename}" emotion="{$bq.emotion}" title="{$bq.title}" onclick="insertBQ(this,{$k-1});"/>                                    </div>
+                                    </volist>
+                                </div>
+                                </div>
+                          </div><!-- 状态编辑框 end -->
+                           <div class="left pt5 pl5" style="width:75px;"> <input type="button" value="发 布" class="btn_big" onclick="post_mini()"/></div>
+                          <div class="c"></div>
+                          </div>
+                          <div class="submenu" style="display:none;"><a href="#" title="说明文字"><img src="../Public/images/ico_app03_16.gif" alt="图片说明" /></a><a href="#" title="说明文字"><img src="../Public/images/ico_app02_16.gif" alt="图片说明" /></a><a href="#" title="说明文字"><img src="../Public/images/ico_app01_16.gif" alt="图片说明" /></a><a href="#" title="说明文字"><img src="../Public/images/ico_app04_16.gif" alt="图片说明" /></a></div>
+                        </div>
+                    </div>
+                </div><!-- 用户资料 end  -->
+                <div class="system_info">
+                    <div style="width:23%">
+                        <a href="__APP__/Notify/inbox">短消息<span class="<php>if($notify_num['message']){ echo 'cRed fB f14px'; }else{ echo 'cGray2'; }</php> hand">{$notify_num["message"]}</span>条
+                        </a>
+                    </div>
+                    <div style="width:26%">
+                        <a href="__APP__/Notify/index/t/sys">系统通知<span class="<php>if($notify_num['notification']){ echo 'cRed fB f14px'; }else{ echo 'cGray2'; }</php> hand">{$notify_num["notification"]}</span>条 </a>
+                    </div>
+                    <div style="width:26%"><a href="__APP__/Notify/index/t/fri" >好友请求<span class="<php>if($notify_num['friend']){ echo 'cRed fB f14px'; }else{ echo 'cGray2'; }</php> hand">{$notify_num["friend"]}</span>条
+                        </a>
+                    </div>
+                    <div style="width:23%"><a href="__APP__/space/{$mid}#wall">留言板<span class="<php>if($notify_num['wall']){ echo 'cRed fB f14px'; }else{ echo 'cGray2'; }</php> hand">{$notify_num["wall"]}
+                            </span>条</a>
+                    </div>
+                </div>
+                <div class="tab-menu"><!-- 切换标签 begin  -->
+                    <div class="right" style="display:none;"><img src="../Public/images/ico_shezhi.gif" /> <a href="#">设置</a></div>
+                    <ul>
+                        <li><a href="javascript:void(0)" class="on feed_item" rel="all" id="feed_all_item"><span>全部动态</span></a></li>
+                        
+                        <li><a href="javascript:void(0)" class="feed_item" rel="3"><span>心情</span></a></li>
+                        <li><a href="javascript:void(0)" class="feed_item" rel="10"><span>相册</span></a></li>
+                        <li><a href="javascript:void(0)" class="feed_item" rel="4"><span>日志</span></a></li>
+                        <li><a href="javascript:void(0)" class="feed_item" rel="11"><span>分享</span></a></li>
+                        <li><a href="javascript:void(0)" class="feed_item" rel="13"><span>投票</span></a></li> 
+                        <li><a href="javascript:void(0)" class="feed_item" rel="14"><span>活动</span></a></li>
+                        <li><a href="javascript:void(0)" class="feed_item" rel="12"> <span>群组</span></a></li>
+                    </ul>
+                </div><!-- 切换标签 end  -->
+                <div class="Friend" ><!-- 好友心情 begin  -->
+    
+                    <div class="FList" id="feed_content">
+    
+    
+                    </div>
+    
+                    
+                    <div class="alR lh35">
+                        <a href="###" id='getMoreFeed' class="U">点击查看更多...</a>
+                    </div>
+                </div><!-- 好友心情 end  -->
+            </div>
+		</div>
+	 <div class="c"></div>
+    </div><!-- 画布 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />

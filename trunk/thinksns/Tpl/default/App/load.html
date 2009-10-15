@@ -1,0 +1,48 @@
+<include file="__THEME__/header" />
+<link href="../Public/app_list.css" rel="stylesheet" type="text/css" />
+
+
+<div class="content"><!-- 内容 begin  -->
+
+<include file="__THEME__/apps" />
+	<div class="main"> <!-- 右侧内容 begin  -->
+        <div class="page_title"> <!-- page_title begin -->
+            <h2><img src="__THEME__/images/icon/{$vo.icon}" />{$vo.name}</h2>
+        </div>
+        <div>
+			<div id="app_loading" style="padding: 100px 0px; text-align: center; color: rgb(153, 153, 153); font-size: 18px;">
+				页面载入中 <img style="position: relative; top: -8px;" alt="loading..." src="__PUBLIC__/images/loading_blue_big.gif"/>
+			</div>
+			<script type="text/javascript">
+			/* Dev by cssrain.cn */
+			jQuery.fn.setIframeHeight = function() {
+				var $_self = this; 
+				$_self[0].onload = function(){
+
+					//下面2种获取高度的方式都可
+					//var height1 = $( window.frames[$_self[0].name].document.body ).height();
+					var height = $_self.contents().find("body").height();
+					if( height < $_self.height()){
+						$_self.height( $_self.height() );
+					}else{
+						$_self.height( height+30 );
+					}
+				}
+				return this;
+			}
+
+			$(function(){
+				$('#app_loading').hide();
+				//$('#appMainIframe').show();
+				$("#appMainIframe").setIframeHeight();
+			});
+			</script>
+			<iframe src="__ROOT__/apps/{$vo.url}" id="appMainIframe"  name="appMainIframe" width="830px" height="100px" frameborder="0" scrolling="no" allowtransparency="true"></iframe>    
+        </div>
+    </div><!-- 右侧内容 end  -->
+	<div class="c"></div>
+</div><!-- 内容 end -->
+<script type="text/javascript">
+	//window.document.getElementById("mainFrame").style.height = window.document.body.scrollHeight + 30;
+</script>
+<include file="__THEME__/footer" />

@@ -1,0 +1,117 @@
+<include file="__THEME__/header" />
+
+
+<script type="text/javascript" src="../Public/Js/Common.js"></script>
+<link  href="../Public/layout.css" rel="stylesheet" type="text/css"/>
+<link  href="../Public/group.css" rel="stylesheet" type="text/css"/>
+<script>
+	function getstrlen(chars){
+
+		chars = chars.replace(/^\s+|\s+$/g,"");
+		return chars.replace(/[^\x00-\xff]/g,"xx").length;
+   }
+	function checkform(v_form){
+		if(getstrlen(v_form.title.value) == 0) {
+			v_form.title.focus();
+			alert('标题不能为空');
+			return false;
+		}
+		
+		if(getstrlen(v_form.title.value) >90) {
+			v_form.title.focus();
+			
+			alert('标题内容过长');
+			
+			return false;
+		}
+		
+		
+		if(getstrlen(v_form.content.value) == 0) {
+			v_form.content.focus();
+			alert('内容不能为空');
+			return false;
+		}
+		return true;
+	}
+</script>
+
+</head>
+
+<body>
+
+<div class="content"><!-- 内容 begin  -->
+
+  <!-- 用户组件列表 begin -->
+   <include file="__THEME__/apps" />
+  <!-- 用户组件列表 end -->
+
+  <div class="main"> <!-- 右侧内容 begin  -->
+  <div class=page_title> <!-- page_title begin -->
+  	<div class="left" style="width:80px;">
+    	<span class="headpic50"><a href="__APP__/Group/index/gid/{$groupinfo['id']}"><img src="__ROOT__/thumb.php?w=50&h=50&url={$groupinfo['logo']|get_photo_url}"/></a></span>
+    </div>
+    <div class="left" style="width:583px;">
+    	<h2><a href="__APP__/Group/index/gid/{$groupinfo['id']}">{$groupinfo['name']}</a> &gt; <a href="__APP__/Topic/index/gid/{$groupinfo['id']}">话题区</a></h2>
+
+      </div>
+    <div class="left alR lh30" style="width:170px;">
+        <a href="JavaScript:window.history.back()">&lt;&lt;返回上一页</a></div>
+  <div class="c"></div>
+</div><!-- page_title end -->
+  <!-- 切换标签 end  -->
+  <div class="groupBox">
+  <div class="boxL" style="width:100%;">
+    <div class="box1">
+  	<h3>编辑话题</h3>
+  	<form method="post" action="__URL__/edit/gid/{$gid}/tid/{$thread['id']}" onsubmit="return checkform(this);">
+    <ul class="pt10">
+          <li class="li">
+          	<div class="lh35 alR left" style="width:5%"><strong>主题：</strong></div>
+            <div class="left" style="width:95%">
+              <input name="title" value="{$thread.title}" class="Text" style="padding: 8px; width: 70%;" onblur="this.className='Text'" onfocus="this.className='Text1'" type="text">
+
+            </div>
+       	  </li>
+          <li class="li pt10">
+          	<div class="left alR" style="width:5%"><strong>内容：</strong></div>
+            <div class="left" style="width:95%"><textarea rows="10"  name="content" style="display:none;">{$thread.content|stripslashes|stripslashes}</textarea>
+            <iframe id="Editor" name="Editor" src="__PUBLIC__/js/Editor/editor.html?id=content&amp;height=300&width=70" frameborder="0" marginheight="0" marginwidth="0" scrolling="No" style="width: 72%; height: 300px"></iframe>
+              <br />
+              <div class="lh35 alR left" style="width:5%"><strong>附件：</strong>
+              
+              </div>
+               <div class="left" style="width:95%">
+               <div id="attach_upload_data">
+               
+               <php>if($thread['attach']) { $attach = unserialize($thread['attach']); </php>
+						<volist name="attach" id="data">
+						<php>$data = explode('|',$data);</php>
+						<input class="attach{$data[0]}" type="hidden" value="{$data[0]}|{$data[1]}" name="attach[]"/>
+					   <p>
+						<a class="attach{$data[0]}" onclick="deleteAttach({$data[0]})" href="javascript:void(0)">[删除]</a>
+						<span class="attach{$data[0]}">{$data[1]}</span>
+					 </p>
+						</volist>
+				<php>}</php>
+               
+               
+					
+
+				</div>
+			{:W( 'UploadAttach',array( 'uid'=>$mid , 'type'=>'group_topic' , 'callback'=>'attach_upload_success') )}
+            </div>
+              <input type="hidden" name="editsubmit" value="do" >
+              <input name="button" type="submit" class="btn_b mt5" id="button" value="确定" />
+            </div>
+       	  </li>
+      </ul>
+      </form>
+    </div>
+    </div>
+  <!-- end  -->
+  </div>  </div><!-- 右侧内容 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />
+</body>
+</html>

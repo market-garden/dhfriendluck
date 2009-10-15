@@ -1,0 +1,65 @@
+<include file="__THEME__/header" />
+<div class="content">
+  <!-- 内容 begin  -->
+  <include file="__THEME__/apps" />
+  <link href="__PUBLIC__/js/pagination/pagination.css" rel="stylesheet" type="text/css" />
+  <div class="main">
+    <!-- 右侧内容 begin  -->
+    <div class=page_title>
+      <!-- page_title begin -->
+      <h2><img src="../Public/images/applications.gif" />帐号管理</h2>
+      <div class="c"></div>
+    </div>
+    <!-- page_title end -->
+    <div class="tab-menu">
+      <!-- 切换标签 begin  -->
+      <ul>
+        <li><a href="__URL__"><span>修改密码</span></a></li>
+        <li><a href="__URL__/account"><span>修改账号</span></a></li>
+        <li><a href="__URL__/security"><span>账号安全</span></a></li>
+        <li><a href="__URL__/score"><span>积分记录</span></a></li>
+        <li><a href="__URL__/score_faq" class="on"><span>积分说明</span></a></li>
+        <!--   <li><a href="__URL__/subscribe"><span>邮件提醒</span></a></li> -->
+      </ul>
+    </div>
+    <!-- 切换标签 end  -->
+    <div class="data"><br />
+      <table width="80%" border="0" cellpadding="4" cellspacing="1" style="background-color:#CCC">
+        <tr>
+          <td bgcolor="#FFFFE8">&nbsp;</td>
+        <volist name="type" id="vo">
+          <td bgcolor="#FFFFE8">{$vo}</td>
+        </volist>
+        </tr>
+        <volist name="list" id="vo">
+        <tr>
+          <td bgcolor="#FFFFFF">{$vo['actioncn']} </td>
+        <sublist name="type" id="so" k="key">
+           <td bgcolor="#FFFFFF"><strong>{$vo[$key]}</strong></td>
+        </sublist>
+        </volist>
+        </tr>
+      </table><br />
+      <table width="80%" border="0" cellpadding="4" cellspacing="1" style="background-color:#CCC">
+        <tr>
+          <td bgcolor="#FFFFE8">用户级别</td>
+                <volist name="type" id="vo">
+                         <td bgcolor="#FFFFE8">{$vo}</td>
+                </volist>
+        </tr>
+        <volist name="rank_rule" id="vo"></volist>
+        <tr>
+          <td bgcolor="#FFFFFF">{$vo['name']}</td>
+        <sublist name="type" id="so" k="key">
+                <td bgcolor="#FFFFFF"><strong>{$vo['rulemin'][$key]}-{$vo['rulemax'][$key]}</strong></td>
+        </sublist>
+        </tr>
+      </volist>
+      </table>
+    </div>
+  </div>
+  <!-- 右侧内容 end  -->
+  <div class="c"></div>
+</div>
+<!-- 内容 end -->
+<include file="__THEME__/footer" /> 

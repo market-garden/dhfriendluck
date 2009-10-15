@@ -1,0 +1,270 @@
+<include file="__THEME__/header" />
+
+<script  type="text/javascript" src="__PUBLIC__/js/jquery.126.js" ></script>
+<link rel="stylesheet" type="text/css" href="../Public/reg.css" />
+<!--日期-->
+<script  type="text/javascript" src="__PUBLIC__/js/rcalendar.js" ></script>
+<!--表单验证-->
+<script type="text/javascript" src="__PUBLIC__/js/form_check/jquery.validator.reg.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/form_check/jquery.corners.min.js"></script>
+<link href="__PUBLIC__/js/form_check/type.css" rel="stylesheet" type="text/css" />
+<!--本页-->
+<script type="text/javascript" src="../Public/reg.js" ></script>
+
+    <div class="RegBox">
+        <p class="alR cGray2">已经注册的用户请 <a href="__URL__/login">登录</a></p>
+        <h1 class="cBlue">注册：完善你的个人信息，加入{$site_opts.site_name}</h1>
+        <p class="cGray">{$site_opts.site_name}是帮助你与朋友、同事、同学、家人保持更紧密联系的真实社交平台，在这里你可以及时了解他们的最新动态；结识更多的新朋友</p>
+
+        <form action="__URL__/doReg" method="post" id="regform">
+            <input type="hidden" name="code" value="{$code}">
+          
+            <ul>
+                <li>
+                    <div class="cl">您的Email：<em>*</em></div>
+                    <div class="cc">
+                        <input type="text" class="text_1" style="width:250px;" onblur="this.className='text_1'" onfocus="this.className='text_2'" name="email" require="true" datatype="email|ajax" url="__URL__/checkEmail" msg="重要！请填有效邮箱地址，以收邮件完成注册|邮箱已被占用!"/>
+                    </div>
+                    <div class="cr">
+                        <div id="success_email" style="display:none;">
+                            <span><img src="../Public/images/fzcg_dh[1].gif" /></span>
+                        </div>
+                        <div class="error_email" style="position: relative;display:none;">
+                            <div>
+                                <span><img src="../Public/images/th_ju[1].gif" /></span>
+                                <div class="clue"><p id="error_email"></p><span class="clue_btm"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="c"></div>
+                </li>
+                <li>
+                    <div class="cl">设置登录密码：<em>*</em></div>
+                    <div class="cc">
+                        <input type="password" class="text_1" style="width:250px;" onblur="this.className='text_1'" onfocus="this.className='text_2'" name="passwd" id="passwd" require="true" value="" datatype="limit" min="6" max="16" msg="密码由6-16个英文字母、数字或特殊字符组成"/>
+                    </div>
+                    <div class="cr">
+                        <div id="success_passwd"  style="display:none;">
+                            <span><img src="../Public/images/fzcg_dh[1].gif" /></span>
+                        </div>
+                        <div class="error_passwd" style="position: relative;display:none;">
+                            <div>
+                                <span><img src="../Public/images/th_ju[1].gif" /></span>
+                                <div class="clue"><p id="error_passwd"></p><span class="clue_btm"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="c"></div>
+                </li>
+
+
+
+                <li>
+                    <div class="cl">再输入一遍密码：<em>*</em></div>
+                    <div class="cc">
+                        <input type="password" class="text_1" style="width:250px;" onblur="this.className='text_1'" onfocus="this.className='text_2'" name="repasswd" require="true" value="" datatype="repeat" to="passwd" msg="两次输入的密码不一样，请重输！"/>
+                    </div>
+                    <div class="cr">
+                        <div id="success_repasswd"  style="display:none;">
+                            <span><img src="../Public/images/fzcg_dh[1].gif" /></span>
+                        </div>
+                        <div class="r error_repasswd" style="position: relative;display:none;">
+                            <div>
+                                <span><img src="../Public/images/th_ju[1].gif" /></span>
+                                <div class="clue"><p id="error_repasswd"></p><span class="clue_btm"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="c"></div>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <div class="cl">你的姓名：<em>*</em></div>
+                    <div class="cc">
+                        <input type="text" class="text_1" style="width:250px;" onblur="this.className='text_1'" onfocus="this.className='text_2'" name="name" require="true" datatype="limit|ajax" min="6" max="12" url="__URL__/checkRealName/" msg="请输入真实姓名|请输入真实姓名!"/>
+                    </div>
+                    <div class="cr">
+                        <div id="success_name"  style="display:none;">
+                            <span><img src="../Public/images/fzcg_dh[1].gif" /></span>
+                        </div>
+                        <div class="r error_name" style="position: relative;display:none;">
+                            <div>
+                                <span><img src="../Public/images/th_ju[1].gif" /></span>
+                                <div class="clue"><p id="error_name"></p><span class="clue_btm"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="c"></div>
+                </li>
+                <li>
+                    <div class="cl">性别：<em>*</em></div>
+                    <div class="cc">
+                        <label><input name="sex" type="radio" value="1"  require="true" datatype="group" min="1" max="1" msgid="fav" msg="必须选中1个选项"/> 男</label> &nbsp;&nbsp;&nbsp;
+                        <label><input name="sex" type="radio" value="0" require="true" datatype="group" min="1" max="1" msgid="fav" msg="必须选中1个选项"/> 女</label>
+                    </div>
+                    <div class="cr">
+                        <div id="success_sex"  style="display:none;">
+                            <span><img src="../Public/images/fzcg_dh[1].gif" /></span>
+                        </div>
+                        <div class="r error_sex" style="position: relative;display:none;">
+                            <div>
+                                <span><img src="../Public/images/th_ju[1].gif" /></span>
+                                <div class="clue"><p id="error_sex"></p><span class="clue_btm"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="c"></div>
+                </li>
+                <li>
+                    <div class="cl">出生日期：</div>
+                    <div class="cc">
+                        <!--<input type="text" class="text_1" style="width:250px;" onBlur="this.className='text1'" onFocus="this.className='text_2';rcalendar(this,null,insert_birth);" name="birthday" id="birthday" require="true" datatype="require" msg="请输入你的出生日期！"/>-->
+                        <select name="birthday_year">
+                        	<php>for($i=1930;$i<=2009;$i++){</php>
+                        		<option value="{$i}" <php>if($i == 1980) echo 'selected';</php> >{$i}</option>
+                        	<php>}</php>
+                        </select>年 
+                        <select name="birthday_month" id="birthday_month">
+                        	<php>for($i=1;$i<=12;$i++){</php>
+                        		<option value="{$i}">{$i}</option>
+                        	<php>}</php>
+                        </select>月 
+                        <select name="birthday_day" id="birthday_day">
+                        	<php>for($i=1;$i<=31;$i++){</php>
+                        		<option value="{$i}">{$i}</option>
+                        	<php>}</php>
+                        </select>日                                                
+                    </div>
+                    <div class="c"></div>
+                    
+                </li>
+
+                <!-- <li><div class="cl">目前身份：<em>*</em></div>
+                    <div class="cc">
+                        <label>
+                            <input name="status" type="radio" id="status2" value="2"  require="true" datatype="group" min="1" max="1" msgid="fav" msg="必须选中1个选项" onclick="work_check();"/>已工作
+                        </label>　
+                        <label>
+                            <input id="status1" name="status" value="1" type="radio" require="true" datatype="group" min="1" max="1" msgid="fav" msg="必须选中1个选项" onclick="school_check();"/>学生
+                        </label>
+                        <label>
+                            <input id="status0" name="status" value="0" type="radio" require="true" datatype="group" min="1" max="1" msgid="fav" msg="必须选中1个选项" onclick="other_check();"/> 其他
+                        </label>
+                    </div>
+                    <div class="cr">
+                        <div id="success_status"  style="display:none;">
+                            <span><img src="../Public/images/fzcg_dh[1].gif" /></span>
+                        </div>
+                        <div class="r error_status" style="position: relative;display:none;">
+                            <div>
+                                <span><img src="../Public/images/th_ju[1].gif" /></span>
+                                <div class="clue"><p id="error_status"></p><span class="clue_btm"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li style="display:none;" id="work_check" class="the_check">
+                    <div class="cl">工作单位：<em>*</em></div>
+                    <div class="cc">
+                        <input id="work_name" type="text" class="text_1" style="width:250px;" onblur="this.className='text_1'" onfocus="this.className='text_2'" name="company" require="true" datatype="require" msg="请输入你的工作单位名称！"/>
+                    </div>
+                    <div class="cr">
+                        <div id="success_company"  style="display:none;">
+                            <span><img src="../Public/images/fzcg_dh[1].gif" /></span>
+                        </div>
+                        <div class="error_company" style="position: relative;display:none;">
+                            <div>
+                                <span><img src="../Public/images/th_ju[1].gif" /></span>
+                                <div class="clue"><p id="error_company"></p><span class="clue_btm"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li style="display:none;" id="school_check" class="the_check">
+                    <div class="cl">所在学校：<em>*</em></div>
+                    <div class="cc">
+                        <input type="text" class="text_1" style="width:250px;" onblur="this.className='text_1'" onfocus="this.className='text_2'" onclick="$.facebox.popup('请选择大学','__URL__/school');" name="school" require="true" datatype="require" msg="请输入你的学校名称！" id="school_name"/>
+                    </div>
+                    <div class="cr">
+                        <div id="success_school"  style="display:none;">
+                            <span><img src="../Public/images/fzcg_dh[1].gif" /></span>
+                        </div>
+                        <div class="error_school" style="position: relative;display:none;">
+                            <div>
+                                <span><img src="../Public/images/th_ju[1].gif" /></span>
+                                <div class="clue"><p id="error_school"></p><span class="clue_btm"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>-->
+                <li>
+                     <div class="cl">居住城市：</div>
+                    <div class="cc">
+                    <input type="hidden" name="ts_areaval" id="ts_areaval"/>
+						<input type="text" class="text_1" style="width:165px;float:left;" disabled onblur="this.className='text_1'" onfocus="this.className='text_2'" name="areaval" id="areaval"  require="true" datatype="require" msg="请选择地区！" /> <input type="button" class="btn_b" value="选择地区" selectArea="true" style="float:left; margin-left:5px;" areatype="areaval" >
+                    </div>
+           			 <div class="cr" style="float:left">
+                        <div id="success_areaval"  style="display:none;">
+                            <span><img src="../Public/images/fzcg_dh[1].gif" /></span>
+                        </div>
+                        <div class="r error_areaval" style="position: relative;display:none;float:left;">
+                            <div>
+                                <span><img src="../Public/images/th_ju[1].gif" /></span>
+                                <div class="clue"><p id="error_areaval"></p><span class="clue_btm"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="c"></div>
+                </li>
+                <li><div class="cl">隐私设置：</div>
+                    <div class="cc">
+                        <select name="baseinfoprivacy" style="width:250px;">
+                            <option value="0">任何人能看见我的资料和内容</option>
+                            <option value="1" selected="selected">仅好友能看见我的资料和内容</option>
+                            <option value="2">隐藏我的资料和内容</option>
+                        </select>
+                    </div>
+                    <div class="c"></div>
+                 </li>
+            </ul>
+            <ul>
+                <php>if($reg_verify_allow){</php>
+
+                <li>
+                    <div class="cl">验证码：<em>*</em></div>
+                    <div class="cc">
+                        <input type="text" class="text_1"  style="width: 60px; margin-right:5px; float:left;" onblur="this.className='text_1'" onfocus="this.className='text_2'" name="verify" require="true" datatype="require|ajax" url="__URL__/checkVerify" msg="验证码不能为空|验证码输入有误，请重输！"/>
+                        <div class="left">
+                            <img src="__URL__/verify" id="verifyimg"/><a href="###" onclick="changeverify()"><br />看不清 换一张</a>
+                        </div>
+
+                    </div>
+                    <div class="cr">
+                        <div id="success_verify"  style="display:none;">
+                            <span><img src="../Public/images/fzcg_dh[1].gif" /></span>
+                        </div>
+                        <div class="r error_verify" style="position: relative;display:none;">
+                            <div>
+                                <span><img src="../Public/images/th_ju[1].gif" /></span>
+                                <div class="clue"><p id="error_verify"></p><span class="clue_btm"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="c"></div>
+                </li>
+                <php>}</php>
+
+                <li><div class="cl"><em>&nbsp;</em></div><div class="cc"><a href="Javascript:service_dialog();">{$site_opts.site_name}网服务条款</a> </div><div class="cr"></div>
+				<div class="c"></div>
+                </li>
+                <li><div class="cl"><em>&nbsp;</em></div><div class="cc">
+                    <input type="submit" name="button" id="button" value="同意条款 立即注册" class="btn_reg hand" /></div><div class="cr"></div>
+					<div class="c"></div>
+                </li>
+            </ul>
+        </form>
+    </div>
+
+
+<include file="__THEME__/footer" />
