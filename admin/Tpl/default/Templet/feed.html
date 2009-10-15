@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{&SITE_TITLE}</title>
+	<link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript">
+		var ctrl = function(name){
+			this.elements = document.getElementsByName('id[]');
+			this.length = this.elements.length;
+		}
+		ctrl.prototype = {
+			reverse:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked= !this.elements[i].checked;
+				}
+			},
+			all:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked = true;
+				}
+			},
+			unAll:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked = false;
+				}
+			},
+			toggle:function(obj){
+				this[obj.checked ? 'all' : 'unAll']();
+			},
+			del:function(id){
+				location.href = "__URL__/delfeed/id/"+id;
+			},
+			edit:function(id){
+				location.href = "__URL__/feed/id/"+id+"#edit";
+			}
+		}
+		var c = null;
+	</script>
+	</head>
+	<body>
+		<div id="container">
+			<table class="tableborder" width="100%">
+				<tbody>
+					<tr class="top">
+						<td class="border"></td>
+					</tr>
+					<tr>
+						<th class="header">tips</th>
+					</tr>
+					<tr>
+						<td class="tips">
+							<ul>
+								<li>动态模板</li>
+							</ul>
+						</td>
+					</tr>
+					<tr class="bottom">
+						<td class="border" colspan="5">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+			<table class="tableborder" width="100%">
+				<tbody>
+					<tr class="top">
+						<td class="border" colspan="7"></td>
+					</tr>
+					<tr>
+						<th class="header" colspan="7">标题</th>
+					</tr>
+					<tr class="label">
+						<th style="width:10%">编号</th>
+						<th style="width:10%;">类型</th>
+						<th style="width:30%;">标题</th>
+						<th style="width:30%;">内容</th>
+						<th style="width:30%;">操作</th>
+					</tr>
+<volist id="vo" name="list">					
+					<tr class="cell altbg2">
+						<td>{$vo.id}</td>
+						<td>{$vo.type}</td>
+						<td>{$vo.title|htmlspecialchars}</td>
+						<td>{$vo.body|htmlspecialchars}</td>
+						<td><button type="button" onclick="c.edit({$vo.id})">编辑</button><button type="button" onclick="c.del({$vo.id})">删除</button></td>
+					</tr>
+</volist>
+
+					<tr class="bottom">
+						<td class="border" colspan="7">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+			
+		<table class="tableborder" width="100%" id="edit">
+			<form action="__URL__/dofeed" method="POST">
+				<tbody>
+					<tr class="top">
+						<td class="border" colspan="2"></td>
+					</tr>
+					<tr>
+					<if condition="$info neq ''">
+						<th class="header" colspan="2">编辑动态模板 <a href="__URL__/feed#edit">添加</a></th>
+					<else />
+						<th class="header" colspan="2">添加动态模板</th>
+					</if>
+					</tr>
+					<tr class="label">
+						<th>说明</th>
+						<th>设置</th>
+					</tr>
+
+					<tr class="cell">
+						<td class="altbg1">
+							<b>类型:</b>
+							<br/>
+							<span class="smalltxt">动态显示的类型</span>
+						</td>
+						<td class="altbg2"><input name="type" value="{$info.type}" class="txt"/></td>
+					</tr>		
+										
+					<tr class="cell">
+						<td class="altbg1">
+							<b>标题:</b>
+							<br/>
+							<span class="smalltxt">动态显示的标题</span>
+						</td>
+						<td class="altbg2">
+						<textarea style="font-size:12px;" cols="80" name="title" rows="3" >{$info.title}</textarea>
+						</td>
+					</tr>								
+	
+					<tr class="cell">
+						<td class="altbg1">
+							<b>内容:</b>
+							<br/>
+							<span class="smalltxt">内容</span>
+						</td>
+						<td class="altbg2">
+							<textarea style="font-size:12px;" cols="80" name="body" rows="5" >{$info.body}</textarea>
+						</td>
+					</tr>
+					<tr>
+						<td class="footer" colspan="2">
+							<input type="submit" class="button" value="<if condition="$info neq ''">编辑<else />添加</if>" />
+						</td>
+					</tr>
+					<tr class="bottom">
+						<td class="border" colspan="5">&nbsp;</td>
+					</tr>
+				</tbody>
+			  </form>
+			</table>
+						
+		</div>
+		<script type="text/javascript">
+			c = new ctrl('id[]');
+		</script>
+	</body>
+</html>

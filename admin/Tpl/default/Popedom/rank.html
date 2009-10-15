@@ -1,0 +1,153 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="cache-control" content="no-cache, must-revalidate">
+            <title>{&SITE_TITLE}</title>
+            <link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+            <script type="text/javascript" src="../Public/script/jquery.js" ></script>
+            <script type="text/javascript">
+  
+                {// 加载尾部公共文件 }
+                    function change_one(x){
+                            <?php foreach($fields as $key=>$vo) {  ?>
+                                var <?php echo $key; ?>_min  =	$("#min_<?php echo $key; ?>_"+x).val();
+                                 var <?php echo $key; ?>_max  =	$("#max_<?php echo $key; ?>_"+x).val();
+                                <?php
+                            $post[] = $key."_min:".$key.'_min';
+                            $post[] = $key."_max:".$key.'_max';
+                        } ?>
+                                var name = $('#name_'+x).val();
+                                var icon = $('#icon_'+x).val();
+                                alert(name);
+                                alert(icon);
+                            //alert(action +' '+ credit + ' ' + info);
+                        $.post("__URL__/doEditRank",{id:x,name:name,icon:icon,<?php  echo implode(',',$post); ?>},function(txt){
+                            if(txt==1){
+                                alert("修改成功！");
+                            }else{
+                                alert(txt);
+                            }
+                        });
+
+                    }
+
+     function deleteRank(cid) {
+                        if   (confirm('确定删除这条等级规则吗？') ){
+                            $.post("__URL__/deleteRank",{id:cid},function(txt){
+                                if(txt==1){
+                                    window.location.href='__URL__/rank';
+                                }else{
+                                    alert(txt);
+                                }
+                            });
+                        }else{
+                            return   false;
+                        }
+                    }
+            </script>
+
+    </head>
+
+
+    <body>
+        <div id="container">
+            <form action="__URL__/doAdd" method="post">
+                <table class="tableborder" width="100%">
+                    <tbody>
+                        <tr class="top">
+                            <td class="border" colspan="3"></td>
+                        </tr>
+                        <tr>
+                            <th class="header" colspan="3">添加新的积分策略</th>
+                        </tr>
+                        <tr class="label">
+                            <th>说明</th>
+                            <th>设置</th>
+                        </tr>
+                        <tr class="cell">
+                                <td class="altbg1">
+                                    <b>用户等级名称</b>
+                                    <br/>
+                                    <span class="smalltxt">用户等级名称</span>
+                                </td>
+                                <td class="altbg2"><input name="name" class="txt" value ="" /></td>
+                            </tr>
+                            <tr class="cell">
+                                <td class="altbg1">
+                                    <b>图标</b>
+                                    <br/>
+                                    <span class="smalltxt">等级图标.gif格式</span>
+                                </td>
+                                <td class="altbg2"><input name="icon" class="txt" value ="" /></td>
+                            </tr>
+                        <volist name="fields" id="vo" k="key">
+
+                            <tr class="cell">
+                                <td class="altbg1">
+                                    <b>{$vo}</b>
+                                    <br/>
+                                    <span class="smalltxt">{$vo}</span>
+                                </td>
+                                <td class="altbg2">最小值<input name="{$key}[min]" class="txt" value ="" /></td>
+                                <td class="altbg2">最大值<input name="{$key}[max]" class="txt" value ="" /></td>
+                            </tr>
+                        </volist>
+                        <tr>
+                            <td class="footer" colspan="3">
+                                <input type="submit" class="button"  value="提交" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+
+
+            <form method="post" id="form_all" name="form_all" action="__URL__/doEditRankAll">
+                <table class="tableborder" width="100%">
+                    <tbody>
+                        <tr class="top">
+                            <td class="border" colspan="<php>echo count($fields)+2;</php>"></td>
+                        </tr>
+                        <tr>
+                            <th class="header" colspan="<php>echo count($fields)+2;</php>">积分策略管理</th>
+                        </tr>
+                        <tr class="label">
+                            <th><input type="checkbox" class="checkbox" onclick="c.toggle(this)" />删？</th>
+                                 <th>编号</th>
+                                  <th>等级名称</th>
+                                   <th>图标</th>
+                            <volist name="fields" id="vo">
+                                <th>{$vo}</th>
+                            </volist>
+                            <th>操作</th>
+                        </tr>
+
+
+                        <volist name="rankRule" id="vo">
+                            <tr class="cell altbg1">
+                                <td><input type="button" onclick="deleteRank({$vo.id});" value="删除" class="button" /></td>
+                                <td>{$vo['id']}</td>
+                                <td><input  id="name_{$vo.id}" type="text" class="large bLeftRequire" name="name[{$vo.id}]" style="width:100px;" value="{$vo.name}" /></td>
+                                <td><input  id="icon_{$vo.id}" type="text" class="large bLeftRequire" name="icon[{$vo.id}]" style="width:100px;" value="{$vo.icon}" /></td>
+                                <sublist name="fields" id="sub" k ="key">
+                                <td>
+                                        最小值<input id="min_{$key}_{$vo.id}" type="text" class="large bLeftRequire" name="{$key}[{$vo.id}][min]" style="width:100px;" value="{$vo['rulemin'][$key]}" /><br />
+                                        最大值<input id="max_{$key}_{$vo.id}" type="text" class="large bLeftRequire" name="{$key}[{$vo.id}][max]" style="width:100px;" value="{$vo['rulemax'][$key]}" />
+                                </td>
+                                </sublist>
+                                <td>
+                                    <input type="button" onclick="change_one({$vo.id|trim});" value="修改这一条" class="button" />
+                            </tr>
+                        </volist>
+
+                            
+                        <tr class="bottom">
+                            <td class="border" colspan="<php>echo count($fields)+2;</php>"> <input type="submit" value="修改全部" class="button" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+    </body>
+</html>

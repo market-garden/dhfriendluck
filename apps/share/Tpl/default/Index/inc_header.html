@@ -1,0 +1,38 @@
+
+  <h2><img src="../Public/images/ico_app_share.gif" />分享</h2>
+  	<div class="ShareEdit">
+      <div class="edit"><!-- 分享编辑框 -->       
+		<table width="100%" border="0" cellspacing="4" cellpadding="0">
+          <tr>
+            <td width="150" align="right"><strong>分享音乐、视频、网址：</strong></td>
+            <td width="256"><input name="url" type="text" id="url" class="TextH20" value="http://" onfocus="javascript:if('http://'==this.value)this.value='';this.className='Text2';" onblur="javascript:if(''==this.value)this.value='http://';this.className='TextH20';" size="50"/></td>
+            <td><input type="button" value="分享" onclick="doURL()" class="btn_b"/></td>
+          </tr>
+        </table>
+      </div>
+	  <div id='msg' style="display:none;"></div>
+      <div class="editC" id='reginfo' style="display:none">
+            <table width="100%" border="0" cellspacing="4" cellpadding="0">
+            <tr>
+              <td align="right" valign="top">描述：</td>
+              <td><span class="input_box">
+                <textarea name="info" cols="70" rows="3" id="info" onfocus="this.className='Text1'" onblur="this.className='Text'" class="Text" ></textarea>
+              </span></td>
+            </tr>
+            <tr>
+              <td align="right">同时通知给：</td>
+              <td><div style="width:300px;">{:W("SelectFriend")}</div></td>
+            </tr>
+            <tr>
+              <td align="right">&nbsp;</td>
+              <td>
+			  <label>		  
+              <input name="button" type="button" class="btn_b" id="button" value="提 交" onclick="doAdd()"/>
+              </label>
+			  <input type="button" value="取 消" onclick="doURL()" class="btn_w"/>
+			  </td>
+            </tr>
+            </table>
+      </div>
+    </div>
+

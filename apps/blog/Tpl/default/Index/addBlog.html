@@ -1,0 +1,132 @@
+<include file="__THEME__/header" />
+<link rel="stylesheet" href="../Public/blog.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+    $( document ).ready( function(){
+        var time = {$savetime}*60*1000;
+        var t = setInterval( 'autosave()',time );
+    });
+</script>
+<script type="text/javascript" src="../Public/Js/addBlog.js">
+</script>
+<div class="content">
+    <!-- 内容 begin  --><include file="__THEME__/apps" />
+    <div class="main">
+        <!-- 画布 begin  -->
+        <div class=page_title>
+            <!-- page_title begin --><h2><span class="f12px fn right"><a href="javascript:history.back( -1 )">&lt;&lt;返回上一页</a></span><img src="../Public/images/ico_app01.gif" />发表新{%blog}</h2>
+            <div class="c"></div>
+        </div><!-- page_title end -->
+        <div class="BlogBox">
+            <form name="addBlog" action="__URL__/doAddBlog" method="post" onsubmit="return check();">
+
+                <div class="sidebar" style="margin-top:52px;">
+                                     <div class="FSort">
+          <div class="tit">{%import}</div>
+          <div><p class="lh20">将你的站外博客导入到{$site_opts.site_name}<a href="__URL__/blogImport">点此导入>></a></p></div>
+          <div class="btm"></div>
+        </div>
+                <div class="lh20">添加在日记中提到的好友</div>
+                    <!-- 添加好友-->{:W("SelectFriend")}
+                </div>
+                <div class="LogList">
+                    <!-- 发表日志 begin  -->
+                    <ul class="edit">
+                        <li style="padding:0;">
+                            <div class="c1" style="line-height:30px;">
+                                标题：
+                            </div>
+                            <div class="c2">
+                                <select name="category" id="select" onchange="javascript:changeCategory($(this))" class="left TextH20 mr5">
+                                    <php>
+                                        foreach( $category as $value ){
+                                    </php>
+                                    <option value="{$value['id']}">{$value['name']}</option>
+                                    <php>
+                                        }
+                                    </php>
+                                    <optgroup id="group">
+                                        <option value="0">+添加分类</option>
+                                    </optgroup>
+                                </select>
+                                <input id="title" name="title" type="text" class="TextH20" style="width:60%; onBlur="this.className='TextH20'" onFocus="this.className='Text2'" maxlength="30" />
+                            </div>
+                        </li>
+                        <li style="padding:0;">
+                            <div class="c1">
+                                内容：
+                            </div>
+                            <div class="c2">
+                                <textarea id="content" name="content" cols="40" rows="15" style="display:none;width:100%; padding:8px;" class="Text" onBlur="this.className='Text'" onFocus="this.className='Text1'">
+                                </textarea>
+                                <iframe id="Editor" name="Editor" src="__PUBLIC__/js/Editor/editor.html?id=content&height=400&width=100" frameborder="0" marginheight="0" marginwidth="0" scrolling="No" style="width: 100%; height: 400px;"></iframe>
+                            </div>
+                        </li>
+                        <li style="padding:0;">
+                            <div class="c1">
+                                附件：
+                            </div>
+                            <div class="c2">
+				{:W( 'UploadAttach',array( 'uid'=>$mid , 'type'=>'blog' , 'callback'=>'attach_upload_success') )}
+                            </div>
+                            <div class="attach"></div>
+                        </li>
+                        <li style="padding:0;">
+                            <div class="c1">
+                                &nbsp;
+                            </div>
+                            <div class="c2 alR"><span id="autoSave" style="display:none;"></span><input id="saveButton" type="button" onclick="javascript:autosave()"class="btn_b" value="临时保存"/>
+                                <input id="saveId" name="saveId" type="hidden" value=""/></div>
+                        </li>
+                        <li style="padding:0;">
+                            <div class="c1">
+                                权限：
+                            </div>
+                            <div class="c2">
+                                <select name="privacy" onchange="javascript:changePrivacy($(this));">
+                                    <option value="0" selected="selected">任何人可见</option>
+                                    <option value="1" >仅好友可见</option>
+                                    <option value="2">私密日记</option>
+                                    <option value="3">凭密码访问</option>
+                                </select>
+                                <input id="password" name="password" type="text" style="display:none"/>
+                            </div>
+                        </li>
+                        <li style="padding:0;">
+                            <div class="c1">
+                                评论权限：
+                            </div>
+                            <div class="c2">
+                                <select id="cc" name="cc">
+                                    <option value="1" selected>任何人可评论</option>
+                                    <option value="2">好友可评论</option>
+                                    <option value="3">关闭评论</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li style="padding:0;">
+                            <div class="c1">
+                                &nbsp;
+                            </div>
+                            <div class="c2">
+                                <input id="friendid" name="mention" type="hidden" value=""><input type="submit" class="btn_b" value="发 表" /><input type="button" value="转到草稿箱" onclick="jumpOutline()" class="btn_w" />
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form><!-- 好友日志 end  -->
+            <script type="text/javascript" charset="utf-8">
+                function jumpOutline(){
+                    if(autosave()){
+                        location.href=APP+'/Index/my/outline/yes';
+                    }
+                }
+
+
+
+            </script>
+
+        </div>
+    </div><!-- 画布 end  -->
+    <div class="c"></div>
+</div><!-- 内容 end --><include file="__THEME__/footer" />

@@ -1,0 +1,63 @@
+<php>if($mid === 0 || !isset($mid)){</php>
+	<script>
+		function changeverify(){
+			var date = new Date();
+			var ttime = date.getTime();
+			$('#verifyimg').attr('src',TS+'/Index/verify/time/'+ttime);
+		}
+
+	</script>
+	<div class="user_app"><!-- 用户组件列表 begin -->
+		<div class="user_app_top"></div>
+		<div class="left_login_box">
+		<h2>登录站点</h2>
+		<form action="__TS__/Index/doLogin" method="post">
+		<div style="width:55px;">Email：</div><div style="width:120px; margin-bottom:5px;"><input name="email" type="text" class="TextH20" id="textfield3" onfocus="this.className='Text2'" onblur="this.className='TextH20'" style="width:100%;"/>
+		</div>
+		<p><div style="width:55px;">密码：</div><div style="width:120px; margin-bottom:5px;"><input name="passwd" type="password" class="TextH20" id="textfield3" onfocus="this.className='Text2'" onblur="this.className='TextH20'"  style="width:100%;"/></div>
+		</p>
+		<php>	
+		    $verify_allow = unserialize($site_opts["verify"]);
+			$login_verify_allow = $verify_allow['login'];
+		</php>
+ <php>if($login_verify_allow){</php>
+		<div style="width:55px;">验证码：</div>
+        <div style="width:130px; margin-bottom:5px;">
+        <div class="left"><input name="verify" type="text" class="TextH20" id="textfield3" onfocus="this.className='Text2'" onblur="this.className='TextH20'" style="width:50px;" /></div>
+		 <a href="###" onclick="changeverify()"><img src="__TS__/Index/verify" id="verifyimg" alt="换一张" /></a>
+		</div>
+ <php>}</php>
+
+		<div style="width:130px; margin-bottom:5px;"><input name="remembor" type="checkbox" value="1" />下次自动登录</div>
+		 <div style="width:130px; margin-bottom:5px;"><input name="button" type="submit" class="btn_b left_do" id="button" value="登 录" /></div>
+		</form>
+	</div>
+	<php>if($ad["leftmenu"]){</php>
+    <div class="ad_app">{$ad["leftmenu"]}</div>
+	<php>}</php>
+		<div class="user_app_btm"></div>
+	</div><!-- 用户组件列表 end -->
+<php>}else{</php>
+
+<div class="user_app"><!-- 用户组件列表 begin -->
+	<div class="user_app_top"></div>
+	<div class="user_app_list">
+		<ul>
+			<volist name="APPMENUS_LEFT" id="app">
+				<li>
+					<a href="{$app.url}" class="a14"><img src="{$app.icon}" />{$app.name}</a>
+					<php>if($app["add_name"]){</php>
+						<span><a href="{$app.add_url}">{$app.add_name}</a></span>
+					<php>}</php>
+				</li>
+			</volist>			
+		</ul>
+	</div>
+	<div class="app_add"><a href="__TS__/App/">添加或删除组件</a></div>
+	<php>if($ad["leftmenu"]){</php>
+    <div class="ad_app">{$ad["leftmenu"]}</div>
+	<php>}</php>
+	<div class="user_app_btm"></div>
+	</div><!-- 用户组件列表 end -->
+
+<php>}</php>

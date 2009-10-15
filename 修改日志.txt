@@ -1,0 +1,12 @@
+2009.10.5
+更换数据表ts_network
+2009.10.6
+\thinksns\Tpl\default\Info\education.html  110行 班级或院系 改为 专业
+\thinksns\public\js\ts_common.js 278行 height改为420
+2009.10.7
+commit test!! from 冯志强
+2009.10.14
+替换了\thinksns\Tpl\default\Index\下 index.php文件和login.php文件    邓晖
+2009.10.15
+再次修改\thinksns\Tpl\default\Info\education.html   form 邓晖  
+修改\thinksns\Lib\Model\UserSearchModel.class.php     去掉个人信息的"年"   邓晖           

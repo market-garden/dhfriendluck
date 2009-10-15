@@ -1,0 +1,81 @@
+<script type="text/javascript">
+function search_show_shui(){
+   var d = $('#search_heshui').css('display');
+   if(d=='none')
+     $('#search_heshui').css('display','block');
+   else	 
+     $('#search_heshui').css('display','none');
+}
+function show_search_where(){
+   var d = $('#search_where').css('display');
+   if(d=='none')
+     $('#search_where').css('display','block');
+   else	 
+     $('#search_where').css('display','none');
+}
+function search_idea_input(name){
+$("#search_idea").val(name);
+}
+</script>
+﻿<div class="FSort">
+<div class="tit">愿望大搜索</div>
+<form id="form1" name="form1" method="post" action="__URL__/search">
+<div>
+		      <label>
+		        我想 <input name="search_idea" type="text" id="search_idea" />
+	          </label>如：&nbsp;
+			  <a href="javascript:void(0);" onclick="search_idea_input('约会');">约会</a>&nbsp;&nbsp;
+			  <a href="javascript:void(0);" onclick="search_idea_input('交朋友');">交朋友</a>&nbsp;&nbsp;
+			  <a href="javascript:void(0);" onclick="search_idea_input('旅游');">旅游</a>&nbsp;&nbsp;
+			  <a href="javascript:void(0);" onclick="search_idea_input('学习');">学习</a>&nbsp;&nbsp;
+			  <a href="javascript:void(0);" onclick="search_idea_input('游泳');">游泳</a>&nbsp;&nbsp;
+			  <a href="javascript:void(0);" onclick="search_idea_input('吃晚餐');">吃晚餐</a>&nbsp;&nbsp;
+			  <a href="javascript:void(0);" onclick="search_idea_input('听音乐会');">听音乐会</a>&nbsp;&nbsp;
+	          <label>
+			  <br/><br/>
+			  <div style="float:left;margin:0px 15px 0px 10px;"><a href="javascript:void(0);" onclick="search_show_shui();">和谁？</a></div>
+			  <div id='search_heshui' style="float:left; margin:0px 15px 0px 10px; display:none">
+	          <select name="search_who" id="search_who">
+			  <option value=""></option>
+			  <option value="1">和某人</option>
+			  <option value="2">和一个男生</option>
+			  <option value="3">和一个女生</option>
+              </select>
+	          </label>
+		      <select name="search_age_from" id="search_age_from"> 
+			  <option selected="selected" value="18">18</option>
+			  <option value="19">19</option><option value="20">20</option>
+			  <option value="21">21</option><option value="22">22</option>
+			  <option value="23">23</option><option value="24">24</option>
+			  <option value="25">25</option><option value="26">26</option>
+			  <option value="27">27</option><option value="28">28</option>
+			  <option value="29">29</option><option value="30">30</option>
+			  <option value="31">31</option><option value="32">32</option>
+			  <option value="33">33</option><option value="34">34</option>
+			  <option value="35">35</option><option value="40">40</option>
+			  <option value="45">45</option><option value="50">50</option>
+			  <option value="80">50+</option> 
+			  </select> — <select name="search_age_to" id="search_age_to"> 
+			  <option value="18">18</option><option value="19">19</option>
+			  <option value="20">20</option><option value="21">21</option>
+			  <option value="22">22</option><option selected="selected" value="23">23</option>
+			  <option value="24">24</option><option value="25">25</option>
+			  <option value="26">26</option><option value="27">27</option>
+			  <option value="28">28</option><option value="29">29</option>
+			  <option value="30">30</option><option value="31">31</option>
+			  <option value="32">32</option><option value="33">33</option>
+			  <option value="34">34</option><option value="35">35</option>
+			  <option value="40">40</option><option value="45">45</option>
+			  <option value="50">50</option><option value="80">50+</option> 
+			  </select>岁
+			  </div> <br/>
+		    <div style="float:left;margin:0px 15px 0px 10px;"><a href="javascript:void(0);" onclick="show_search_where();">在哪里？</a></div>
+			<div id='search_where' style="float:left; margin:0px 15px 0px 10px; display:none">
+<input type="hidden" name="ts_search_area" id="ts_search_area" value="{$info.ts_hometown}"/>
+<input type="text" class="TextH20" style="width:100px;" onfocus="this.className='Text2'" onblur="this.className='TextH20'" value="选择地区" name="search_area" id="search_area" selectArea="true" areatype="search_area"/>
+           </div>		
+        </div><br/>
+		<div><input type="submit" name="Submit" value=" 搜 索 " class="btn_b"/></div>
+</form>  
+<div class="btm"></div>
+</div><!-- 愿望归档 -->

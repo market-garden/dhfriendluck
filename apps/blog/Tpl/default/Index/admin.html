@@ -1,0 +1,64 @@
+<include file="__THEME__/header" />
+
+<script type="text/javascript" src="../Public/Js/Common.js"></script>
+<link rel="stylesheet" href="../Public/blog.css" type="text/css" media="screen" charset="utf-8" />
+<div class="content"><!-- 内容 begin  -->
+  <include file="__THEME__/apps" />
+  <div class="main"><!-- 画布 begin  -->
+  <div class=page_title> <!-- page_title begin -->
+    <h2><img src="../Public/images/ico_app01.gif" />{%blog}分类管理</h2>
+  <div class="c"></div>
+</div><!-- page_title end -->
+  <!-- 切换标签 end  -->
+  <div class="BlogBox">
+  <div class="LogList"><!-- 好友日志 begin  -->
+  <div class="MenuSub"><a href="__URL__/my">返回{%blog}首页</a></div>
+  		<ul>
+       	  <li class="btmlineD" style="margin:0px;">
+          		<div class="left" style="width: 40%;"><input name="" type="text" class="TextH20" id="insertCategory" onBlur="this.className='TextH20'" onFocus="this.className='Text2'" />
+          		  <input name="button" type="submit" class="btn_b" id="button" onclick="addCategory( $( '#insertCategory' ).val() )"value="增加分类" />
+          		</div>
+   				<div class="left cGray2" style="width: 50%;">
+
+            </div>
+                <div class="left" style="width: 10%;"></div>
+       	  </li>
+          <li class="cGray2 btmlineD" style="margin:0px;">
+       		<div class="left" style="width: 40%;">名称</div>
+          		<div class="left" style="width: 50%;">{%blog}数目</div>
+                <div class="left" style="width: 10%;">操作</div>
+       	  </li>
+
+          <form action="__URL__/editCategory" method="post">
+          <volist name="category" id="vo">
+            <li class="btmlineD" style="margin:0px;" id ="cate{$vo['id']}">
+            <div class="left" style="width: 40%;">
+              <span class="left" style="width: 40%;">
+                <php>if( $vo['uid'] != 0 ){</php>
+                <input name="name[{$vo['id']}]" type="text" class="TextH20" onBlur="this.className='TextH20'" onFocus="this.className='Text2'" value="{$vo['name']}"/>
+                <php>}else{</php>
+                {$vo['name']}
+                  <php>}</php>
+            </span>
+          </div>
+            <div id="c{$vo['id']}" class="left" style="width: 50%;">{$vo['count']}</div>
+            <php>if( $vo['uid'] != 0 ){</php><div class="left" style="width: 10%;"><a href="javascript:deleteCategory( {$vo['id']})">[移除]</a></div><php>}</php>
+            </li>
+          </volist>
+          <li style="margin:0px;">
+          <div class="left" style="width: 40%;">
+            <input type="submit" class="btn_b"  id="button2" value="保存修改" />
+          </div>
+          		<div class="left" style="width: 50%;"></div>
+                <div class="left" style="width: 10%;"></div>
+       	  </li>
+          </form>
+   	    </ul>
+       </div>
+  <!-- 好友日志 end  -->
+  </div>  </div><!-- 右侧内容 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+<div class="footer"><div class="menu"><a href="#">关于</a>| <a href="#">客服</a>| <a href="#">帮助</a>| <a href="#">隐私声明</a></div>Copyright © ThinkSNS 京ICP备09050100号</div>
+</body>
+</html>

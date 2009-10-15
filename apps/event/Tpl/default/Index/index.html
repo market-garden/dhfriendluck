@@ -1,0 +1,102 @@
+<include file="__THEME__/header" />
+<div class="content"><!-- 内容 begin  -->
+  <include file="__THEME__/apps" />
+<link rel="stylesheet" href="../Public/event.css" type="text/css" media="screen" charset="utf-8" />
+
+<link href="__PUBLIC__/js/pagination/pagination.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../Public/js/event.js"></script>
+  <div class="main"><!-- 画布 begin  -->
+    <div class=page_title> <!-- page_title begin -->
+  <h2><img src="{$APPINFO['APP_ICON']}" />活动</h2>
+  <div class="c"></div>
+</div><!-- page_title end -->
+  <div class="tab-menu"><!-- 切换标签 begin  -->
+      <ul>
+      <li><a href="__URL__/my"><span>我的活动</span></a></li>
+      <li><a href="__URL__/index" class="on"><span>好友的活动</span></a></li>
+      <li><a href="__URL__/all"><span>全部活动</span></a></li>
+      <li><a href="__URL__/addEvent/"><span><div class="ico_add">&nbsp;</div>发起活动</span></a></li>
+      </ul>
+  </div><!-- 切换标签 end  -->
+  <div class="MenuSub">
+    
+            <a href="__URL__/index" <php> if (!isset( $_GET['action'] )) {echo "class='fB'";}else{echo "class='cGray'";}</php>>全部活动</a>┊  <a href="__URL__/index/action/admin" <php> if (isset( $_GET['action'] ) && 'admin' == $_GET['action']) {echo "class='fB'";}else{echo "class='cGray'";}</php>>好友发起的活动</a>┊ <a href="__URL__/index/action/join" <php> if (isset( $_GET['action'] ) && 'join' == $_GET['action']) {echo "class='fB'";}else{echo "class='cGray'";}</php>>好友参加的活动</a>┊ <a href="__URL__/index/action/att" <php> if (isset( $_GET['action'] ) && 'att' == $_GET['action']) {echo "class='fB'";}else{echo "class='cGray'";}</php>>好友关注的活动</a>
+</div>
+  <div class="groupBox" style="margin:0">
+    <div class="sidebar">
+	<div class="FSort">
+      <div class="tit">搜索活动：</div>
+      <div style="padding:8px 0 0 8px; height:34px;"><form action="__URL__/index/" method="POST" name="subform">
+        <span class="left mr5"><input name="title" type="text" value="{$title}" class="TextH20"  style="width:90px;"  onblur="this.className='TextH20'" onfocus="this.className='Text2'"/></span><input type="submit" class="btn_b left" value="搜 索" />
+        </form>
+		</div>
+		<div class="btm"></div>
+		</div>
+		<div class="FSort">
+      <div class="tit">分类浏览群：</div>
+      <ul>
+        <li <php>if( !isset( $_GET['cid'] ) ){echo "class = 'on'";}</php>> <a href="__URL__/index" >全部</a> </li>
+
+      				<?php foreach($category as $k=>$cate){ ?>
+                                          <li <eq name="k" value="$_GET['cid']"> class="on"  </eq>  ><a href="__URL__/index/cid/{$k}">{$cate}</a></li>
+                  <?php } ?>
+      </ul>
+	  <div class="btm"></div>
+    </div>
+	</div>
+    <div class="boxL" style="width:640px;"><!-- 好友日志 begin  -->
+    
+  		<ul class="search">
+          <volist name="data" id="vo">
+       	  <li class="bx1" onmouseover="this.className='bx2'" onmouseout="this.className='bx1'">
+          <div class="left" style="width: 90px;"><span class="pic80"><a href="__URL__/eventDetail/id/{$vo['id']}/uid/{$vo['uid']}"><img src="<php>echo C( 'TS_URL' );</php>/thumb.php?url={$vo['cover']}&w=80&h=80" /></a></span></div>
+          		<div class="left" style="width: 460px;">
+                  <h3><a href="__URL__/eventDetail/id/{$vo['id']}/uid/{$vo['uid']}">{$vo['title']}</a><span class="cGray2 f12px">[{$vo['type']}]</span></h3>
+                  <p><span class="cGray2">活动时间：</span>[{$vo['time']}]  </p>
+                  <p><span class="cGray2">活动地点：</span>{$vo['address']} {$vo['area']}</p>
+                  <p><span class="cGray2">发起人：</span><a href="__TS__/space/{$vo['uid']}">{$vo['name']}</a></p>
+                  <?php if( false == empty( $vo['friends'] ) ){ ?>
+                  <p><span class="cGray2">参加的好友：</span>
+                  <?php foreach( $vo['friends'] as $so ) { ?>
+                                 <a href="__TS__/space/<?php echo $so['uid']; ?>" ><?php echo $so['name']; ?></a>
+
+                  <?php } ?>
+                  </p>
+                  <?php } ?>
+
+                  <p><span class="right mr10">参加人数（{$vo['joinCount']}） 关注人数（{$vo['attentionCount']}）</span><span class="cRed"></span></p>
+       		</div>
+            <div class="left rmenu" style="width: 60px;">
+           <?php if( $vo['deadline']>time()){ ?>
+           <a onclick="ts_sharePop('{$vo.id}','__URL__')" id="BtnShare_{$vo.id}" href="javascript:void(0)">分享活动</a>
+                      <?php if( $vo['canJoin'] ){ ?>
+
+                      <?php if( $vo['limitCount'] >0 ){ ?>
+                      <a href="javascript:EventAction( {$vo['id']},{$vo['opts']['alow']},'joinIn')">我要参加</a>
+                      <?php }else{ ?>
+                        <span class="cGreen lh35">名额已满</span>
+                        <?php } ?>
+                      <?php }else if( false == $vo['admin'] ){ ?>
+        <a href="javascript:EventDelAction( {$vo['id']},{$vo['opts']['alow']},'joinIn' )">取消参加</a>
+                      <?php } ?>
+
+                      <?php if( $vo['canAtt'] ){ ?>
+        <a href="javascript:EventAction( {$vo['id']},null,'attention')">我要关注</a>
+                      <?php }else if( false == $vo['admin'] && true == $vo['canJoin']){ ?>
+        <a href="javascript:EventDelAction( {$vo['id']},null,'attention')">取消关注</a>
+                      <?php } ?>
+              <?php }else{ ?>
+                    <span class="cGreen lh35">活动结束</span>
+              <?php } ?>
+              </div>
+       	  </li>
+          </volist>
+        </ul>
+        <div id="Pagination" class="pagination">{$html}</div>
+  </div><!-- 好友日志 end  -->
+  </div>
+  
+  </div><!-- 右侧内容 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+  <include file="__THEME__/footer" />

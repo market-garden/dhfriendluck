@@ -1,0 +1,91 @@
+<script type="text/javascript">
+function show_shui(){
+   var d = $('#heshui').css('display');
+   if(d=='none')
+     $('#heshui').css('display','block');
+   else	 
+     $('#heshui').css('display','none');
+}
+function show_where(){
+   var d = $('#where').css('display');
+   if(d=='none')
+     $('#where').css('display','block');
+   else	 
+     $('#where').css('display','none');
+}
+function add_idea(name){
+$("#idea").val(name);
+}
+</script>
+<form action="__URL__/doAddWish" method="post">
+<div class="status_edit1"><!-- 愿望状态页显示编辑框 -->
+          <div class="lh25">
+		      <label>
+		        我想 <input name="idea" type="text" id="idea"  class="TextH20" onfocus="this.className='Text2'" onblur="this.className='TextH20'"/>
+	          </label>如：&nbsp;
+			  <a href="javascript:void(0);" onclick="add_idea('约会');">约会</a>&nbsp;&nbsp;
+			  <a href="javascript:void(0);" onclick="add_idea('交朋友');">交朋友</a>&nbsp;&nbsp;
+			  <a href="javascript:void(0);" onclick="add_idea('旅游');">旅游</a>&nbsp;&nbsp;
+			  <a href="javascript:void(0);" onclick="add_idea('学习');">学习</a>&nbsp;&nbsp;
+			  <a href="javascript:void(0);" onclick="add_idea('游泳');">游泳</a>&nbsp;&nbsp;
+			  <a href="javascript:void(0);" onclick="add_idea('吃晚餐');">吃晚餐</a>&nbsp;&nbsp;
+			  <a href="javascript:void(0);" onclick="add_idea('听音乐会');">听音乐会</a>&nbsp;&nbsp;
+	          <label>
+			  <br/>
+<div style="float:left;margin:0px 15px 0px 10px;"><a href="javascript:void(0);" onclick="show_shui();">和谁？</a></div>
+			  <div id='heshui' style="float:left; margin:0px 15px 0px 10px; display:none">
+			  <select name="who" id="who">
+			  <option value="">请选择</option>
+			  <option value="1">某人</option>
+			  <option value="2">一个男生</option>
+			  <option value="3">一个女生</option>
+              </select>
+	          </label>
+		      <select name="age_from" id="f_age_from"> 
+			  <option selected="selected" value="18">18</option>
+			  <option value="19">19</option><option value="20">20</option>
+			  <option value="21">21</option><option value="22">22</option>
+			  <option value="23">23</option><option value="24">24</option>
+			  <option value="25">25</option><option value="26">26</option>
+			  <option value="27">27</option><option value="28">28</option>
+			  <option value="29">29</option><option value="30">30</option>
+			  <option value="31">31</option><option value="32">32</option>
+			  <option value="33">33</option><option value="34">34</option>
+			  <option value="35">35</option><option value="40">40</option>
+			  <option value="45">45</option><option value="50">50</option>
+			  <option value="80">50+</option> 
+			  </select> 
+		      - 
+		      <select name="age_to" id="f_age_to"> 
+			  <option value="18">18</option><option value="19">19</option>
+			  <option value="20">20</option><option value="21">21</option>
+			  <option value="22">22</option><option selected="selected" value="23">23</option>
+			  <option value="24">24</option><option value="25">25</option>
+			  <option value="26">26</option><option value="27">27</option>
+			  <option value="28">28</option><option value="29">29</option>
+			  <option value="30">30</option><option value="31">31</option>
+			  <option value="32">32</option><option value="33">33</option>
+			  <option value="34">34</option><option value="35">35</option>
+			  <option value="40">40</option><option value="45">45</option>
+			  <option value="50">50</option><option value="80">50+</option> 
+			  </select>岁 
+</div> 
+		    <div style="float:left;margin:0px 15px 0px 10px;"><a href="javascript:void(0);" onclick="show_where();">在哪里？</a></div>
+			<div id='where' style="float:left; margin:0px 15px 0px 10px; display:none">
+<input type="hidden" name="ts_hometown" id="ts_hometown" value="{$info.ts_hometown}"/>
+<input type="text" class="TextH20" style="width:100px;" onfocus="this.className='Text2'" onblur="this.className='TextH20'" value="选择地区" name="hometown" id="hometown" selectArea="true" areatype="hometown"/>  
+           </div>			
+        </div><br/><br/>
+        	
+      	  <div class="left pt5">
+		  告诉朋友们您的愿望?
+		    <label>
+		    <input name="tell" type="radio" value="1" checked="checked" />
+		    是的
+            </label><label>
+		    <input name="tell" type="radio" value="0" />
+		    不</label> 
+		     <input type="submit" class="btn_b" value="{%add}" /></div>
+        <div class="c" ></div>
+</div>
+</form>

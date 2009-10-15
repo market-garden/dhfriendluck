@@ -1,0 +1,57 @@
+<include file="__THEME__/header" />
+<div class="content"><!-- 内容 begin  -->
+  <include file="__THEME__/apps" />
+  <div class="main"><!-- 画布 begin  -->
+  <script type="text/javascript" src="../Public/Js/Common.js" ></script>
+<link href="__PUBLIC__/js/pagination/pagination.css" rel="stylesheet" type="text/css" />
+
+        <div class="page_title1"> <!-- page_title begin -->
+          <div class="left"><a href="__TS__/space/{$uid}"  class="tips" rel="__TS__/Index/userInfo/uid/{$uid}"><span class="headpic50"><img src="{$uid|getUserFace}" /></span></a></div>
+          <div class="tit_l">
+            <h2>{$name}的{%wish}</h2>
+            <p style="margin:0; padding:0;" class="lh25"><a href="__TS__/space/{$uid}">{$name}的{%space}</a> <a href="__TS__/Notify/write/uid/{$uid}">{%msg}</a></p>
+          </div>
+        <div class="c"></div>
+</div><!-- page_title end -->
+        <div class="tab-menu"><!-- 切换标签 begin  -->
+          <ul>
+            <li><a href="###" class="on" ><span>{$name}的{%wish}</span></a></li>
+          </ul>
+        </div><!-- 切换标签 end  -->
+        <div class="Friend"><!-- 好友愿望 begin  -->
+          <div class="sidebar">
+		     <include file="wish_search" /> 
+            {:W( 'FileAway',$file_away)}<!-- 愿望归档 -->
+          </div>
+          <div class="FList">
+            <volist name ="data" id="vo">
+              <div class="Fli" id="Fli{$vo['id']}">
+                <div class="c1"><span class="headpic50"><a href="__TS__/space/{$vo['uid']}"  class="tips" rel="__TS__/Index/userInfo/uid/{$vo['uid']}"><img src="{$vo['uid']|getUserFace}" /></a></span></div>
+              <div class="c2 bg_ico_arrow">
+                <div class="MC bg01">
+                  <h4><a href="__TS__/space/{$vo['uid']}">{$vo['name']}</a><span class="time">{$vo['cTime']|friendlyDate}</span></h4>
+                  <p class="WB">{$vo['content']}
+                  <php>if( isset( $vo['replay'] ) && 2 < $vo['replay_numbel'] ){</php>
+                    <a id="closeReplay{$vo['id']}" href="###" onclick="closeReplay({$vo['id']},{$vo['uid']})">收起回复</a>
+                    <php>}else{</php>
+                    <a href="javascript:replay('false',{$vo['id']})">{%replay}</a>
+                    <php>}</php></p>
+                 
+                </div>
+                {:W('Replay',$vo['replay'])}
+              </div>
+            </div>
+            </volist>
+
+ <div id="Pagination" class="pagination">{$html}</div>
+    <input id="page" type="hidden" value="{$_GET['p']}">
+          </div>
+ </div><!-- 好友愿望 end  -->
+
+
+  </div><!-- 画布 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />
+
+

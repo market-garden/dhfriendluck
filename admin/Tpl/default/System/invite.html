@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>公告设置</title>
+        <link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../Public/script/jquery.js"></script>
+        <script>
+            $(function(){
+                $('#content').xheditor(true,{tools:'simple',uploadUrl:"__URL__/up_edit_img",uploadExt:"jpg,jpeg,gif,png"});
+            });
+        </script>
+    </head>
+    <body>
+        <div id="container">
+            <php>if($_GET["t"] == 1){</php>
+            <center><font color="red">保存成功!</font></center>
+            <php>}</php>
+
+            <form action="__URL__/doInvite" method="post">
+
+                <div class="c1">内容：</div>
+                <div class="c2">
+                    <textarea id="invite_content" name="invite_content" cols="40" rows="15" style="width:95%; padding:8px;display:none;" class="Text" onBlur="this.className='Text'" onFocus="this.className='Text1'">{$invite_content}</textarea>
+                    <iframe id="Editor" name="Editor" src="__PUBLIC__/js/Editor/editor.html?id=invite_content&amp;height=400&width=100" frameborder="0" marginheight="0" marginwidth="0" scrolling="No" style="width: 100%; height: 400px;"></iframe>
+
+                </div>
+              <br/>
+                <input type="submit"  value="提交" id="d">
+            </form>
+        </div>
+    </body>
+</html>

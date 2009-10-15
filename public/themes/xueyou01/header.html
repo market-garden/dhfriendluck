@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><neq name="apps_title" value="">{$apps_title}-</neq>{$site_opts.site_name}</title>
+<link rel="shortcut icon" href="__THEME__/favicon.ico" />
+<meta name="keywords" content="{$site_opts.site_keyword}" />
+<meta name="description" content="{$site_opts.site_header}" />
+<script type="text/javascript">
+<!--
+	//指定当前组模块URL地址
+	var	URL		=	'__URL__';
+	var	APP		=	'__APP__';
+	var	PUBLIC	=	'__PUBLIC__';
+	var	ROOT	=	'__ROOT__';
+	var TS		=	'__TS__';
+	var MID		=	'{$mid|intval}';
+	var NEED_LOGIN	=	'{$TS_NEED_LOGIN}';
+	var expire  = <?php echo C('COOKIE_EXPIRE');?>;
+    var TPIS = '{$site_opts["tips"]}';
+
+//-->
+</script>
+<link href="__THEME__/layout.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/json.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/shortcuts.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.hotkeys.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/ymPrompt/ymPrompt.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/scrolltotop/scrolltopcontrol.js"></script>
+
+<script type="text/javascript" src="__PUBLIC__/js/ts_common.js"></script>
+<link rel="stylesheet" id='skin' type="text/css" href="__PUBLIC__/js/ymPrompt/skin/qq/ymPrompt.css" />
+
+<script type="text/javascript" src="__PUBLIC__/js/Share.js"></script>
+
+
+<script>
+	var Alert	= ymPrompt.alert;
+	var Confirm = ymPrompt.confirmInfo;
+	var Success = ymPrompt.succeedInfo;
+	var Error   = ymPrompt.errorInfo;
+	var Win     = ymPrompt.win;
+
+</script>
+<link rel="stylesheet" id='skin' type="text/css" href="__PUBLIC__/js/tip/jquery.cluetip.css" />
+
+</head>
+<body>
+<script>
+
+</script>
+<php>if($ad["header"]){</php>
+<div class="ad_top">{$ad.header}</div>
+<php>}</php>
+<div class="header"><!-- 头部 begin -->
+    <div class="logo"><a href="__TS__">&nbsp;</a></div>
+	<session name="userInfo">
+		<div class="nav">
+			<ul>
+			<li><a href="__TS__/Home" class="fb14">首页</a></li>
+		   <!--  <li class="on"> -->
+		   <li><a href="__TS__/space/{$mid}" class="fb14">个人空间</a>
+				<!-- <div class="dropmenu"><a href="#">修改资料</a><a href="#">换头像</a><a href="#">我的留言板</a></div> --></li>
+			<li onMouseOut="this.className='#'" onmouseover="this.className='on'"><a href="__TS__/Friend/index" class="ico_arrow fb14">好友</a>
+				<div class="dropmenu"><a href="__TS__/Friend/index">我的好友</a><a href="__TS__/Friend/ping">好友屏蔽</a><a href="__TS__/Friend/track">访问脚印</a><a href="__TS__/Friend/find">查找朋友</a><a href="__TS__/Invite/index
+">邀请好友</a></div></li>
+			<li><a href="__TS__/Home/network" class="fb14">随便看看</a></li>
+
+            <php>if($APPMENUS_TOP){</php>
+				<li onMouseOut="this.className='#'" onmouseover="this.className='on'"><a href="#" class="ico_arrow fb14 ">应用</a>
+				
+				<div class="dropmenu">
+					<volist name="APPMENUS_TOP" id="app">
+						<a href="{$app.url}"><img src="{$app.icon}" height="16" align="absmiddle"/> {$app.name} </a> 
+
+					</volist>
+	              </div>
+				</li>
+			<php>}</php>		
+			
+			<li onMouseOut="this.className='#'" onmouseover="this.className='on'"><a href="__TS__/Notify/inbox" class="ico_arrow fb14 ">消息</a>
+			
+			<div class="dropmenu">
+                                  <a href="__TS__/Notify/inbox">短消息<span class="cRed fB" id='message{$mid}' ></span></a>
+                                  <a href="__TS__/Notify/index/t/sys">系统通知<span class="cRed fB" id='notification{$mid}'></span></a>
+                                  <a href="__TS__/Notify/index/t/fri">好友请求<span class="cRed fB" id='friend{$mid}'></span></a>
+                                  <a href="__TS__/Space/#wall">留言板<span class="cRed fB" id='wall{$mid}'></span></a>
+                </div>
+                    <div class="msg_top" id='msg_top' style='display:none'><a href="" id='msg_top_href'></a></div>
+				
+			</li>
+			
+			</ul>
+		</div>
+		
+		
+            <input type="hidden" id="js_token" value="{$js_token}">
+  </session>
+  <nosession name="userInfo">
+		<div class="nav">
+			<ul>
+			<li><a href="__TS__/Index/index/" class="fb14">首页</a></li>
+		   <!--  <li class="on"> -->
+		   <li><a href="__TS__/Home/network" class="fb14">随便看看</a></li>
+			</ul>
+		</div>
+  </nosession>
+    <div class="nav_sub">
+		<nosession name="userInfo">
+			<a href="__TS__/Index/reg">注册</a>&nbsp;┆&nbsp;<a href="__TS__/Index/login">登陆</a>&nbsp;┆&nbsp;<a href="__TS__/Information/help">帮助</a>
+		</nosession>
+		<session name="userInfo">
+			<a href="__TS__/Invite">邀请</a>&nbsp;┆&nbsp;<a href="__TS__/Account">账号</a>&nbsp;┆&nbsp;<a href="__TS__/Info">资料</a>&nbsp;┆&nbsp;<a href="__TS__/Privacy">隐私</a>&nbsp;┆&nbsp;<a href="__TS__/Index/logout">退出</a>
+		</session>
+	</div>
+</div><!-- 头部 end -->
+
+

@@ -1,0 +1,206 @@
+<include file="__THEME__/header" />
+
+<link rel="stylesheet" href="../Public/blog.css" type="text/css" media="screen" charset="utf-8" />
+<link href="__PUBLIC__/js/pagination/pagination.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="../Public/Js/Common.js"></script>
+<div class="content"><!-- 内容 begin  -->
+  <include file="__THEME__/apps" />
+  <div class="main"><!-- 画布 begin  -->
+
+    <div class=page_title> <!-- page_title begin -->
+                        <h2><img src="{$APPINFO['APP_ICON']}" />{%blog}</h2>
+    <div class="c"></div>
+</div><!-- page_title end -->
+    <div class="tab-menu"><!-- 切换标签 begin  -->
+      <ul>
+        <li><a href="__URL__/index" ><span>{%friends}</span></a></li>
+        <li><a href="__URL__/my" class="on"><span>{%my}</span></a></li>
+        <eq name="all" value="true"><li><a href="__URL__/all"><span>{%all}</span></a></li></eq>
+        <li><a href="__URL__/addBlog"><span><div class="ico_add">&nbsp;</div>{%insertNew}</span></a></li>
+      </ul>
+    </div><!-- 切换标签 end  -->
+    <div class="MenuSub"><php>if( isset($mention) ){</php><a href="__URL__/my" class="fB"><php>}</php>我的最新{%blog}</a> | <php>if( !isset($mention) ){</php><a href="__URL__/my/mention/do" class="fB"><php>}</php>提到我的{%blog}</a></div>
+    <div class="BlogBox">
+
+	<div class="sidebar">
+                           <div class="FSort">
+          <div class="tit">{%import}</div>
+          <div><p class="lh20">将你的站外博客导入到{$site_opts.site_name}<a href="__URL__/blogImport">点此导入>></a></p></div>
+          <div class="btm"></div>
+        </div>
+        <php>if( !isset( $mention ) ){</php>
+		<div class="FSort">
+      <div class="tit">{%category}（<span class="cBlue"><a href="__URL__/admin" style="padding-left: 0px;" >{%admin}</a></span>）</div>
+        <ul>
+        <li <php>if( !isset( $_GET['outline'] ) && !isset( $_GET['cateId'] ) ) echo "class=\"on\"";</php>><a href="__URL__/my">所有分类</a></li>
+          <php>foreach( $category as $key=>$value ) {</php>
+          <li  <php>if ( $_GET['cateId'] == $value['id'] ){</php> class="on" <php>}</php>><a href="__URL__/my/cateId/{$value['id']}">{$value['name']} ( {$value['count']} )</a></li>
+          <php>}</php>
+          <li <php>if( isset( $_GET['outline'] ) ) echo "class=\'on\'";</php>><a href="__URL__/my/outline/yes" >草稿箱 ( {$oc} )</a></li>
+        </ul>
+		<div class="btm"></div>
+</div>
+		{:W( 'FileAway',$file_away)}<!-- 心情归档 --><php>}</php>
+
+      </div>
+      <php>if( isset( $_GET['outline'] ) ){</php>
+ <script type="text/javascript" charset="utf-8">
+   var g_selected = 0;
+var selected = new Array();
+  /*
+   *  方法:Array.baoremove(dx)
+   *  功能:删除数组元素.
+   *  参数:dx删除元素的下标.
+   *  返回:在原数组上修改数组.
+   */
+  Array.prototype.baoremove = function(dx)
+  {
+    if(isNaN(dx)||dx>this.length){return false;}
+    this.splice(dx,1);
+  }
+
+function selectCheck(v_obj,i)
+{
+   if (v_obj.checked == true)
+   {
+     selected[i-1] = v_obj.value;
+     g_selected++;
+   }
+   else
+   {
+     selected.baoremove(i-1);
+     g_selected--;
+   }
+}
+g_selectedall = false;
+  function selectAll(){
+    selected.splice( 0,selected.length );
+
+    if( false == g_selectedall ){
+      $("input[type='checkbox']").each(function(i) {
+       selected[i]=$( this ).val();
+       $(this).attr("checked", true); 
+      });
+      g_selectedall = true;
+    }else{
+      $("input[type='checkbox']").each(function() {
+        $(this).attr("checked", false); 
+      });
+      g_selectedall = false;
+      g_selected = 0;
+
+    }
+
+  }
+  function deleteOutline(  ){
+      alert( selected );
+  }
+function check()
+{
+ if (g_selected > 0)
+ {
+   return true;
+ }
+ else
+ {
+  Alert("请选择待导入的文章");
+ return false;
+ }
+
+
+}
+
+function deleteOutline(){
+  //.post方法传递的参数不能是数组。用.ajax进行ajax传递
+  $.ajax( {
+        'type':'post',
+        'url':APP+"/Index/deleteOutline",
+        'data': "id="+selected,
+        success:function( msg ){
+            if( msg != -1 ){
+                for( var a=0; a<selected.length;a++ ){
+                if( selected.length<15 ){
+                    //清除网页显示
+                    $( '#'+selected[a] ).remove();
+                    }else{
+                    location.href="__URL__/my";
+                    }
+                }
+                //制零数据
+                selected.splice( 0,selected.length );
+                g_selected = 0;
+                g_selectedall = false;
+            }else{
+                Alert( "删除草稿箱失败" );
+            }
+        }
+      });
+ }
+  </script>
+    <div class="draft"><!-- LogList begin  -->
+      <ul>
+        <li class="btmline bg01" style="margin:0px;">
+        <div class="c1"><a href="javascript:selectAll()">全选</a></div>
+        <div class="c2">日记标题</div>
+        <div class="c3">最后编辑时间</div>
+        <php>if( !empty( $data )){</php>
+        </li>
+        <volist name="data" id="vo">
+          <li class="btmlineD" id="{$vo['id']}" style="margin:0px;">
+        <div class="c1"><input name="" type="checkbox" onclick="selectCheck( this,{$i})" value="{$vo['id']}" /></div>
+        <div class="c2"><a href="__URL__/edit/id/{$vo['id']}/mid/{$vo['uid']}/edit/yes">{$vo['title']}</a></div>
+        <div class="c3 cGray2"><php>echo date("Y-m-d H:i:s",$vo['cTime']);</php></div>
+        </li>
+        </volist>
+        {$html}
+        <li style="margin:0px;">
+        <input type="button" onclick="deleteOutline()" class="btn_b" value="删除所选{%blog}" />
+        </li>
+        <php>}else{</php>
+          <span>草稿箱中没有草稿日记</span>
+          <php>}</php>
+      </ul>
+    </div>
+    <!--  end  -->
+      <php>}else{</php>
+      <div class="LogList"><!-- 好友{%blog} begin  -->
+       <ul>
+          <php>foreach( $data as $vo){</php>
+ 		<li class="btmline">
+    <div class="left" style="width: 10%;"><span class="headpic50"><a href="__TS__/space/{$vo['uid']}"  class="tips" rel="__TS__/Index/userInfo/uid/{$vo['uid']}"><img src="{$vo['uid']|getUserFace}" /></a></span></div>
+          <div class="left" style="width: 90%;">
+            <h3 class="f14px lh30"><span class="right f12px"> 			
+			<input type="button" name="Submit" value="{%share}" class="BtnShare" onclick="ts_sharePop('{$vo.id}','__URL__')" id="BtnShare_{$vo.id}"/>
+			</span>
+			<a href="__URL__/show/id/{$vo['id']}/mid/{$vo['uid']}"><strong>{$vo['title']}</strong></a></h3>
+            <p><a href="__URL__/edit/id/{$vo['id']}/mid/{$vo['uid']}">编辑</a> | 
+			<a href="javascript:deleteBlog('__URL__/doDeleteBlog/id/{$vo['id']}')">删除</a>&nbsp;&nbsp;<php>if( isset($mention) ){</php><a href="__TS__/space/{$vo['uid']}">{$vo['name']}</a><php>}</php>
+            <span class="cGray2">{$vo['cTime']|friendlyDate}</span>
+            </p>
+              <php>if( $vo['type'] != 0 ){</php><span class="cGray2 imported-article">{%type1}<php>}</php></span>
+            <p style="margin:10px 0px; line-height:180%" class="f14px">{$vo['content']}</p>
+            <neq name="vo['mention']" value="">
+            <p class="cGray2">{%mention}: 
+                <php>foreach( $vo['mention'] as $friends ){</php>
+                <a href="__TS__/space/{$friends['uid']}">{$friends['name']}</a>
+                <php>}</php>
+            
+            </p>
+            </neq>
+
+            <p class="cGray2 alR">分类:
+            <a href="__URL__/my/cateId/{$vo['category']['id']}">{$vo['category']['name']}</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="__URL__/show/id/{$vo['id']}/mid/{$vo['uid']}">{%reader}</a>({$vo['readCount']})&nbsp;&nbsp;|&nbsp;&nbsp;<a href="__URL__/show/id/{$vo['id']}/mid/{$vo['uid']}#comment">{%comment}</a>({$vo['commentCount']})</p>
+          </div>
+          </li>
+          <php>}</php>
+        </ul>
+        <div id="Pagination" class="pagination">{$html}</div>
+      </div><!-- 好友{%blog} end  -->
+      <php>}</php>
+    </div>
+
+  </div><!-- 画布 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />

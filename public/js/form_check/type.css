@@ -1,0 +1,16 @@
+.errorTip{
+	background-image:url(images/access_disallow.gif);
+	background-repeat:no-repeat;
+	padding-left:16px;
+}
+
+.errorInput{
+/*	background-color:#FFCC33;*/
+}
+
+.validTip{
+	background-image:url(images/access_allow.gif);
+	background-repeat:no-repeat;
+	background-position:left top ;
+	padding:2px;
+}

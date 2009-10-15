@@ -1,0 +1,495 @@
+
+<include file="__THEME__/header" />
+
+<script>
+    function changeverify(){
+        var date = new Date();
+        var ttime = date.getTime();
+        $('#verifyimg').attr('src',URL+'/verify/time/'+ttime);
+    }
+
+</script>
+
+<script type="text/javascript" src="../Public/home_index.js"></script>
+<script type="text/javascript" src="../Public/feed.js"></script>
+
+<style type="text/css">
+<!--
+.casual {
+	width: 1000px;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: left;
+	clear: both;
+}
+.casual .cl {
+	width: 752px;
+	float: left;
+	overflow: hidden;
+}
+
+.casual .cr {
+	width: 232px;
+	float: right;
+}
+.box {
+	border: 1px solid #ccc;
+	overflow: hidden;
+}
+.box h2 {
+	font-size: 12px;
+	line-height: 27px;
+	height: 28px;
+	margin: 0px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 5px;
+	font-weight: bold;
+	background-image: url(../Public/images/login_con_tit.gif);
+	background-repeat: repeat-x;
+	background-color: #FFF;
+	background-position: 0px 0px;
+	color: #1a6fb6;
+}
+.box ul {
+	width: 100%;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	margin: 0px;
+	padding-right: 0px;
+	padding-left: 0px;
+}
+.box ul li { display: block; }
+
+.user_list{
+	border: 1px solid #ccc;
+	overflow: hidden;
+	height: 270px;
+	clear: both;
+	width: 1000px;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: left;
+}
+.user_list h2{
+	font-size: 12px;
+	line-height: 27px;
+	height: 28px;
+	margin: 0px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 5px;
+	font-weight: bold;
+	background-image: url(../Public/images/login_con_tit.gif);
+	background-repeat: repeat-x;
+	background-color: #FFF;
+	background-position: 0px 0px;
+	color: #1a6fb6;
+}
+.user_list ul{
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	list-style-type: none;
+	overflow: hidden;
+	display: block;
+	clear: both;
+	width: 100%;
+	margin-left: 5px;
+}
+.user_list ul li{
+	width: 198px;
+	height: 72px;
+	line-height: 20px;
+	display: block;
+	float: left;
+	overflow: hidden;
+}
+-->
+</style>
+
+<div class="casual mb10 mt10">
+<div class="cl">
+
+<div class="box" style="height:328px;">
+<h2>日志 »</h2>
+<ul style="margin-left:10px;">
+	<li class="left" style="width:365px; height:95px;">
+  	  <div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left" style="width:280px;">
+      <div class="OverH" style="width:100%"><strong><a href="#">转载：女生一定要看，男生看完转告你的女性朋友！</a></strong></div>
+      <div class="cGray pb5 pt5">晚风把荣华吹涩，名利是如此浅薄，哥一生的峥嵘，一眨眼就没落，别问哥过的如何，问了哥也不会说</div>
+      <div class="cGray2"><a href="#"><span class="right">6 人推荐</span></a>sup 发表于 4小时前</div>
+	  </div>
+	</li>
+	<li class="left" style="width:365px; height:95px;">
+  	  <div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left" style="width:280px;">
+      <div class="OverH" style="width:100%"><strong><a href="#">转载：女生一定要看，男生看完转告你的女性朋友！</a></strong></div>
+      <div class="cGray pb5 pt5">晚风把荣华吹涩，名利是如此浅薄，哥一生的峥嵘，一眨眼就没落，别问哥过的如何，问了哥也不会说</div>
+      <div class="cGray2"><a href="#"><span class="right">6 人推荐</span></a>sup 发表于 4小时前</div>
+	  </div>
+	</li>
+    <li class="left" style="width:365px; height:95px;">
+  	  <div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left" style="width:280px;">
+      <div class="OverH" style="width:100%"><strong><a href="#">转载：女生一定要看，男生看完转告你的女性朋友！</a></strong></div>
+      <div class="cGray pb5 pt5">晚风把荣华吹涩，名利是如此浅薄，哥一生的峥嵘，一眨眼就没落，别问哥过的如何，问了哥也不会说</div>
+      <div class="cGray2"><a href="#"><span class="right">6 人推荐</span></a>sup 发表于 4小时前</div>
+	  </div>
+	</li>
+    <li class="left" style="width:365px; height:95px;">
+  	  <div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left" style="width:280px;">
+      <div class="OverH" style="width:100%"><strong><a href="#">转载：女生一定要看，男生看完转告你的女性朋友！</a></strong></div>
+      <div class="cGray pb5 pt5">晚风把荣华吹涩，名利是如此浅薄，哥一生的峥嵘，一眨眼就没落，别问哥过的如何，问了哥也不会说</div>
+      <div class="cGray2"><a href="#"><span class="right">6 人推荐</span></a>sup 发表于 4小时前</div>
+	  </div>
+	</li>
+    <li class="left" style="width:365px; height:95px;">
+  	  <div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left" style="width:280px;">
+      <div class="OverH" style="width:100%"><strong><a href="#">转载：女生一定要看，男生看完转告你的女性朋友！</a></strong></div>
+      <div class="cGray pb5 pt5">晚风把荣华吹涩，名利是如此浅薄，哥一生的峥嵘，一眨眼就没落，别问哥过的如何，问了哥也不会说</div>
+      <div class="cGray2"><a href="#"><span class="right">6 人推荐</span></a>sup 发表于 4小时前</div>
+	  </div>
+	</li>
+    <li class="left" style="width:365px; height:95px;">
+  	  <div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left" style="width:280px;">
+      <div class="OverH" style="width:100%"><strong><a href="#">转载：女生一定要看，男生看完转告你的女性朋友！</a></strong></div>
+      <div class="cGray pb5 pt5">晚风把荣华吹涩，名利是如此浅薄，哥一生的峥嵘，一眨眼就没落，别问哥过的如何，问了哥也不会说</div>
+      <div class="cGray2"><a href="#"><span class="right">6 人推荐</span></a>sup 发表于 4小时前</div>
+	  </div>
+	</li>
+</ul>
+</div>
+
+</div>
+
+<div class="cr">
+  <div class="box" style="height:328px;">
+    <h2>分享 »</h2>
+    <ul style="padding-left:10px;">
+      <li class="lh25"><a href="#">feifan83</a> <a href="#" class="cGray">分享了一个网址</a></li>
+      <li class="lh25"><a href="#">ekaifeng</a> <a href="#" class="cGray">分享了一个网址</a></li>
+      <li class="lh25"><a href="#">51read</a> <a href="#" class="cGray">分享了一个网址</a></li>
+      <li class="lh25"><a href="#">ltoz</a> <a href="#" class="cGray">分享了一个网址</a></li>
+      <li class="lh25"><a href="#">站长无畏</a> <a href="#" class="cGray">分享了一个话题</a></li>
+      <li class="lh25"><a href="#">站长无畏</a> <a href="#" class="cGray">分享了一个话题</a></li>
+      <li class="lh25"><a href="#">集思网络</a> <a href="#" class="cGray">分享了一篇日志</a></li>
+      <li class="lh25"><a href="#">jianulin</a> <a href="#" class="cGray">分享了一篇日志</a></li>
+      <li class="lh25"><a href="#">blackbee</a> <a href="#" class="cGray">分享了一篇日志</a></li>
+      <li class="lh25"><a href="#">china800</a> <a href="#" class="cGray">分享了一篇日志</a></li>
+      <li class="lh25"><a href="#">理红轩</a> <a href="#" class="cGray">分享了一篇日志</a></li>
+    </ul>
+  </div>
+</div>
+<div class="c"></div>
+</div>
+
+<div class="user_list mb10">
+<h2>欢迎和大家一起交流</h2>
+<ul class="pt10">
+	<li>
+  	<div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left">
+        <a href="__APP__/space/{$vo['id']}">{$vo['name']}</a><br />
+        江苏 苏州<br />2288 位好友位好友
+	  </div>
+	</li>
+    <li>
+  	<div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left">
+        <a href="__APP__/space/{$vo['id']}">{$vo['name']}</a><br />
+        江苏 苏州<br />2288 位好友位好友
+	  </div>
+	</li>
+    <li>
+  	<div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left">
+        <a href="__APP__/space/{$vo['id']}">{$vo['name']}</a><br />
+        江苏 苏州<br />2288 位好友位好友
+	  </div>
+	</li>
+    <li>
+  	<div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left">
+        <a href="__APP__/space/{$vo['id']}">{$vo['name']}</a><br />
+        江苏 苏州<br />2288 位好友位好友
+	  </div>
+	</li>
+    <li>
+  	<div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left">
+        <a href="__APP__/space/{$vo['id']}">{$vo['name']}</a><br />
+        江苏 苏州<br />2288 位好友位好友
+	  </div>
+	</li>
+    <li>
+  	<div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left">
+        <a href="__APP__/space/{$vo['id']}">{$vo['name']}</a><br />
+        江苏 苏州<br />2288 位好友位好友
+	  </div>
+	</li>
+    <li>
+  	<div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left">
+        <a href="__APP__/space/{$vo['id']}">{$vo['name']}</a><br />
+        江苏 苏州<br />2288 位好友位好友
+	  </div>
+	</li>
+    <li>
+  	<div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left">
+        <a href="__APP__/space/{$vo['id']}">{$vo['name']}</a><br />
+        江苏 苏州<br />2288 位好友位好友
+	  </div>
+	</li>
+    <li>
+  	<div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left">
+        <a href="__APP__/space/{$vo['id']}">{$vo['name']}</a><br />
+        江苏 苏州<br />2288 位好友位好友
+	  </div>
+	</li>
+    <li>
+  	<div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left">
+        <a href="__APP__/space/{$vo['id']}">{$vo['name']}</a><br />
+        江苏 苏州<br />2288 位好友位好友
+	  </div>
+	</li>
+    <li>
+  	<div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left">
+        <a href="__APP__/space/{$vo['id']}">{$vo['name']}</a><br />
+        江苏 苏州<br />2288 位好友位好友
+	  </div>
+	</li>
+    <li>
+  	<div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left">
+        <a href="__APP__/space/{$vo['id']}">{$vo['name']}</a><br />
+        江苏 苏州<br />2288 位好友位好友
+	  </div>
+	</li>
+    <li>
+  	<div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left">
+        <a href="__APP__/space/{$vo['id']}">{$vo['name']}</a><br />
+        江苏 苏州<br />2288 位好友位好友
+	  </div>
+	</li>
+    <li>
+  	<div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left">
+        <a href="__APP__/space/{$vo['id']}">{$vo['name']}</a><br />
+        江苏 苏州<br />2288 位好友位好友
+	  </div>
+	</li>
+    <li>
+  	<div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="{$vo['id']|getUserFace}" width="50" height="50" /></a></span></div>
+      <div class="left">
+        <a href="__APP__/space/{$vo['id']}">{$vo['name']}</a><br />
+        江苏 苏州<br />2288 位好友位好友
+	  </div>
+	</li>
+    <div class="c"></div>
+</ul>
+</div>
+
+<div class="casual mb10">
+<div class="cl">
+
+<div class="box" style="height:270px;">
+<h2>活动 »</h2>
+<ul style="margin-left:10px;">
+	<li class="left" style="width:365px; height:120px;">
+  	  <div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="http://www.qiniao.com/product/thumb.php?url=http://www.qiniao.com/product/public/theme_default/images/hdpic1.gif&amp;w=80&amp;h=80" width="80" height="80" /></a></span></div>
+      <div class="left" style="width:280px;">
+      <div class="OverH" style="width:100%"><strong><a href="#">经典台词征集</a></strong></div>
+      <div class="cGray pb5 pt5">
+      <span class="cGray2">活动时间：</span>2009-08-16 至 2011-08-17<br />
+      <span class="cGray2">活动地点：</span>网站<br />
+      <span class="cGray2">发起人：</span>赵杰hotmail </div>
+      <div class="cGray2"><span class="cRed">1 人参加</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="cRed">0 人关注</span></div>
+	  </div>
+	</li>
+	<li class="left" style="width:365px; height:120px;">
+  	  <div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="http://www.qiniao.com/product/thumb.php?url=http://www.qiniao.com/product/public/theme_default/images/hdpic1.gif&amp;w=80&amp;h=80" width="80" height="80" /></a></span></div>
+      <div class="left" style="width:280px;">
+      <div class="OverH" style="width:100%"><strong><a href="#">经典台词征集</a></strong></div>
+      <div class="cGray pb5 pt5">
+      <span class="cGray2">活动时间：</span>2009-08-16 至 2011-08-17<br />
+      <span class="cGray2">活动地点：</span>网站<br />
+      <span class="cGray2">发起人：</span>赵杰hotmail </div>
+      <div class="cGray2"><span class="cRed">1 人参加</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="cRed">0 人关注</span></div>
+	  </div>
+	</li>
+    <li class="left" style="width:365px; height:120px;">
+  	  <div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="http://www.qiniao.com/product/thumb.php?url=http://www.qiniao.com/product/public/theme_default/images/hdpic1.gif&amp;w=80&amp;h=80" width="80" height="80" /></a></span></div>
+      <div class="left" style="width:280px;">
+      <div class="OverH" style="width:100%"><strong><a href="#">经典台词征集</a></strong></div>
+      <div class="cGray pb5 pt5">
+      <span class="cGray2">活动时间：</span>2009-08-16 至 2011-08-17<br />
+      <span class="cGray2">活动地点：</span>网站<br />
+      <span class="cGray2">发起人：</span>赵杰hotmail </div>
+      <div class="cGray2"><span class="cRed">1 人参加</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="cRed">0 人关注</span></div>
+	  </div>
+	</li>
+    <li class="left" style="width:365px; height:120px;">
+  	  <div style="width:70px;" class="left"><span class="headpic50"><a href="__TS__/space/{$vo['id']}"><img src="http://www.qiniao.com/product/thumb.php?url=http://www.qiniao.com/product/public/theme_default/images/hdpic1.gif&amp;w=80&amp;h=80" width="80" height="80" /></a></span></div>
+      <div class="left" style="width:280px;">
+      <div class="OverH" style="width:100%"><strong><a href="#">经典台词征集</a></strong></div>
+      <div class="cGray pb5 pt5">
+      <span class="cGray2">活动时间：</span>2009-08-16 至 2011-08-17<br />
+      <span class="cGray2">活动地点：</span>网站<br />
+      <span class="cGray2">发起人：</span>赵杰hotmail </div>
+      <div class="cGray2"><span class="cRed">1 人参加</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span class="cRed">0 人关注</span></div>
+	  </div>
+	</li>
+
+</ul>
+</div>
+
+</div>
+<div class="cr">
+<div class="box" style="height:270px;">
+<h2>投票 »</h2>
+<ul>
+  	<li class="pl10 pr10 lh25"><a href="#">你们那个地方治安好吗？ </a></li>
+	<li class="pl10 pr10 lh25"><a href="#">你们那个地方治安好吗？ </a></li>
+    <li class="pl10 pr10 lh25"><a href="#">你们那个地方治安好吗？ </a></li>
+    <li class="pl10 pr10 lh25"><a href="#">你们那个地方治安好吗？ </a></li>
+    <li class="pl10 pr10 lh25"><a href="#">你们那个地方治安好吗？ </a></li>
+    <li class="pl10 pr10 lh25"><a href="#">你们那个地方治安好吗？ </a></li>
+</ul>
+</div>
+
+</div>
+<div class="c"></div>
+</div>
+
+<div class="casual mb10">
+<div class="box" >
+<h2>专辑 »</h2>
+<ul>
+  	<li class="left alC" style=" width:166px;">
+    	<div><span class="photo135"><a href="#"><img src="http://www.qiniao.com/product/data/userface/000/00/00/48_middle_face.jpg" /></a></span></div>
+  	  	<div style="width:135px; margin:0 auto;" class="alL lh20"><a href="#" class="lh25"><strong>我的相册</strong></a><br />
+        创建人：<a href="#">李那啥</a><br />
+        共10张<br />08-06 15:20更新<br /><em>2009年08月06日创建</em></dd>
+          </dl>
+  	  </div></li>
+      <li class="left alC" style=" width:166px;">
+    	<div><span class="photo135"><a href="#"><img src="http://www.qiniao.com/product/data/userface/000/00/00/48_middle_face.jpg" /></a></span></div>
+  	  	<div style="width:135px; margin:0 auto;" class="alL lh20"><a href="#" class="lh25"><strong>我的相册</strong></a><br />
+        创建人：<a href="#">李那啥</a><br />
+        共10张<br />08-06 15:20更新<br /><em>2009年08月06日创建</em></dd>
+          </dl>
+  	  </div></li>
+      <li class="left alC" style=" width:166px;">
+    	<div><span class="photo135"><a href="#"><img src="http://www.qiniao.com/product/data/userface/000/00/00/48_middle_face.jpg" /></a></span></div>
+  	  	<div style="width:135px; margin:0 auto;" class="alL lh20"><a href="#" class="lh25"><strong>我的相册</strong></a><br />
+        创建人：<a href="#">李那啥</a><br />
+        共10张<br />08-06 15:20更新<br /><em>2009年08月06日创建</em></dd>
+          </dl>
+  	  </div></li>
+      <li class="left alC" style=" width:166px;">
+    	<div><span class="photo135"><a href="#"><img src="http://www.qiniao.com/product/data/userface/000/00/00/48_middle_face.jpg" /></a></span></div>
+  	  	<div style="width:135px; margin:0 auto;" class="alL lh20"><a href="#" class="lh25"><strong>我的相册</strong></a><br />
+        创建人：<a href="#">李那啥</a><br />
+        共10张<br />08-06 15:20更新<br /><em>2009年08月06日创建</em></dd>
+          </dl>
+  	  </div></li>
+      <li class="left alC" style=" width:166px;">
+    	<div><span class="photo135"><a href="#"><img src="http://www.qiniao.com/product/data/userface/000/00/00/48_middle_face.jpg" /></a></span></div>
+  	  	<div style="width:135px; margin:0 auto;" class="alL lh20"><a href="#" class="lh25"><strong>我的相册</strong></a><br />
+        创建人：<a href="#">李那啥</a><br />
+        共10张<br />08-06 15:20更新<br /><em>2009年08月06日创建</em></dd>
+          </dl>
+  	  </div></li>
+      <li class="left alC" style=" width:166px;">
+    	<div><span class="photo135"><a href="#"><img src="http://www.qiniao.com/product/data/userface/000/00/00/48_middle_face.jpg" /></a></span></div>
+  	  	<div style="width:135px; margin:0 auto;" class="alL lh20"><a href="#" class="lh25"><strong>我的相册</strong></a><br />
+        创建人：<a href="#">李那啥</a><br />
+        共10张<br />08-06 15:20更新<br /><em>2009年08月06日创建</em></dd>
+          </dl>
+  	  </div></li>
+  	<div class="c"></div>
+</ul>
+</div>
+</div>
+<div class="casual mb10">
+<div class="cl">
+
+<div class="box mb10" style="height:320px;">
+<h2>话题 »</h2>
+<ul>
+	<li class="lh30 pl10 pr10 btmline" style="height:30px;">
+      <div class="left cGray2" style="width:50%;">话题</div><div class="left cGray2" style="width:10%;">回复</div><div class="left cGray2" style="width:20%;">作者</div><div class="left cGray2" style="width:20%;">群组</div>
+	</li>
+    <li class="lh30 pl10 pr10 btmlineD" style="height:30px;">
+      <div class="left" style="width:50%;"><a href="#">不知道标题有无字数限制</a></div><div class="left" style="width:10%;">16</div><div class="left" style="width:20%;"><a href="#">林依晓</a></div><div class="left" style="width:20%;"><a href="#">thinksns</a></div>
+	</li>
+    <li class="lh30 pl10 pr10 btmlineD" style="height:30px;">
+      <div class="left" style="width:50%;"><a href="#">不知道标题有无字数限制</a></div><div class="left" style="width:10%;">16</div><div class="left" style="width:20%;"><a href="#">林依晓</a></div><div class="left" style="width:20%;"><a href="#">thinksns</a></div>
+	</li>
+    <li class="lh30 pl10 pr10 btmlineD" style="height:30px;">
+      <div class="left" style="width:50%;"><a href="#">不知道标题有无字数限制</a></div><div class="left" style="width:10%;">16</div><div class="left" style="width:20%;"><a href="#">林依晓</a></div><div class="left" style="width:20%;"><a href="#">thinksns</a></div>
+	</li>
+    <li class="lh30 pl10 pr10 btmlineD" style="height:30px;">
+      <div class="left" style="width:50%;"><a href="#">不知道标题有无字数限制</a></div><div class="left" style="width:10%;">16</div><div class="left" style="width:20%;"><a href="#">林依晓</a></div><div class="left" style="width:20%;"><a href="#">thinksns</a></div>
+	</li>
+    <li class="lh30 pl10 pr10 btmlineD" style="height:30px;">
+      <div class="left" style="width:50%;"><a href="#">不知道标题有无字数限制</a></div><div class="left" style="width:10%;">16</div><div class="left" style="width:20%;"><a href="#">林依晓</a></div><div class="left" style="width:20%;"><a href="#">thinksns</a></div>
+	</li>
+    <li class="lh30 pl10 pr10 btmlineD" style="height:30px;">
+      <div class="left" style="width:50%;"><a href="#">不知道标题有无字数限制</a></div><div class="left" style="width:10%;">16</div><div class="left" style="width:20%;"><a href="#">林依晓</a></div><div class="left" style="width:20%;"><a href="#">thinksns</a></div>
+	</li>
+    <li class="lh30 pl10 pr10 btmlineD" style="height:30px;">
+      <div class="left" style="width:50%;"><a href="#">不知道标题有无字数限制</a></div><div class="left" style="width:10%;">16</div><div class="left" style="width:20%;"><a href="#">林依晓</a></div><div class="left" style="width:20%;"><a href="#">thinksns</a></div>
+	</li>
+
+
+</ul>
+</div>
+
+</div>
+<div class="cr">
+<div class="box mb10" style="height:320px;">
+<h2>心情 »</h2>
+<ul>
+  <li class="pl10 pr10 mb5 btmlineD" style="height:50px;">
+    <div style="height:25px;"><span class="right cGray2">3小时前</span><span class="pic20 mr5"><img src="../Public/images/userimg.jpg" width="50" height="50" /></span><a href="#">赵杰hotmail</a></div>
+    <div class="OverH cGray">最近想做淘宝客了。一直在做策划</div>
+  </li>
+  <li class="pl10 pr10 mb5 btmlineD" style="height:50px;">
+    <div style="height:25px;"><span class="right cGray2">3小时前</span><span class="pic20 mr5"><img src="../Public/images/userimg.jpg" width="50" height="50" /></span><a href="#">赵杰hotmail</a></div>
+    <div class="OverH cGray">最近想做淘宝客了。一直在做策划</div>
+  </li>
+  <li class="pl10 pr10 mb5 btmlineD" style="height:50px;">
+    <div style="height:25px;"><span class="right cGray2">3小时前</span><span class="pic20 mr5"><img src="../Public/images/userimg.jpg" width="50" height="50" /></span><a href="#">赵杰hotmail</a></div>
+    <div class="OverH cGray">最近想做淘宝客了。一直在做策划</div>
+  </li>
+  <li class="pl10 pr10 mb5 btmlineD" style="height:50px;">
+    <div style="height:25px;"><span class="right cGray2">3小时前</span><span class="pic20 mr5"><img src="../Public/images/userimg.jpg" width="50" height="50" /></span><a href="#">赵杰hotmail</a></div>
+    <div class="OverH cGray">最近想做淘宝客了。一直在做策划</div>
+  </li>
+  <li class="pl10 pr10 mb5 btmlineD" style="height:50px;">
+    <div style="height:25px;"><span class="right cGray2">3小时前</span><span class="pic20 mr5"><img src="../Public/images/userimg.jpg" width="50" height="50" /></span><a href="#">赵杰hotmail</a></div>
+    <div class="OverH cGray">最近想做淘宝客了。一直在做策划</div>
+  </li>
+
+</ul>
+</div>
+
+</div>
+<div class="c"></div>
+</div>
+<include file="__THEME__/footer" />

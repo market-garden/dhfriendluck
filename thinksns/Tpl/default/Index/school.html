@@ -1,0 +1,73 @@
+<style type="text/css" title="">
+.clear {
+	clear:both;
+}
+hr {
+	border-color:#BBBBBB;
+	border-style:solid;
+	border-width:1px 0 0;
+	height:1px;
+}
+</style>
+
+<script type="text/javascript" charset="utf-8">
+  
+<!--
+function input(str){
+var xxx =  $( '#input_school' ).val() ;
+  switch ( str ){
+    case 1:
+      $( "#school_name" ).val( $( '#input_school' ).val() ); 
+//	  $(".error_company").hide();
+//	  $("#success_company").show();
+    break;
+    case 2:
+      $( "#position" ).val( $( '#input_position' ).val() );
+      break;
+  }
+  $.facebox.close();
+}
+
+function ss(p){
+    $("#schools").html('<img src="__PUBLIC__/Images/bigloading.gif" />');
+    $.post('__APP__/Index/university',{province:p},function(text){
+        $("#schools").html(text);
+        });
+}
+function pp(p){
+  switch ( p ){
+    case "其他学校":
+      $( "#schools" ).html( '<input id = "input_school" type = text><input type="submit" class="f-button" value="提交" id="sub" onclick = "input(1)"/>&nbsp;&nbsp;');
+      break;
+    case "其他":
+      $( "#schools" ).html( '<input id = "input_position" type = text><input type="submit" class="f-button" value="提交" id="sub" onclick = "input(2)"/>');
+    break;
+    default:
+		$("#position").val(p);
+        $.facebox.close();
+  }
+}
+function cs(name,id){
+	$('#school_name').val(name);
+//	$(".error_company").hide();
+//    $("#success_company").show();
+	//$('#network_id').val(id);
+	$.facebox.close();
+}
+
+//-->
+</script>
+<div style="width:700px;padding:5px;">
+  
+	<div id="province">
+		<ul>
+		<volist name="provinceList" id="p">
+			<li style="float:left;width:60px;"><a href="javascript:ss('{$p.p}');">{$p.p}</a></li>
+		</volist>
+    	<li style="float:left;width:60px;"><a href="javascript:pp('其他学校');">其他学校</a></li>
+		</ul>
+	</div>
+	<hr class="clear" />
+	<div id="schools"></div>
+	<div class="clear"></div>
+</div>

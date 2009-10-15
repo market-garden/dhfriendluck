@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <title>{&SITE_TITLE}</title>
+                <link href="__PUBLIC__/admin/css/layout.css" rel="stylesheet" type="text/css" />
+                <script type="text/javascript" src="__PUBLIC__/js/jquery.js" ></script>
+
+                <script type="text/javascript">
+
+                </script>
+
+        </head>
+        <body>
+                <div id="container">
+                        <div class="tab">
+                                <ul>
+                                        <li> <a class="on" href="__URL__/index/">全局设置</a></li>
+                                        <li><a href="__URL__/votelist/">投票管理</a></li>
+                                </ul>
+                        </div>
+
+                        <form action ="__URL__/doChangeBase/" method="post" >
+                                <table class="tableborder" width="100%">
+                                        <tbody>
+                                                <tr class="top">
+                                                        <td class="border" colspan="2"></td>
+                                                </tr>
+                                                <tr>
+                                                        <th class="header" colspan="2">投票全局设置</th>
+                                                </tr>
+                                                <tr class="label">
+                                                        <th>说明</th>
+                                                        <th>设置</th>
+                                                </tr>
+
+                                                <tr class="cell">
+                                                        <td class="altbg1">
+                                                                <b>每页显示投票条数:</b>
+                                                                <br/>
+                                                                <span class="smalltxt">设置投票列表页每页显示条数。默认为10条记录。</span>
+                                                        </td>
+                                                        <td class="altbg2"><input name="limitpage" class="txt" value ="{$limitpage}" /></td>
+                                                </tr>
+
+                                                <tr class="cell">
+                                                        <td class="altbg1">
+                                                                <b>全部投票查看时间:</b>
+                                                                <br/>
+                                                                <span class="smalltxt">全部投票查看排序时间</span>
+                                                        </td>
+                                                        <td class="altbg2">   <select id="allorder" name="allorder">
+                                                                        <option value = "all">全部</option>
+                                                                        <option value = "oneDay">一天</option>
+                                                                        <option value = "threeDay">三天</option>
+                                                                        <option value = "oneWeek">一周</option>
+                                                                        <option value = "three">三个月</option>
+                                                                        <option value = "half">半年</option>
+                                                                        <option value = "year">一年</option>
+                                                                </select>
+                                                        </td>
+                                                </tr>
+
+
+                                                <tr class="cell">
+                                                        <td class="altbg1">
+                                                                <b>默认结束时间:</b>
+                                                                <br/>
+                                                                <span class="smalltxt">投票结束时间距离发布时间间隔</span>
+                                                        </td>
+                                                        <td class="altbg2">
+                                                                <select id="defaultTime" name="defaultTime">
+                                                                        <option value = "86400">一天</option>
+                                                                        <option value = "259200">三天</option>
+                                                                        <option value = "604800">一周</option>
+                                                                        <option value = "2592000">一个月</option>
+                                                                        <option value = "7776000">三个月</option>
+                                                                        <option value = "15552000">半年</option>
+                                                                        <option value = "31104000">一年</option>
+                                                                </select>
+                                                        </td>
+                                                </tr>
+
+                                                <tr class="cell">
+                                                        <td class="altbg1">
+                                                                <b>投票参与显示:</b>
+                                                                <br/>
+                                                                <span class="smalltxt">显示好友的参与还是所有人的参与</span>
+                                                        </td>
+                                                        <td class="altbg2">   <select id="join" name="join">
+                                                                        <option value = "all">全部</option>
+                                                                        <option value = "friend">好友</option>
+                                                                </select>
+                                                        </td>
+                                                </tr>
+
+
+                                                <tr>
+                                                        <td class="footer" colspan="2">
+                                                                <input type="submit" class="button" value="提交" />
+                                                        </td>
+                                                </tr>
+                                                <tr class="bottom">
+                                                        <td class="border" colspan="5">&nbsp;</td>
+                                                </tr>
+
+
+                                        </tbody>
+                                </table>
+                        </form>
+
+
+                        <script type="text/javascript">
+                                $( "#join option[value='{$join}']" ).attr( 'selected',true );
+                                $( "#defaultTime option[value='{$defaultTime}']" ).attr( 'selected',true );
+                        </script>
+
+                        </form>
+                </div>
+        </body>
+</html>

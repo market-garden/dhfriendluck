@@ -1,0 +1,44 @@
+<script type="text/javascript">
+<!--
+	//指定当前组模块URL地址
+	var	URL		=	'__URL__';
+	var	APP		=	'__APP__';
+	var	PUBLIC	=	'__PUBLIC__';
+	var	ROOT	=	'__ROOT__';
+	var TS		=	'__TS__';
+//-->
+</script>
+<link href="__THEME__/layout.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
+<script type="text/javascript">
+function handup(){
+	var info = $("#info").val();
+	var id = $("#id").val();
+	var fids = $("#ui_fri_ids").val();
+	
+	parent.doadd_share(URL,id,info,fids);
+}
+</script>
+<form id="form1" name="form1" method="post"  onsubmit="parent.ymPrompt.close()">
+<table width="100%" border="0" cellspacing="3" cellpadding="0" class="mt10"><!--action="__URL__/doadd_share"-->
+        <tr>
+          <td align="right" valign="top" class="lh25">同时通知给：</td>
+          <td><div style="width:350px;">{:W("SelectFriend")}</div></td>
+        </tr>		
+        <tr>
+        	<td align="right" valign="top">描述：</td>
+        	<td><span class="input_box">
+        		<textarea name="info" cols="40" rows="4" id="info"></textarea>
+       		</span></td>
+       	</tr>
+        <tr>
+        	<td align="right">&nbsp;</td>
+        	<td><label>	
+        		<input name="id" type="hidden" id="id" value="{$id}"/>
+        		
+        		<input name="button" type="submit" class="btn_b" id="button" value="提 交" onclick="handup()"/>
+        		<input name="button2" type="button" class="btn_w" id="button2" value="取 消" onclick="parent.ymPrompt.close()"/>
+       		</label></td>
+       	</tr>	
+</table>
+</form>

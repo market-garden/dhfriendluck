@@ -1,0 +1,63 @@
+<php>
+  if( 2 == $role ){
+    echo "您无法评论,日志发布者设置好友可评论";
+  }elseif( 3 == $role ){
+    echo "您无法评论,日志发布者已经关闭评论";
+    }else{</php>
+<script type="text/javascript" charset="utf-8">
+var items_per_page = {$perpage};
+var next_text      = "{$next}";
+var prev_text      = "{$prev}";
+var appid          = {$appid};
+var mid            = {$mid};
+var filed          = '{$filed}';
+var type = "{$type}";
+
+</script>
+<link href="__PUBLIC__/js/pagination/pagination.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__PUBLIC__/js/pagination/jquery.pagination.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/pagination/Comment.js"></script>
+<script type="text/javascript">
+
+$(document).bind("keydown","ctrl+return",function(evt){
+	addComment($('#content_submit'));
+	return false;
+	}
+);
+</script>
+
+<div id="content1" class="Guestbook">
+          <div class="tit"><div class="right pr5" style="position: relative; width:40px; height:29px;"><a class="phizIco" id="bqBottom" href="###" onclick='bq_show();' title="插入表情">插入表情</a>
+          <div class="phiz" style="display:none; width:365px; right:0; top:31px; line-height:0px;" id="smileylist">
+          <volist name="bq_emotion" id="bq" key="k">
+            <div class="ico_link hand">
+              <img src="__PUBLIC__/images/biaoqing/mini/{$bq.filename}" emotion="{$bq.emotion}" title="{$bq.title}" onclick="insertBQ(this,{$k-1});"/>            </div>
+          </volist>
+    </div></div><span class="pl5">添加评论</span></div>
+  <div class="GB_box"><textarea id="content" name="textarea" cols="50" class="Text"  onBlur="this.className='Text'" onFocus="this.className='Text1'"></textarea>
+    <input id="content_submit" onclick="addComment( $( this ) )" type="button" class="btn_b" value="发表留言" />
+          <!--<span class="cGray">(每条最多2000字)</span>--> 
+          <input id="quietly" name="quietly" type="checkbox" value="1" />悄悄话
+        </div>
+        </div>
+        <div id="loadding"></div>
+        <div id="comment" class="critique"><!-- 评论列表 begin  -->
+          <ul>
+          </ul>
+          <div id="Pagination" class="pagination"></div><div id="Searchresult"></div>
+              <input id="toId" type="hidden" value="">
+
+        </div>
+
+        <div id="replay2" style="display:none">
+          <div class="pt5 clear">
+            <div style="width: 10%;" class="left"><span class="pic38"><img id="face" src="{$face}"/></span></div>
+            <div style="width: 90%;" class="left">
+              <textarea onfocus="this.className='Text1'" id="content2" onblur="this.className='Text'" class="Text" style="width: 99%;" rows="4" cols="50" name="textarea"> </textarea>
+              <input onclick="ReplayComment( $( this ) )" type="button" value="回 复" class="btn_b mt5"/>
+              <input onclick="cancel( $( this ) )" type="button" value="取消" class="btn_w mt5"/>
+            </div>
+          </div>
+        </div>
+        <input type="hidden" id='url' value="{$url}">
+        <php>}</php>

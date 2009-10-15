@@ -1,0 +1,19 @@
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+</head>
+
+<include file="__THEME__/header" />
+<script>
+function handlerIframe(){
+    alert(ymPrompt.getPage().contentWindow.document.body.innerHTML);
+    ymPrompt.close();
+}
+
+</script>
+<script type="text/javascript" src="__PUBLIC__/js/ymPrompt/ymPrompt_ex.js"></script>
+<a href="javascript:ymPrompt.win({message:'__URL__/addFriend',width:500,height:300,title:'getPage测试',handler:handlerIframe,autoClose:false,iframe:true});" title="加为好友">加为好友</a>
+
+<script type="text/javascript" src="__PUBLIC__/js/ymPrompt/ymPrompt_ex.js"></script>
+<a href="javascript:ymPrompt.win({title:'iframe模式 ',fixPosition:true,maxBtn:true,minBtn:true,iframe:{id:'myId',name:'myName',src:'__URL__/addFriend'}});" title="加为好友">xxx</a>
+

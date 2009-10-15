@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$site_opts.site_name}后台管理系统</title>
+<link href="__PUBLIC__/admin/css/layout.css" rel="stylesheet" type="text/css" />
+<script src="../Public/script/app.js" type="text/javascript"></script>
+<script type="text/javascript">
+App.BOOT_URL	= '__URL__';
+App.MENU_URL	= '__URL__/menu';
+</script>
+<SCRIPT LANGUAGE="JavaScript" src="__PUBLIC__/Js/FCKeditor/fckeditor.js"></SCRIPT>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
+<script type="text/javascript" src="../Public/script/json2select.js"></script>
+<body>
+<div id="main" class="main" >
+<div class="content">
+<TABLE cellpadding=3 cellspacing=3>
+<FORM METHOD=POST id="form1" action="__URL__/update/" >
+
+
+<TR>
+	<TD class="tRight" >标题：</TD>
+	<TD class="tLeft" ><INPUT TYPE="text" class="bLeftRequire"  check='Require' warning="标题不能为空" size="100" NAME="title" value="{$vo.title}"></TD>
+</TR>
+
+<TR>
+	<TD class="tRight" >内容：</TD>
+	<TD class="tLeft" >
+	<textarea rows="10"  name="content" style="display:none;" id="content">{$vo.content|stripslashes|stripslashes}</textarea>
+            <iframe id="Editor" name="Editor" src="__PUBLIC__/js/Editor/editor.html?id=content&amp;height=300&width=70" frameborder="0" marginheight="0" marginwidth="0" scrolling="No" style="width: 72%; height: 300px"></iframe>
+	
+     </TD>
+</TR>
+
+<TR>
+	<TD >分类：</TD>
+	<TD class="center"><div id="category"></div></TD>
+</TR>
+<TR>
+  <TD >作者：</TD>
+  <TD class="center"><span class="tLeft">
+    <input type="text" class="large bLeftRequire" name="author" value="{$vo.author}" />
+  </span></TD>
+</TR>
+<TR>
+	<TD class="tRight" >链接：</TD>
+	<TD class="tLeft" ><INPUT TYPE="text" class="bLeftRequire" size="100" NAME="url" value="{$vo.url}"></TD>
+</TR>
+<TR>
+  <TD ></TD>
+  <TD class="center">
+  	<INPUT TYPE="hidden" name="id" value="{$vo.id}" >
+	<INPUT TYPE="submit" value="保 存" class="small submit">
+	<INPUT TYPE="reset" class="submit  small" value="清 空" >
+  </TD>
+</TR>
+</TABLE>
+</FORM>
+</div>
+</div>
+<script type="text/javascript">
+
+var category_json={$category_json};
+
+$("#category").json2select(category_json,[{$vo.cate_tree}],'category');
+
+</script>
+</body>
+</html>

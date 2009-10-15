@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
+
+<link href="__THEME__/layout.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+    <!--
+    //指定当前组模块URL地址
+    var	URL		=	'__URL__';
+    var	APP		=	'__APP__';
+    var	PUBLIC	=	'__PUBLIC__';
+    var	ROOT	=	'__ROOT__';
+    //-->
+</script>
+
+<script>
+var json = eval({$list} );
+var arrArea = new Array();
+var arrAreaTitle = new Array();
+var selected = '{$selectedarea}';
+
+//初始化
+function init(){
+	var selectarr = selected.split(',');
+	$.each( json, function(i,n){
+		$("#list_0").append(addnode(n));
+		if(selectarr[0]==i){
+			$("#node_"+i).attr('class','on');
+			arrArea = selectarr;
+			arrAreaTitle[0] = n.title;
+			$("#select_0").html(n.title);
+			$.each( json[i]['child'], function(j,m){
+				$("#list_1").append(addnode(m));
+				if(selectarr[1]==j){
+					$("#node_"+j).attr('class','on');
+					arrAreaTitle[1] = m.title;
+					$("#select_"+m.level).html(m.title);
+				}
+			});
+		}
+	});
+}
+
+//选择下级地区
+function selectarea(id,level,title){
+	$("#select_"+level).html(title);
+	$("#node_"+arrArea[level]).attr('class','noon');
+	$("#node_"+id).attr('class','on');
+	
+	arrArea[level]    = id;
+	arrAreaTitle[level]    = title;
+	
+	level++;
+	var jsonchild = json;
+	//var arrlength = arrArea.length;	
+	for(var i=0;i<1;i++){
+		if(i>=level-1){
+			var num = i+1;
+			$("#list_"+num).html('');
+			$("#select_"+num).html('');		    	
+		}
+		if(i<level){
+			jsonchild= jsonchild[arrArea[i]].child;
+		}
+	}
+	arrArea.splice(level);
+	arrAreaTitle.splice(level);
+	
+	var html = '';
+	if(jsonchild){
+		$.each( jsonchild, function(i,n){
+		   		html+=addnode(n);
+		}); 
+		$("#list_"+level).html(html);
+	}
+}
+
+function addnode(n){
+	return "<li id='node_"+n.id+"'><a href='javascript:void(0);' onclick=selectarea("+n.id+","+n.level+",\'"+n.title+"\') >"+n.title+"</a></li>";
+}
+
+function save(){
+	if(arrArea.length==0){
+		alert('请选择地区');
+	}else{
+		parent.$('#{$type}').val(arrAreaTitle.join(' '));
+		parent.$('#ts_{$type}').val(arrArea);
+		parent.ymPrompt.close();
+	}
+}
+</script>
+<style>
+.ullist{
+	list-style-type:none;
+	white-space: nowrap;
+}
+
+.ullist li{
+	margin:5px;
+	float:left;
+}
+
+.ullist .on a{
+	border:1px solid #3385CA;
+}
+
+</style>
+<body onload="init()">
+<div class="pop">
+
+    <div class="con">
+      <ul class="ullist" id="list_0">
+    
+      </ul>
+    </div>
+    
+    <div class="con" style="clear:both;border-top:1px solid #D1D1D1;height:90px;margin-top:0px;">
+      <ul class="ullist" id="list_1">
+    
+      </ul>
+    </div> 
+    <div style="margin-left:10px;margin-top:0px;margin-bottom:3px;color:red;clear:both;text-align:left;" id="selectmessage">
+    &nbsp;
+    <span id="select_0" style="margin-left:5px;"></span><span  style="margin-left:5px;" id="select_1"></span><span  style="margin-left:5px;" id="select_2"></span>
+    </div>
+    <div class="btm" id="f_button">
+        <input name="input" type="button" class="btn_b" value="确 定"  onclick="save()"/>
+        <input name="input2" type="button" class="btn_w" value="取 消" onclick="parent.ymPrompt.close();" />
+    </div>
+</div>
+
+</body>

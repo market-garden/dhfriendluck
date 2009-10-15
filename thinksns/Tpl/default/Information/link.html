@@ -1,0 +1,50 @@
+<include file="__THEME__/header" />
+
+<link href="../../../../public/theme_default/us_info.css" rel="stylesheet" type="text/css" />
+<div class="content"><!-- 内容 begin  -->
+   <link href="__THEME__/us_info.css" rel="stylesheet" type="text/css" />
+<div class="left_menu">
+  <!-- 用户组件列表 begin -->
+  <div class="left_menu_top"></div>
+  <div class="left_menu_list">
+    <ul>
+      
+        <volist name="category" id="cate" >
+      
+      	
+      		
+      			
+      				<li
+      					 <php> if($cid == $cate['a']) {</php> class="on" <php> } </php>  >
+      						<a href="__URL__/index/cid/{$cate.a}">{$cate.t}</a><span>&nbsp;</span>
+      				</li>
+      			
+      		
+
+      
+
+      </volist>
+     
+      <li class="on"> <a href="__URL__/index/flink/1">友情链接</a><span>&nbsp;</span></li>
+      
+    </ul>
+  </div>
+  <div class="left_menu_btm"></div>
+</div>
+
+    <div class="main"><!-- 画布 begin  -->
+    <div class="us_info">
+		<div class="tit">友情连接</div>
+        <div class="detail">
+        <volist name="links" id="link">
+        	<div class="left alC lh25 mr10 mb10" style="background-color:#f7f7f7; width:120px;"><a href="{$link.url}" target="_blank">{$link.name}</a></div>
+       </volist>
+      </div>
+      <div class="c"></div>
+    </div>
+    
+   
+    </div><!-- 画布 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />

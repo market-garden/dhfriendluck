@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>注册配置</title>
+	<link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+	</head>
+	<body>
+		<div id="container">
+            <form action="__URL__/doReg" method="post" class="form_validator">
+
+		  <table width="100%" border="0" cellpadding="4" cellspacing="0" class="form">
+            <tr class="top">
+              <td colspan="2" class="tit">注册配置</td>
+            </tr>
+            <tr>
+              <th class="th" width="160" valign="top">关闭新用户注册：</th>
+              <td class="td"><p>
+                <input type="radio" name="reg_close" id="radio3" value="1" class="radio"  <php> if($reg_close == 1){</php> checked <php>}</php>/>
+                是
+                <input type="radio" name="reg_close" id="radio4" value="0" class="radio"    <php> if($reg_close == 0){</php> checked <php>}</php> />
+                否</p>
+              </td>
+            </tr>
+            <tr>
+              <th class="th" valign="top">邀请注册功能：</th>
+              <td class="td"><p>
+                      <input type="radio" name="reg_invite_close" id="radio" value="1" class="radio"  <php>if($reg_invite_close == 1){</php> checked='true' <php>}</php>/>
+                      邀请注册
+                      <input type="radio" name="reg_invite_close" id="radio2" value="0" class="radio" <php>if($reg_invite_close == 0){</php> checked='true' <php>}</php> />
+                      普通注册
+                      </p>
+                      </td>
+            </tr>
+            
+             <tr>
+              <th class="th" valign="top">是否需要邮件激活：</th>
+              <td class="td"><input type="radio" name="reg_email" id="radio7" value="1" class="radio" <php>if($reg_email == 1){</php> checked='true' <php>}</php>/>
+是
+  <input type="radio" name="reg_email" id="radio8" value="0" class="radio" <php>if($reg_email == 0){</php> checked='true' <php>}</php>/>
+否</td>
+            </tr>
+            
+            <tr>
+              <th class="th" valign="top">注册服务条款：</th>
+              <td class="td"><p>
+                 
+                   <textarea rows="10"  name="reg_tiaokuan" style="display:none;" id="content">{$reg_tiaokuan|stripslashes|stripslashes}</textarea>
+            <iframe id="Editor" name="Editor" src="__PUBLIC__/js/Editor/editor.html?id=reg_tiaokuan&height=300&width=70" frameborder="0" marginheight="0" marginwidth="0" scrolling="No" style="width: 72%; height: 300px"></iframe> 
+                </p>
+                 </td>
+            </tr>
+            
+            <tr>
+              <th class="th" valign="top">用户注册默认添加的好友：</th>
+              <td class="td"><p>
+                  <textarea name="reg_relation_friend" cols="50" rows="2" id="textfield">{$reg_relation_friend}</textarea>
+                </p>
+                  <p>按用户id存储，用，隔开 </p></td>
+            </tr>
+            
+            <tr>
+              <th class="th" valign="top">用户注册默认添加的群组：</th>
+              <td class="td"><p>
+                  <textarea name="reg_relation_group" cols="50" rows="2" id="textfield">{$reg_relation_group}</textarea>
+                </p>
+                  <p>按群组id存储，用，隔开</p></td>
+            </tr>
+
+            <tr>
+              <th class="th" valign="top">关闭姓名判断：</th>
+              <td class="td"><p>
+                      <input type="radio" name="reg_checkname" id="radio" value="1" class="radio"  <php>if($reg_checkname == 1){</php> checked='true' <php>}</php>/>
+                      是
+                      <input type="radio" name="reg_checkname" id="radio2" value="0" class="radio" <php>if($reg_checkname == 0){</php> checked='true' <php>}</php> />
+                      否
+                      </p>
+                      </td>
+            </tr>
+
+            <tr>
+              <th class="th" valign="top">用户名检测单姓：</th>
+              <td class="td"><p>
+                  <textarea name="reg_danxing" cols="50" rows="5" id="textfield">{$reg_danxing}</textarea>
+                </p>
+                  <p>用于检测用户名是否为真实用户名。此配置只有打开姓名检测才有效</p></td>
+            </tr>
+            <tr>
+              <th class="th" valign="top">用户名检测复姓：</th>
+              <td class="td"><p>
+                  <textarea name="reg_fuxing" cols="50" rows="5" id="textfield">{$reg_fuxing}</textarea>
+                </p>
+                  <p>用于检测用户名是否为真实用户名。此配置只有打开姓名检测才有效</p></td>
+            </tr>
+
+
+           <!-- <tr>
+              <th class="th" valign="top">没有好友时显示推荐用户：</th>
+              <td class="td"><input type="radio" name="fri_tuijian" id="radio5" value="1" class="radio" <php>if($fri_tuijian == 1){</php> checked='true' <php>}</php>/>
+是
+  <input type="radio" name="fri_tuijian" id="radio6" value="0" class="radio" <php>if($fri_tuijian == 0){</php> checked='true' <php>}</php>/>
+否</td>
+            </tr>-->
+            <tr>
+              <th class="th" valign="top">没有好友时显示全站动态：</th>
+              <td class="td"><input type="radio" name="fri_dongtai" id="radio7" value="1" class="radio" <php>if($fri_dongtai == 1){</php> checked='true' <php>}</php>/>
+是
+  <input type="radio" name="fri_dongtai" id="radio8" value="0" class="radio" <php>if($fri_dongtai == 0){</php> checked='true' <php>}</php>/>
+否</td>
+            </tr>
+
+           
+
+
+            <tr>
+              <th class="th" valign="top">&nbsp;</th>
+              <td class="td"><input  type="submit" class="button" id="button" value="提交" /></td>
+
+            </form>
+            </tr>
+          </table>
+		  </div>
+	</body>
+</html>

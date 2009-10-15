@@ -1,0 +1,32 @@
+
+<div class="cr"><!-- cr begin  -->
+    <div class="UserList">
+        <div class="tit"><span class="right"></span>活跃用户</div>
+        <div class="ListBox">
+            <ul>
+                <volist name="user" id="user">
+                    <li>
+                        <span><a href="__APP__/space/{$user.id}"><img src="{$user.id|getUserFace}" /></a></span>
+                        <div class="name"><a href="__APP__/space/{$user.id}">{$user.name}</a></div>
+                    </li>
+                </volist>
+
+            </ul>
+        </div>
+        <div class="btm"></div>
+    </div>
+    <div class="UserList">
+        <div class="tit">推荐用户</div>
+        <div class="ListBox">
+            <ul>
+                <volist name="commenduser" id="user">
+                    <li>
+                        <span><a href="__APP__/space/{$user.id}"><img src="{$user.id|getUserFace}" /></a></span>
+                        <div class="name"><a href="__APP__/space/{$user.id}">{$user.name}</a></div>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+        <div class="btm"></div>
+    </div>
+</div><!-- cr end  -->

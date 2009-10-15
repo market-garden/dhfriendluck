@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{&SITE_TITLE}</title>
+  <link href="__PUBLIC__/admin/css/layout.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../Public/script/jquery.js" ></script>
+
+	<script type="text/javascript">
+		var ctrl = function(name){
+			this.elements = document.getElementsByName('id[]');
+			this.length = this.elements.length;
+		}
+		ctrl.prototype = {
+			reverse:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked= !this.elements[i].checked;
+				}
+			},
+			all:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked = true;
+				}
+			},
+			unAll:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked = false;
+				}
+			},
+			toggle:function(obj){
+				this[obj.checked ? 'all' : 'unAll']();
+			},
+			del:function(id){
+				if(id==undefined){
+					id = [];
+					for(i=0;i<this.length;i++){
+						this.elements[i].checked && id.push(this.elements[i].value);
+					}
+					id = id.join(',');
+				}
+        //ajax删除id
+        $.post( '__URL__/doDeleteSmileType',{type:id},function( text ){
+            //返回1，是只是选择了一个id,返回2，选择了多个
+            if( text == 1 ){
+                 $( 'tr['+'id=\'biaoqing'+id+'\']' ).remove();
+              }else if( text == 2 ){
+                  var id_list = id.split( ',' );   
+                  for (var j=0 ; j< id_list.length ; j++   ){
+                      $( 'tr['+'id=\'biaoqing'+id_list[j]+'\']' ).remove();
+                  }
+              }else{
+                alert( '删除失败' );
+              }
+            });
+			},
+			edit:function(id){
+				alert('您选择了id为:'+id);
+			}
+		}
+		var c = null;
+	</script>
+	</head>
+	<body>
+		<div id="container">
+      <form action = "__URL__/smile/" method="post">
+      			<table class="tableborder" width="100%">
+				<tbody>
+					<tr class="top">
+						<td class="border" colspan="2"></td>
+					</tr>
+					<tr>
+						<th class="header" colspan="2">表情分类添加</th>
+					</tr>
+					<tr class="label">
+						<th>说明</th>
+						<th>设置</th>
+					</tr>
+					<tr class="cell">
+						<td class="altbg1">
+							<b>表情分类添加</b>
+							<br/>
+							<span class="smalltxt">表情分类为表情所使用的应用名。表情文件在风格路径下的images/biaoqing/应用名</span>
+						</td>
+            <td class="altbg2"><input name="type" class="txt"/></td>
+					</tr>
+					<tr>
+						<td class="footer" colspan="2">
+							<input type="submit" class="submit" value="提交" />
+						</td>
+					</tr>
+					</tbody>
+			</table>
+      </form>
+
+			<table class="tableborder" width="100%">
+				<tbody>
+					<tr class="top">
+						<td class="border" colspan="6"></td>
+					</tr>
+					<tr>
+						<th class="header" colspan="6">表情列表</th>
+					</tr>
+					<tr class="label">
+						<th><input type="checkbox" class="checkbox" onclick="c.toggle(this)" />删？</th>
+						<th>表情分类名</th>
+						<th>操作</th>
+					</tr>
+          <php>foreach( $smiletype as $key=>$vo ){</php>
+          <tr class="cell altbg1" id = 'biaoqing{$vo['type']}'>
+            <php>$i++</php>
+            <td><input type="checkbox" class="checkbox" name="id[]" value="{$vo['type']}" /></td>
+            <td>{$vo['type']}</td>
+            <td><button type="button" onclick="location.href='__URL__/smile/type/{$vo['type']}'">编辑</button><button type="button" onclick="c.del('{$vo.type}')">删除</button></td>
+					</tr>
+          <php>}</php>
+					<tr>
+						<td class="footer" colspan="6">
+							<button type="button" onclick="c.all()">全选</button>
+							<button type="button" onclick="c.unAll()">全不选</button>
+							<button type="button" onclick="c.reverse()">反选</button>
+							<button type="button" onclick="c.del()">删除</button>
+						</td>
+					</tr>
+					<tr class="bottom">
+						<td class="border" colspan="6">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<script type="text/javascript">
+			c = new ctrl('id[]');
+		</script>
+	</body>
+</html>

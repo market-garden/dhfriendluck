@@ -1,0 +1,45 @@
+@charset "utf-8";
+/*
+赵杰 
+应用列表样式
+*/
+
+.page_title h2 img{height:24px;width:24px;float:left;margin-right:5px}
+.page_title h2{
+	font-size:14px;
+	color:#000000;
+	font-weight:bold;
+	line-height:25px;
+	height:25px;
+	clear:both
+}
+
+.app_box {
+	clear:both;
+	overflow:hidden;
+	margin-top: 10px;
+}
+
+
+.app_box ul{}
+.app_box ul li{
+	padding-top: 20px;
+	padding-bottom: 10px;
+	clear: both;
+}
+.app_box ul li h3{
+	font-size: 14px;
+	line-height: 25px;
+}
+.app_box ul li p{
+	margin: 0px;
+	padding: 0px;
+	line-height: 25px;
+}
+.app_account{
+	background-color:#F2F2F2;
+	border: 1px solid #CCCCCC;
+	width:180px;
+	padding: 5px;
+	position: absolute; right:20px; top:34px;
+}

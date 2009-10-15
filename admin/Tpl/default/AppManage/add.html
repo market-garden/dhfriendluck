@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{&SITE_TITLE}</title>
+        <link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+
+        <script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/js/form_check/jquery.validator.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/js/form_check/jquery.corners.min.js"></script>
+        <link href="__PUBLIC__/js/form_check/type.css" rel="stylesheet" type="text/css" />
+
+        <script>
+            $(function(){
+                $('#myform1').checkForm();
+            });
+            function install(name){
+            	location.href = "__URL__/add/appname/"+name;
+            }
+        </script>
+
+    </head>
+    <body>
+        <div id="container">
+<table class="tableborder" width="100%">
+				<tbody>
+					<tr class="top">
+						<td class="border"></td>
+					</tr>
+					<tr>
+						<th class="header">tips</th>
+					</tr>
+					<tr>
+						<td class="tips">
+							<ul>
+								<li>应用安装</li>
+							</ul>
+						</td>
+					</tr>
+					<tr class="bottom">
+						<td class="border" colspan="5">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>        
+        <php>if($selected){</php>
+         <table class="tableborder" width="100%">
+         <form action="__APP__/AppManage/doadd" method="POST">
+    <tr class="label">
+                            <th style="width:400px;">说明</th>
+                            <th>设置</th>
+                        </tr>
+                        <tr class="cell">
+                            <td class="altbg1">
+                                <b>应用名:</b>
+                                <br/>
+                                <span class="smalltxt">在前台显示的名字</span>
+                            </td>
+                            <td class="altbg2"><input name="name" class="txt" value="{$appConfig.app_cnname}"/></td>
+                        </tr>
+                        
+                        <tr class="cell">
+                            <td class="altbg1">
+                                <b>应用目录名:</b>
+                                <br/>
+                                <span class="smalltxt">你的应用在apps下的文件夹名</span>
+                            </td>
+                            <td class="altbg2"><input name="enname" class="txt" value="{$appConfig.app_enname}" readonly/></td>
+                        </tr>
+                        
+                        <tr class="cell">
+                            <td class="altbg1">
+                                <b>开发者:</b>
+                                <br/>
+                                <span class="smalltxt">开发者的名字</span>
+                            </td>
+                            <td class="altbg2"><input name="author" value="{$appConfig.author}" readonly /></td>
+                        </tr>
+
+                        <tr class="cell">
+                            <td class="altbg1">
+                                <b>应用访问地址:</b>
+                                <br/>
+                                <span class="smalltxt">{APPS_URL}对应网站配置的APP应用安装目录<BR>注意:需指向应用的安装根目录</span>
+                            </td>
+                            <td class="altbg2"><input name="url" style="width:200px;" class="txt" value="http://{APPS_URL}/{$appConfig.app_enname}"/>  / <input name="url_exp" style="width:100px;" class="txt" value="{$appConfig.url_exp}"> </td>
+                        </tr>
+                        
+                        <tr class="cell">
+                            <td class="altbg1">
+                                <b>应用管理地址:</b>
+                                <br/>
+                                <span class="smalltxt">应用管理地址</span>
+                            </td>
+                            <td class="altbg2"><input name="url" style="width:200px;" class="txt" value="{$appConfig.url_admin}"/> </td>
+                        </tr>      
+                        
+                        <tr class="cell">
+                            <td class="altbg1">
+                                <b>图标:</b>
+                                <br/>
+                                <span class="smalltxt">应用图标</span>
+                            </td>
+                            <td class="altbg2"><input name="icon" class="txt" value="{$appConfig.icon}" style="width:250px;" readonly/></td>
+                        </tr>
+                        
+                     
+
+                        <tr class="cell">
+                            <td class="altbg1">
+                                <b>查看某个用户这个应用的链接:</b>
+                                <br/>
+                                <span class="smalltxt">支持二级或独立域名,内部安装地址应为http://{APP_URL}/</span>
+                            </td>
+                            <td class="altbg2"><input name="uid_url" class="txt" style="width:250px"  value="{$appConfig.uid_url}" /></td>
+                        </tr>
+
+
+                        <tr class="cell">
+                            <td class="altbg1">
+                                <b>应用附加链接名字:</b>
+                                <br/>
+                                <span class="smalltxt">比如日志右边的"发表"</span>
+                            </td>
+                            <td class="altbg2"><input name="add_name"  class="txt" value="{$appConfig.add_name}"  />(选填)</td>
+                        </tr>
+
+                        <tr class="cell">
+                            <td class="altbg1">
+                                <b>应用附加链接的地址:</b>
+                                <br/>
+                                <span class="smalltxt">支持二级或独立域名,内部安装地址应为http://{APP_URL}/</span>
+                            </td>
+                            <td class="altbg2"><input name="add_url" style="width:250px" class="txt" value="{$appConfig.add_url}" />(选填)</td>
+                        </tr>
+
+
+                        <tr class="cell">
+                            <td class="altbg1">
+                                <b>状态:</b>
+                                <br/>
+                                <span class="smalltxt">"默认" --- 表示用户默认就安装的;<br/>"可选" --- 表示用户点击添加应用后才会显示的;<br/>"关闭" --- 表示用户在前台暂时看不到</span>
+                            </td>
+                            <td class="altbg2">
+                                <input class="radio" type="radio" name="status" value="0" checked/>
+                                默认
+                                <br/>
+                                <input class="radio" type="radio" name="status" value="1"/>
+                                可选
+                                <br/>
+                                <input class="radio" type="radio" name="status" value="2"  require="true" datatype="group" min="1" max="1" msgid="fav" msg="必须选中1个选项" />
+                                关闭
+                                <span id="fav"></span>
+                            </td>
+                        </tr>
+                        <tr class="cell">
+                            <td class="altbg1">
+                                <b>位置:</b>
+                                <br/>
+                                <span class="smalltxt">这里写说明</span>
+                            </td>
+                            <td class="altbg2">
+                                <input class="radio" type="radio" name="place" value="0"  checked="true"/>
+                                左边栏
+                                <br/>
+                                <input class="radio" type="radio" name="place" value="1" />
+                                上边栏
+                                <br/>
+                                <input class="radio" type="radio" name="place" value="2" />
+                                左边栏和上边栏都有
+                            </td>
+                        </tr>
+
+                        <tr class="cell">
+                            <td class="altbg1">
+                                <b>描述:</b>
+                                <br/>
+                                <span class="smalltxt">描述一下你的应用吧</span>
+                            </td>
+                            <td class="altbg2">
+                                <textarea cols="30" name="describe" rows="5"  require="true" datatype="require" msg="此项不能为空" >{$appConfig.describe}</textarea>
+                            </td>
+                        </tr>
+                        <tr class="bottom">
+                            <td class="border" colspan="2" style="text-align:center;"><button type="button" onclick="history.back()"> 返回 </button> <input type="submit" value="安装" class="button" /></td>
+                        </tr>
+                        </form>
+         </table>
+        <php>}else{</php>
+	
+			<table class="tableborder" width="100%">
+				<tbody>
+					<tr class="top">
+						<td class="border" colspan="6"></td>
+					</tr>
+					<tr>
+						<th class="header" colspan="6">待安装的应用</th>
+					</tr>
+					<tr class="label">
+						<!-- <th><input type="checkbox" class="checkbox" onclick="c.toggle(this)" />删？</th> -->
+						<th>图标</th>
+						<th>目录名</th>
+						<th>名称</th>
+						<th>作者</th>
+						<th>介绍</th>
+						<th>操作</th>
+					</tr>
+					<volist id="vo" name="appList">
+						<tr >
+							<td><img src="{$vo.icon}"></td>
+							<td>{$vo.app_enname}</td>
+							<td>{$vo.app_cnname}</td>
+							<td>{$vo.author}</td>
+							<td>{$vo.describe}</td>
+							<td> <button type="button" onclick="install('{$vo.app_enname}')"> 安装 </button></td>
+						</tr>
+					</volist>
+					<tr>
+						<td class="footer" colspan="6">
+						<div class="pagination">
+							{$page}
+						</div>
+						</td>
+					</tr>
+					<tr class="bottom">
+						<td class="border" colspan="6">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+		<php>}</php>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,84 @@
+<include file="__THEME__/header" />
+<link href="../Public/css/photo.css" rel="stylesheet" type="text/css" />
+
+<!-- 头部 end -->
+<div class="content"><!-- 内容 begin  -->
+	<include file="__THEME__/apps" />
+	<div class="main"> <!-- 右侧内容 begin  -->
+
+	<div class="page_title"> <!-- page_title begin -->
+      <div class="left" style=" width:70%; height:30px;"><h2><img src="../Public/images/ico_app02.gif" />相册</h2></div>
+      <div class="left alR lh30" style="width:100px;"></div>
+	<div class="c"></div>
+</div><!-- page_title end -->
+
+    <div class="tab-menu"><!-- 切换标签 begin  -->
+      <ul>
+		<li><a href="#" class="on"><span>创建专辑</span></a></li>
+        <li><a href="__APP__/Index/photos"><span>返回我的照片</span></a></li>
+      </ul>
+	</div><!-- 切换标签 end  -->
+        
+	<div class="photoBox">
+		<form method="post" action="__URL__/do_create_album" name="do_create_album" onsubmit="return check_form(this);">
+		<div class="edit_box">
+			<br />
+  			<div class="li">
+				<div class="c1">专辑名称：</div>
+				<div class="c2"><input name="name" type="text" class="TextH20" id="name" style="width:200px;" onblur="this.className='TextH20'" onfocus="this.className='Text2'" /></div>
+			</div>
+            
+            <div class="li" style="height:70px;">
+				<div class="c1">详细描述：</div>
+				<div class="c2"> <textarea cols="50" rows="4" class="Text" name="info"></textarea></div>
+			</div>
+
+			<div class="li">
+				<div class="c1">访问权限：</div>
+				<div class="c2">
+				<select name="privacy" id="privacy" onchange="javascript:changePrivacy(this);">
+					<option value="1" <if condition="$album['privacy'] eq 1">selected="selected"</if>>所有人可见</option>
+					<option value="2" <if condition="$album['privacy'] eq 2">selected="selected"</if>>仅好友可见</option>
+					<option value="3" <if condition="$album['privacy'] eq 3">selected="selected"</if>>仅自己可见</option>
+					<option value="4" <if condition="$album['privacy'] eq 4">selected="selected"</if>>凭密码访问</option>
+				</select>
+				<label><input type="checkbox" name="share" checked="checked" /> 允许好友转帖</label>
+				</div>
+			</div>
+		
+			<div class="li" id="need_password" style="display:none;">
+				<div class="c1">设置密码：</div>
+				<div class="c2">
+				<input name="privacy_data" value="{$album.privacy_data}" type="text" class="TextH20" id="textfield3" style="width:200px;" onblur="this.className='TextH20'" onfocus="this.className='Text2'" />
+				</div>
+			</div>
+
+		</div>
+
+		<div class="lh20 clear">
+			<div class="left" style="width:80px;">&nbsp;</div>
+			<div class="left" style="width:300px">
+				<input type="submit" class="btn_b" value="创建专辑" /> 
+				<a href="javascript:window.history.back(-1)">返回上一页</a>
+			</div>
+		</div>
+		</form>
+	</div>  </div><!-- 右侧内容 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />
+<script type="text/javascript">
+function check_form(obj){
+	if(obj.name==''){
+		alert('专辑名字不能为空！');
+		return false;	
+	}
+}
+function changePrivacy(obj){
+	if(obj.value==4){
+		$('#need_password').show();
+	}else{
+		$('#need_password').hide();
+	}
+}
+</script>

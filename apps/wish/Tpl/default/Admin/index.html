@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{&SITE_TITLE}</title>
+	<link href="__PUBLIC__/admin/css/layout.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../Public/Js/jquery-1.2.6.js" ></script>
+	</head>
+	<body>
+      <script type="text/javascript" charset="utf-8">
+        $( document ).ready( function(){
+              $( "#smiletype option[value='{$smiletype}']" ).attr( 'selected',true );
+            })
+      </script>
+		<div id="container">
+      <a href="__URL__/index/">全局设置</a>||<a href="__URL__/ico/">表情设置</a>||<a href="__URL__/wishlist/">愿望管理</a>
+          <form action ="__URL__/doChangeBase/" method="post" >
+			<table class="tableborder" width="100%">
+				<tbody>
+					<tr class="top">
+						<td class="border" colspan="2"></td>
+					</tr>
+					<tr>
+						<th class="header" colspan="2">愿望全局设置</th>
+					</tr>
+					<tr class="label">
+						<th>说明</th>
+						<th>设置</th>
+					</tr>
+
+					<tr class="cell">
+						<td class="altbg1">
+							<b>回收站功能:</b>
+							<br/>
+							<span class="smalltxt">用户和管理员删除愿望不是物理删除。可以恢复。如果空间小请关闭此功能。默认打开</span>
+						</td>
+						<td class="altbg2">
+							<input class="radio" type="radio" name="delete" value="0"  <php>if( !isset( $delete ) || false == $delete ){</php> checked  <php>}</php>/>
+                            开启
+							<input class="radio" type="radio" name="delete" value="1" <php>if( $delete ){</php> checked  <php>}</php> />
+                            关闭
+						</td>
+					</tr>
+
+					<tr class="cell">
+						<td class="altbg1">
+							<b>查看全站愿望:</b>
+							<br/>
+							<span class="smalltxt">开启后每个用户可以查看和评论全站动态</span>
+						</td>
+						<td class="altbg2">
+							<input class="radio" type="radio" name="all" value="1" <php>if( isset( $all ) || $all ){</php> checked  <php>}</php>/>
+                            开启
+							<input class="radio" type="radio" name="all" value="0" <php>if( !isset( $all ) || false == $all ){</php> checked  <php>}</php>/>
+                            关闭
+						</td>
+					</tr>
+
+					<tr class="cell">
+						<td class="altbg1">
+							<b>愿望归档功能:</b>
+							<br/>
+							<span class="smalltxt">开启后，用户在个人愿望内可以对愿望归档查看</span>
+						</td>
+						<td class="altbg2">
+                          <input class="radio" type="radio" name="fileaway" value="1" <php>if( $fileaway ){</php> checked  <php>}</php>/>
+                            开启
+							<input class="radio" type="radio" name="fileaway" value="0" <php>if( !isset( $fileaway ) || false == $fileaway ){</php> checked  <php>}</php>/>
+                            关闭
+						</td>
+					</tr>
+					<tr class="cell">
+						<td class="altbg1">
+							<b>保留归档月份:</b>
+							<br/>
+							<span class="smalltxt">设置归档显示月份。默认为6个月。推荐6－8个月为佳</span>
+						</td>
+                        <td class="altbg2"><input name="fileawaypage" class="txt" value ="{$fileawaypage}" /></td>
+					</tr>
+
+					<tr class="cell">
+						<td class="altbg1">
+							<b>迷你博客字数限定:</b>
+							<br/>
+							<span class="smalltxt">迷你博客字数限定，必须为正数，小于200</span>
+						</td>
+                        <td class="altbg2"><input name="stringcount" class="txt" value ="{$stringcount}" /></td>
+					</tr>
+
+					<tr class="cell">
+						<td class="altbg1">
+							<b>分页设置:</b>
+							<br/>
+							<span class="smalltxt">每一页显示多少条迷你博客，最多50条</span>
+						</td>
+                        <td class="altbg2"><input name="pagenum" class="txt" value ="{$pagenum}" /></td>
+					</tr>
+
+					<tr class="cell">
+						<td class="altbg1">
+							<b>选择使用表情:</b>
+							<br/>
+							<span class="smalltxt">选择使用哪一种表情</span>
+						</td>
+                        <td class="altbg2">
+                          <select id="smiletype" name="smiletype">
+                            <php>foreach( $smilelist as $vo){</php>
+                              <option value="{$vo['type']}">{$vo['type']}</option>
+                              <php>}</php>
+                          </select>
+					</tr>
+
+
+					<tr>
+						<td class="footer" colspan="2">
+							<input type="submit" class="button" value="提交" />
+						</td>
+					</tr>
+					<tr class="bottom">
+						<td class="border" colspan="5">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+            </form>
+		</div>
+	</body>
+</html>

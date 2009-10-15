@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>{&SITE_TITLE}</title>
+	<link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript">
+		var ctrl = function(name){
+			this.elements = document.getElementsByName('id[]');
+			this.length = this.elements.length;
+		} 
+		ctrl.prototype = {
+			reverse:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked= !this.elements[i].checked;
+				}
+			},
+			all:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked = true;
+				}
+			},
+			unAll:function(){
+				for(i=0;i<this.length;i++){
+					this.elements[i].checked = false;
+				}
+			},
+			toggle:function(obj){
+				this[obj.checked ? 'all' : 'unAll']();
+			},
+			del:function(id){
+				if(id==undefined){
+					id = [];
+					for(i=0;i<this.length;i++){
+						this.elements[i].checked && id.push(this.elements[i].value);
+					}
+					id = id.join(',');
+				}
+				alert('您选择了id为:'+id);
+			},
+			edit:function(id){
+				alert('您选择了id为:'+id);
+			}
+		}
+		var c = null;
+	</script>
+	</head>
+	<body>
+		<div id="container">
+			<table class="tableborder" width="100%">
+				<tbody>
+					<tr class="top">
+						<td class="border"></td>
+					</tr>
+					<tr>
+						<th class="header">tips</th>
+					</tr>
+					<tr>
+						<td class="tips">
+							<ul>
+								<li>前台举报列表</li>
+							</ul>
+						</td>
+					</tr>
+					<tr class="bottom">
+						<td class="border" colspan="5">&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+			<table class="tableborder" width="100%">
+				<tbody>
+					<tr class="top">
+						<td class="border" colspan="8"></td>
+					</tr>
+					<tr>
+						<th class="header" colspan="8">标题</th>
+					</tr>
+					<tr class="label">
+						<th><input type="checkbox" class="checkbox" onclick="c.toggle(this)" />删？</th>
+						<th>编号</th>
+						<th>举报人</th>
+						<th>类型</th>
+						<th>内容</th>
+						<th>举报原因</th>
+						<th>时间</th>
+						<th>操作</th>
+					</tr>
+			<volist name="reprots" id="vo">				
+					<tr class="cell altbg1">
+						<td><input type="checkbox" class="checkbox" name="id[]" value="1" /></td>
+						<td>{$vo.id}</td>
+						<td><a href="__TS__/space/{$vo.uid}" target="_blank">{$vo.uid|getUserName}</a></td>
+						<td>{$vo.type}</td>
+						<td>{$vo.info}</td>
+						<td>{$vo.reason}</td>
+						<td>{$vo.cTime|date="Y-m-d",###}</td>
+						<td><a href="{$vo.url}" target="_blank">查看</a></td>
+					</tr>
+		    </volist>
+					<tr class="bottom">
+						<td class="border" colspan="6">{$page}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<script type="text/javascript">
+			c = new ctrl('id[]');
+		</script>
+	</body>
+</html>

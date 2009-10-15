@@ -1,0 +1,52 @@
+<include file="__THEME__/header" />
+<link href="../Public/css/photo.css" rel="stylesheet" type="text/css" />
+<!-- 头部 end -->
+<div class="content"><!-- 内容 begin  -->
+	<include file="__THEME__/apps" />
+	<div class="main"> <!-- 右侧内容 begin  -->
+
+		<div class="page_title"> <!-- page_title begin -->
+			<h2><img src="../Public/images/ico_app02.gif" />相册</h2>
+		<div class="c"></div>
+</div><!-- page_title end -->
+
+		<div class="tab-menu"><!-- 切换标签 begin  -->
+		<span class="right"></span>
+			<ul>
+				<li><a href="__APP__/Index/friends_photos" class="on"><span>好友的照片</span></a></li>
+				<li><a href="__APP__/Index/photos/uid/{$mid}"><span>我的照片</span></a></li>
+				<li><a href="__APP__/Index/all_photos"><span>大家的照片</span></a></li>
+                <li><a href="__APP__/Upload/flash"><span><div class="ico_add">&nbsp;</div>上传照片</span></a></li>
+			</ul>
+			
+		</div><!-- 切换标签 end  -->
+
+		<div class="photoBox">
+			<div class="MenuSub">好友的最新照片 ┊ <a href="__URL__/friends_albums">好友的最新专辑</a><!--  ┊ <a href="__URL__/friends_marked">圈有好友的照片</a> --></div>
+			<div class="fphotolist">
+				<ul>
+                <volist name="data" id="li">
+				<li class="bg04">
+					<div class="box">
+						<div class="c1">
+							<span class="photo130"><a href="__APP__/Index/photos/uid/{$li.userId}/type/fAll" rel="{$li.savepath|get_photo_url}" title="{$li.name}">
+							<img src="__ROOT__/thumb.php?w=120&h=100&t=f&url={$li.savepath|get_photo_url}" /></a></span></div>
+						<div class="c2">
+						<dl>
+							<dt><a href="__TS__/space/{$li.userId}">{$li.userId|getUserName}</a>的照片</dt>
+							<dd>最近新增{$li.photocount}张</dd>
+							<dd><em>{$li.updatetime|friendlyDate}更新</em></dd>
+                            <dd><a href="__APP__/Index/photos/uid/{$li.userId}">查看全部照片</a></dd>
+						</dl>
+						</div>
+					</div>
+				</li>
+                </volist>
+				</ul>
+			</div><!-- fphotolist end  -->
+		</div>
+		<div style="clear:both">&nbsp;</div>
+  </div><!-- 右侧内容 end  -->
+  <div class="c"></div>
+  </div><!-- 内容 end -->
+<include file="__THEME__/footer" />

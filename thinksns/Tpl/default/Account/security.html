@@ -1,0 +1,81 @@
+<include file="__THEME__/header" />
+
+<link href="../Public/accounts.css" rel="stylesheet" type="text/css" />
+
+<div class="content"><!-- 内容 begin  -->
+  
+  <include file="__THEME__/apps" />
+
+  <div class="main"> <!-- 右侧内容 begin  -->
+  <div class=page_title> <!-- page_title begin -->
+  <h2><img src="../Public/images/applications.gif" />帐号管理</h2>
+  <div class="c"></div>
+</div><!-- page_title end -->
+  <div class="tab-menu"><!-- 切换标签 begin  -->
+      <ul>
+      <li><a href="__URL__"><span>修改密码</span></a></li>
+      <li><a href="__URL__/account"><span>修改账号</span></a></li>
+      <li><a href="__URL__/security" class="on"><span>账号安全</span></a></li>
+      <li><a href="__URL__/score"><span>积分记录</span></a></li>
+	  <li><a href="__URL__/score_faq"><span>积分说明</span></a></li>
+              <!--   <li><a href="__URL__/subscribe"><span>邮件提醒</span></a></li> -->
+      </ul>
+  </div><!-- 切换标签 end  -->
+
+
+<div class="data" style="padding-top:30px;"><!-- 帐号安全 begin  -->
+  	<div>
+    <h2 class="lh35 f14px btmline"><strong>你上次的登录：</strong></h2>
+    	<ul>
+          <li>
+           	<DIV class="left alR" style="width:15%;">登录时间：</DIV>
+                <DIV class="left cGray2" style="width:85%;">{$lastLogin['login_time']|date="Y年m月d日 h:i:s",###}<br />
+                </DIV>
+                <DIV class="left cGray2"></DIV>
+          </li>
+            <li>
+           	  <DIV class="left alR" style="width:15%;">IP  地址：</DIV>
+                <DIV class="left" style="width: 85%;">{$lastLogin['login_ip']}</DIV>
+          </li>
+            <li>
+           	  <DIV class="left alR" style="width:15%">上网地点：</DIV>
+                <DIV class="left" style="width:85%;" id="lastLoginAddress"></DIV>
+          </li>
+                <li>
+           	  <DIV class="left alR" style="width:15%;">&nbsp;</DIV>
+                <DIV class="left" style="width: 85%;"></DIV>
+          </li>
+        </ul>
+        
+    <h2 class="lh35 f14px btmline"><strong>本次的登录：</strong></h2>
+      	<ul>
+          <li>
+           	<DIV class="left alR" style="width:15%;">登录时间：</DIV>
+                <DIV class="left cGray2" style="width:85%;">{$thisLoginInfo['login_time']|date="Y年m月d日 h:i:s",###}<br />
+                </DIV>
+                <DIV class="left cGray2"></DIV>
+          </li>
+          <li>
+           	<DIV class="left alR" style="width:15%;">IP  地址：</DIV>
+            <DIV class="left" style="width: 85%;">{$thisLoginInfo['login_ip']}</DIV>
+          </li>
+          <li>
+           	<DIV class="left alR" style="width:15%">上网地点：</DIV>
+            <DIV class="left" style="width:85%;" id="thisLoginAddress"></DIV>
+          </li>
+          <li>
+           	<DIV class="left alR" style="width:15%;">&nbsp;</DIV>
+			<DIV class="left" style="width: 85%;"></DIV>
+          </li>
+        </ul> 
+  
+      </div>
+
+  </div><!-- 帐号安全 end  -->
+    </div><!-- 右侧内容 end  -->
+<div class="c"></div>
+</div><!-- 内容 end -->
+<!-- IP地址识别接口 -->
+<script type="text/javascript" src="http://whois.pconline.com.cn/jsLabel.jsp?id=lastLoginAddress&ip={$lastLogin['login_ip']}"></script>
+<script type="text/javascript" src="http://whois.pconline.com.cn/jsLabel.jsp?id=thisLoginAddress&ip={$thisLoginInfo['login_ip']}"></script>
+<include file="__THEME__/footer" />

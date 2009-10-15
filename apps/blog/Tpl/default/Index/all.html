@@ -1,0 +1,106 @@
+<include file="__THEME__/header" />
+
+
+<link rel="stylesheet" href="../Public/blog.css" type="text/css" media="screen" charset="utf-8" />
+<link href="__PUBLIC__/js/pagination/pagination.css" rel="stylesheet" type="text/css" />
+<div class="content"><!-- 内容 begin  -->
+  <include file="__THEME__/apps" />
+  <div class="main"><!-- 画布 begin  -->
+
+    <div class=page_title> <!-- page_title begin -->
+      <h2><img src="{$APPINFO['APP_ICON']}" />{%blog}</h2>
+    <div class="c"></div>
+    
+</div><!-- page_title end -->
+    <div class="tab-menu"><!-- 切换标签 begin  -->
+      <ul>
+        <li><a href="__URL__/index"  ><span>{%friends}</span></a></li>
+        <li><a href="__URL__/my" ><span>{%my}</span></a></li>
+        <eq name="all" value="true"><li><a href="__URL__/all" class="on"><span>{%all}</span></a></li></eq>
+        <li><a href="__URL__/addBlog"><span><div class="ico_add">&nbsp;</div>{%insertNew}</span></a></li>
+      </ul>
+    </div><!-- 切换标签 end  -->
+    <div class="BlogBox">
+	<div class="sidebar mt10">
+	     <div class="FSort">
+          <div class="tit">{%import}</div>
+          <div><p class="lh20">将你的站外博客导入到{$site_opts.site_name}<a href="__URL__/blogImport">点此导入>></a></p></div>
+          <div class="btm"></div>
+        </div>
+	<div class="FSort">
+   <div class="tit">{%allBlog}</div>
+              <ul>
+          <li <php>if( $order == 'new' || !isset( $_GET['order'] ) ){</php> class="on" <php>}</php>><a href="__URL__/all/order/new">{%orderNew}</a></li>
+          <li <eq name="order" value="hot">class="on" </eq>><a href="__URL__/all/order/hot">{%orderHot}</a></li>
+          <li <eq name="order" value="popular">class="on" </eq>><a href="__URL__/all/order/popular">{%orderPopular}</a></li>
+          <li <eq name="order" value="comment">class="on" </eq>><a href="__URL__/all/order/comment">{%orderComment}</a></li>
+          <li <eq name="order" value="read">class="on" </eq>><a href="__URL__/all/order/read">{%orderRead}</a></li>
+        </ul>
+        <div class="btm"></div>
+      </div>
+		</div>
+
+      <div class="LogList"><!-- 好友日志 begin  -->
+        <ul>
+          <php>foreach( $data as $vo){</php>
+          <li class="btmline">
+          <div class="left" style="width: 10%;"><span class="headpic50"><a class="tips" rel="__TS__/Index/userInfo/uid/{$vo['uid']}"  href="__TS__/space/{$vo['uid']}"   class="tips" rel="__TS__/Index/userInfo/uid/{$vo['uid']}"><img src="{$vo['uid']|getUserFace}" /></a></span></div>
+          <div class="left" style="width: 90%;">
+                       <php>if( !((3 == $vo['private'] && $vo['uid'] != $mid) || (1 == $vo['private'] && !$api->friend_areFriends( $mid,$vo['uid'] ))) ){</php>
+            <h3 class="f14px lh30">
+            <span class="right">
+             <input type="button" name="Submit" value="{%share}" class="BtnShare" onclick="ts_sharePop('{$vo.id}','__URL__')" id="BtnShare_{$vo.id}"/>
+			</span>
+			<a href="__URL__/show/id/{$vo['id']}/mid/{$vo['uid']}"><strong>{$vo['title']}</strong></a>
+			</h3>
+			<php>}</php>
+            <p>
+            <a href="__TS__/space/{$vo['uid']}">{$vo['name']}</a> <span class="cGray2">{$vo['cTime']|friendlyDate}</span>
+            </p>
+
+            <php>if( 3 == $vo['private'] && $vo['uid'] != $mid ){</php>
+                <div class="bg_msg"><div class="bg_msg_btm"><table width="100%" border="0" cellpadding="0" cellspacing="0"><tr><td width="40" align="center"><img src="../Public/images/ico_yaoshi.png" width="20" height="20" /></td>
+                	<td>本日志需要密码才能访问</td>
+                </tr>
+                </table></div></div>
+            <php>}elseif( 1 == $vo['private'] && !$api->friend_areFriends( $mid,$vo['uid'] ) && $vo['uid'] != $mid){</php>
+               <div class="bg_msg"><div class="bg_msg_btm"><table width="100%" border="0" cellpadding="0" cellspacing="0"><tr>
+               	<td width="40" align="center"><img src="../Public/images/ico_suo.png" width="20" height="20" /></td>
+                	<td>只有主人的好友可以查看此日志</td>
+                </tr>
+                </table></div></div>
+            <php>}else{</php>
+              <php>if( $vo['type'] != 0 ){</php><span class="imported-article cGray2">{%type1}<php>}</php></span>
+            <p style="margin:5px 0px; line-height:180%" class="f14px">{$vo['content']}</p>
+
+            <neq name="vo['mention']" value="">
+            <p class="cGray2">{%mention}: 
+                <php>foreach( $vo['mention'] as $friends ){</php>
+                <a href="__TS__/space/{$friends['uid']}">{$friends['name']}</a>
+                <php>}</php>
+            </p>
+            </neq>
+            <php>}</php>
+
+
+            <p class="cGray2 alR">分类:
+            <php>
+              $who = ( $vo['uid'] == $uid )?"my":"personal/uid/".$vo['uid'];
+            </php>
+            <a href="__URL__/{$who}/cateId/{$vo['category']['id']}">{$vo['category']['name']}</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="__URL__/show/id/{$vo['id']}/mid/{$vo['uid']}">{%reader}</a>({$vo['readCount']})&nbsp;&nbsp;|&nbsp;&nbsp;<a href="__URL__/show/id/{$vo['id']}/mid/{$vo['uid']}#comment">{%comment}</a>({$vo['commentCount']})</p>
+          </div>
+          </li>
+          <php>}</php>
+        </ul>
+        <div id="Pagination" class="pagination">{$html}</div>
+      </div><!-- 好友日志 end  -->
+    </div>
+
+
+
+  </div><!-- 画布 end  -->
+  <div class="c"></div>
+</div><!-- 内容 end -->
+<include file="__THEME__/footer" />
+
