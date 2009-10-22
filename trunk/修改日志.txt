@@ -9,4 +9,9 @@ commit test!! from 冯志强
 替换了\thinksns\Tpl\default\Index\下 index.php文件和login.php文件    邓晖
 2009.10.15
 再次修改\thinksns\Tpl\default\Info\education.html   form 邓晖  
-修改\thinksns\Lib\Model\UserSearchModel.class.php     去掉个人信息的"年"   邓晖           
+修改\thinksns\Lib\Model\UserSearchModel.class.php     去掉个人信息的"年"   邓晖
+2009.10.22
+修改\thinksns\public\themes\xueyou01\header.html    from 冯志强 
+添加时钟功能<script src=" http://www.clocklink.com/embed.js"></script><script type="text/javascript" language="JavaScript">obj=new Object;obj.clockfile="0050-purple.swf";obj.TimeZone="China_Beijing";obj.width=150;obj.height=150;obj.wmode="transparent";showClock(obj);</script>
+
+       
