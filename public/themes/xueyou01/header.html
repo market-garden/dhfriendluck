@@ -21,7 +21,6 @@
 
 //-->
 </script>
-
 <link href="__THEME__/layout.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/json.js"></script>
@@ -45,13 +44,14 @@
 
 </script>
 <link rel="stylesheet" id='skin' type="text/css" href="__PUBLIC__/js/tip/jquery.cluetip.css" />
-<script src=" http://www.clocklink.com/embed.js"></script><script type="text/javascript" language="JavaScript">obj=new Object;obj.clockfile="0050-purple.swf";obj.TimeZone="China_Beijing";obj.width=150;obj.height=150;obj.wmode="transparent";showClock(obj);</script>
+
 </head>
 <body>
+<div id="clock" style="float:right; margin-right:0px; position:absolute;" >
+<script src="http://www.clocklink.com/embed.js"></script><script type="text/javascript" language="JavaScript">obj=new Object;obj.clockfile="0050-purple.swf";obj.TimeZone="China_Beijing";obj.width=150;obj.height=150;obj.wmode="transparent";showClock(obj);</script>
+</div>
 <script>
-
 </script>
-
 <php>if($ad["header"]){</php>
 <div class="ad_top">{$ad.header}</div>
 <php>}</php>
