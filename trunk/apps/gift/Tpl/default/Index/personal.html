@@ -36,11 +36,11 @@
             <div class="left" style="width:560px;">
 			<php>if($gift['sendWay']==3) { </php>
 			
-				  <div class="lh20">神秘人物 	在 {$gift.cTime|friendlyDate} 花费了 {$gift.giftPrice}个{$config.creditName} 赠送给<a href="__TS__/space/{$uid}">{$uid|getUserName}</a></a>的礼物。 </div>
+				  <div class="lh20">神秘人物 	在 {$gift.cTime|friendlyDate} 花费了 {$gift.giftPrice}个{$config.creditName} 赠送给<a href="__TS__/space/{$gift.toUserId}">{$gift.toUserId|getUserName}</a>的礼物。 </div>
 	              
 				  <php>if($gift['toUserId']==$mid) { </php>
 				  <div class="cGray2 lh30">				  
-				  <php>echo getUserWo($gift['fromUserId'],$mid);</php>还给<a href="__TS__/space/{$uid}">{$uid|getUserName}</a>留言说：</div>
+				  <php>echo getUserWo($gift['fromUserId'],$mid);</php>还给<a href="__TS__/space/{$gift.toUserId}">{$gift.toUserId|getUserName}</a>留言说：</div>
 				  <div class="quote" style="margin:0;"><p>{$gift.sendInfo}<span class="quoteR">&nbsp;</span></p></div>
 				  <php> } </php>
 			<php> }elseif($gift['sendWay']==2) { </php>  
@@ -52,18 +52,18 @@
 					神秘人物
 				  <php> } </php>
 						  
-				  在 {$gift.cTime|friendlyDate} 花费了 {$gift.giftPrice}个{$config.creditName} 赠送给<a href="__TS__/space/{$uid}">{$uid|getUserName}</a>的礼物。<br />
+				  在 {$gift.cTime|friendlyDate} 花费了 {$gift.giftPrice}个{$config.creditName} 赠送给<a href="__TS__/space/{$gift.toUserId}">{$gift.toUserId|getUserName}</a>的礼物。<br />
 				  <php>if($gift['toUserId']==$mid) { </php>
 					</div>
-				  <div class="cGray2 lh30"><php>echo getUserWo($gift['fromUserId'],$mid);</php>还给<a href="__TS__/space/{$uid}">{$uid|getUserName}</a>留言说：</div>
+				  <div class="cGray2 lh30"><php>echo getUserWo($gift['fromUserId'],$mid);</php>还给<a href="__TS__/space/{$gift.toUserId}">{$gift.toUserId|getUserName}</a>留言说：</div>
 				  <div class="quote" style="margin:0;"><p>{$gift.sendInfo}<span class="quoteR">&nbsp;</span></p></div>
 				  <php> }else{ </php>
 				      </div>
 				  <php> } </php>
 			<php>} else {</php> 
-			  <div class="lh20"><a href="__TS__/space/{$gift.fromUserId}">{$gift.fromUserName}</a> 在 {$gift.cTime|friendlyDate} 花费了 {$gift.giftPrice}个{$config.creditName} 赠送给<a href="__TS__/space/{$uid}">{$uid|getUserName}</a>的礼物。<br /> 
+			  <div class="lh20"><a href="__TS__/space/{$gift.fromUserId}">{$gift.fromUserName}</a> 在 {$gift.cTime|friendlyDate} 花费了 {$gift.giftPrice}个{$config.creditName} 赠送给<a href="__TS__/space/{$gift.toUserId}">{$gift.toUserId|getUserName}</a>的礼物。<br /> 
                 </div>
-              <div class="cGray2 lh30"><php>echo getUserWo($gift['fromUserId'],$mid);</php>还给<a href="__TS__/space/{$uid}">{$uid|getUserName}</a>留言说：</div>
+              <div class="cGray2 lh30"><php>echo getUserWo($gift['fromUserId'],$mid);</php>还给<a href="__TS__/space/{$gift.toUserId}">{$gift.toUserId|getUserName}</a>留言说：</div>
               <div class="quote" style="margin:0;"><p>{$gift.sendInfo}<span class="quoteR">&nbsp;</span></p></div>
 
 			<php> } </php>

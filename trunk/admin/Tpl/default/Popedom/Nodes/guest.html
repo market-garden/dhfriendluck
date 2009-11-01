@@ -15,6 +15,7 @@
 						<td class="border" colspan="5">&nbsp;</td>
 					</tr>
 				</tbody>
+				</form>
 			</table>
 			
 			<table class="tableborder" width="100%">
@@ -29,38 +30,39 @@
 						<th>编号</th>
 						<th>节点名称</th>
 						<th>显示名</th>
-						<th>描述</th>
+						<th>全部权限</th>
 						<th>状态</th>
 						<th>排序</th>
 						<th>操作</th>
 					</tr>
-<volist id="vo" name="list">
+<volist id="vo" name="list['data']">
 		<tr class="cell altbg2" style="height:30px;">
 		<td >{$vo.id}</td>
-<php>if($level>=3){</php>	
+<php>if($level>=3 || $vo['containaction']=='All'){</php>	
 		<td >{$vo.name}</td>
 		<td >{$vo.title}</td>
 <php>}else{</php>
-		<td ><a href="__URL__/node/pid/{$vo.id}">{$vo.name}</a></td>
-		<td ><a href="__URL__/node/pid/{$vo.id}">{$vo.title}</a></td>
+		<td ><a href="__URL__/node/pid/{$vo.id}/type/guest">{$vo.name}</a></td>
+		<td ><a href="__URL__/node/pid/{$vo.id}/type/guest">{$vo.title}</a></td>
 <php>}</php>
-		<td >{$vo.description}</td>
+		<td ><php>if($vo['containaction']=='All'){</php><font color="red">√</font><php>}</php></td>
 		<td><php>if($vo['state']){</php><font color="Blue">开启</font><php>}else{</php><font color="Red">关闭</font><php>}</php></td>
 		<td >
-			上移 下移
+		<input type="text" name="ordernum[{$vo.id}]" value="{$vo.ordernum}" style="width:30px;">
         </td>
 		<td style="width:15%"><button type="button" onclick="c.edit({$vo.id})">编辑</button> <button type="button" onclick="c.del({$vo.id})">删除</button></td>
 	</tr>
 </volist>					
 					<tr>
 						<td class="footer" colspan="7">
-							&nbsp;
+							<input type="submit" value="保存" class="button">
 						</td>
 					</tr>
 					<tr class="bottom">
 						<td class="border" colspan="7">&nbsp;</td>
 					</tr>
 				</tbody>
+			</form>
 			</table>
 			<table class="tableborder" width="100%">
 			<form action="__URL__/addnode" method="POST">
@@ -133,13 +135,39 @@
 							<th>说明</th>
 							<th>设置</th>
 						</tr>
+<php>if($applist){</php>
 						<tr class="cell">
 							<td class="altbg1">
+								<b>选择APP:</b>
+								<br/>
+								<span class="smalltxt">后台节点</span>parameter
+							</td>
+							<td class="altbg2">
+								<select name="applist" id="applist" onchange="selectapp(this)">
+										<option value="">请选择应用</option>
+									<volist id="vo" name="applist">
+										<option value="{$vo.enname}">{$vo.name}</option>
+									</volist>
+								</select>
+							</td>
+						</tr>
+<script>
+	function selectapp(o){
+		var result = $(o);
+		if(result.val()!=''){
+			$('#name').val(result.val());
+			$('#title').val($("#applist option:selected").text() );
+		}
+	}
+</script>				
+<php>}</php>
+						<tr class="cell">
+							<td class="altbg1" style="width:300px;">
 								<b>节点名:</b>
 								<br/>
 								<span class="smalltxt">后台节点</span>parameter
 							</td>
-							<td class="altbg2"><input name="name" class="txt"/> </td>
+							<td class="altbg2"><input name="name" id="name" class="txt"/> </td>
 						</tr>
 						
 						<tr class="cell">
@@ -148,9 +176,20 @@
 								<br/>
 								<span class="smalltxt">后台显示名</span>
 							</td>
-							<td class="altbg2"><input name="title" class="txt"/></td>
+							<td class="altbg2"><input name="title" id="title" class="txt"/></td>
 						</tr>
 						
+						<tr class="cell">
+							<td class="altbg1">
+								<b>全部权限:</b>
+								<br/>
+								<span class="smalltxt">游客是否拥有此节点下所有的访问权限</span>
+							</td>
+							<td class="altbg2">
+								<input type="checkbox" value="All" name="containaction"> 是								
+							</td>
+						</tr>
+									
 						<tr class="cell">
 							<td class="altbg1">
 								<b>状态:</b>
@@ -161,20 +200,10 @@
 								<select name="state">
 									<option value="1">开启</option>
 									<option value="0">关闭</option>
-								</select>
+								</select>&nbsp;&nbsp;&nbsp;								
+								
 							</td>
 						</tr>										
-		
-						<tr class="cell">
-							<td class="altbg1">
-								<b>描述:</b>
-								<br/>
-								<span class="smalltxt">对节点的描述</span>
-							</td>
-							<td class="altbg2">
-								<textarea cols="30" name="description" rows="5" ></textarea>
-							</td>
-						</tr>
 						
 	<php>}</php>
 					<tr>

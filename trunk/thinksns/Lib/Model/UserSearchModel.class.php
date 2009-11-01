@@ -306,8 +306,7 @@ class UserSearchModel extends Model {
 	private function __paramAddress( $param ) {
 		$result = $input =  $param;
 		if( isset( $input ) ) {
-			list( $province,$city ) = explode( ',',$input );
-			isset( $input ) && $result = getAreaInfo( $province)." ".getAreaInfo($city);
+			$result = getAreaInfo( $input );
 		}
 		return $result;
 	}

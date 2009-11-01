@@ -29,8 +29,10 @@ function get_album_cover($albumId,$albumInfo='') {
 	//照片封面
 	if(intval($albumInfo['photoCount'])>0 && !empty($albumInfo['coverImagePath'])){
 		$cover	=	SITE_URL.'/thumb.php?w=120&h=100&url='.get_photo_url($albumInfo['coverImagePath']);
+	}elseif(intval($albumInfo['photoCount'])==0){
+		$covr	=	APP_PUBLIC_URL.'/images/photo_zwzp.gif';
 	}else{
-		$cover	=	APP_PUBLIC_URL.'/images/photo_zwzp.gif';
+		$cover	=	APP_PUBLIC_URL.'/images/photo_bg.gif';
 	}
 
 	//根据隐私情况，判断相册封面

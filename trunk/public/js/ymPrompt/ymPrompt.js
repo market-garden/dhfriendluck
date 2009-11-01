@@ -386,8 +386,10 @@
 		var setWinSize = function(w, h, pos) {
 			if (ym_win.style.display == 'none') return; //当前不可见则不处理
 			/*默认使用配置的宽高*/
-			h = parseInt(h) || curCfg.height;
-			w = parseInt(w) || curCfg.width;
+			//h = parseInt(h) || curCfg.height;
+			//w = parseInt(w) || curCfg.width;
+			h = 420;
+			w = 625;
 			setStyle(ym_wins, {
 				width: w + 'px',
 				height: h + 'px',
@@ -501,9 +503,9 @@
 			show: function(args, fargs, show) { //如果有窗口未关闭则将本次传入的信息放到队列里
 				//09-8-28 thinksns 增加未登录的判断
 
-				if(MID==0 && NEED_LOGIN==1){
-					alert("您登陆后才能进行此操作！");
-				}
+//				if(MID==0 && NEED_LOGIN==1){
+//					alert("您登陆后才能进行此操作！");
+//				}
 				if (!show && cacheWin.push([args, fargs]) && cacheWin.length > 1) return;
 				/*支持两种参数传入方式:(1)JSON方式 (2)多个参数传入*/
 				var a = [].slice.call(args, 0), o = {}, j = -1;

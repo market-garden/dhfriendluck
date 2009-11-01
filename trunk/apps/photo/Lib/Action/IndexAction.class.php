@@ -490,15 +490,25 @@ class IndexAction extends BaseAction{
 
 		 //发送两条消息
 		$data['toUid'] = $result->toUid;
-		$need  = $dao->where('id='.$result->appid)->field('userId,name,albumId')->find();
+		$need  = $dao->where('id='.$result->appid)->field('userId,name,albumId,savepath')->find();
 		$data['uids'] =$need['userId'];
 		$data['url'] = sprintf('%s/apps/photo/index.php?s=/Index/photo/id/%s/aid/%s/uid/%s/type/mAll',
-									'{SITE_URL}',$result->appid,$need['albumId'],$data['uids']
+									'{WR}',$result->appid,$need['albumId'],$data['uids']
 							);
 		$data['title_body']['comment'] = $result->comment;
 		$data['title_data']['title'] = sprintf("<a href='%s'>%s</a>",$data['url'],$need['name']);
 		$data['title_data']['type']  = "相册";
 		$this->api->comment_notify('photo',$data,$this->appId);
+		
+		//发送动态
+		if(empty($result->toUid) && $need['userId'] != $this->mid){
+	       $title['user'] = sprintf('<a href="__TS__/space/%s">%s</a>',$need['userId'],getUserName($need['userId']));
+           $title['picname'] = $data['title_data']['title'];
+           $body['pic'] = '<span style="margin:2px;"><a href="{SITE_URL}/apps/photo/index.php//Index/photo/id/'.$result->appid.'/aid/'.$need['albumId'].'/uid/'.$need['userId'].'"><img src="{SITE_URL}/thumb.php?w=120&w=100&t=f&url={UPLOAD_URL}'.$need['savepath'].'" width=80 /></a></span>';	       
+		   $body['comment'] = $result->comment;
+           $feed = $this->api->feed_publish('photo_comment',$title,$body,$this->appId);
+		}
+
 		echo $count;
 	}
 
@@ -509,7 +519,7 @@ class IndexAction extends BaseAction{
 
     private function __setCount($id){
         $count = $this->api->comment_getCount('photo',$id);
-        $this->blog->setCount($id,$count);
+        D('Photo')->setCount($id,$count);
         return $count;
     }
 

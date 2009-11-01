@@ -17,6 +17,7 @@ class BlogModel extends BaseModel {
  * @access public
  */
     public $_type = 0;
+    public $uid = 0;
 
     /**
      * limit
@@ -77,7 +78,7 @@ class BlogModel extends BaseModel {
     public function getBlogContent( $id,$how =null,$uid = null  ) {
         $result         = parent::getBlogContent( $id,$how,$uid );
         if(false == $result) return false;
-        $result['role']  = $this->checkCommentRole( $result['canableComment'],$result['uid'],$this->uid );
+        $result['role']  = $this->checkCommentRole( $result['canableComment'],$uid,$this->uid );
         $result['title'] = stripslashes( $result['title'] );
         $result['attach'] = unserialize($result['attach']);
         return $result;

@@ -44,9 +44,13 @@ function friendlyDate($sTime,$type = 'normal',$alt = 'false') {
 
 //入库前的过滤
 function  new_addslashes($string) {
-    if(!is_array($string)) return addslashes(trim($string));
-    foreach($string as $key => $val) $string[$key] = new_addslashes($val);
-    return $string;
+	if(!get_magic_quotes_gpc()){
+		    if(!is_array($string)) return addslashes(trim($string));
+	    foreach($string as $key => $val) $string[$key] = new_addslashes($val);
+	    return $string;
+	}else{
+		return $string;
+	}
 }
 
 //编辑文本时用的
@@ -108,7 +112,7 @@ function html_output($str) {
 
 //用户Html安全过滤输出
 function html_output2($str) {
-//$str = stripcslashes($str);
+	$str = stripcslashes($str);
     $farr = array(
         "/\s /", //过滤多余的空白
         "/<(\/?)(script|i?frame|style|html|body|title|link|meta\?|\%)([^>]*?)>/isU", //过滤 <script 等可能引入恶意内容或恶意改变显示布局的代码,假如不需要插入flash等,还可以加入<object的过滤
@@ -134,6 +138,7 @@ function html_output2($str) {
 //过滤脚本代码
 function cleanJs($text) {
     $text	=	trim($text);
+    //$text	=	mysql_escape_string($text);
     $text	=	stripslashes($text);
     //完全过滤注释
     $text	=	preg_replace('/<!--?.*-->/','',$text);
@@ -158,7 +163,7 @@ function cleanJs($text) {
 function t($text) {
     $text	=	cleanJs($text);
     $text	=	strip_tags($text);
-    $text	=	htmlspecialchars($text);
+    $text	=	htmlspecialchars($text,ENT_NOQUOTES);
     return $text;
 }
 //输出安全的html
@@ -206,9 +211,9 @@ function ts_cache($key,$value="__secache_get",$expireTime=-1,$type="secache") {
 
         vendor("secache");
         $cache = new secache;
-        if(!is_dir(C('Cache_Data'))){
-        	mk_dir(C('Cache_Data'));
-        }
+//        if(!is_dir(C('Cache_Data'))){
+//        	mk_dir(C('Cache_Data'));
+//        }
 		$cache->workat(C('Cache_Data'));
         if($value && $value != "__secache_get") {   //赋值
             $var["content"] = $value;
@@ -1100,11 +1105,13 @@ function imagebmp(&$im, $filename = '', $bit = 8, $compression = 0) {
 function GFW($string) {
 
     if(!is_array($string)) {
-        $api = new TS_API();
-        $site_opts = $api->option_get();
+        $site_opts = ts_cache("site_options");;
         $badkey = $site_opts["gfw_keywords"];
         $gfw_rep = $site_opts["gfw_rep"];
         $string = preg_replace("/$badkey/i",$gfw_rep,$string);
+        if (!MAGIC_QUOTES_GPC) {  //统一将$_POST $_GET $_REQUEST的值进行转义
+		   $string = addslashes($string);
+		}
         return $string;
     }else {
         foreach($string as $key => $val) $string[$key] = GFW($val);
@@ -1120,66 +1127,6 @@ function is_email($email) {
         return true;
     }else {
         return false;
-    }
-}
-
-
-
-function getAppNum($uid,$fun) {
-    if(function_exists($fun)) {
-        eval("\$num = ".$fun."(".$uid.");");
-    }else {
-        $num = 0;
-    }
-    return $num;
-}
-
-
-
-
-
-function getAppNumx($uid,$left_apps) {
-    $app_map["日志"] = "Blog";
-    $app_map["相册"] = "Album";
-    $app_map["视频"] = "Video";
-    $app_map["分享"] = "Share";
-    $app_map["心情"] = "Mini";
-    $app_map["投票"] = "Vote";
-    $app_map["群组"] = "Groups";
-    $app_map["活动"] = "Event";
-    $app_map["电影"] = "Movie";
-
-    foreach($left_apps as $k=>$v) {
-        $type = $app_map[$v['name']];
-        if(function_exists("get".$type."Num")) {
-            eval("\$num = get".$type."Num(".$uid.");");
-            $apps_num[$type]["num"] = $num;
-            $apps_num[$type]['name'] = $v['name'];
-            $apps_num[$type]['icon'] = $v['icon'];
-            $apps_num[$type]["url"] = getAppUrl($uid,$type);
-        }else {
-            $apps_num[$type]["num"] = 0;
-            $apps_num[$type]['name'] = $v['name'];
-            $apps_num[$type]['icon'] = $v['icon'];
-            $apps_num[$type]["url"] = getAppUrl($uid,$type);
-        }
-    }
-
-    return $apps_num;
-
-}
-
-
-
-
-function getAppUrl($uid,$type) {
-    switch($type) {
-        case  "Blog" : return __ROOT__."/apps/blog/index.php?s=/Index/personal/uid/".$uid; break;
-        case  "Album" : return __ROOT__."/apps/photo/index.php?s=/Index/albums/uid/".$uid; break;
-        case  "Vote" : return __ROOT__."/apps/vote/index.php?s=/Index/personal/uid/".$uid; break;
-        case  "Share" : return __ROOT__."/apps/Share/index.php?s=/Index/personal/uid/".$uid; break;
-        case  "Groups" : return __ROOT__."/apps/group/index.php?s=/Index/index/uid/".$uid; break;
-        case  "Mini" : return __ROOT__."/apps/mini/index.php?s=/Index/friends/uid/".$uid; break;
     }
 }
 
@@ -1247,17 +1194,17 @@ function isAppAdd($appid,$uid) {
 /**
  * 获取完整的地区
  *
- * @param unknown_type $area   '23,45,64' 字串形式传入
- * @param unknown_type $type
+ * @param String $area   '23,45,64' 字串形式传入
  */
 function getAreaInfo($area) {
-    $pNetwork = D('Network');
+	$api = new TS_API();
+	$pNetwork = $api->Network_getList();
     $arrArea = explode(',',$area);
-    foreach ($arrArea as $key=>$val) {
+    foreach ($arrArea as $val) {
         if($val) {
-            $areName = $pNetwork->where('id='.$val)->field('title')->find();;
-            $str[] = $areName['title'];
+            $str[] = $pNetwork[$val]['title'];
         }
+        $pNetwork = $pNetwork[$val]['child'];
     }
     return implode(' ',$str);
 }
@@ -1269,7 +1216,7 @@ function getAreaInfo($area) {
 function getUserGroupIcon($uid) {
     $groupId = TS_D('User')->where('id='.$uid)->field('admin_level')->find();
     if($uid) {
-        $info = TS_D('SystemGroup')->where('id='.$groupId['admin_level'])->find();
+        $info = TS_D('SystemGroup')->where("id='".$groupId['admin_level']."'")->find();
         if($info['icon']) {
             return '<img src='.__THEME__.'/images/icon/groupicon/'.$info['icon'].' Alt="'.$info['showname'].'" />';
         }
@@ -1293,6 +1240,28 @@ function isOnlineIcon($uid) {
     if($api->UserOnline_isOnline($uid)) {
         return "<img src=".__THEME__."/images/ico_zx.gif alt='在线' width='11' height='8' border='0'>";
     }
+}
+
+/**
+ * 检查用户是否已安装指定应用
+ *
+ * @param String $appName
+ * @param Integer $uid
+ * @return boolen
+ */
+function isAddApp($appName,$uid='0'){
+	$api = new TS_API();
+	if(!$uid){
+		$uid = $api->User_getLoggedInUser();
+	}	
+	$userAppId = $api->UserApp_getUserAppId($uid);
+	$appId     = $api->App_getChoiceId($appName);
+
+	if(in_array($appId,$userAppId)){
+		return true;
+	}else{
+		return false;
+	}
 }
 
 //新的积分控制系统

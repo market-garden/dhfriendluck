@@ -32,13 +32,13 @@ abstract class Administrator extends Base
 
     // 当前登陆的用户ID
     protected $uid;
-    
+
     // 管理员的等级
     protected $userlevel;
-    
+
     //api
     protected $api;
-    
+
     protected $opts;
 
    /**
@@ -64,7 +64,7 @@ abstract class Administrator extends Base
 
         $this->uid=$this->api->user_getLoggedInUser();
         $loginUser = Session::get('ThinkSnSAdmin');
-		
+
         if($this->uid){
 	        $this->userlevel = $this->api->User_getLoggedInUserLevel();
 	        $groupType = $this->api->SystemGroup_getGroupType($this->userlevel);
@@ -84,22 +84,39 @@ abstract class Administrator extends Base
 					$url = SITE_URL.'/admin.php?s=/Public/login';
 		    		header("Location: ".$url);
 					exit();
-	        	}     	
+	        	}
         }
-        
+
         if(method_exists($this,'_initialize')) {
             $this->_initialize();
         }
- 
+
     }
 
+     /*
+     * 获得表情
+     */
+     protected function getSmile($smileType){
+        foreach (D('Smile')->getSmile($smileType) as $k=>$value) {
+               $smile[$k%2]=ltrim($smile[$k%2].',\''.$value['filename'].'\'',',');
+        }
+        foreach( $smile as &$value ) {
+               $value = '['.$value.']';
+        }
+        $smile = '['.implode(',',$smile).']';
+        return $smile;
+    }
+    
+    protected function getSmilePath($smileType){
+            return __PUBLIC__.'/images/biaoqing/'.$smileType.'/';
+    }
 	public function _ts_init() {
 
 		$api     =    new TS_API();
-	
+
 		return $api;
-	}    
-    
+	}
+
     // 判断是否为AjAX提交
     protected function isAjax() {
         if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) ) {

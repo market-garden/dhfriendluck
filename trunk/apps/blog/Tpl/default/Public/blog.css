@@ -1,187 +1,36 @@
 @charset "utf-8";
 /*
-赵杰 
 blog
 */
 
-.page_title h2 img{height:24px;width:24px;float:left;margin-right:5px}
-.page_title h2{
-	font-size:14px;
-	color:#000000;
-	font-weight:bold;
-	line-height:25px;
-	height:25px;
-	clear:both;
-}
-.page_title p {
-	padding: 0px;
-	margin-top: 5px;
-	margin-right: 0px;
-	margin-bottom: 5px;
-	margin-left: 0px;
-	line-height: 20px;
-}
-
-.BlogBox {
-	clear:both;
-	overflow:hidden;
-	width: 100%;
-}
-.LogList{
-	width: 640px;
-	float: left;
-	overflow:hidden;
-}
-
-.LogList ul {
-	padding: 0px;
-	margin-top: 10px;
-	margin-right: auto;
-	margin-bottom: 0px;
-	margin-left: auto;
-}
-.LogList ul li {
-	clear: both;
-	overflow: hidden;
-	width: 100%;
-	line-height: 20px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	margin-bottom: 10px;
-}
-.LogList ul li p {
-	margin: 0px;
-	padding: 0px;
-}
-.LogList ul li p a{ }
-.blog_con{}
-.blog_con p{
-			text-indent: 2em;
-			margin: auto;
-}
-.imported-article{
-	background-color:transparent;
-	background-image:url(images/blogmini.gif);
-	background-repeat:no-repeat;
-	background-position:0pt 8px;
-	font-weight:normal;
-	border-top-width:1px;
-	border-top-style:solid;
-	border-top-color:#cccccc;
-	width:200px;
-	margin:5px 0pt 0pt;
-	padding:5px 0pt 0pt 19px;
-	display: block;
-	font-size: 12px;
-	line-height: 18px;
-}
-
-.draft{
-	width: 640px;
-	float: left;
-}
-
-.draft ul {
-	padding: 0px;
-	margin-top: 10px;
-	margin-right: auto;
-	margin-bottom: 0px;
-	margin-left: auto;
-}
-.draft ul li {
-	clear: both;
-	display:table;
-	overflow: hidden;
-	width: 100%;
-	line-height: 20px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	margin-bottom: 10px;
-}
-.draft ul li .c1{
-	width: 6%;
-	float: left;
-	text-align: center;
-	overflow: hidden;
-}
-.draft ul li .c1 input{
-	margin: 0px;
-	padding: 0px;
-}
-.draft ul li .c2{
-	width: 70%;
-	float: left;
-}
-.draft ul li .c3{
-	width: 24%;
-	float: left;
-	text-align: center;
-}
-p{
-	padding: 0px;
-	margin: 0px;
-}
-
-.msg {
-	background-color: #fffff5;
-	color: #FF0000;
-	padding: 5px;
-	display:table;
-	display:inline-block;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	width: 80%;
-	margin-right: auto;
-	margin-left: auto;
-}.msg div {
-	line-height: 24px;
-	display: inline-block;
-	margin-right: 5px;
-	float: left;
-}
-.Textp5{
-	border:1px solid #BDC7D8;
-	font-size:12px;
-	font-family: Arial, Helvetica, sans-serif;
-}
-.Textp52{
-	border:1px solid #005FAB;
-	font-size:12px;
-	font-family: Arial, Helvetica, sans-serif;
-	overflow: hidden;
-}
-
+.page_title h2 img { height:24px; width:24px; float:left; margin-right:5px }
+.page_title h2 { font-size:14px; color:#000000; font-weight:bold; line-height:25px; height:25px; clear:both; }
+.page_title p { padding: 0px; margin-top: 5px; margin-right: 0px; margin-bottom: 5px; margin-left: 0px; line-height: 20px; }
+.BlogBox { clear:both; overflow:hidden; width: 100%; }
+.LogList { width: 640px; float: left; overflow:hidden; }
+.LogList ul { padding: 0px; margin-top: 10px; margin-right: auto; margin-bottom: 0px; margin-left: auto; }
+.LogList ul li { clear: both; overflow: hidden; width: 100%; line-height: 20px; padding-top: 5px; padding-bottom: 5px; margin-bottom: 10px; }
+.LogList ul li p { margin: 0px; padding: 0px; }
+.LogList ul li p a { }
+.blog_con { }
+.blog_con p { text-indent: 2em; margin: auto; }
+.imported-article { background-color:transparent; background-image:url(images/blogmini.gif); background-repeat:no-repeat; background-position:0pt 8px; font-weight:normal; border-top-width:1px; border-top-style:solid; border-top-color:#cccccc; width:200px; margin:5px 0pt 0pt; padding:5px 0pt 0pt 19px; display: block; font-size: 12px; line-height: 18px; }
+.draft { width: 640px; float: left; }
+.draft ul { padding: 0px; margin-top: 10px; margin-right: auto; margin-bottom: 0px; margin-left: auto; }
+.draft ul li { clear: both; display:table; overflow: hidden; width: 100%; line-height: 20px; padding-top: 5px; padding-bottom: 5px; margin-bottom: 10px; }
+.draft ul li .c1 { width: 6%; float: left; text-align: center; overflow: hidden; }
+.draft ul li .c1 input { margin: 0px; padding: 0px; }
+.draft ul li .c2 { width: 70%; float: left; }
+.draft ul li .c3 { width: 24%; float: left; text-align: center; }
+p { padding: 0px; margin: 0px; }
+.msg { background-color: #fffff5; color: #FF0000; padding: 5px; display:table; display:inline-block; margin-top: 20px; margin-bottom: 20px; width: 80%; margin-right: auto; margin-left: auto; }
+.msg div { line-height: 24px; display: inline-block; margin-right: 5px; float: left; }
+.Textp5 { border:1px solid #BDC7D8; font-size:12px; font-family: Arial, Helvetica, sans-serif; }
+.Textp52 { border:1px solid #005FAB; font-size:12px; font-family: Arial, Helvetica, sans-serif; overflow: hidden; }
 /*发表日志样式*/
-.edit{}
-.edit .c1{
-	float: left;
-	width: 14%;
-	line-height: 20px;
-	text-align: right;
-	white-space: nowrap;
-	font-weight: bold;
-	font-size: 12px;
-}
-.edit .c2{
-	float: left;
-	width: 86%;
-}
-.bg_msg {
-	background-image: url(images/rz_bg.gif);
-	background-repeat: no-repeat;
-	background-position: 0px 0px;
-	width: 288px;
-	padding:10px 0 0 0;
-	font-size:14px;
-	margin: 30px auto;
-}
-.bg_msg_btm{
-	background:url(images/rz_bg.gif) no-repeat 0px bottom;
-	padding:0 0 10px 0; line-height:30px;
-	}
-.bg_msg_btm td{
-	font-weight: bold;
-	color:#F00;
-	font-size: 14px;
-}
-
+.edit { }
+.edit .c1 { float: left; width: 14%; line-height: 20px; text-align: right; white-space: nowrap; font-weight: bold; font-size: 12px; }
+.edit .c2 { float: left; width: 86%; }
+.bg_msg { background-image: url(images/rz_bg.gif); background-repeat: no-repeat; background-position: 0px 0px; width: 288px; padding:10px 0 0 0; font-size:14px; margin: 30px auto; }
+.bg_msg_btm { background:url(images/rz_bg.gif) no-repeat 0px bottom; padding:0 0 10px 0; line-height:30px; }
+.bg_msg_btm td { font-weight: bold; color:#F00; font-size: 14px; }

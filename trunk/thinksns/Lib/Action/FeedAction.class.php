@@ -22,72 +22,12 @@ class FeedAction extends BaseAction{
 
 	}
 
-
-    public function post_mini(){
-        $this->checkJsToken();
-        //缓存表情配置
-        $bg = D('AppConfig');
-        $bg->setAppname ('mini');
-        
-        $bq_config = $bg->getConfig();
-        //从缓存中读出表情
-        $bq_emotion = ts_cache('smile_'.$bq_config['smiletype']);
-        // 保存添加的数据
-		$Dao = D("Mini");
-        $Dao->setCount( $bq_config['stringcount'] );
-		$vo = $Dao->create();
-		if(false === $vo) {
-            echo false;
-            return;
-        }
-        $Dao->content = t( $Dao->content );
-        $Dao->uid  = $this->mid;
-        $Dao->name  = $this->my_name;
-        $Dao->status = 0;
-        $Dao->cTime = time();
-        if($mini_id = $Dao->add()){
-
-            //ajax返回
-            $mini_con = tt($Dao->content);
- 
-            $bq_path = "<img src='".__PUBLIC__."/images/biaoqing/{$bq_config['smiletype']}/";
-            foreach($bq_emotion as $v){
-                $mini_con =  str_replace($v["emotion"], $bq_path.$v['filename']."'>", $mini_con);
-            }
-
-
-            //添加一条动态
-            $title_data["content"] = $mini_con;
-            $body_data["id"] = $mini_id;
-            $body_data["uid"] = $this->mid;
-            $body_data["con"] = $mini_con;
-            $feedId = $this->api->feed_publish("mini",$title_data,$body_data,3);
-
-
-            //再把feedId放入mini表中
-            $data_m["feedId"] = $feedId;
-            $Dao->where("id=$mini_id")->save($data_m);
-           // echo $Dao->getLastSql();
-        if( $bq_config['delete'] ){
-            $count = $Dao->where( 'uid='.$this->mid.' AND status <> 1' )->count();
-        }else{
-            $count = $Dao->where( 'uid='.$this->mid)->count();
-        }
-        $result = $this->api->space_changeCount( 'mini',$count );
-                setScore($this->mid,'add_mini');
-            echo $mini_con;
-        }else{
-            echo 0;
-        }
-
-    }
-
     function post_mini_comment(){
-
+		$strComment = t($_POST["comment"]);
         //发表一条评论
         $daoComm = D("Comment");
         $daoComm->appid = $_POST["appid"];
-        $daoComm->comment = $_POST["comment"];
+        $daoComm->comment = $strComment;
         $daoComm->type = "mini";
         $daoComm->uid  = $this->mid;
         $daoComm->name = $this->my_name;

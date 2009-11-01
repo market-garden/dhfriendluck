@@ -74,7 +74,7 @@ class UserModel extends AdvModel
     }
 
     public function findUserByField($name,$value){
-	    $map[$name] = t($value);
+	    $map[$name] = $value;
 	    $map['active'] = 1;
 	    $result = $this->__getUser($map);
 	    return $result;
@@ -94,7 +94,26 @@ class UserModel extends AdvModel
     }
 
     private function __getUser($map){
+    	$privacy = $this->__filterSearchUser();
+        if(!empty($privacy)){
+        	if(isset($map['id']) && in_array($map['id'],$privacy))
+        	   return array('count'=>0);
+            $map['id'] = array("not in",$privacy);
+        }
 	    return $this->where($map)->field('`id` as `uid`,name,sex,current_province,current_city')->order('cTime DESC')->findPage(10);
     }
+        private function __filterSearchUser() {
+                $dao = D('Privacy');
+                $result = array();
+                $privacy_request = $dao->field('privacy,uid')->findAll();
+                     if($privacy_request ) {
+                        foreach($privacy_request as $value){
+                             $privacy = unserialize($value['privacy']);
+                             if($privacy['search']) $result[] = $value['uid'];
+                              }
+                                       
+                      }
+                return $result;
+        }
 }
 ?>

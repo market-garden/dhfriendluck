@@ -1,6 +1,6 @@
 <include file="__THEME__/header" />
-<link rel="stylesheet" href="../Public/blog.css" type="text/css" media="screen" charset="utf-8" />
 
+<link rel="stylesheet" href="../Public/blog.css" type="text/css" media="screen" charset="utf-8" />
 <script type="text/javascript" charset="utf-8">
     $( document ).ready( function(){
         var time = {$savetime}*60*1000;
@@ -57,9 +57,10 @@
                                 内容：
                             </div>
                             <div class="c2">
-                                <textarea id="content" name="content" cols="40" rows="15" style="display:none;width:100%; padding:8px;" class="Text" onBlur="this.className='Text'" onFocus="this.className='Text1'">
-                                </textarea>
+                                {:W("Edit",array('smileList'=>$smileList,'smilePath'=>$smilePath))}
+                                <!-- 
                                 <iframe id="Editor" name="Editor" src="__PUBLIC__/js/Editor/editor.html?id=content&height=400&width=100" frameborder="0" marginheight="0" marginwidth="0" scrolling="No" style="width: 100%; height: 400px;"></iframe>
+                                 -->
                             </div>
                         </li>
                         <li style="padding:0;">

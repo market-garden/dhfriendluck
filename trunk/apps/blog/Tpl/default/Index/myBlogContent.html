@@ -20,9 +20,9 @@
                     第 {$num}/{$count} 篇日志</div>
                 <div style="margin-bottom:20px;">
                     <h3 class="f14px lh30">
-                      <span class="right"> 
+                      <span class="right"> <php>if(isAddApp('share')) { </php>
 					  <input type="button" name="Submit" value="{%share}" class="BtnShare" onclick="ts_sharePop('{$id}','__URL__')" id="BtnShare_{$id}"/>
-					  </span>							
+					  <php> } </php></span>							
 							<strong>{$title}</strong></a>        </h3>
                             <p><a href="__URL__/edit/id/{$id}/mid/{$uid}">编辑</a>&nbsp;&nbsp;|&nbsp;&nbsp;
 							<a href="#" onclick="deleteBlog('__URL__/doDeleteBlog/id/{$id}')">删除</a>&nbsp;&nbsp;<em>{$cTime|friendlyDate}</em></p>

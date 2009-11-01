@@ -240,8 +240,8 @@ echo '$(".vote-per-'.$k.'").animate( { width: "'.$v.'%"}, 2000);';
                     <a href="javascript:deleteVote({$vote.id})">删除投票</a><br />
                     <a href="javascript:getMessage2()">修改结束时间</a><br />
                     <php>}else{</php>
-                    {:W('Report',array( 'type'=>'投票举报','appid'=>$APPINFO['APP_ID'],'url'=>'Index/pollDetail/id/'.$vote['id'],'title'=>$vote['title'],'recordId'=>$vote['id'] ))}<input type="button" value="分享" class="BtnShare" style="margin-left:10px;" onclick="ts_sharePop('{$vote.id}','__URL__')" id="BtnShare_{$vote.id}"/>           
-                    <php>}</php></div>
+                    {:W('Report',array( 'type'=>'投票举报','appid'=>$APPINFO['APP_ID'],'url'=>'Index/pollDetail/id/'.$vote['id'],'title'=>$vote['title'],'recordId'=>$vote['id'] ))}<php>if(isAddApp('share')) { </php><input type="button" value="分享" class="BtnShare" style="margin-left:10px;" onclick="ts_sharePop('{$vote.id}','__URL__')" id="BtnShare_{$vote.id}"/>           
+                    <php>} }</php></div>
                 <div>
                     <p>发起时间：{$vote.cTime|friendlyDate}</p>
                     <p>已投票数：{$vote.vote_num}</p>

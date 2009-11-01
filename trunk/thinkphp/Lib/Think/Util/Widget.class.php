@@ -23,6 +23,7 @@ abstract class Widget extends Base {
             // 自动定位模板文件
             $filename   =  empty($templateFile)?substr(get_class($this),0,-6):$templateFile;
             $templateFile = LIB_PATH.'Widget/'.$filename.C('TEMPLATE_SUFFIX');
+           
             if(!file_exists_case($templateFile)){
 				//2009-06-01修改
 				$templateFile = THINK_PATH.'/../thinksns/Lib/Widget/'.$filename.C('TEMPLATE_SUFFIX');

@@ -22,6 +22,7 @@ if(version_compare(PHP_VERSION,'5.0.0','<') ) {
 $GLOBALS['_beginTime'] = microtime(TRUE);
 
 // ThinkPHP系统目录定义	2009-5-28 thinksns修改
+define('ThinkSNS_VERSION','1.6.20720');
 if(!defined('SITE_PATH'))		define("SITE_PATH"	,	str_ireplace('\\','/',dirname(__FILE__)));
 if(!defined('SITE_URL'))		define('SITE_URL'	,	'http://'.$_SERVER["HTTP_HOST"].str_ireplace(trim(strip_tags($_SERVER["DOCUMENT_ROOT"])),'',SITE_PATH));
 if(!defined('ROOT_PATH'))		define("ROOT_PATH"	,	SITE_URL);

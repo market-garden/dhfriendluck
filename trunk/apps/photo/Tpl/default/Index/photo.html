@@ -80,9 +80,9 @@
 					<div class="left"><a href="__APP__/Index/photo/id/{$pre.id}/aid/{$pre.albumId}/uid/{$pre.userId}<neq name="type" value="">/type/{$type}</neq>">上一张</a> | 
 					<a href="__APP__/Index/photo/id/{$next.id}/aid/{$next.albumId}/uid/{$next.userId}<neq name="type" value="">/type/{$type}</neq>">下一张</a>
 					<!-- <a href="javascript:void(0)" onclick="play('button');" id="play_button">幻灯播放</a> --></div>
-					<div class="left"><eq name="album.share" value="1">
+					<div class="left"><eq name="album.share" value="1"><php>if(isAddApp('share')) { </php>
 					<input type="button" style="margin-left:5px;" value="分享" class="BtnShare" onclick="sharePop('{$photo.id}','__URL__','photo')" id="BtnShare_{$photo.id}"/>
-					</eq></div>
+					<php> } </php></eq></div>
 				</div>
 			第{$now}张，共{$photoCount}张
 			<if condition=" ($type eq 'mAll') || ($type eq 'fAll') ">

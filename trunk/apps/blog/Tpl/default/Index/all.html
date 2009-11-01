@@ -48,9 +48,9 @@
           <div class="left" style="width: 90%;">
                        <php>if( !((3 == $vo['private'] && $vo['uid'] != $mid) || (1 == $vo['private'] && !$api->friend_areFriends( $mid,$vo['uid'] ))) ){</php>
             <h3 class="f14px lh30">
-            <span class="right">
+            <span class="right"><php>if(isAddApp('share')) { </php>
              <input type="button" name="Submit" value="{%share}" class="BtnShare" onclick="ts_sharePop('{$vo.id}','__URL__')" id="BtnShare_{$vo.id}"/>
-			</span>
+			<php> } </php></span>
 			<a href="__URL__/show/id/{$vo['id']}/mid/{$vo['uid']}"><strong>{$vo['title']}</strong></a>
 			</h3>
 			<php>}</php>

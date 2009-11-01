@@ -94,7 +94,7 @@
          * @access protected
          * @return void
          */
-        protected  function doFeed($type,$title,$body = null){
+        public  function doFeed($type,$title,$body = null){
             $appid = A('Index')->getAppId();
             $result = $this->api->feed_publish( $type,$title,$body,$appid );
             return $result;

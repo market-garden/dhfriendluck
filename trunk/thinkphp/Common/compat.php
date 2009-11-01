@@ -21,88 +21,52 @@
  +------------------------------------------------------------------------------
  */
 
-if (!function_exists('json_encode')) {
-     function format_json_value(&$value)
+if (!function_exists('json_encode'))
+{
+  function json_encode($a=false)
+  {
+    if (is_null($a)) return 'null';
+    if ($a === false) return 'false';
+    if ($a === true) return 'true';
+    if (is_scalar($a))
     {
-        if(is_bool($value)) {
-            $value = $value?'true':'false';
-        }elseif(is_int($value)) {
-            $value = intval($value);
-        }elseif(is_float($value)) {
-            $value = floatval($value);
-        }elseif(defined($value) && $value === null) {
-            $value = strval(constant($value));
-        }elseif(is_string($value)) {
-            $value = '"'.addslashes($value).'"';
-        }
-        return $value;
-    }
+      if (is_float($a))
+      {
+        // Always use "." for floats.
+        return floatval(str_replace(",", ".", strval($a)));
+      }
 
-    function json_encode($data)
-    {
-        if(is_object($data)) {
-            //对象转换成数组
-            $data = get_object_vars($data);
-        }else if(!is_array($data)) {
-            // 普通格式直接输出
-            return format_json_value($data);
-        }
-        // 判断是否关联数组
-        if(empty($data) || is_numeric(implode('',array_keys($data)))) {
-            $assoc  =  false;
-        }else {
-            $assoc  =  true;
-        }
-        // 组装 Json字符串
-        $json = $assoc ? '{' : '[' ;
-        foreach($data as $key=>$val) {
-            if(!is_null($val)) {
-                if($assoc) {
-                    $json .= "\"$key\":".json_encode($val).",";
-                }else {
-                    $json .= json_encode($val).",";
-                }
-            }
-        }
-        if(strlen($json)>1) {// 加上判断 防止空数组
-            $json  = substr($json,0,-1);
-        }
-        $json .= $assoc ? '}' : ']' ;
-        return $json;
+      if (is_string($a))
+      {
+        static $jsonReplaces = array(array("\\", "/", "\n", "\t", "\r", "\b", "\f", '"'), array('\\\\', '\\/', '\\n', '\\t', '\\r', '\\b', '\\f', '\"'));
+        return '"' . str_replace($jsonReplaces[0], $jsonReplaces[1], $a) . '"';
+      }
+      else
+        return $a;
     }
-}
-if (!function_exists('json_decode')) {
-    function json_decode($json,$assoc=false)
+    $isList = true;
+    for ($i = 0, reset($a); $i < count($a); $i++, next($a))
     {
-        // 目前不支持二维数组或对象
-        $begin  =  substr($json,0,1) ;
-        if(!in_array($begin,array('{','['))) {
-            // 不是对象或者数组直接返回
-            return $json;
-        }
-        $parse = substr($json,1,-1);
-        $data  = explode(',',$parse);
-        if($flag = $begin =='{' ) {
-            // 转换成PHP对象
-            $result   = new stdClass();
-            foreach($data as $val) {
-                $item    = explode(':',$val);
-                $key =  substr($item[0],1,-1);
-                $result->$key = json_decode($item[1],$assoc);
-            }
-            if($assoc) {
-                $result   = get_object_vars($result);
-            }
-        }else {
-            // 转换成PHP数组
-            $result   = array();
-            foreach($data as $val) {
-                $result[]  =  json_decode($val,$assoc);
-            }
-        }
-        return $result;
+      if (key($a) !== $i)
+      {
+        $isList = false;
+        break;
+      }
     }
+    $result = array();
+    if ($isList)
+    {
+      foreach ($a as $v) $result[] = json_encode($v);
+      return '[' . join(',', $result) . ']';
+    }
+    else
+    {
+      foreach ($a as $k => $v) $result[] = json_encode($k).':'.json_encode($v);
+      return '{' . join(',', $result) . '}';
+    }
+  }
 }
+
 if (!function_exists('property_exists')) {
     /**
      +----------------------------------------------------------

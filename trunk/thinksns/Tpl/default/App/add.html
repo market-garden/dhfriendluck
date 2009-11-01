@@ -11,9 +11,9 @@
 
   <div class="main" style="position: relative;"> <!-- 右侧内容 begin  -->
   <div class="app_account">
-  	<div style="clear:both;"><div class="left"><img src="__THEME__/images/icon/{$add_app.icon}" /></div><div class="left lh30"><strong>{$add_app.name}</strong></div></div>
+  	<div style="clear:both;"><div class="left"><img src="{$add_app.icon}" /></div><div class="left lh30"><strong>{$add_app.name}</strong></div></div>
   	<div style="clear:both;"><p class="lh18">开 发 者：{$add_app.author}<br />
-    组件介绍：{$add_app.describe} </p></div>
+    组件介绍：{$add_app.description} </p></div>
   </div>
   <div class="page_title"> <!-- page_title begin -->
     	<h2>将组件<span class="cBlue">“{$add_app.name}”</span>添加到您的账户吗？</h2>
@@ -21,7 +21,7 @@
 </div><!-- page_title end -->
   <!-- 切换标签 end  -->
   <div class="app_box">
-		<div class="f14px" style="background:url(../Public/images/tp_azzj2.gif) no-repeat 0 0; height:30px; padding:25px 20px 40px 20px;"><div class="left"><img src="__THEME__/images/icon/{$add_app.icon}" /></div><div class="left lh30"><strong>{$add_app.name}</strong></div></div>
+		<div class="f14px" style="background:url(../Public/images/tp_azzj2.gif) no-repeat 0 0; height:30px; padding:25px 20px 40px 20px;"><div class="left"><img src="{$add_app.icon}" /></div><div class="left lh30"><strong>{$add_app.name}</strong></div></div>
 		<div>
             <form action="__URL__/doAdd" method="post">
                 <input type="hidden" name="id" value="{$add_app.id}">

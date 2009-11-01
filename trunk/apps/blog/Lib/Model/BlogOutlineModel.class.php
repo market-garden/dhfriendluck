@@ -31,8 +31,6 @@
             unset( $map['mention'] );
             $map    = $this->merge( $map );
             $addId  = $this->add( $map );
-            fd( $addId );
-            fd( $this->getLastSql() );
 
             
             if( !$result && !empty( $friendsId ) ){

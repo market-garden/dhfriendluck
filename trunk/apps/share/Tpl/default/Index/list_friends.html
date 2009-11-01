@@ -42,7 +42,7 @@
           </div>
           <div class="LC">
             <div class="MC">
-              <h4><span class="right"> <input type="button" value="分享" class="BtnShare" onclick="sharePop('{$vo.id}','__URL__')" id="BtnShare_{$vo.id}"/></span>分享了一个{$vo.typeId|getTypeName}<span class="cGray2 ml10">{$vo.cTime|friendlyDate}</span></h4>
+              <h4><span class="right"> <php>if(isAddApp('share')) { </php><input type="button" value="分享" class="BtnShare" onclick="sharePop('{$vo.id}','__URL__')" id="BtnShare_{$vo.id}"/><php> } </php></span>分享了一个{$vo.typeId|getTypeName}<span class="cGray2 ml10">{$vo.cTime|friendlyDate}</span></h4>
               <div style="height:5px;"></div>{$vo.data}		  
               <php>if(!empty($vo['info'])&&$vo['info']!='&nbsp;') { </php>
               <div class="quote"><p>{$vo.info}<span class="quoteR">&nbsp;</span></p></div>

@@ -20,17 +20,9 @@ var TS		=	'__TS__';
 	<tr>
 		<td align="right" valign="top" width="14%"><strong>回复内容：</strong></td>
 		<td>
-		<textarea rows="6"  name="content" style="display:none;" id="content"></textarea>
-        <iframe id="Editor" name="Editor" src="__PUBLIC__/js/Editor/editor.html?id=content&amp;height=200&width=400" frameborder="0" marginheight="0" marginwidth="0" scrolling="No" style="width: 80%; height: 200px;width:400px;"></iframe>
+		 {:W("Edit",array('smileList'=>$smileList,'smilePath'=>$smilePath,'rows'=>10,'width'=>487,'name'=>'content','id'=>'content'))}
 		</td>
 	</tr>
-	<!--
-	<tr>
-		<td align="right" width="14%"><strong>上传图片：</strong></td>
-		<td valign="top">
-			{:W( 'UploadAttach',array( 'uid'=>$mid , 'type'=>'group_topic' , 'callback'=>'attach_upload_success') )}</td>
-	</tr>
-	-->
 	<tr>
 		<td height="40" width="14%">
 		</td>
@@ -46,10 +38,8 @@ var TS		=	'__TS__';
 
 <script>
 function submitReply() {
-		var content = $('#content').val();
-
-	
-		if(checkContent(content) == 0) {
+		
+		if(KE.util.getData('content') == '') {
 			alert('回复内容不能为空');
 			return false;
 		}else{

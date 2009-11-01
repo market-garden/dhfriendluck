@@ -23,7 +23,7 @@
 			$this->actor_level =  $this->groupinfo['brower_level']==-1 && !$this->mid? false :
 			 ($this->groupinfo['actor_level']==0 ? true : $this->groupinfo['actor_level'] == 1 && isJoinGroup($this->mid,$this->gid)) ;  //如果actor_level=1 仅成员可以发表话题，如果是2 任何人都可以回复
 
-		
+
 			$this->assign('actor_level',$this->actor_level);
 			$this->assign('current','topic');
 
@@ -50,12 +50,13 @@
 
 		//发表话题 编辑话题
 		function add() {
-			
+
 			//权限判读 用户没有加入过
 			if(($this->groupinfo['actor_level'] == 1 && !isJoinGroup($this->mid,$this->gid)) || !$this->mid){
 				$this->alert();
 			}
-
+			$this->assign('smileList',$this->getSmile($this->opts['ico_type']));
+			$this->assign('smilePath',$this->getSmilePath($this->opts['ico_type']));
 
 			$this->setTitle($this->siteTitle['add_topic']);
 			$this->display();
@@ -105,7 +106,7 @@
 					$title_data['gid'] = $this->gid;
 					$title_data['group_name'] = $this->groupinfo['name'];
 
-   				
+
    					$body_data['title'] = msubstr($title,0,20);
 					$body_data['gid'] = $this->gid;
 					$body_data['tid'] = $tid;
@@ -137,7 +138,9 @@
 			//管理员或者帖子主人
 			if(!($this->isadmin || $thread['uid'] == $this->mid)){$this->error('无权限');}
 
-
+			$this->assign('smileList',$this->getSmile($this->opts['ico_type']));
+			$this->assign('smilePath',$this->getSmilePath($this->opts['ico_type']));
+			
 			if(isset($_POST['editsubmit']) && trim($_POST['editsubmit']) == 'do') {
 
 				$title = t($_POST['title']);
@@ -167,12 +170,11 @@
 
 
 
-
+			
 			$tid = isset($_POST['tid']) ? intval($_POST['tid']) : 0;
 			$content_i = replaceSpecialChar(h($_POST['content']));
 
 			
-
 			if(empty($content_i)){
 				$this->error('请输入内容');
 			}
@@ -192,12 +194,12 @@
 				$post['istopic'] = 0;
 				$post['ctime'] = time();
 				$post['ip'] = $ip->get_client_ip();
-				
+
 				$title_data['actor'] = $this->mid;
     			$body_data['gid'] = $this->gid;
     			$body_data['tid'] = $tid;
     			$body_data['title'] = $topic['title'];
-				
+
     			if(isset($_POST['quote'])) {  //如果引用帖子
 						$qid = isset($_POST['qid']) ? intval($_POST['qid']) : 0;      //引用帖子id
 
@@ -205,14 +207,14 @@
 
 						$postData = getPost($qid);
 						if($postData['uid'] != $this->mid){
-							
+
             				//通知
             				$cate = "notification";
             				$this->api->notify_setAppId($this->appId);
             				$this->api->notify_send($postData['uid'],'group_topic_quote',$title_data,$body_data,$url,$cate);
 							setScore($this->mid,'group_topic_reply');
-							
-							
+
+
 						}
 
 				}
@@ -226,19 +228,19 @@
 
 
 					if(!($topic['uid'] == $this->mid || $postData['tid'] == $topic['id'])){ //如果不是回复自己
-    					
+
             			//通知
             			$cate = "notification";
             			$this->api->notify_setAppId($this->appId);
             			$this->api->notify_send($topic['uid'],'group_reply',$title_data,$body_data,$url,$cate);
             			setScore($this->mid,'group_topic_reply');
-       
+
 					}
 
 					//添加动态
-					
+
 					$this->api->feed_publish('group_topic_post',$title_data,$body_data,$this->appId,0,$this->gid);
-					
+
 					$this->topic->setField('replytime',time(),'id='.$tid);
 					$this->topic->setInc('replycount','id='.$tid);
 				}
@@ -283,7 +285,8 @@
 				}
 			}
 
-
+			$this->assign('smileList',$this->getSmile($this->opts['ico_type']));
+			$this->assign('smilePath',$this->getSmilePath($this->opts['ico_type']));
 			$this->assign('post',$post);
 			$this->setTitle($this->siteTitle['edit_topic']);
 			$this->display();
@@ -333,7 +336,7 @@
 				$this->alert();
 			}
 
-
+	
 			$tid = intval($_GET['tid']) > 0 ? $_GET['tid'] : 0;
 
 			if($tid == 0) $this->error('参数错误');
@@ -353,12 +356,11 @@
 			$this->assign('postlist',$postlist);
 
 			$this->assign('isCollect',D('Collect')->isCollect($tid,$this->mid));  //判断是否收藏
-			//$bq_emotion = D('Smile')->getSmile('mini');//读取表情
-
-			//$this->saveToken();
-			//$this->assign('bq_emotion',$bq_emotion);
-
-			 $this->setTitle($thread['title'].'-');
+			
+			$this->assign('smileList',$this->getSmile($this->opts['ico_type']));
+			$this->assign('smilePath',$this->getSmilePath($this->opts['ico_type']));
+			
+			$this->setTitle($thread['title'].'-');
 			$this->display();
 		}
 		//收藏话题
@@ -399,7 +401,9 @@
 			$postInfo = $this->post->where('id='.$id)->find();
 
 			if(empty($postInfo))  $this->error('参数错误');
-
+			
+			$this->assign('smileList',$this->getSmile($this->opts['ico_type']));
+			$this->assign('smilePath',$this->getSmilePath($this->opts['ico_type']));
 			$this->assign('postInfo',$postInfo);
 			$this->assign('id',$id);
 			$this->display();

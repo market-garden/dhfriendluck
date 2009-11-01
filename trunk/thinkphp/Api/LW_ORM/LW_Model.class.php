@@ -7,6 +7,7 @@ require("LW_DB_Exception.class.php");
 class LW_Model {
 
     var $db;
+    var $table_name;
 
     public function __construct($lw_db_configs) {
         $db2 = LW_DB::init($lw_db_configs, 'common', 1);
@@ -329,7 +330,10 @@ class LW_Model {
 
     protected function __getTitle($template,$data) {
         $result = $template; //title的模板
-        $title_data = unserialize($data["title"]);  //title的数据
+        $title_data = $this->__unserialize($data["title"]);  //title的数据
+		if(!$body_data){
+			$body_data = unserialize(stripcslashes($data['body']));
+		}
         $actor = "<a style='white-space: nowrap;' href='".__TS__."/space/".$data["uid"]."'>".$data["username"].'</a>';
         $title_data["actor"] = $actor;
         //替换自定义变量
@@ -339,7 +343,8 @@ class LW_Model {
 
     protected function __getBody($template,$data) {
 
-        $body_data = unserialize($data["body"]);  //body的数据
+        $body_data = $this->__unserialize($data["body"]);  //body的数据
+
 
         return $this->__substitutionVariable($body_data, $template, $data['appid']);
     }
@@ -360,7 +365,7 @@ class LW_Model {
         foreach($data as $k=>$v) {   //替换
             //$result = str_replace('{'.$k.'}',stripcslashes($v),$result);
 			$search[] = '{'.$k.'}';
-			$replace[] = $v;
+			$replace[] = stripcslashes($v);
 
         }
 
@@ -387,5 +392,12 @@ class LW_Model {
     public function __getPageLimitSecond($count,$pageLimit) {
         return (int)ceil($count/$pageLimit);
     }
+	public function __unserialize($data) {
+		$result = unserialize($data);
+		if(!$result){
+			$result = unserialize(stripcslashes($data));
+		}
+		return $result;
+	}
 }
 ?>

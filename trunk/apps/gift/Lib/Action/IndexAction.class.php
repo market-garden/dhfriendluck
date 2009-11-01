@@ -170,38 +170,4 @@ class IndexAction extends Action{
 			$this->assign('toUserFace',$toUserFace);
 		}
 	}	
-
-	function add_wish(){
-		$id = $_GET['id'];
-		$gift = D('Gift')->where('id='.$id)->find();
-		
-		$img = $this->getImg($gift);
-		$me = "<a href=".TS."/space/$this->mid>".getUserName($this->mid)."</a>";
-		$this->assign('me',$me);
-		$this->assign('img',$img);
-		$this->assign('id',$id);
-		$this->display();
-	}
-	
-	function doadd_wish(){
-		$id = intval($_POST['id']);
-        $gift = D('Gift')->where('id='.$id)->find();
-		if($gift){				
-			$gift['img'] = $this->getImg($gift);
-			$data = $gift;
-			
-			$data['info'] = h($_POST['info']);
-			$fids = $_POST["fids"];
-
-			$result = $this->api->wish_addWish(2,$data,$fids);
-            echo $result;
-		}else {
-			echo -5;
-		}
-	}
-	
-	function getImg($gift){
-		$img = "<img src='".SITE_URL."/apps/gift/Tpl/default/Public/gift/".$gift['img']."' alt='".$gift['name']."'>";
-		return $img;
-	}
 }

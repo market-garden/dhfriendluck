@@ -195,6 +195,7 @@ button, .button {
 	background-color: #F1F5F8;
 }
 
+
 /* 提示信息 */
 .message1 { background-image: url(../images/message1.gif); background-repeat: no-repeat; background-position: 15px 20px; height: 110px; width: 509px; margin: 100px auto; background-color: #fffef5; border: 2px solid #ffdbab; }
 .message2 { background-image: url(../images/message2.gif); border: 2px solid #bcf291; background-repeat: no-repeat; background-position: 15px 20px; height: 110px; width: 509px; margin: 100px auto; background-color: #F9FFF4; }

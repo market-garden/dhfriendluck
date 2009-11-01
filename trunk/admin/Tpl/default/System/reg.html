@@ -3,7 +3,7 @@
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>注册配置</title>
-	<link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+	<link href="__PUBLIC__/admin/css/layout.css" rel="stylesheet" type="text/css" />
 	</head>
 	<body>
 		<div id="container">
@@ -45,8 +45,8 @@
               <th class="th" valign="top">注册服务条款：</th>
               <td class="td"><p>
                  
-                   <textarea rows="10"  name="reg_tiaokuan" style="display:none;" id="content">{$reg_tiaokuan|stripslashes|stripslashes}</textarea>
-            <iframe id="Editor" name="Editor" src="__PUBLIC__/js/Editor/editor.html?id=reg_tiaokuan&height=300&width=70" frameborder="0" marginheight="0" marginwidth="0" scrolling="No" style="width: 72%; height: 300px"></iframe> 
+             {:W("Edit",array('name'=>'reg_tiaokuan','smileList'=>$smileList,'smilePath'=>$smilePath,'content'=>$content,'content'=>$reg_tiaokuan))}
+               
                 </p>
                  </td>
             </tr>

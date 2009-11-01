@@ -217,6 +217,7 @@ function rcalendar(text, mode, retfunction) { //文本域对象, 模式(dateonly
 		rseconds.style.position = "absolute";
 		rseconds.style.display = "none";
 		rfill_rseconds();
+	
 		
 		document.body.appendChild(div_rcalendar);
 		div_rcalendar.appendChild(ryears);

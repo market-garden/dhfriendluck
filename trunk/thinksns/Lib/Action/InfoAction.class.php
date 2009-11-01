@@ -63,7 +63,9 @@ class InfoAction extends BaseAction{
         unset( $_POST );
         $_POST['name'] = $temp_post['name'];
         $_POST['sex']  = $temp_post['sex'];
-
+		$_POST['current_province'] = $temp_post['extra']['ts_areaval']['0'];
+		$_POST['current_city'] = $temp_post['extra']['ts_areaval']['1'];
+		
         $dao = D("User");
 
         $r = $dao->create();

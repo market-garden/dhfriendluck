@@ -30,7 +30,6 @@ class AppLwModel extends LW_Model
 				$applist[$appid]['id']            = $val['id'];
 				$applist[$appid]['name']          = $val['name'];
 				$applist[$appid]['enname']        = $val['enname'];
-				$applist[$appid]['folder']        = $val['folder'];
 				$applist[$appid]['place']         = $val['place'];
 				$applist[$appid]['canvas_url']    = $val['type'];
 				$applist[$appid]['add_name']      = $val['add_name'];
@@ -72,7 +71,7 @@ class AppLwModel extends LW_Model
 			$result = array(
 				'APP_NAME'     => 'thinksns',
 				'APP_CNNAME'     => '核心应用',
-				'APP_ICON'     => SITE_URL.'/public/images/icon/base.gif',
+				'APP_ICON'     => SITE_URL.'/public/images/system.gif',
 				'APP_URL'      => SITE_URL.'/index.php?s=',
 				'APP_ID'       => '0',
 			);

@@ -20,15 +20,12 @@
         public function _initialize(){
             //初始化只搜索status为0的。status字段代表没被删除的
             $this->status = 0;
-            $emotion_obj  = D( 'Smile' );
+
             $config_obj   = D( 'AppConfig' );
 
             //获取配置和表情信息
             $config       = $config_obj->getConfig();
-            $emotion      = $emotion_obj->getSmile( $config['smiletype'] );
-            $configarray['ico'] = $emotion;
-            if($config && $configarray) $configarray += $config;
-            $this->setConfig( $configarray );
+            $this->setConfig( $config );
             parent::_initialize();
         }
         public function getReplayCount( $data ){
@@ -168,6 +165,13 @@
          */
         public function getIco (){
             return $this->config->ico;
+        }
+        
+        public function setSmileType($smiletype){
+        	$emotion_obj  = D( 'Smile' );
+        	$emotion      = $emotion_obj->getSmile( $smiletype );
+        	$this->config->ico = $emotion;
+        	$this->config->smiletype = $smiletype;
         }
 
 

@@ -136,6 +136,7 @@ function getCategoryTree($id,$onlyShowPid=false) {
 //获取分类名称
 function getCategoryName($id) {
 	$title = D('Category')->getField('title','id='.$id);
+	if(empty($title)) $title = '未分类';
 	return $title;
 }
 

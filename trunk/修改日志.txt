@@ -2,16 +2,23 @@
 更换数据表ts_network
 2009.10.6
 \thinksns\Tpl\default\Info\education.html  110行 班级或院系 改为 专业
-\thinksns\public\js\ts_common.js 278行 height改为420
+\thinksns\public\js\ts_common.js 223行 height改为420  此条已经不行
 2009.10.7
 commit test!! from 冯志强
 2009.10.14
 替换了\thinksns\Tpl\default\Index\下 index.php文件和login.php文件    邓晖
 2009.10.15
 再次修改\thinksns\Tpl\default\Info\education.html   form 邓晖  
-修改\thinksns\Lib\Model\UserSearchModel.class.php     去掉个人信息的"年"   邓晖
+修改\thinksns\Lib\Model\UserSearchModel.class.php     去掉个人信息的"年"   邓晖   
+2009.10.19
+修改\admin\Lib\Action\InfoAction.class.php 文件名Info小写i  以适应linux  邓晖
+修改\admin\Tpl\default\Info文件夹名  Info改为info  邓晖
+修改\thinksns\Tpl\default\Index\index.html  邓晖
 2009.10.22
-修改\thinksns\public\themes\xueyou01\header.html    from 冯志强 
-添加时钟功能<script src=" http://www.clocklink.com/embed.js"></script><script type="text/javascript" language="JavaScript">obj=new Object;obj.clockfile="0050-purple.swf";obj.TimeZone="China_Beijing";obj.width=150;obj.height=150;obj.wmode="transparent";showClock(obj);</script>
-
-       
+修改\thinkphp\Common\convention.php  第99行 更改timezone
+添加时钟功能   \public\themes\xueyou01  下添加clock.html文件 修改footer.html
+2009.10.23
+修改\thinksns\Tpl\default\Chat\box.html  中的title
+2009。10.31
+更新为正式版，以上改动均已调整，现在就差地区选项框了，要重新调整
+修改\public\js\ymPrompt\ymPrompt.js 391行

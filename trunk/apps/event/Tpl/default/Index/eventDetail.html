@@ -12,9 +12,9 @@
 </div><!-- page_title end -->
   <div class="tab-menu"><!-- 切换标签 begin  -->
 	  
-      <div class="right">{:W('Report',array( 'type'=>'举报','appid'=>$APPINFO['APP_ID'],'url'=>'/Index/eventDetail/id/'.$id.'/uid/'.$uid,'title'=>$title,'recordId'=>$id))}
+      <div class="right">{:W('Report',array( 'type'=>'举报','appid'=>$APPINFO['APP_ID'],'url'=>'/Index/eventDetail/id/'.$id.'/uid/'.$uid,'title'=>$title,'recordId'=>$id))}<php>if(isAddApp('share')) { </php>
 	  <input type="button" value="分享" class="BtnShare" onclick="ts_sharePop('{$id}','__URL__')" id="BtnShare_{$id}"/>	  
-      </div>
+      <php> } </php></div>
       <ul>
         <li><a href="__URL__/eventDetail/id/{$id}/uid/{$uid}" class="on"><span>活动</span></a></li>
       <li><a href="__URL__/member/id/{$id}"><span>成员</span></a></li>

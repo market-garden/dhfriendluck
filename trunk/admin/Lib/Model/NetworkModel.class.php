@@ -25,8 +25,8 @@ class NetworkModel extends AdvModel
 		return $this->_MakeTree($pid);
 	}	
 	
-	function _MakeTree($pid,$level='0') {
-		$result = $this->where('pid='.$pid)->findall();
+	function _MakeTree($pid,$level='1') {
+		$result = $this->where('pid='.$pid.' AND status=1')->findall();
 		if($result){
 			foreach ($result as $key => $value){
 				$id = $value['id'];

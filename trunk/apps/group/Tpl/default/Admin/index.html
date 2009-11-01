@@ -10,7 +10,9 @@
 	<script type="text/javascript">
 
 	</script>
-
+	<style>
+	 li { list-style-type: none;}
+	</style>
   </head>
   <body>
     <div id="container">
@@ -120,12 +122,18 @@
               <td class="altbg2"><input type="radio" value="1" name="whoUploadFile" <eq name="setting['whoUploadFile']" value="1"> checked</eq> >仅管理员<input type="radio" value="2" name="whoUploadFile" <eq name="setting['whoUploadFile']" value="2"> checked</eq> >成员</td>
             </tr>
 
-
+			  <tr>
+              <td class="footer" colspan="2">
+                 <input type="hidden" name="editSubmit" value="1">
+                <input type="submit" class="button"  value="保存" />
+              </td>
+            </tr>
 
           </tbody>
         </table>
+		</form>
 
-
+		<form action ="__URL__/index" method="post" >
 
 	     <!-- 群组内设置-->
          <table class="tableborder" width="100%">
@@ -297,12 +305,19 @@
             </tr>
 
             <!--  私密结束-->
-
+			 <tr>
+              <td class="footer" colspan="2">
+                 <input type="hidden" name="editSubmit" value="1">
+                <input type="submit" class="button"  value="保存" />
+              </td>
+            </tr>
 
           </tbody>
         </table>
+		</form>
 
         <!-- 创建新群组条件 -->
+		<form action ="__URL__/index" method="post" >
          <!--积分设置 -->
         <table class="tableborder" width="100%">
           <tbody>
@@ -329,7 +344,7 @@
               </td>
             </tr>
 
-       
+
             <tr class="cell" id="create_group_limit">
               <td class="altbg1">
                 <b>用户拥有的积分</b>
@@ -365,24 +380,17 @@
               <td class="altbg2"><input type="text" name="createMaxGroup" value="{$setting['createMaxGroup']}"></td>
             </tr>
 
-
-         </tbody>
-        </table>
-
-
-
-        <!--积分设置 -->
-        <table class="tableborder" width="100%">
-          <tbody> 
-            <tr>
+			 <tr>
               <td class="footer" colspan="2">
-                <input type="hidden" name="editSubmit" value="1">
+                 <input type="hidden" name="editSubmit" value="1">
                 <input type="submit" class="button"  value="保存" />
               </td>
             </tr>
-          </tbody>
+         </tbody>
         </table>
-        </form>
+
+		</form>
+
 
 
 
@@ -409,14 +417,7 @@
               <td class="altbg2"><input type="text" name="title" id="title" value=""></td>
             </tr>
 
-            <tr class="cell">
-              <td class="altbg1">
-                <b>上一级分类</b>
-                <br/>
-                <span class="smalltxt">分类</span>
-              </td>
-              <td class="altbg2"><div id="pid"></div></td>
-            </tr>
+
 
             <tr>
               <td class="footer" colspan="2">
@@ -447,15 +448,7 @@
               	<td colspan="3">{$categoryList}</td>
               </tr>
 
-              <tr id = "category">
-                <td class="footer" colspan="6">
-                  <button type="button" onclick="c.all()">全选</button>
-                  <button type="button" onclick="c.unAll()">全不选</button>
-                  <button type="button" onclick="c.reverse()">反选</button>
-                  <button type="button" onclick="c.del()">删除</button>
-                  <button type="submit" >提交</button>
-                </td>
-              </tr>
+
               <tr class="bottom">
                 <td class="border" colspan="6">&nbsp;</td>
               </tr>
@@ -463,31 +456,19 @@
           </table>
 
 
-   <form name="editCagegoryForm" method="post" action="__APP__/Admin/editCategory">
+   <form name="editCagegoryForm" id="editCagegoryForm" method="post" action="__APP__/Admin/editCategory">
    		<input type="hidden" name="id" value="0">
    </form>
 
-    <form name="delCagegoryForm" method="post" action="__APP__/Admin/delCategory">
+    <form name="delCagegoryForm" id='delCagegoryForm' method="post" action="__APP__/Admin/delCategory">
    		<input type="hidden" name="id" value="0">
    </form>
 
-	 <script type="text/javascript">
-
-		 var category_json	=	{:getCategorySelect(0)};
-		 $("#pid").json2select(category_json,'','pid');
-		 function checkForm() {
-		 	if($.trim($('#title').val()) == '') {
-		 		alert('分类名称不能为空');
-		 		return false;
-		 	}
-		 	return true;
-		 }
-	 </script>
      <script type="text/javascript">
 		/* 编辑分类 */
 		function edit(id){
 			document.editCagegoryForm.id.value = id;
-			document.editCagegoryForm.submit();
+			document.getElementById('editCagegoryForm').submit();
 		}
 
 	</script>
@@ -498,7 +479,7 @@
 			if (window.confirm('确实要删除选择项吗？'))
 			{
 				document.delCagegoryForm.id.value = id;
-				document.delCagegoryForm.submit();
+				document.getElementById('delCagegoryForm').submit();
 			}
 		}
 
@@ -521,10 +502,11 @@
 		doSwitch({$setting['open_isInvite']},'open_isInvite');
 
 		doSwitch({$setting['close_isInvite']},'close_isInvite');
-		
+
 		doSwitch({$setting['isLimit']},'create_group_limit');
 
 	</script>
+
       </div>
     </body>
 </html>

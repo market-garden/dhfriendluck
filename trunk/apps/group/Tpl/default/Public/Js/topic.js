@@ -1,12 +1,12 @@
 function quoteSubmit() {
 	var gid		=	parent.document.delform.gid.value;
 	var tid		=	parent.document.delform.tid.value;
-
+	var content = KE.util.getData('content');
 
 	$.ajax({
 		type: 'POST',
 		url: APP+'/Topic/post/',
-		data:"gid="+gid+"&tid="+tid+"&quote=1&content="+$('#content').val()+"&qid="+$('#qid').val(),
+		data:"gid="+gid+"&tid="+tid+"&quote=1&content="+content+"&qid="+$('#qid').val(),
 		success:function( result ){
 			parent.window.location.reload();
 			parent.ymPrompt.close();

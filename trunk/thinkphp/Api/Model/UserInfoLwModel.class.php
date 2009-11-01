@@ -44,7 +44,6 @@ class UserInfoLwModel extends LW_Model{
             if( is_string( $type ) && false === strpos( $type,',' ) ){
                 //查询得到结果
                 $request         = $this->where( $map )->field( $type )->find();
-
                 //反序列化所得数据集并赋值给变量
                 $data = unserialize( $request[$type] );
 

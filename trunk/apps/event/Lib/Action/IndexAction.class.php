@@ -22,7 +22,7 @@ class IndexAction extends Action {
     //参数转义
         new_addslashes($_POST);
         new_addslashes($_GET);
-     
+
         //设置心情Action的数据处理层
         $this->event = D( 'Event' );
         $this->event->setApi( $this->api);
@@ -112,11 +112,16 @@ class IndexAction extends Action {
      * @return void
      */
     public function addEvent() {
+        if($this->event->getConfig('canCreat')){
+            $this->_creatLimit($this->mid);
+        }
         $typeDao = D( 'EventType' );
         $this->assign('type',$typeDao->getType());
+        $this->assign('smileList',$this->getSmile($this->opts['ico_type']));
+        $this->assign('smilePath',$this->getSmilePath($this->opts['ico_type']));
         //TODO 获取本人创建的群组
         $this->display();
-        
+
     }
 
     /**
@@ -138,7 +143,7 @@ class IndexAction extends Action {
             return;
         }
         echo trim($this->event->doAddUser( $data,$allow ));
-  
+
     }
 
 
@@ -277,6 +282,7 @@ class IndexAction extends Action {
         list( $opts['province'],$opts['city'],$opts['area'] ) = explode( " ",$_POST['city']);;
 
         //得到上传的图片
+        $option = array();
         $option['save_photo']['albumId'] = intval( $_POST['albumId'] );
         $option['max_size'] = $this->event->getConfig( 'limitphoto' )*1024*1024;
         $option['allow_exts'] = $this->event->getConfig( 'limitsuffix' );
@@ -294,7 +300,26 @@ class IndexAction extends Action {
         }
     }
 
+    private function _creatLimit($uid){
+    	$scoreLimit = $this->event->getConfig('score');
+    	$timeLimit  = $this->event->getConfig('limittime');
+    	if($scoreLimit){
+    		$score = $this->api->UserScore_getScore($uid,'score');
+    		if($score<$scoreLimit){
+    			$this->error("积分小于".$scoreLimit.".不允许发起活动");
+    			exit;
+    		}
+    	}
+    	if($timeLimit){
+    	   $regTime = $this->api->User_getUserReg($uid);
+    	   $difference = (time()-$regTime)/3600;
 
+    	   if($difference<$timeLimit){
+    	       $this->error("账户创建时间小于".$timeLimit.'.不允许发起活动');
+    	       exit;
+    	   }
+    	}
+    }
     /**
      * doEditEvent
      * 修改活动
@@ -375,6 +400,8 @@ class IndexAction extends Action {
         if($result = $this->event->getEventContent( $id,$uid )) {
             $this->assign( $result );
             $this->assign('category',$typeDao->getType());
+            $this->assign('smileList',$this->getSmile($this->opts['ico_type']));
+            $this->assign('smilePath',$this->getSmilePath($this->opts['ico_type']));
             $this->display('edit');
         }else {
             $this->error( '错误的访问页面，请检查链接' );

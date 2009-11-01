@@ -3,7 +3,8 @@
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>{&SITE_TITLE}</title>
-	<link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+	<link href="__PUBLIC__/admin/css/layout.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
 	<script type="text/javascript">
 		var ctrl = function(name){
 			this.elements = document.getElementsByName('id[]');
@@ -29,14 +30,16 @@
 				this[obj.checked ? 'all' : 'unAll']();
 			},
 			del:function(id){
-				if(id==undefined){
-					id = [];
-					for(i=0;i<this.length;i++){
-						this.elements[i].checked && id.push(this.elements[i].value);
+				if(confirm("此节点删除后,连同子节点一同删除,你是否确认删除?")){
+					if(confirm("请您再次确认是否真要删除?")){
+						location.href = "__URL__/delnode/id/"+id;
+					}else{
+						return false;
 					}
-					id = id.join(',');
+				}else{
+					return false;
 				}
-				location.href = "__URL__/delnode/id/"+id;
+				
 			},
 			edit:function(id){
 				location.href = "__URL__/editnode/id/"+id;
@@ -65,8 +68,7 @@
 							<ul>
 								<li>ThinkSnS系统后台权限配置 - 菜单管理</li>
 								<li><select name="type" onchange="changetype(this)">
-										<option value="admin" <eq name="type" value="admin">selected</eq> >网站后台权限</option>
-										<option value="apps" <eq name="type" value="apps">selected</eq> >APP后台配置</option>
+										<option value="admin" <eq name="type" value="admin">selected</eq> >后台节点配置</option>
 										<option value="guest" <eq name="type" value="guest">selected</eq> >前台游客配置</option>
 									</select>
 								</li>

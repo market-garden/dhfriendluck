@@ -321,6 +321,8 @@ class App extends Base
         define('__CURRENT__',	APP_URL.'/'.$tmplDir.MODULE_NAME);	//thinksns修改:	由WEB_URL.'/'.APP_NAME 换成 APP_URL
         //项目模板目录
         define('APP_TMPL_URL', $appRoot.$tmplDir);
+        //项目模板目录绝对路径
+        define('APP_PUBLIC_PATH',APP_PATH.DIRECTORY_SEPARATOR.$tmplDir.'Public');
         //网站公共文件地址
         define('WEB_PUBLIC_URL', WEB_URL.'/Public');
         //项目公共文件目录

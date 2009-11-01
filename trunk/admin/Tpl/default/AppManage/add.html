@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>{&SITE_TITLE}</title>
-        <link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+        <link href="__PUBLIC__/admin/css/layout.css" rel="stylesheet" type="text/css" />
 
         <script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
         <script type="text/javascript" src="__PUBLIC__/js/form_check/jquery.validator.js"></script>
@@ -91,7 +91,7 @@
                                 <br/>
                                 <span class="smalltxt">应用管理地址</span>
                             </td>
-                            <td class="altbg2"><input name="url" style="width:200px;" class="txt" value="{$appConfig.url_admin}"/> </td>
+                            <td class="altbg2"><input name="url_admin" style="width:200px;" class="txt" value="{$appConfig.url_admin}"/> </td>
                         </tr>      
                         
                         <tr class="cell">
@@ -177,7 +177,7 @@
                                 <span class="smalltxt">描述一下你的应用吧</span>
                             </td>
                             <td class="altbg2">
-                                <textarea cols="30" name="describe" rows="5"  require="true" datatype="require" msg="此项不能为空" >{$appConfig.describe}</textarea>
+                                <textarea cols="30" name="description" rows="5"  require="true" datatype="require" msg="此项不能为空" >{$appConfig.describe}</textarea>
                             </td>
                         </tr>
                         <tr class="bottom">

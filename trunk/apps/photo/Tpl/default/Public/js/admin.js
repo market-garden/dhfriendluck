@@ -144,3 +144,61 @@ function clean_album(id,URL){
 	}
 	return true;
 }
+//还原照片
+function restore_photo(id,URL){
+	var keyValue;
+	if (id!=0)
+	{
+		keyValue = id;
+	}else {
+		keyValue = getSelectValues();
+	}
+	if (!keyValue)
+	{
+		alert('请选择删除项！');
+		return false;
+	}
+
+	if (window.confirm('确实要还原选择项吗？'))
+	{	
+		$.post(URL+"/restore_photo",{ajax:1,id:keyValue},function(data){
+			if(data){
+				//成功
+				remove_list(keyValue);
+			}else{
+				//失败
+				alert('还原失败！');
+			}
+		});		
+	}
+	return true;
+}
+//还原照片
+function restore_album(id,URL){
+	var keyValue;
+	if (id!=0)
+	{
+		keyValue = id;
+	}else {
+		keyValue = getSelectValues();
+	}
+	if (!keyValue)
+	{
+		alert('请选择删除项！');
+		return false;
+	}
+
+	if (window.confirm('确实要还原选择项吗？'))
+	{	
+		$.post(URL+"/restore_album",{ajax:1,id:keyValue},function(data){
+			if(data){
+				//成功
+				remove_list(keyValue);
+			}else{
+				//失败
+				alert('还原失败！');
+			}
+		});		
+	}
+	return true;
+}

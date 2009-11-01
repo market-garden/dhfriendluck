@@ -3,14 +3,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>广告设置</title>
-        <link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+        <link href="__PUBLIC__/admin/css/layout.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="../Public/script/jquery.js"></script>
-        <script type="text/javascript" src="../Public/script/xheditor/xheditor.js"></script>
-        <script>
-            $(function(){
-                $('#content').xheditor(true,{tools:'simple',uploadUrl:"__URL__/up_ad_img",uploadExt:"jpg,jpeg,gif,png"});
-            });
-        </script>
+
     </head>
     <body>
 
@@ -59,7 +54,7 @@
                     <tr>
                         <th class="th" valign="top">广告代码(必填)</th>
                         <td class="td" >
-                            <textarea id="content" name="ad" cols="40" rows="15" style="width:95%; padding:8px;" class="Text" onBlur="this.className='Text'" onFocus="this.className='Text1'">{$ad.ad|stripslashes}</textarea>
+                            {:W("Edit",array('name'=>'ad',width=>"95%",'cols'=>40,'rows'=>15,'smileList'=>$smileList,'smilePath'=>$smilePath,'content'=>stripslashes($ad['ad'])))}
                         </td>
                     </tr>
                 </TBODY>

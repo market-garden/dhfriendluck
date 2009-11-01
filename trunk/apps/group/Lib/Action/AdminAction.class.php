@@ -308,7 +308,7 @@
    		//修改分类
    		
    		function editCategory() {
-   			$id	=	intval($_POST['id']);
+   			$id	=	intval($_REQUEST['id']);
    			if(isset($_POST['editSubmit'])) {
 				if(!$id) $this->error('错误的分类ID！');
 				if(empty($_POST['title'])){
@@ -321,9 +321,10 @@
 				$pid = $cate['pid'] = intval($_POST['pid0']);  //1级分类
 				
 				//$pid	=	intval($this->Cagetory->_digCate($_POST));
-				if(!$pid){
-					$this->error('分类必须选！');
-				}
+				//if(!$pid){
+					//$this->error('分类必须选！');
+				//}
+				$pid = 0;
 				if($pid==$id){
 					$categoryId = $this->Cagetory->setField('title',$cate['title'],'id='.$id);
 				}else{	
@@ -344,8 +345,9 @@
    		
    		//删除分类
    		function delCategory() {
-   			$id	=	intval($_POST['id']);
+   			$id	=	intval($_REQUEST['id']);
 			if($this->Cagetory->where('id='.$id)->delete()){
+				
 				header("Location:".__APP__."/Admin");
 			}else{
 				$this->error('删除失败！');

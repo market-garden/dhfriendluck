@@ -272,8 +272,6 @@ class FriendAction extends BaseAction {
                         if($_GET["id"])             $data = $dao->findUserByField('id',intval(trim($_GET["id"])));
 
                 }
-                $data['data'] = $this->__filterSearchUser($data['data']);
-                $data['count'] = $data['data']?count($data['count']):$data['count'];
                 $this->assign("page",$data["html"]);
                 $this->assign("data",$data["data"]);
                 $this->assign("total_num",$data['count']);
@@ -282,24 +280,6 @@ class FriendAction extends BaseAction {
 
         }
 
-        private function __filterSearchUser($input) {
-                $dao = D('Privacy');
-                $result = $input;
-
-                if(is_array($input)) {
-                        foreach ($result as $key=>$value) {
-                                $uid = $value['uid'];
-                                $privacy_request = $dao->where('uid='.$uid)->field('privacy')->find();
-                                if($privacy_request ) {
-                                        $privacy = unserialize($privacy_request['privacy']);
-                                        if($privacy['search']) unset($result[$key]);
-                                }
-                        }
-                }else{
-                        return false;
-                }
-                return $result;
-        }
 
 
         //------------------------------------------------以下是选择好友组件相关-----------------------------------
@@ -490,7 +470,7 @@ class FriendAction extends BaseAction {
                 //------------再插入一条我的------------------
                 //1、先在分组关系表中插入我的相关数据
                 $daoG = D("Fg");
-                $daoG->addAgreeFriendGroup($mid,$fuid,$gids);
+                $daoG->addAgreeFriendGroup($this->mid,$fuid,$gids);
 
                 //处理通知
                 $map_n["id"]   = intval($_POST["nid"]);

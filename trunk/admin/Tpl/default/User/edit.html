@@ -3,7 +3,7 @@
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>{&SITE_TITLE}</title>
-	<link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+	<link href="__PUBLIC__/admin/css/layout.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 <!--
 	//指定当前组模块URL地址
@@ -16,7 +16,7 @@
 </script>	
 	<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
 	<script type="text/javascript" src="__PUBLIC__/js/json.js"></script>
-	<script type="text/javascript" src="__PUBLIC__/js/ts_common.js"></script>
+
 	<script type="text/javascript" src="__PUBLIC__/js/ymPrompt/ymPrompt.js"></script>
 	<link rel="stylesheet" id='skin' type="text/css" href="__PUBLIC__/js/ymPrompt/skin/qq/ymPrompt.css" />
 <script>
@@ -46,11 +46,6 @@
 
 $(document).ready(function()
 {
-	$("[selectArea='true']").bind("click", function(){
-		var type = $(this).attr('areatype');
-		var typevalue = $("#ts_"+type).val();
-		ymPrompt.win({message:APP+'/Index/network/type/'+type+'/selected/'+typevalue,width:600,height:290,title:'选择地区',handler:function(){ymPrompt.close();},autoClose:false,iframe:true,allowRightMenu:true});
-	}); 	
 	var bithday='{$info.birthday}'.split('-');
 	var v_astro = getAstro(bithday[1],bithday[2]);
 	$("#astro").html(v_astro);
@@ -157,7 +152,7 @@ function getAstro(v_month, v_day)
 						<td class="altbg1">
 							<b>头像:</b>
 						</td>
-						<td class="altbg2"><img src="{$info.id|getUserFace='middle'}" style="height:60px;">&nbsp;<a href="">清空头像</a></td>
+						<td class="altbg2"><img src="{$info.id|getUserFace='middle'}" style="height:60px;">&nbsp;<a href="__APP__/User/doedit/type/cleanface/id/{$info.id}" onclick=" return confirm('是否清空此用户的头像')">清空头像</a></td>
 					</tr>
 					<tr class="cell">
 						<td class="altbg1">
@@ -354,3 +349,4 @@ function getAstro(v_month, v_day)
 		</div>
 	</body>
 </html>
+{:W('Network')}

@@ -96,7 +96,7 @@ return  array(
     'HTML_URL_SUFFIX'			=>	'',	// 伪静态后缀设置
 
     /* 语言时区设置 */
-    'TIME_ZONE'					=>	'PRC',		 // 默认时区
+    'TIME_ZONE'					=>	'Europe/Berlin',		 // 默认时区
 	'LANG_SWITCH_ON'			=>	false,	 // 默认关闭多语言包功能
 	'DEFAULT_LANGUAGE'		=>	'zh-cn',	 // 默认语言
     'AUTO_DETECT_LANG'      =>   false,     // 自动侦测语言

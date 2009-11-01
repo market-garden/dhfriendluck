@@ -1,17 +1,18 @@
 <?php
 
 function getUserLevel($level){
-	 if($level){
-	 	$info = D('SystemGroup')->where('id='.$level)->find();
-	 	return '<font color="red">'.$info['name'].'</font>';
-	 }else{
-	 	return '普通用户';
-	 }
+	$level	=	intval($level);
+	if($level>0){
+		$info = D('SystemGroup')->where("id='$level'")->find();
+		return '<font color="red">'.$info['name'].'</font>';
+	}else{
+		return '普通用户';
+	}
 }
 
 function getInfoCate($id){
 	$value = D('InfoCate')->where("id=".$id)->find();
-	return $value['name'];
+	return $value['title'];
 }
 
 function formatsize($fileSize) {
@@ -24,5 +25,23 @@ function formatsize($fileSize) {
 
 }
 
+//删除目录
+function rmdirr($dirname) {
+	if (!file_exists($dirname)) {
+		return false;
+	}
+	if (is_file($dirname) || is_link($dirname)) {
+		return unlink($dirname);
+	}
+	$dir = dir($dirname);
+	while (false !== $entry = $dir->read()) {
+		if ($entry == '.' || $entry == '..') {
+			continue;
+		}
+		rmdirr($dirname . DIRECTORY_SEPARATOR . $entry);
+	}
+	$dir->close();
+	return rmdir($dirname);
+}
 
 ?>

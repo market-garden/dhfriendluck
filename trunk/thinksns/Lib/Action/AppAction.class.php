@@ -35,6 +35,8 @@ class AppAction extends BaseAction{
 			$appData['appid'] = $intAppId;
         	$result = $pUserApp->where($appData)->count();
         	if($result==0){
+        		$APP_URL = str_replace('http://{APPS_URL}',SITE_URL.'/apps',$app['url']);
+        		$app['icon'] = str_replace('http://{APP_URL}',$APP_URL,$app['icon']);
 		        $this->assign("add_app",$app);
 		        $this->display();
         	}else{
@@ -71,6 +73,8 @@ class AppAction extends BaseAction{
 			$appData['appid'] = $intAppId;
         	$result = $pUserApp->where($appData)->count();
         	if($result==0){
+        		$APP_URL = str_replace('http://{APPS_URL}',SITE_URL.'/apps',$app['url']);
+        		$app['icon'] = str_replace('http://{APP_URL}',$APP_URL,$app['icon']);        		
 		        $this->assign("add_app",$app);
 		        $this->display();
         	}else{

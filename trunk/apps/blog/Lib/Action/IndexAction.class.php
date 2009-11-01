@@ -40,7 +40,6 @@ class IndexAction extends Action {
         //获得日志数据集,自动获得当前登录用户的好友日志
                 $list = $this->__getBlog(null,'*','cTime desc');
                 //dump($this->blog->getLastSql());
-
                 //检查是否可以查看全部日志
                 $this->__checkAllModel();
 
@@ -138,7 +137,6 @@ class IndexAction extends Action {
                 $bloguid = $_GET['mid'];
 
 
-
                 //获得日志的详细内容,第二参数通知是当前还是上一篇下一篇
                 isset( $_GET['action'] ) && $how = $_GET['action'];
                 $list     = $this->blog->getBlogContent($id,$how,$bloguid);
@@ -150,7 +148,7 @@ class IndexAction extends Action {
                 $id = $list['id'];
                 //是否是好友
                 $this->assign( 'isFriend',$this->api->friend_areFriends( $bloguid,$this->mid ) );
-
+                
                 //检测密码
                 if (isset($_POST['password'])) {
                         if(md5(t($_POST['password'])) == $list['private_data']) {
@@ -301,23 +299,19 @@ class IndexAction extends Action {
 
                 //表情控制
                 $smile     = array();
-                $smileType = $this->blog->getConfig( 'smiletype' );
+                $smileType = $this->opts['ico_type'];
 
-                foreach (D('Smile')->getSmile($smileType) as $k=>$value) {
-                        $smile[$k%2]=ltrim($smile[$k%2].',\''.$value['filename'].'\'',',');
-                }
-                foreach( $smile as &$value ) {
-                        $value = '['.$value.']';
-                }
-                $smileList = '['.implode(',',$smile).']';
-                $smilePath = '../../public/images/biaoqing/'.$smileType.'/';
 
+                $smileList = $this->getSmile($smileType);
+                $smilePath = $this->getSmilePath($smileType);
                 $this->assign( 'smileList',$smileList );
                 $this->assign( 'smilePath',$smilePath );
                 $this->assign( 'savetime',$savetime );
                 $this->assign( 'category',$category );
                 $this->display();
         }
+
+
 
         public function edit() {
                 $category = $this->blog->getCategory($this->mid);
@@ -377,18 +371,13 @@ class IndexAction extends Action {
 
                 $list['mention'] = json_encode( $list['mention'] );
 
-                //表情控制
+                 //表情控制
                 $smile     = array();
-                $smileType = $this->blog->getConfig( 'smiletype' );
+                $smileType = $this->opts['ico_type'];
 
-                foreach (D('Smile')->getSmile($smileType) as $k=>$value) {
-                        $smile[$k%2]=ltrim($smile[$k%2].',\''.$value['filename'].'\'',',');
-                }
-                foreach( $smile as &$value ) {
-                        $value = '['.$value.']';
-                }
-                $smileList = '['.implode(',',$smile).']';
-                $smilePath = '../../public/images/biaoqing/'.$smileType.'/';
+
+                $smileList = $this->getSmile($smileType);
+                $smilePath = $this->getSmilePath($smileType);
                 $this->assign( 'smileList',$smileList );
                 $this->assign( 'smilePath',$smilePath );
                 $this->assign( 'link',$link );
@@ -473,7 +462,7 @@ class IndexAction extends Action {
         //得到发日志人的名字
                 $userName = $this->blog->getOneName( $this->mid );
                 $data['name']     = $userName['name'];
-                $data['content']  = h($_POST['content']);
+                $data['content']  = $_POST['content'];
                 $data['uid']      = $this->mid;
                 $data['category'] = intval($_POST['category']);
                 $data['password'] = t($_POST['password']);
@@ -833,6 +822,7 @@ class IndexAction extends Action {
         //$post = str_replace('\\', '', stripslashes($_POST['data']));
                 $result = json_decode(stripslashes($_POST['data']));  //json被反解析成了stdClass类型
                 $count = $this->__setBlogCount($result->appid);
+
                 //发送两条消息
                 $data = $this->__getNotifyData($result);
                 $this->api->comment_notify('blog',$data,$this->appId);
@@ -845,11 +835,20 @@ class IndexAction extends Action {
         //发送两条消息
                 $result['toUid'] = $data->toUid;
                 $need  = $this->blog->where('id='.$data->appid)->field('uid,title')->find();
+
+                
                 $result['uids'] =$need['uid'];
                 $result['url'] = sprintf('%s/Index/show/id/%s/mid/%s','{'.$this->appId.'}',$data->appid,$result['uids']);
                 $result['title_body']['comment'] = $data->comment;
                 $result['title_data']['title'] = sprintf("<a href='%s'>%s</a>",$result['url'],$need['title']);
                 $result['title_data']['type']  = "日志";
+                if(empty($data->toUid) && $this->mid != $need['uid']){
+                    $title['title'] = $result['title_data']['title'];
+                    $uid = $result["uids"];
+                    $title['user'] = '<a href="__TS__/space/'.$uid.'">'.getUserName($uid)."</a>";
+                    $body['comment'] = $data->comment;
+                    $this->blog->doFeed('blog_comment',$title,$body);
+                }
                 return $result;
         }
         /**
@@ -916,14 +915,15 @@ class IndexAction extends Action {
 
                 //给blog对象的uid属性赋值
                 if( isset( $uid ) ) {
-                        $this->blog->uid   = $uid;
+                        $map['uid']   = $uid;
                 }else {
                         $gid     = $_GET['gid'];
                         $friends = $this->api->friend_getGroupUids($gid);
-                        $this->blog->uid = array( "in",$friends);
+                        if(empty($friends)) return false;
+                        $map['uid']  = array( "in",$friends);
                 }
                 $this->blog->private = array('neq',2);
-                return $this->blog->getBlogList (null, $field, $order);
+                return $this->blog->getBlogList ($map, $field, $order);
         }
 
         /**

@@ -1,6 +1,5 @@
 <include file="__THEME__/header" />
 <link rel="stylesheet" href="../Public/event.css" type="text/css" media="screen" charset="utf-8" />
-
 <script  type="text/javascript" src="__PUBLIC__/js/rcalendar.js" ></script>
 <script type="text/javascript" src="../Public/Js/event.js"></script>
 
@@ -78,7 +77,8 @@
               </select>
             </div>
           </li>
-          <li><div class="c1">活动介绍：<span class="cRed pr5">*</span></div><div class="c2"><textarea id="explain" name="explain" cols="50" rows="10" style="width:100%" class="Text"  onBlur="this.className='Text'" onFocus="this.className='Text1'">{$explain}</textarea>
+          <li><div class="c1">活动介绍：<span class="cRed pr5">*</span></div><div class="c2">
+                    {:W("Edit",array('smileList'=>$smileList,'smilePath'=>$smilePath,'cols'=>60,'rows'=>20,'name'=>'explain','id'=>'explain','content'=>$explain))}
           </div></li>
           <li>
             <div class="c1">联系方式：</div>
@@ -148,4 +148,5 @@
   </div><!-- 画布 end  -->
   <div class="c"></div>
 </div><!-- 内容 end -->
+{:W('Network')}
 <include file="__THEME__/footer" />

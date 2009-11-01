@@ -3,11 +3,12 @@
 <link href="public.css" rel="stylesheet" type="text/css">
 <link href="layout.css" rel="stylesheet" type="text/css">
 </head>
-
+<php>if($mid && true){</php>
+	<include file="__THEME__/clock" />
+<php>}</php>
 <php>if($mid && !$is_im_closed && $site_opts["is_im_open"]){</php>
 	<include file="__THEME__/im" />
 <php>}</php>
-
 <div class="app_bbg" style="display:none;"></div>
 <php>if($ad["contentbottom"]){</php>
 <div class="ad_footer">{$ad.contentbottom}</div>

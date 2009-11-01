@@ -33,7 +33,7 @@ class IndexAction extends Action {
      * 添加一个投票
      */
         function add() {
-
+				$_POST['title'] = t($_POST['title']);
                 $deadline = mktime($_POST["hour"],0,0,$_POST["month"],$_POST["day"],$_POST["year"]);
 
                 if($deadline < time()) {
@@ -74,7 +74,7 @@ class IndexAction extends Action {
                 foreach($_POST["opt"] as $v) {
                         if(!$v) continue;
                         $data["vote_id"]    =    $vote_id;
-                        $data["name"]       =    $v;
+                        $data["name"]       =    t($v);
                         $feed[] = $v;
                         $optDao->add($data);
                 }
@@ -339,6 +339,7 @@ class IndexAction extends Action {
                 //检查好友投票情况
                 $empty_friend = false;
                 $temp_uid     = array();
+                $join = D( 'Vote' )->getConfig( 'join' );
                 if( "" == $vote_users[0] ) {
                         $empty_friend = true;
                 }else {
@@ -348,7 +349,7 @@ class IndexAction extends Action {
                                 }else if( $this->mid == $vote['uid'] || $this->uid == $value['uid'] ) {
                                                 $value['admin'] = true;
                                         }else {
-                                                if( 'friend' === $join = D( 'Vote' )->getConfig( 'join' )) {
+                                                if( 'friend' === $join) {
                                                         $value['Show'] = false;
                                                 }else {
                                                         $value['Show'] = true;

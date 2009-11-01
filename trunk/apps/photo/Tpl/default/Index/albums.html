@@ -49,9 +49,9 @@
 				<dl>
 					<dt>
 						<span class="right">
-							<eq name="li.share" value="1">
+							<eq name="li.share" value="1"><php>if(isAddApp('share')) { </php>
 							<input type="button" value="分享" class="BtnShare" onclick="sharePop('{$li.id}','__URL__','album')" id="BtnShare_{$li.id}"/>
-							</eq>
+							<php> } </php></eq>
 						</span>
 						<a href="__APP__/Index/album/id/{$li.id}/uid/{$li.userId}" class="OverH" style="width:140px; display:block;"><strong>{$li.name}</strong></a>
 					</dt>
