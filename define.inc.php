@@ -1,6 +1,6 @@
-<?php
+﻿<?php
 //由于多应用情况下，目录由应用自己设置，核心系统就需要定义主程序的路径
-define("SITE_PATH"	,	'E:/wamp/www/thinksns/');
+define("SITE_PATH"	,	'E:/wamp/www/thinksns');
 
 //应用跳转到核心需要的路径
 define('SITE_URL'	,	'http://localhost/thinksns');
