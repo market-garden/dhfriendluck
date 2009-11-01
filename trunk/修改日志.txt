@@ -22,3 +22,7 @@ commit test!! from 冯志强
 2009。10.31
 更新为正式版，以上改动均已调整，现在就差地区选项框了，要重新调整
 修改\public\js\ymPrompt\ymPrompt.js 391行
+2009。11.01
+文件define.inc.php中
+     define("SITE_PATH"	,	'E:/wamp/www/thinksns/');
+改为define("SITE_PATH"	,	'E:/wamp/www/thinksns');
