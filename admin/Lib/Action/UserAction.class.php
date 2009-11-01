@@ -7,12 +7,13 @@ class UserAction extends BaseAction {
 
         public function msg () {
                 $group = D('SystemGroup')->getGroupList();
+                $this->assign('smileList',$this->getSmile($this->opts['ico_type']));
+                $this->assign('smilePath',$this->getSmilePath($this->opts['ico_type']));  
                 $this->assign('group',$group);
                 $this->display();
         }
         public function doSend() {
-        //获取用户登陆ID
-                $this->mid     =    $this->api->user_getLoggedInUser();
+                //获取用户登陆ID
                 if($_POST['type'] == 1) {
                         $this->doSendMsg();
                 }else {
@@ -23,13 +24,12 @@ class UserAction extends BaseAction {
         }
         public function doSendMsg() {
                 $toUserIds =$this->__GroupGetUser();
-
                 $dao = D("Msg");
                 $r = $dao->create();
                 if(false === $r) $this->error($dao->getError());
 
                 $dao->cTime = time();
-                $dao->fromUserId = $this->mid;
+                $dao->fromUserId = $this->uid;
                 $title_data['title'] = $dao->subject;
                 foreach($toUserIds as $uid) {
                         $dao->toUserId = $uid;
@@ -46,7 +46,7 @@ class UserAction extends BaseAction {
                 $dao = D('User');
                 $title = $_POST['subject'];
                 $content = $_POST['content'];
-                $mid = $this->mid;
+                $mid = $this->uid;
                 foreach ($toUids as $value) {
                         $temp = $dao->where('id='.$value)->field('email')->find();
                         $email[] = $temp['email'];
@@ -246,7 +246,7 @@ class UserAction extends BaseAction {
 
         //修改用户资料
         public function doedit() {
-                $intId = intval($_POST['id']);
+                $intId = intval($_REQUEST['id']);
                 $pUser = D('User');
                 $info = $pUser->where('id='.$intId)->find();
                 if(!$info || !$intId) {
@@ -254,7 +254,7 @@ class UserAction extends BaseAction {
                         exit;
                 }
 
-                switch ($_POST['type']) {
+                switch ($_REQUEST['type']) {
                         case 'accounts':  //帐户设置
                                 $strEmail = h($_POST['email']);
                                 $strPassword = h($_POST['password']);
@@ -284,6 +284,13 @@ class UserAction extends BaseAction {
                                 $pUser->setField('admin_level',$intLevel,'id='.$intId);
                                 $this->success('操作成功');
                                 break;
+                                
+                        case 'cleanface': //清空头像
+                        	$path = getFacePath($info['id']);
+                        	@unlink($path.$intId.'_middle_face.jpg');
+                        	@unlink($path.$intId.'_small_face.jpg');
+                        	$this->success('头像清空成功');
+                        break;
 
 
                 }

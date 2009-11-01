@@ -62,7 +62,7 @@
             var imgPattern = new RegExp('^.*\.(bmp|gif|jpg|png){1}$','gi');	//图片类型匹配
             var imgPattern = new RegExp('^.*.(bmp|gif|jpg|png){1}$','gi'); //图片类型匹配
             if(imgPattern.test(info.name)){
-                attachInfo = '<input class="attach'+info.id+'" type="hidden" name="attach[]" value="'+info.id+'|'+info.name+'"/>'+'<p><a class="attach'+info.id+'" href= javascript:void(0) onclick = insertImageIntoEditor("'+ upload_url + info.savepath+info.savename +'","'+ info.id +'")>[插入]</a>   <a class="attach'+info.id+'" href="javascript:void(0)" onclick="deleteAttach('+info.id+'<?php if($id) echo ",".$id ?>)">[删除]</a>&nbsp;<span class="attach'+info.id+'">'+info.name+'</span></p>';
+                attachInfo = '<input class="attach'+info.id+'" type="hidden" name="attach[]" value="'+info.id+'|'+info.name+'"/>'+'<p><a class="attach'+info.id+'" href="javascript:void(0)" onclick="deleteAttach('+info.id+'<?php if($id) echo ",".$id ?>)">[删除]</a>&nbsp;<span class="attach'+info.id+'">'+info.name+'</span></p>';
             }else{
                 attachInfo = '<input class="attach'+info.id+'" type="hidden" name="attach[]" value="'+info.id+'|'+info.name+'"/>'+'<p><a class="attach'+info.id+'" href= javascript:void(0) onclick="deleteAttach('+info.id+')">[删除]</a>&nbsp;<span class="attach'+info.id+'"> '+info.name+'</span></p>';
             }

@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="../Public/event.css" type="text/css" media="screen" charset="utf-8" />
 
 <!--<script type="text/javascript" src="../Public/Js/tinymce/tiny_mce.js"></script>-->
-<script type="text/javascript" src="../Public/Js/xheditor/xheditor.js"></script>
 <script  type="text/javascript" src="__PUBLIC__/js/rcalendar.js" ></script>
 <script type="text/javascript" src="../Public/Js/event.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/form_check/jquery.validator.reg.js"></script>
@@ -35,14 +34,17 @@
           
             <div class="c2"><input name="address" type="text" class="TextH20" id="address" onfocus="this.className='Text2'" onblur="this.className='TextH20'"  maxlength="30"/></div>
           </li>
-          <li><div class="c1"> 活动时间：<span class="cRed pr5">*</span></div>
-            <div class="c2"><input name="sTime" type="text" class="TextH20" id="sTime" onfocus="this.className='Text2';rcalendar(this,'full');" onblur="this.className='TextH20'" readonly />
-               -  
-                 <input name="eTime" type="text" class="TextH20" id="eTime" onfocus="this.className='Text2';rcalendar(this,'full');" onblur="this.className='TextH20'" readonly />
+          <li>
+            <div class="c1"> 活动分类：<span class="cRed pr5">*</span></div>
+            <div class="c2">
+              <select name="type" id="type">
+                <option value="0" selected>请选择活动分类</option>
+                      				<?php foreach($type as $k=>$cate){ ?>
+                                         <option value="{$k}">{$cate}</option>
+                                         <?php } ?>
+                </volist>
+              </select>
             </div>
-          </li>
-          <li><div class="c1"> 截止报名：<span class="cRed pr5">*</span></div>
-            <div class="c2"> <input name="deadline" type="text" class="TextH20" id="deadline" onfocus="this.className='Text2';rcalendar(this,'full');" id="deadline" onblur="this.className='TextH20'" readonly /> </div>
           </li>
           <li><div class="c1"> 活动经费：&nbsp;&nbsp;&nbsp;</div>
             <div class="c2"><select name="cost">
@@ -58,23 +60,23 @@
               <input name="costExplain" type="text" class="TextH20" id="textfield2" onfocus="this.className='Text2'" onblur="this.className='TextH20'" size="30" />
             </div>
           </li>
+          <li><div class="c1"> 活动时间：<span class="cRed pr5">*</span></div>
+            <div class="c2"><input name="sTime" type="text" class="TextH20" id="sTime" onfocus="this.className='Text2';rcalendar(this,'full');" onblur="this.className='TextH20'" readonly />
+               -  
+                 <input name="eTime" type="text" class="TextH20" id="eTime" onfocus="this.className='Text2';rcalendar(this,'full');" onblur="this.className='TextH20'" readonly />
+            </div>
+          </li>
+          <li><div class="c1"> 截止报名：<span class="cRed pr5">*</span></div>
+            <div class="c2"> <input name="deadline" type="text" class="TextH20" id="deadline" onfocus="this.className='Text2';rcalendar(this,'full');" id="deadline" onblur="this.className='TextH20'" readonly /> </div>
+          </li>
           <li><div class="c1"> 活动人数：&nbsp;&nbsp;&nbsp;</div>
             <div class="c2"> <input name="limitCount" type="text" class="TextH20" id="limitCount" onfocus="this.className='Text2'" onblur="this.className='TextH20'" onKeyUp="this.value=this.value.replace(/\D/g,'')" maxlength="5" value="0" />
               <span class="cGray2"> 活动人数上限，设0表示无限制</span></div>
           </li>
-          <li>
-            <div class="c1"> 活动分类：<span class="cRed pr5">*</span></div>
-            <div class="c2">
-              <select name="type" id="type">
-                <option value="0" selected>请选择活动分类</option>
-                      				<?php foreach($type as $k=>$cate){ ?>
-                                         <option value="{$k}">{$cate}</option>
-                                         <?php } ?>
-                </volist>
-              </select>
-            </div>
-          </li>
-          <li><div class="c1">活动介绍：<span class="cRed pr5">*</span></div><div class="c2"><textarea id="explain" name="explain" cols="50" rows="10" style="width:100%" class="Text"  onBlur="this.className='Text'" onFocus="this.className='Text1'"></textarea>
+          
+          <li><div class="c1">活动介绍：<span class="cRed pr5">*</span></div><div class="c2">
+          {:W("Edit",array('smileList'=>$smileList,'smilePath'=>$smilePath,'cols'=>60,'rows'=>20,'name'=>'explain','id'=>'explain'))}
+          
           </div></li>
           <li>
             <div class="c1">联系方式：&nbsp;&nbsp;&nbsp;</div>
@@ -130,6 +132,6 @@
   <div class="c"></div>
 </div><!-- 内容 end -->
 <include file="__THEME__/footer" />
-
+{:W('Network')}
 
 

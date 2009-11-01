@@ -14,14 +14,7 @@
 	margin-left: auto;
 }
 .data ul {padding: 0px;	margin: 0 auto; overflow:hidden;}
-.data ul li {
-	clear: both;
-	overflow:hidden;
-	width: 100%;
-	line-height: 20px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-}
+.data ul li { clear: both; overflow:hidden; width: 100%; line-height: 24px; padding-top: 5px; padding-bottom: 5px; }
 .data dl {
 	padding: 0px;
 	margin-top: 10px;

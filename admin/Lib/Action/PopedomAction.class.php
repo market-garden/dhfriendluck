@@ -29,132 +29,77 @@ class PopedomAction extends BaseAction   {
 /*********************************** 节点管理 *******************************/
         //节点管理
         public function node() {
-			//exit('Beta版暂不启动');
+            $intPid = intval($_GET['pid']);
+            $pNode = D('SystemNode');
+            $strType = (h($_GET['type']))?(h($_GET['type'])):'admin';
+            $this->assign($pNode->getList($intPid,$strType));  
+            $operateModel = $this->fetch('Nodes/'.$strType);
+            $this->assign('operateModel',$operateModel);
+            $this->assign('type',$strType);
+            $this->display();
+        }
 
-        //上级ID
-                $intPid = intval($_GET['pid']);
-                $pNode = D('SystemNode');
-                if($intPid) $info = $pNode->find($intPid);
-                if($info && $intPid) {
-                        $map["pid"] = $intPid;
-                        $strType = $info['type'];
-                }else {
-                        $map["pid"] = 0;
-                        $strType = (h($_GET['type']))?(h($_GET['type'])):'admin';
-                }
-
-                switch ($strType) {
-                        case 'apps':
-                                $this->assign('appslist', D('APP')->findall());
-                                break;
-                }
-                $map['type'] = $strType;
-                $list = $pNode->where($map)->findAll();
-                $this->assign('level',$info['level']+1);
-                $this->assign('pid',$intPid);
-                $this->assign('list',$list);
-                $operateModel = $this->fetch('Nodes/'.$strType);
-                $this->assign('operateModel',$operateModel);
-                $this->assign('type',$strType);
-                $this->display();
+        public function dosavenode(){
+        	$pNode = D('SystemNode');
+        	$arrOrder = $_POST['ordernum'];
+        	foreach ($arrOrder as $key=>$val){
+        		$pNode->setField('ordernum',intval($val),'id='.$key);
+        	}
+        	$this->success('操作成功');
         }
 
         //添加节点
         public function addnode() {
+            $pNode = D('SystemNode');
 
-                $pNode = D('SystemNode');
-
-                $strType = h($_POST['type']);
-                if($_POST['level']=='3' || ($_POST['level']=='2' && $strType='apps')) {
-                        $getReturn =$this->_getActionList();
-                        $data['containaction']  = $getReturn['arrActionList'];
-                        $data['title']          = $getReturn['indexShow']['title'];
-                        $data['name']           = $getReturn['indexShow']['name'];
-                        $data['description']    = $getReturn['indexShow']['title'];
-                }else {
-                        $data['title']          = $_POST['title'];
-                        $data['name']           = $_POST['name'];
-                        $data['description']    = $_POST['description'];
-                }
-
-
-                $data['pid']                = intval($_POST['pid']);
-                $data['level']              = intval($_POST['level']);
-                $data['state']              = intval($_POST['state']);
-                $data['type']               = $strType;
-                $pNode->add($data);
-                $this->success('添加成功');
+			if($pNode->addnode()){
+            	$this->success('添加成功');
+			}else{
+				$this->error('添加失败');
+			}
         }
-
 
         //删除节点
         public function delnode() {
-                $pNode = D('SystemNode');
-                $intId = intval($_GET['id']);
-                if($pNode->_DelNode($intId)) {
-                        $this->success('删除成功');
-                }else {
-                        $this->error('删除失败');
-                }
+            $pNode = D('SystemNode');
+            $intId = intval($_GET['id']);
+            if($pNode->_DelNode($intId)) {
+				$this->success('删除成功');
+            }else {
+				$this->error('删除失败');
+            }
         }
 
         //修改节点show
         public function editnode() {
-                $pNode = D('SystemNode');
-                $intId = intval($_GET['id']);
-                $info = $pNode->find($intId);
-                if($info && $intId) {
-                        if($info['level']=='3') {
-                                $arrActionList = unserialize($info['containaction']);
-                                $this->assign('actionlist',$arrActionList);
-                        }
-
-                        $this->assign('info',$info);
-                        $this->display();
-                }else {
-                        $this->error('您提交错误参数');
+            $pNode = D('SystemNode');
+            $intId = intval($_GET['id']);
+            $info = $pNode->find($intId);
+            if($info && $intId) {
+                if($info['level']=='3') {
+					$arrActionList = unserialize($info['containaction']);
+					$this->assign('actionlist',$arrActionList);
                 }
+                $this->assign('info',$info);
+                $this->display();
+            }else {
+				$this->error('您提交错误参数');
+            }
         }
 
         //修改节点操作
         public function doeditnode() {
-                $intId = intval($_POST['id']);
-                $pNode = D('SystemNode');
-                $info = $pNode->find($intId);
-                if($info && $intId) {
-                        if($info['level']=='3') {
-                                $getReturn =$this->_getActionList();
-                                $pNode->containaction  = $getReturn['arrActionList'];
-                                $pNode->title          = $getReturn['indexShow']['title'];
-                                $pNode->name           = $getReturn['indexShow']['name'];
-                                $pNode->description    = $getReturn['indexShow']['title'];
-                        }else {
-                                $pNode->title          = $_POST['title'];
-                                $pNode->name           = $_POST['name'];
-                                $pNode->description    = $_POST['description'];
-                        }
-                        $pNode->state              = intval($_POST['state']);
-                        $pNode->where($intId)->save();
-                        $this->success('修改成功');
-                }else {
-                        $this->error('您提交了错误参数');
-                }
+            $intId = intval($_POST['id']);
+            $pNode = D('SystemNode');
+            $info = $pNode->find($intId);
+			if($pNode->addnode($intId)){
+            	$this->success('修改成功');
+            }else {
+            	$this->error('您提交了错误参数');
+            }
         }
 
-        protected function _getActionList() {
-                $arrAction = $_POST['action'];
-                $intShowIndex = intval($_POST['showindex']);
-                foreach ($_POST['action'] as $key => $val) {
-                        if(!empty($val)) {
-                                $arrContainaction[$key]['title'] = $_POST['description'][$key];
-                                $arrContainaction[$key]['name'] = $val;
-                        }
-                }
 
-                $return['arrActionList'] = serialize($arrContainaction);
-                $return['indexShow']     = $arrContainaction[$intShowIndex];
-                return $return;
-        }
 /*********************************** 节点管理结束 *******************************/
 
 /*********************************** 用户组管理开始 *******************************/
@@ -174,8 +119,8 @@ class PopedomAction extends BaseAction   {
 
         //添加用户组
         public function addgroup() {
-                $pGroup = D('SystemGroup');
                 $intGroupId = intval($_POST['groupid']);
+				$pGroup	=	D('SystemGroup');
                 if($pGroup->create()) {
                         if($intGroupId) {
                                 $pGroup->id = $intGroupId;
@@ -252,7 +197,7 @@ class PopedomAction extends BaseAction   {
                         echo '等级图标必须填写';
                         exit;
                 }
-                
+
                 $rankRule = array_diff($_POST,$map);
                 foreach($creditType as $key=>$value) {
                         $min = intval($rankRule[$key.'_min']);
@@ -303,7 +248,7 @@ class PopedomAction extends BaseAction   {
                         $data[$id]['rulemin'] = serialize($data[$id]['rulemin']);
                         $data[$id]['rulemax'] = serialize($data[$id]['rulemax']);
                 }
-                
+
                 $dao = D('SystemUserRank');
                 foreach ($data as $key=>$map) {
                         $result[] = $dao->where('id='.$id)->save($map);
@@ -315,7 +260,7 @@ class PopedomAction extends BaseAction   {
                         $this->success('修改失败');
                 }
         }
-        
+
         public function deleteRank() {
                 $id = intval($_POST['id']);
                 if(empty($id)) {

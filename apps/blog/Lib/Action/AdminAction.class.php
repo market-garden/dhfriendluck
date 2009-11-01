@@ -87,7 +87,6 @@
             $map['status'] = 2;
 
             $order && $list = $this->blog->where( $map )->order( $order )->findPage( t($_POST['limit']) );
-            dump( $this->blog->getLastSql() );
             $this->assign( $list );
             $this->display();
         }

@@ -50,8 +50,9 @@
     </ul>
 	<!-- photoBox end  -->
   	</div>
-  <div class="lh30"><span class="right cGray2">{:date('Y年m月d日',$album['cTime'])}创建</span>该专辑里有：<volist name="albumMember" id="member"><a href="__TS__/space/{$member.userId}">{$member.userId|getUserName}</a>, </volist> </div>
-  <div class="page">{$photos.html}</div><!-- 右侧内容 end  -->
+  <div class="lh30"><span class="right cGray2">{:date('Y年m月d日',$album['cTime'])}创建</span></div>
+  <div class="page">{$photos.html}</div>
+  </div><!-- 右侧内容 end  -->
 
 
 <div class="c"></div>

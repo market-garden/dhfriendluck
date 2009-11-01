@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>站点配置</title>
-        <link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+        <link href="__PUBLIC__/admin/css/layout.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
         <div id="container">
@@ -58,7 +58,19 @@
 									</volist>
                                 </select>
                             </p>
-                            <p>站点模板目录存放在 ./template 下面。其中 default 目录为默认风格，不能删除。 </p></td>
+                            <p>站点模板目录存放在 ./public/themes 下面。其中 blue 目录为默认风格，不能删除。 </p></td>
+                    </tr>
+                    <tr>
+                        <th class="th" valign="top">选择表情包：</th>
+                        <td class="td"><p>
+               
+                       <select id="smiletype" name="ico_type">
+                            <php>foreach( $smilelist as $vo){</php>
+                              <option value="{$vo['type']}" <php>if($vo['type'] == $opt['ico_type']) echo "selected";</php>>{$vo['type']}</option>
+                              <php>}</php>
+                          </select>
+                            </p>
+                            <p>站点表情放在 ./public/images/biaoqing 下面。          </p></td>
                     </tr>
                       <tr>
                         <th class="th" valign="top">网站logo：</th>
@@ -91,11 +103,11 @@
                             <option value="friend"  <php>if($opt["feed_filter"] == 'friend'){</php>  selected="true" <php>}</php> >好友</option>
                             <option value="app"  <php>if($opt["feed_filter"] == 'app'){</php>  selected="true" <php>}</php> >应用</option>
                             <option value="user"  <php>if($opt["feed_filter"] == 'user'){</php>  selected="true" <php>}</php> >用户</option>
-                        </select></td>
+                        </select>
+                        <input name="feed_filter_count" type="text" value="{$opt['feed_filter_count']}" />
+                        </td>
                     </tr>
-                     <th class="th" valign="top">动态优化条数：</th>
-                    <td class="td">
-                         <input name="feed_filter_count" type="text" value="{$opt['feed_filter_count']}" />
+                         
                     </tr>
 
                     <tr>
@@ -110,22 +122,22 @@
                         <td class="td"><p>
                                 <textarea name="report_reason" cols="50" id="textfield7">{$opt['report_reason']}</textarea>
                             </p>
-                            <p>预设举报可选理由，每行一个 </p></td>
+                            <p>预设举报可选理由，多个请用,隔开 </p></td>
                     </tr>
                     <tr>
                         <th class="th" valign="top">站点关闭访问：</th>
                         <td class="td"><input type="radio" name="site_close" id="radio" value="1" class="radio" <php>if($opt["site_close"] == 1){</php>  checked="true" <php>}</php>/>
 						    是  
-                                <input type="radio" name="site_close" id="radio2" value="radio" class="0" <php>if($opt["site_close"] == 0){</php>  checked="true" <php>}</php>/>
+                                <input type="radio" name="site_close" id="radio2" value="0" class="radio" <php>if($opt["site_close"] == 0){</php>  checked="true" <php>}</php>/>
 						      否</td>
                                     </tr>
                                     <tr>
 
                                         <tr>
-                                            <th class="th" valign="top">游客访问模式：</th>
+                                            <th class="th" valign="top">是否显示随便看看：</th>
                                             <td class="td"><input type="radio" name="guest" id="radio" value="1" class="radio" <php>if($opt["guest"] == 1){</php>  checked="true" <php>}</php>/>
 						    是  
-                                                    <input type="radio" name="guest" id="radio2" value="radio" class="0" <php>if($opt["guest"] == 0){</php>  checked="true" <php>}</php>/>
+                                                    <input type="radio" name="guest" id="radio2" value="0" class="radio" <php>if($opt["guest"] == 0){</php>  checked="true" <php>}</php>/>
 						      否</td>
                                                         </tr>
 

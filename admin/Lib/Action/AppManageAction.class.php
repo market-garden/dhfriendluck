@@ -5,11 +5,14 @@ class AppManageAction extends BaseAction
 
 	protected function applist($state){
 		$dao = D("App");
-//		switch($_GET["t"]) {
-//			case "default" :  $map["status"] = 0; break;
-//			case "choice"  :  $map["status"] = 1; break;
-//			case "close"   :  $map["status"] = 2; break;
-//		}
+		//有0存 或重复的排序 则重新排序
+         if(0<$dao->where('order2=0')->count() || $dao->query("Select order2,Count(*) From ".C('DB_PREFIX')."app Group By order2 Having Count(*) > 1")){
+         	$arrapplist = $dao->order('order2 asc')->findall();
+         	foreach ($arrapplist as $key=>$val){
+         		$dao->setField('order2',$key+1,'id='.$val['id']);
+         	}
+         }
+         
 		if(isset($state)){
 			$map["status"] = $state;
 		}
@@ -98,8 +101,10 @@ class AppManageAction extends BaseAction
 			exit;
 		}else{
 			if($pApp->create()){
+				$pApp-> name      = h($_POST['name']);
+				
 				if($appId = $pApp->add()){
-					$installfile = SITE_PATH.'/apps/'.h($_POST['url']).'/appinfo/install.sql';
+					$installfile = SITE_PATH.'/apps/'.h($_POST['enname']).'/appinfo/install.sql';
 					$fp = fopen($installfile, 'rb');
 					$sql = fread($fp, filesize($installfile));
 					fclose($fp);
@@ -248,6 +253,7 @@ class AppManageAction extends BaseAction
          $map2["order2"] = $_POST["id2"];
 
          $dao = D("App");
+        
          $app1 = $dao->where($map1)->find();
          $app2 = $dao->where($map2)->find();
 

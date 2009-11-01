@@ -40,7 +40,8 @@
                 {$vo.cTime|friendlyDate}<br />
                 {$vo.privacy|get_privacy}<br />
                 <input type="checkbox" class="checkbox" id="checkboxtest" name="id[]" value="{$vo['id']}" />
-                锁定 删除 删相册
+                <a href="###" onclick="javascript:restore_photo('{$vo.id}','__URL__')">清空</a> | 
+				<a href="###" onclick="javascript:clean_photo('{$vo.id}','__URL__')">还原</a>
             </li>
             </volist>
             </div>
@@ -70,8 +71,8 @@
               <td>{$vo.cTime|friendlyDate}</td>
               <td>{$vo.privacy|get_privacy}</td>
               <td>
-              	<input type="button" onclick="javascript:revert('{$vo.id}','__URL__')" value="还原" />
-			    <input type="button" onclick="javascript:delSure('{$vo.id}','__URL__')" value="清空" />
+              	<input type="button" onclick="javascript:restore_album('{$vo.id}','__URL__')" value="还原" />
+			    <input type="button" onclick="javascript:clean_album('{$vo.id}','__URL__')" value="清空" />
 			  </td>
             </tr>
           </volist>
@@ -81,8 +82,8 @@
               <button type="button" onclick="checkall('checkList',true)">全选</button>
               <button type="button" onclick="checkall('checkList',false)">全不选</button>
 
-              <button type="button" onclick="javascript:revert('0','__URL__')">还原</button>
-			  <button type="button" onclick="javascript:delSure('0','__URL__')">清空</button> 
+              <button type="button" onclick="javascript:restore_album('0','__URL__')">还原</button>
+			  <button type="button" onclick="javascript:clean_album('0','__URL__')">清空</button> 
             </td>
           </tr>
           <tr>

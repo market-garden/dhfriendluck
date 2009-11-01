@@ -42,9 +42,9 @@ function sharePop(id,url,type){
 	<!-- 切换标签 end  -->
 	<div class="MenuSub">
 		<span class="right">
-			<eq name="album.share" value="1">
+			<eq name="album.share" value="1"><php>if(isAddApp('share')) { </php>
 			<input type="button" value="分享" class="BtnShare" onclick="sharePop('{$album.id}','__URL__','album')" id="BtnShare_{$album.id}"/>
-			</eq>
+			<php> } </php></eq>
 		</span>
 		共{$album.photoCount}张 ┊ 
 		<if condition="$album['userId'] eq $mid">

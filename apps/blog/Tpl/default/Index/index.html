@@ -33,7 +33,7 @@
             <div class="left" style="width: 10%;"><span class="headpic50"><a href="__TS__/space/{$vo['uid']}"  class="tips" rel="__TS__/Index/userInfo/uid/{$vo['uid']}"><img src="{$vo['uid']|getUserFace}" /></a></span></div>
             <div class="left" style="width: 90%;">
                        <php>if( !((3 == $vo['private'] && $vo['uid'] != $mid) || (1 == $vo['private'] && !$api->friend_areFriends( $mid,$vo['uid'] ))) ){</php>
-              <h3 class="f14px lh30 bg4"><span class="right"> <input type="button" name="Submit" value="{%share}" class="BtnShare" onclick="ts_sharePop('{$vo.id}','__URL__')" id="BtnShare_{$vo.id}"/></span><a href="__URL__/show/id/{$vo['id']}/mid/{$vo['uid']}"><strong>{$vo['title']}</strong></a></h3>
+              <h3 class="f14px lh30 bg4"><span class="right"> <php>if(isAddApp('share')) { </php><input type="button" name="Submit" value="{%share}" class="BtnShare" onclick="ts_sharePop('{$vo.id}','__URL__')" id="BtnShare_{$vo.id}"/><php> } </php></span><a href="__URL__/show/id/{$vo['id']}/mid/{$vo['uid']}"><strong>{$vo['title']}</strong></a></h3>
               	<php>}</php>
               <p>
               <a href="__TS__/space/{$vo['uid']}">{$vo['name']}</a> <span class="cGray2">{$vo['cTime']|friendlyDate}</span>

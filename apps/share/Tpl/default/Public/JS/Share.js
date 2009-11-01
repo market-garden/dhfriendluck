@@ -280,7 +280,7 @@ function doAdd(){
 					   ymPrompt.succeedInfo('分享成功!',null,null,null,refurbish);			   
 				   }
 			   },			   
-			   error: function(){
+			   error: function(txt){
 				   $("#msg").remove(); 
 				   $("input[type='button']").attr('disabled','');
 				   //alert("url="+url+"&typeId="+share_type+"&info="+info+"&fids="+fids);

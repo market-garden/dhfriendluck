@@ -29,7 +29,9 @@ var mini_zishu = '{$stringcount}';
                     <div class="Linfo">
                         <div class="info">
                             <h2 class="h21" onmouseover="this.className='h22'" onmouseout="this.className='h21'" ><div class="progress right" style="display:none;"><a href="#" class="hand cGray2"><span>资料完整度</span><span class="percent"><span style="background-color: #ffd9a0;width: 30%;">&nbsp;</span></span>&nbsp;30%</a> <a href="__APP__/Info" class="U">完善资料</a></div><span id="my_name">{$my_name}</span> {$uid|getUserGroupIcon}</h2>
-                          <p><span id="my_mini">{$my_mini.content}</span><span id="my_mini_time"><em>{$my_mini.cTime|friendlyDate}</em></span><span><a href="__ROOT__/apps/mini/index.php?s=/Index/my/">更多</a></span></p>
+<!--                          <p><span id="my_mini">{$my_mini.content}</span><span id="my_mini_time"><em>{$my_mini.cTime|friendlyDate}</em></span><span><a href="__ROOT__/apps/mini/index.php?s=/Index/my/">更多</a></span></p>-->
+                          
+                          <p><span id="mini-content">{$my_mini.content}</span><span id="mini-time"><em>{$my_mini.cTime|friendlyDate}</em></span><span><a href="__ROOT__/apps/mini/index.php?s=/Index/my/">更多</a></span></p>                          
                         </div>
                         <div class="edit_box">
                             <div class="box1" style="display:none">这里是弹出的内容</div>
@@ -43,12 +45,12 @@ var mini_zishu = '{$stringcount}';
                                 <div class="phiz" style="display:none;top: 2px;left: 0px;" id="smileylist">
                                     <volist name="bq_emotion" id="bq" key="k">
                                         <div class="ico_link hand">
-                                          <img src="__PUBLIC__/images/biaoqing/{$smiletype}/{$bq.filename}" emotion="{$bq.emotion}" title="{$bq.title}" onclick="insertBQ(this,{$k-1});"/>                                    </div>
+                                          <img src="__PUBLIC__/images/biaoqing/{$site_opts.ico_type}/{$bq.filename}" emotion="{$bq.emotion}" title="{$bq.title}" onclick="insertBQ(this,{$k-1});"/>                                    </div>
                                     </volist>
                                 </div>
                                 </div>
                           </div><!-- 状态编辑框 end -->
-                           <div class="left pt5 pl5" style="width:75px;"> <input type="button" value="发 布" class="btn_big" onclick="post_mini()"/></div>
+                           <div class="left pt5 pl5" style="width:75px;"> <input type="button" value="发 布" class="btn_big" onclick="doAddMini()"/></div>
                           <div class="c"></div>
                           </div>
                           <div class="submenu" style="display:none;"><a href="#" title="说明文字"><img src="../Public/images/ico_app03_16.gif" alt="图片说明" /></a><a href="#" title="说明文字"><img src="../Public/images/ico_app02_16.gif" alt="图片说明" /></a><a href="#" title="说明文字"><img src="../Public/images/ico_app01_16.gif" alt="图片说明" /></a><a href="#" title="说明文字"><img src="../Public/images/ico_app04_16.gif" alt="图片说明" /></a></div>
@@ -103,3 +105,4 @@ var mini_zishu = '{$stringcount}';
   <div class="c"></div>
 </div><!-- 内容 end -->
 <include file="__THEME__/footer" />
+<!-- <script type="text/javascript" src="__APP__/Cron/run"></script> -->

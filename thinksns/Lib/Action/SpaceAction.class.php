@@ -125,8 +125,8 @@ class SpaceAction extends BaseAction {
 
     private function  __getOneMini($uid) {
         $bq_config = D('MiniConfig')->getConfig('mini');
-        $bq_emotion = D('Smile')->getSmile($bq_config['smiletype']);
-        return D("Mini")->getOneMini($uid,$bq_emotion,$bq_config['smiletype']);
+        $bq_emotion = D('Smile')->getSmile($this->opts['ico_type']);
+        return D("Mini")->getOneMini($uid,$bq_emotion,$this->opts['ico_type']);
     }
 
 
@@ -227,12 +227,13 @@ class SpaceAction extends BaseAction {
     public function doWall() {
 
         $dao = D("Wall");
-
+		$strContent = t($_POST['content']);
         $r = $dao->create();
         if(false === $r) {echo 0;return;}
 
         $dao->fromUserId = $this->mid;
         $dao->fromUserName = $this->my_name;
+        $dao->content      = $strContent;
         $dao->cTime = time();
 
         $rr = $dao->add();
@@ -243,7 +244,8 @@ class SpaceAction extends BaseAction {
             if($uid != $this->mid) {
                 $cate = "wall";
                 $title_data = null;
-                $body_data['data'] = t($_POST['content']);
+                $body_data['data'] = $strContent;
+                exit;
                 $url               = '__TS__/space/'.$uid.'#wall';
                 $this->api->notify_send($uid,$type,$title_data,$body_data,$url,$cate);
                 setScore($this->mid, 'wall');

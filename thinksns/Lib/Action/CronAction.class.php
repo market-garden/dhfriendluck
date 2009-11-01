@@ -18,11 +18,11 @@ class CronAction extends Action {
 
 		// 解除锁定
         unlink($lockfile);
-        return ;
+		return ;
     }
 
     //设置发送邮件每次发送10条
-	public function sendEmail($count=1){
+	public function sendEmail($count=10){
 		$email_arr = D('Invite')->where('status=0')->limit($count)->findAll();
 		$opts = $this->api->option_get();
 		$options['smtp'] = $opts['email_stmp'];

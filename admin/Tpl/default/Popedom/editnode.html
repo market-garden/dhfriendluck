@@ -3,7 +3,7 @@
 	<head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>{&SITE_TITLE}</title>
-	<link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+	<link href="__PUBLIC__/admin/css/layout.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript">
 		var ctrl = function(name){
 			this.elements = document.getElementsByName('id[]');
@@ -72,6 +72,7 @@
 			<table class="tableborder" width="100%">
 			<form action="__URL__/doeditnode" method="POST">
 			<input type="hidden" name="id" value="{$info.id}" >
+			<input type="hidden" name="level" value="{$info.level}" >
 			<tbody>
 <php>if($info['level']=='3'){</php>
 
@@ -162,7 +163,7 @@
 					</tr>
 					
 					<tr class="cell">
-						<td class="altbg1">
+						<td class="altbg1" style="width:300px">
 							<b>状态:</b>
 							<br/>
 							<span class="smalltxt">后台显示名</span>
@@ -174,7 +175,19 @@
 							</select>
 						</td>
 					</tr>										
-	
+	<php>if($info['type']=='guest'){</php>
+							<tr class="cell">
+							<td class="altbg1">
+								<b>全部权限:</b>
+								<br/>
+								<span class="smalltxt">游客是否拥有此节点下所有的访问权限</span>
+							</td>
+							<td class="altbg2">
+								<php>$checked = ($info['containaction']=='All')?'checked':'';</php>
+								<input type="checkbox" value="All" name="containaction" {$checked}> 是								
+							</td>
+						</tr>
+	<php>}else{</php>
 					<tr class="cell">
 						<td class="altbg1">
 							<b>描述:</b>
@@ -185,7 +198,7 @@
 							<textarea cols="30" name="description" rows="5" >{$info.description}</textarea>
 						</td>
 					</tr>
-					
+	<php>}</php>
 <php>}</php>
 					<tr>
 						<td class="footer" colspan="2">

@@ -16,10 +16,6 @@ $(function(){
 	            $("#ui_fri_ids").val(uid);
 			}   
 	<php>}</php>
-		<php>if($_GET["id"]){</php>
-			sendGift({.id});
-	<php>}</php>
-
 });
 function selectItems(id){
 	$('.gift_items').each(function(test){
@@ -58,29 +54,6 @@ function check(){
 		return false;
 	}
 }
-
-function add_wish(id){
-ymPrompt.win(url+'/add_wish/id/'+id,500,'315','愿望',null,null,null,{id:'a'});
-}
-
-function doadd_wish(id,info,fids){
-	ymPrompt.close();
-	$.post(url+"/doadd_wish/", {id:id,info:info,fids:fids}, function(txt){
-
-	/* @return  0 失败 1 成功 -1 已经发布 -2 分类出错 -3 内容为空  -4 不能发布自己的东西*/
-		   if(txt==0){
-			   ymPrompt.errorInfo('许愿失败!');
-		   }else if(txt==-3){
-			   ymPrompt.errorInfo('许愿内容不能为空!');			   
-		   }else if(txt==-5){
-			   ymPrompt.errorInfo('参数出错!');				   
-		   }else if(txt==-10){
-			   ymPrompt.errorInfo('许愿内容不能超过100个字!');			   
-		   }else{
-			   ymPrompt.succeedInfo('许愿成功!',null,null,null,function(){return true});
-		   }
-	});	
-}
 </script>
 
 <div class="content">
@@ -110,12 +83,11 @@ function doadd_wish(id,info,fids){
     	<div class="giftblock" id='gifts{$category['id']}' style="display:none;" >
     		<ul>
     			<volist name = "category['gifts']" id='gift'>
-	        	<li class='gifts hand' title="点击选择"id='gift{$gift['id']}'>
-	        		<span onclick='sendGift({$gift['id']})'><img src="../Public/gift/{$gift['img']}" /><br />
+	        	<li class='gifts hand' title="点击选择" id="gift{$gift['id']}" onclick="sendGift({$gift['id']})">
+	        		<img src="../Public/gift/{$gift['img']}" /><br />
 	        		{$gift['name']}<br />
 	        		限量：{$gift['num']}个<br />
-	        		{$gift['price']}个{$config.creditName}<br /></span>
-					<a href="javascript:void(0);" onclick="add_wish({$gift['id']});">许愿</a>
+	        		{$gift['price']}个{$config.creditName}				
 	        	</li>
 	        	</volist>
 	            <div class="c"></div>

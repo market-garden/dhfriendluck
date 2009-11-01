@@ -104,11 +104,9 @@ class UserGiftModel extends Model{
 					//发送动态
 					$this->__doFeed($sendInfo,$giftInfo,$toUser,$appId);
 				}
-
-				//更新愿望数据表
-			    $ids = $this->api->wish_setHelp($toUser,$fromUid,$giftInfo['id']);
+				
 				//给接收人发送通知
-				$this->__doNotify($ids,$sendInfo,$giftInfo,$fromUid,$appId);			    
+				$this->__doNotify($toUser,$sendInfo,$giftInfo,$fromUid,$appId);			    
 			    
 				//更新个人空间的礼品统计
 				$this->_gift_count($toUser);
@@ -163,7 +161,6 @@ class UserGiftModel extends Model{
 						case 1:   //公开
 							$user = $this->api->user_getInfo($fromUid,'name');
 							$title['user'] = $user['name'];
-							//<a href="{WR}/apps/gift/index.php?s=/Index/index/uid/10203">给张峰回赠礼物</a>
 							$body['sendback']     = '<br/><a href=\"{WR}/apps/gift/index.php?s=/Index/index/uid/'.$fromUid.'\">给'.$user['name'].'回赠礼物</a>';
 							break;
 						case 2:   //私下

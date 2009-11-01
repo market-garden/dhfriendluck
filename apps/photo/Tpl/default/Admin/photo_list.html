@@ -41,7 +41,7 @@
                 {$vo.cTime|friendlyDate}<br />
                 {$vo.privacy|get_privacy}<br />
                 <input type="checkbox" class="checkbox" id="checkboxtest" name="id[]" value="{$vo['id']}" />
-                锁定 删除 删相册
+                <a href="###" onclick="javascript:del('{$vo.id}','__URL__')">删除</a>
             </li>
             </volist>
             </div>
@@ -83,7 +83,6 @@
               <button type="button" onclick="checkall('checkList',true)">全选</button>
               <button type="button" onclick="checkall('checkList',false)">全不选</button>
 
-<!--               <button type="button" onclick="javascript:pass('0','__URL__')">通过审核</button> -->
 			  <button type="button" onclick="javascript:del_photo('0','__URL__')">删除</button>         
             </td>
           </tr>

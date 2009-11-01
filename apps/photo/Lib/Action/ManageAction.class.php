@@ -128,6 +128,8 @@ class ManageAction extends BaseAction{
 				$map['privacy']		=	$album_privacy;
 				//相册信息更新
 				$photoDao->limit(1)->where("id='$k'")->save($map);
+				//重置相册照片数
+				D('Album')->updateAlbumPhotoCount($map['albumId']);
 
 				//相册索引更新
 				//$index['albumId']	=	$v['albumId'];

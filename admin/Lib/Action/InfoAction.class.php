@@ -132,7 +132,8 @@ class InfoAction extends BaseAction{
 	//添加文章内容
 	function addContent() {
 		$tree	=	json_encode($this->_makeTree(0));
-		
+		                $this->assign('smileList',$this->getSmile($this->opts['ico_type']));
+                $this->assign('smilePath',$this->getSmilePath($this->opts['ico_type']));  
 		$this->assign('category_json',$tree);
 		$this->display();
 	}
@@ -288,7 +289,8 @@ class InfoAction extends BaseAction{
 
 		$tree	=	json_encode($this->_makeTree(0));
 		$this->assign('category_json',$tree);
-
+                $this->assign('smileList',$this->getSmile($this->opts['ico_type']));
+                $this->assign('smilePath',$this->getSmilePath($this->opts['ico_type']));  
 		$this->display();
 	}
 

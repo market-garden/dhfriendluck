@@ -50,6 +50,17 @@ abstract class Action extends Base {//类定义开始
      +----------------------------------------------------------
      */
     public function __construct() {
+    	
+        $this->view       = View::getInstance();
+        $this->name     =   substr(get_class($this),0,-6);
+        
+    	$this->init();
+        if(method_exists($this,'_initialize')){
+            $this->_initialize();
+        }
+    }
+    
+    final function init(){
     //实例化视图类和初始化变量
         $this->tsSetInt();
         //广告。这样子类可以调用同样的方法，稍微修改一下传入参数。就可以调出自己应用的广告
@@ -115,11 +126,8 @@ abstract class Action extends Base {//类定义开始
         //设置顶部
         isset($appInfo) && $this->app_title = $appInfo['APP_CNNAME'];
         $this->setTitle();
-		
-        if(method_exists($this,'_initialize')) {
-            $this->_initialize();
-        }
     }
+    
     public function setJsToken($key=null){
         $token = jiami(microtime(TRUE));
         $type = C('OTHER_TOKEN');
@@ -134,10 +142,10 @@ abstract class Action extends Base {//类定义开始
         $jiemi_token = jiemi($old);
 
         $time = microtime(TRUE) - $jiemi_token ;
-        if( $time < 3){
+        if( $time < 1){
                 echo 'error';
                 exit;
-        }elseif($time<5){
+        }elseif($time<3){
             $count = intval(Cookie::get('count_'.$this->appId));
             $result = !empty($count)?$count+1:0;
             if($result == 3){
@@ -149,6 +157,7 @@ abstract class Action extends Base {//类定义开始
             }
         }
     }
+    
     public function setTitle($title=null){
         $this->title = t($title);
         $this->setSiteTitle($this->title);
@@ -170,6 +179,7 @@ abstract class Action extends Base {//类定义开始
     public function setSiteOpts($opt){
         $this->assign("site_opts",$opt);//头尾部信息
     }
+    
     public function setAppId($name) {
         return $this->api->App_getChoiceId($name);
     }
@@ -228,43 +238,52 @@ abstract class Action extends Base {//类定义开始
         $this->assign("ad",$ads);
     }
     /*
+     * 获得表情
+     */
+     protected function getSmile($smileType){
+        foreach (D('Smile')->getSmile($smileType) as $k=>$value) {
+               $smile[$k%2]=ltrim($smile[$k%2].',\''.$value['filename'].'\'',',');
+        }
+        foreach( $smile as &$value ) {
+               $value = '['.$value.']';
+        }
+        $smile = '['.implode(',',$smile).']';
+        return $smile;
+    }
+    
+    protected function getSmilePath($smileType){
+    	return __PUBLIC__.'/images/biaoqing/'.$smileType.'/';
+    }
+    /*
      * 设置初始化属性
      */
     final protected function tsSetInt() {
-
         $this->api = new TS_API();
-        $this->opts = $this->api->option_get();
+        $this->opts = $this->api->Option_get();
         // 风格主题路径
         $template = $this->opts['template'];
-
 		define('THEME_PATH'	,	SITE_PATH."/public/themes/{$template}");
 		define('THEME_URL'	,	SITE_URL."/public/themes/{$template}");
 		define('__THEME__'	,	SITE_URL."/public/themes/{$template}");
-
-        $this->view       = View::getInstance();
-        $this->name     =   substr(get_class($this),0,-6);
-
-
-
     }
 
     /*
      * 过滤关键词
      */
     protected function tsFilterSensitive() {
-        $_POST && $_POST		 =	GFW($_POST);
-        $_GET  && $_GET			 =	GFW($_GET);
-        $_REQUEST  && $_REQUEST  =	GFW($_REQUEST);
+         $_POST		 =	GFW($_POST);
+         $_GET	     =	GFW($_GET);
+         $_REQUEST   =	GFW($_REQUEST);
     }
 
     /*
      * 站点关闭
      */
-    protected  function tsSiteClose($opts) {
-        $opts = empty($this->opts)?$opts:$this->opts;
-        if( 1 == $opts ) {
-            $this->redirect("Index/close");
-            exit();
+    protected  function tsSiteClose() {
+        if( 1 == $this->opts['site_close'] ) {
+        	$this->assign('reason',$this->opts['site_close_reason']);
+            $this->display(THEME_PATH.'&close');
+            exit;
         }
     }
 
@@ -273,7 +292,7 @@ abstract class Action extends Base {//类定义开始
      * 设置游客权限
      */
     protected function tsSetGuest() {
-        if($this->tsGuestPrivacyEqualTrue()) {
+        if($this->tsGuestPrivacyEqualTrue() || (strtoupper(APP_NAME)=='THINKSNS' && strtoupper(MODULE_NAME)=='INDEX')) {
             $this->assign('TS_NEED_LOGIN','0');
         }else {
             $this->assign('TS_NEED_LOGIN','1');
@@ -291,28 +310,10 @@ abstract class Action extends Base {//类定义开始
      * @return bool
      */
     protected function tsGuestPrivacyEqualTrue() {
-        $guestpopedom = array(
-		    	'THINKSNS'=>array(
-		    		'INDEX'=> 'ALL',
-		    		'SPACE'=> array(
-		    			'INDEX'   => 'TRUE',
-		    		),
-		    		'HOME' => array(
-		    			'NETWORK' => 'TRUE',
-		    			'FEED'    => 'TRUE',
-		    		),
-		    		'FEED' => array(
-		    			'POST_MINI_COUNT' => 'TRUE',
-		    			'GET_OTHER_COMMENT' => 'TRUE',
-		    		),
-		    		'INFORMATION' => 'ALL',
-		    	),
-		    	'GROUP' => 'ALL',
-		    );
+    	$guestpopedom = $this->api->SystemNode_getNodeList();
         $temp = $guestpopedom[strtoupper(APP_NAME)][strtoupper(MODULE_NAME)];
-        if($guestpopedom[strtoupper(APP_NAME)]== 'ALL') return true;
-        if($temp[strtoupper(ACTION_NAME)] == 'TRUE' || $temp =='ALL') return true;
-        return false;
+        if($guestpopedom[strtoupper(APP_NAME)]== 'All') return true;
+        if($temp[strtoupper(ACTION_NAME)] == 'TRUE' || $temp =='All') return true;
     }
 
     // 生成令牌

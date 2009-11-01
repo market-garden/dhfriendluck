@@ -18,6 +18,7 @@
 			</table>
 			
 			<table class="tableborder" width="100%">
+			<form action="__URL__/dosavenode" method="POST">
 				<tbody>
 					<tr class="top">
 						<td class="border" colspan="7"></td>
@@ -47,20 +48,21 @@
 		<td >{$vo.description}</td>
 		<td><php>if($vo['state']){</php><font color="Blue">开启</font><php>}else{</php><font color="Red">关闭</font><php>}</php></td>
 		<td >
-			上移 下移
+		<input type="text" name="ordernum[{$vo.id}]" value="{$vo.ordernum}" style="width:30px;">
         </td>
 		<td style="width:15%"><button type="button" onclick="c.edit({$vo.id})">编辑</button> <button type="button" onclick="c.del({$vo.id})">删除</button></td>
 	</tr>
 </volist>					
 					<tr>
 						<td class="footer" colspan="7">
-							&nbsp;
+							<input type="submit" value="保存" class="button">
 						</td>
 					</tr>
 					<tr class="bottom">
 						<td class="border" colspan="7">&nbsp;</td>
 					</tr>
 				</tbody>
+			</form>
 			</table>
 			<table class="tableborder" width="100%">
 			<form action="__URL__/addnode" method="POST">

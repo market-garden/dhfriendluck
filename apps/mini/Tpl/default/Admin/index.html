@@ -102,20 +102,6 @@
                         <td class="altbg2"><input name="pagenum" class="txt" value ="{$pagenum}" /></td>
 					</tr>
 
-					<tr class="cell">
-						<td class="altbg1">
-							<b>选择使用表情:</b>
-							<br/>
-							<span class="smalltxt">选择使用哪一种表情</span>
-						</td>
-                        <td class="altbg2">
-                          <select id="smiletype" name="smiletype">
-                            <php>foreach( $smilelist as $vo){</php>
-                              <option value="{$vo['type']}">{$vo['type']}</option>
-                              <php>}</php>
-                          </select>
-					</tr>
-
 
 					<tr>
 						<td class="footer" colspan="2">

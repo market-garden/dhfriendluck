@@ -3,13 +3,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>公告设置</title>
-        <link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+        <link href="__PUBLIC__/admin/css/layout.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="../Public/script/jquery.js"></script>
-        <script>
-            $(function(){
-                $('#content').xheditor(true,{tools:'simple',uploadUrl:"__URL__/up_edit_img",uploadExt:"jpg,jpeg,gif,png"});
-            });
-        </script>
     </head>
     <body>
         <div id="container">
@@ -40,8 +35,8 @@
     </tr>
   <tr>
     <td width="50" valign="top" class="th">内容：</td>
-    <td><textarea cols="40" rows="15" name="gg_content" style="display:none;" id="gg_content">{$gonggao|stripslashes|stripslashes}</textarea>
-            <iframe id="Editor" name="Editor" src="__PUBLIC__/js/Editor/editor.html?id=gg_content&height=300&width=70" frameborder="0" marginheight="0" marginwidth="0" scrolling="No" style="width: 72%; height: 300px"></iframe> 
+    <td>
+       {:W("Edit",array('name'=>'gg_content',width=>"95%",'cols'=>40,'rows'=>15,'smileList'=>$smileList,'smilePath'=>$smilePath,'content'=>stripslashes(stripslashes($gonggao))))}
               
                 <br/>
                 是否开启： 

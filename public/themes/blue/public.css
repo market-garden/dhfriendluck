@@ -15,6 +15,7 @@ caption, th { text-align:left }
 .alR { text-align:right }
 .alL { text-align:left }
 .alC { text-align:center }
+.alM { vertical-align: middle; }
 em { color:#999; font-family: Arial, Verdana, sans-serif, helvetica; font-size: 10px; font-style: normal; }
 abbr, acronym { border:0 }
 address, caption, cite, code, dfn, em, th, var { font-weight:normal; font-style:normal }

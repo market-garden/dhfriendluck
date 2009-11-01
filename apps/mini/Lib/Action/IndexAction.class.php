@@ -24,7 +24,7 @@
             //设置心情Action的数据处理层
             $this->mini = D( 'Mini' );
             $this->mini->setUid( $this->mid );  //设置登录者uid
-
+            $this->mini->setSmileType($this->opts['ico_type']);
         }
         /**
          * index
@@ -60,7 +60,6 @@
 
             //获得表情列表
             $this->assign( 'ico_list',$lastMini[1] );
-            $this->assign( 'ico_type',$this->mini->getConfig( 'smiletype' ) );
             $this->assign( $lastMini[0] );
             $this->assign( 'stringcount',$lastMini[2] );
 			$this->assign( 'friend_list',$this->mini->uid );
@@ -132,7 +131,6 @@
 
             //获得表情列表
             $this->assign( 'ico_list',$lastMini[1] );
-            $this->assign( 'ico_type',$this->mini->getConfig( 'smiletype' ) );
             $this->assign( $lastMini[0] );
             $this->assign( 'stringcount',$lastMini[2] );
 
@@ -168,7 +166,6 @@
 
                     //对数据集进行判断。如果是自己发的心情，可以删除
                     $this->assign( 'ico_list',$lastMini[1] );
-                    $this->assign( 'ico_type',$this->mini->getConfig( 'smiletype' ) );
                     $this->assign( $lastMini[0] );
                     $this->assign( 'stringcount',$lastMini[2] );
                     $this->assign( $list );

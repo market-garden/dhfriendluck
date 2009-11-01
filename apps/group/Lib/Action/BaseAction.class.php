@@ -22,12 +22,8 @@
         var $groupinfo;
         var $siteTitle;
         public function _initialize(){
-			
-        	//if()
 
-        	
-            //群组id
-           	  //echo __APP__;
+        	  $this->base();
               if(isset($_GET['gid']) && intval($_GET['gid']) > 0) {
               	$this->gid = intval($_GET['gid']);
               }elseif(isset($_POST['gid']) && intval($_POST['gid']) > 0){
@@ -43,7 +39,7 @@
               if($groupinfo['brower_level'] == 1 && !isJoinGroup($this->uid,$this->gid)){
               		$this->error('只有成员可见');
               }elseif($groupinfo['brower_level'] == 0 && !$this->mid){
-					$this->error('登陆会员可见');    		
+					$this->error('登陆会员可见');
               }
 
 
@@ -62,18 +58,18 @@
 
         	  $this->assign('isadmin',$this->isadmin);
 			  $this->setTitle($this->groupinfo['name'].'群-');
-			  
+
         }
 
         function base() {
-        	if(!$this->mid) $this->error('你还没有登陆系统！！');
+
         	 $this->config = D('Group')->getConfig();  //系统的配置文件
       		  $this->siteTitle = getSiteTitle();
-      		 
-      		  
+
+
         	  $this->assign('config',$this->config);
-     		
-			  
+
+
               $this->api->space_changeCount( 'group',D('Member')->memberCount($this->uid));
 
         }
@@ -124,9 +120,9 @@
     	$this->display('../Public/alert');
     	exit();
     }
-    
-    
 
-    
+
+
+
  }
  ?>

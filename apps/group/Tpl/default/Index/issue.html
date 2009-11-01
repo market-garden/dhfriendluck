@@ -23,8 +23,7 @@
 			return false;
 		}
 		
-		if(getstrlen(v_form.content.value) == 0) {
-			v_form.content.focus();
+		if(gKE.util.getData('icontent') == '') {
 			alert('内容不能为空');
 			return false;
 		}
@@ -83,8 +82,8 @@
        	  </li>
           <li class="li pt10">
           	<div class="left alR lh30" style="width:10%"><strong>内容：</strong></div>
-            <div class="left" style="width:90%"><textarea rows="10"  name="content" style="display:none;"></textarea>
-            <iframe id="Editor" name="Editor" src="__PUBLIC__/js/Editor/editor.html?id=content&amp;height=400&width=700" frameborder="0" marginheight="0" marginwidth="0" scrolling="No" style="width: 95%; height: 400px"></iframe>
+            <div class="left" style="width:90%">
+            {:W("Edit",array('smileList'=>$smileList,'smilePath'=>$smilePath,'rows'=>20,'cols'=>20))}
             </div>
        	  </li>
 		  <li class="li">

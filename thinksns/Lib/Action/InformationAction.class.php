@@ -1,22 +1,7 @@
 <?php
 
 Class InformationAction extends  Action{
-	
-	function  _initialize(){
-		
-		$api     =    new TS_API();
 
-        //查看站点是否关闭了
-        $site_opts = $api->option_get();      
-        if($site_opts["site_close"] == 1){
-            $this->redirect("Index/close");
-            exit();
-        }
-
-		$this->opts = $site_opts;
-		$this->assign('site_opts',$site_opts);
-	}
-	
 	function index(){
 		
 		//获取总分类

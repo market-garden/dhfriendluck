@@ -1,5 +1,4 @@
 <?php
-//这个类不经过BaseAction
 class IndexAction extends BaseAction {
 
 
@@ -13,18 +12,12 @@ class IndexAction extends BaseAction {
          *
          * @return void
          */
-         function _initialize() {
-                parent::_initialize();
-                
-                $this->site_opts = $this->api->option_get();
-            
-                $verify_allow = unserialize($this->site_opts["verify"]);
-              
-                $this->assign("login_verify_allow",$verify_allow['login']);
-
-                if( $this->mid > 0 && in_array(strtoupper(ACTION_NAME),array('INDEX','REG','DOREG','LOGIN','DOLOGIN'))) {
-                        $this->redirect("Home/index");
-                }
+         function _initialize() {            
+            $verify_allow = unserialize($this->opts["verify"]);
+            $this->assign("login_verify_allow",$verify_allow['login']);
+            if( $this->mid > 0 && in_array(strtoupper(ACTION_NAME),array('INDEX','REG','DOREG','LOGIN','DOLOGIN'))) {
+                    $this->redirect("Home/index");
+            }
         }
 
         public function userInfo() {
@@ -47,8 +40,8 @@ class IndexAction extends BaseAction {
 
         private function  __getOneMini($uid) {
                 $bq_config = D('MiniConfig')->getConfig('mini');
-                $bq_emotion = D('Smile')->getSmile($bq_config['smiletype']);
-                return D("Mini")->getOneMini($uid,$bq_emotion,$bq_config['smiletype']);
+                $bq_emotion = D('Smile')->getSmile($this->opts['ico_type']);
+                return D("Mini")->getOneMini($uid,$bq_emotion,$this->opts['ico_type']);
         }
         public function notify() {
                 set_time_limit(0);
@@ -637,7 +630,7 @@ EOD;
 
                 //获取配置中的单姓和复性
                 $opts = D( 'Option' )->getOpts();
-                if( 1 == $opts['reg_checkname'] ) {
+                if( 0 == $opts['reg_checkname'] ) {
                         $danxing = $opts['reg_danxing'];
                         $fuxing  = $opts['reg_fuxing'];
                 }else {
@@ -711,15 +704,6 @@ EOD;
         }
 
 
-        public function close() {
-                $site_opts = $this->api->option_get();
-                if($site_opts["site_close"] == 0) {
-                        $this->redirect("Index/index");
-                }
-                $this->assign("reason",$site_opts["site_close_reason"]);
-                $this->display();
-        }
-
         /**
          * 获取消息计数
          * @return void
@@ -728,23 +712,6 @@ EOD;
                 $uid = intval($_POST['uid']);
                 $notify_num = $this->api->notify_getNewNum($uid,null,'json');
                 echo $notify_num;
-        }
-
-        //地区网络
-        public function network() {
-        //类型
-                $type = $_GET['type'];
-                $this->assign('type',$type);
-
-                //已选地区
-                $selectedArea = explode(',',$_GET['selected']);
-                if(!empty($selectedArea[0])) {
-                        $this->assign('selectedarea',$_GET['selected']);
-                }
-                $pNetwork = D('Network');
-                $list = $pNetwork->getNetworkList(0);
-                $this->assign('list',json_encode($list));
-                $this->display();
         }
 
         /**
@@ -761,7 +728,6 @@ EOD;
                 $array['extra']['ts_areaval'] = $ts_areaval[1];
 
                 $array['sex']                  = $_POST['sex'];
-
                 foreach( array( 'birthday','ts_areaval','sex' ) as $value ) {
                         $array['__display_'.$value] = 0;
                         $array['__privacy_'.$value] = $_POST['baseinfoprivacy'];
@@ -872,12 +838,12 @@ EOD;
                 $Friend = D('Friend');
                 $User = D('User');
 
-
+                D("LoginRecord")->record($user["id"]);
                 $code = jiemi($code);
                 $code = json_decode($code);
                 $fuid = 0;
                 $gid = 0;
-
+                
                 if($code) {
                         $fuid = $code[0];
                         $fusername = $code[1];
@@ -890,7 +856,7 @@ EOD;
 						$title['fuser'] = getUserName($fuid);
 						$title['uid'] = $uid;
 						$title['user'] = getUserName($uid);
-						$title['site_name'] = $this->site_opts['site_name'];
+						$title['site_name'] = $this->opts['site_name'];
 						$this->api->feed_publish('invite_reg',$title,$body='');
                         //添加积分
                         setScore($fuid,'invite_reg');
@@ -902,8 +868,8 @@ EOD;
 
                 }
 
-                $relationFriend = explode(',',$this->site_opts['reg_relation_friend']);  //朋友关联
-                $relationGroup = explode(',',$this->site_opts['reg_relation_group']);   //群众默认关联
+                $relationFriend = explode(',',$this->opts['reg_relation_friend']);  //朋友关联
+                $relationGroup = explode(',',$this->opts['reg_relation_group']);   //群众默认关联
 
                 if(!empty($relationFriend) && is_array($relationFriend)) {
                         foreach($relationFriend as $v) {
@@ -926,8 +892,30 @@ EOD;
                         }
                 }
         }
-
-
-
+        
+        
+        //获取地区显示页面
+        function getNetwork(){
+        	$list = $this->api->Network_getList();;
+            $arrPid = explode(',',$_POST['pid']);
+            $level  = $_POST['level'];
+            
+            if($level=='init'){
+            	$this->assign('arealevel',intval($_POST['arealevel']));
+            	$this->assign('init','1');
+            	$this->assign('arrPid',$arrPid);
+            }else{
+	            if(is_array($arrPid)){
+					unset($arrPid[0]);
+		            foreach ($arrPid as $v){
+		            	if($list[$v]['child']){
+		            		$list = $list[$v]['child'];
+		            	}
+		            }
+	            }
+            }
+        	$this->assign('list',$list);
+        	$this->display();
+		}
 }
 ?>

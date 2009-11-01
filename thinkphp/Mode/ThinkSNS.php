@@ -20,7 +20,6 @@ return array(
     THINK_PATH.'/Mode/ThinkSNS/Model.class.php',
     THINK_PATH.'/Mode/ThinkSNS/View.class.php',
     THINK_PATH.'/Mode/ThinkSNS/alias.php',
-	THINK_PATH.'/Mode/ThinkSNS/AppModel.class.php',
 	THINK_PATH.'/Mode/ThinkSNS/AdModel.class.php',
 	THINK_PATH.'/Api/TS_API.class.php',
 );

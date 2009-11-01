@@ -1,6 +1,5 @@
 <include file="__THEME__/header" />
 
-<script  type="text/javascript" src="__PUBLIC__/js/jquery.126.js" ></script>
 <link rel="stylesheet" type="text/css" href="../Public/reg.css" />
 <!--日期-->
 <script  type="text/javascript" src="__PUBLIC__/js/rcalendar.js" ></script>
@@ -119,7 +118,6 @@
                 <li>
                     <div class="cl">出生日期：</div>
                     <div class="cc">
-                        <!--<input type="text" class="text_1" style="width:250px;" onBlur="this.className='text1'" onFocus="this.className='text_2';rcalendar(this,null,insert_birth);" name="birthday" id="birthday" require="true" datatype="require" msg="请输入你的出生日期！"/>-->
                         <select name="birthday_year">
                         	<php>for($i=1930;$i<=2009;$i++){</php>
                         		<option value="{$i}" <php>if($i == 1980) echo 'selected';</php> >{$i}</option>
@@ -139,70 +137,11 @@
                     <div class="c"></div>
                     
                 </li>
-
-                <!-- <li><div class="cl">目前身份：<em>*</em></div>
-                    <div class="cc">
-                        <label>
-                            <input name="status" type="radio" id="status2" value="2"  require="true" datatype="group" min="1" max="1" msgid="fav" msg="必须选中1个选项" onclick="work_check();"/>已工作
-                        </label>　
-                        <label>
-                            <input id="status1" name="status" value="1" type="radio" require="true" datatype="group" min="1" max="1" msgid="fav" msg="必须选中1个选项" onclick="school_check();"/>学生
-                        </label>
-                        <label>
-                            <input id="status0" name="status" value="0" type="radio" require="true" datatype="group" min="1" max="1" msgid="fav" msg="必须选中1个选项" onclick="other_check();"/> 其他
-                        </label>
-                    </div>
-                    <div class="cr">
-                        <div id="success_status"  style="display:none;">
-                            <span><img src="../Public/images/fzcg_dh[1].gif" /></span>
-                        </div>
-                        <div class="r error_status" style="position: relative;display:none;">
-                            <div>
-                                <span><img src="../Public/images/th_ju[1].gif" /></span>
-                                <div class="clue"><p id="error_status"></p><span class="clue_btm"></span></div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li style="display:none;" id="work_check" class="the_check">
-                    <div class="cl">工作单位：<em>*</em></div>
-                    <div class="cc">
-                        <input id="work_name" type="text" class="text_1" style="width:250px;" onblur="this.className='text_1'" onfocus="this.className='text_2'" name="company" require="true" datatype="require" msg="请输入你的工作单位名称！"/>
-                    </div>
-                    <div class="cr">
-                        <div id="success_company"  style="display:none;">
-                            <span><img src="../Public/images/fzcg_dh[1].gif" /></span>
-                        </div>
-                        <div class="error_company" style="position: relative;display:none;">
-                            <div>
-                                <span><img src="../Public/images/th_ju[1].gif" /></span>
-                                <div class="clue"><p id="error_company"></p><span class="clue_btm"></span></div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li style="display:none;" id="school_check" class="the_check">
-                    <div class="cl">所在学校：<em>*</em></div>
-                    <div class="cc">
-                        <input type="text" class="text_1" style="width:250px;" onblur="this.className='text_1'" onfocus="this.className='text_2'" onclick="$.facebox.popup('请选择大学','__URL__/school');" name="school" require="true" datatype="require" msg="请输入你的学校名称！" id="school_name"/>
-                    </div>
-                    <div class="cr">
-                        <div id="success_school"  style="display:none;">
-                            <span><img src="../Public/images/fzcg_dh[1].gif" /></span>
-                        </div>
-                        <div class="error_school" style="position: relative;display:none;">
-                            <div>
-                                <span><img src="../Public/images/th_ju[1].gif" /></span>
-                                <div class="clue"><p id="error_school"></p><span class="clue_btm"></span></div>
-                            </div>
-                        </div>
-                    </div>
-                </li>-->
                 <li>
                      <div class="cl">居住城市：</div>
                     <div class="cc">
                     <input type="hidden" name="ts_areaval" id="ts_areaval"/>
-						<input type="text" class="text_1" style="width:165px;float:left;" disabled onblur="this.className='text_1'" onfocus="this.className='text_2'" name="areaval" id="areaval"  require="true" datatype="require" msg="请选择地区！" /> <input type="button" class="btn_b" value="选择地区" selectArea="true" style="float:left; margin-left:5px;" areatype="areaval" >
+						<input type="text" class="text_1" style="width:165px;float:left;" disabled onblur="this.className='text_1'" onfocus="this.className='text_2'" name="areaval" id="areaval"  require="true" datatype="require" msg="请选择地区！" /> <input type="button" class="btn_b" value="选择地区" level='2' selectArea="true" style="float:left; margin-left:5px;" areatype="areaval" >
                     </div>
            			 <div class="cr" style="float:left">
                         <div id="success_areaval"  style="display:none;">
@@ -265,6 +204,5 @@
             </ul>
         </form>
     </div>
-
-
+{:W('Network')}
 <include file="__THEME__/footer" />

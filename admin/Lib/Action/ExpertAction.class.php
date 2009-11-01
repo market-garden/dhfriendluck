@@ -106,8 +106,14 @@ class ExpertAction extends BaseAction{
 					$pNetwork->setField('status',0,'id='.$val);
 				}
 				$this->success('操作完成');
-			break;			
-		}
+			break;
+			
+			case 'upcache':
+				$list = $pNetwork->getNetworkList();
+				F('network',$list,'-1',SITE_PATH.'/data/cache/');
+				$this->success('操作完成');
+			break;
+		}	
 	}
 	
 	//学校
@@ -370,11 +376,94 @@ class ExpertAction extends BaseAction{
 		$this->assign('jumpUrl',$url);
 		$this->success('删除成功');
 	}
-		
 	
+	function doFeedDelList(){
+		$id = array('in',$_POST['id']);
+		$this->assign('jumpUrl',__URL__.'/feedDel');
+		if(!is_array($_POST['id'])){
+			$this->error("错误参数");
+		    exit;
+		}
+		
+	   $feed = D('Feed');
+            if($feed->delFeed($id)){
+                $this->success("删除成功");
+                exit;
+            }else{
+                $this->error("删除失败");
+                exit;
+            }
+	}
+	function doFeedDel(){
+		$id = intval($_GET['id']);
+		$this->assign('jumpUrl',__URL__.'/feedDel');
+		if(empty($id) && 0 == $id){
+			$this->error("错误的动态ID");
+		}else{
+			$feed = D('Feed');
+			if($feed->delFeed($id)){
+				$this->success("删除成功");
+				exit;
+			}else{
+				$this->error("删除失败");
+				exit;
+			}
+		}
+	}
+	function feedDel(){
+		if(!empty($_POST)){
+			$who = $this->__getPOSTData();
+		}
+        $fri_feeds  = $this->api->feed_get($who,'all',$_GET['p']);
+        $count = $this->getFeedCount($who);
+        $page = $this->__getPageLimitSecond($count, 30);
+        $page = $page>50?50:$page;
+        $this->assign('feed',$fri_feeds);
+        $this->assign( 'count',$count );
+        $this->assign( 'type',$_GET['type']?$_GET['type']:"" );
+        $this->assign('page',intval($_GET['p']));
+        $this->assign('page_count',$page);
+        $this->display();
+	}
+	
+	private function __getPOSTData(){
+		!empty($_POST['uid']) && $map['id'] = array('in',$_POST['uid']);
+		!empty($_POST['name']) && $map['name'] = array('like','%'.$_POST['name'].'%');
+		!empty($_POST['email']) && $map['email'] = array('like','%'.$_POST['email'].'%');
+		$dao = D('User');
+		$user = $dao->where($map)->field('id')->findAll();
+		if($user){
+			$result = array();
+			foreach($user as $value){
+				$result[] = $value['id'];
+			}
+			return $result;
+		}else{
+			return null;
+		}
+	}
+   public function __getPageLimitSecond($count,$pageLimit) {
+        return (int)ceil($count/$pageLimit);
+    }
+
+    public function getFeedCount($uid) {
+    	if(is_array($uid)) $uid = array('in',$uid);
+    	return $this->api->feed_getCount(null,$uid);
+    }
+    
+    
+    /**************** 更新缓存管理 ****************/
+    public function upcache(){
+    	$this->display();
+    }
+    
+    //清空缓存操作
+    public function doupcache(){
+    	$dirs	=	array(SITE_PATH.'/runtime');
+		//清理缓存
+		rmdirr($dirs);
+    	mkdir(SITE_PATH.'/runtime');
+    	$this->success('操作成功');
+    }
 }
-
-
-
-
 ?>

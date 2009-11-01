@@ -67,14 +67,13 @@ class HomeAction extends BaseAction {
     }
 
     private function __getMini($config) {
-        $bq_emotion = D('Smile')->getSmile($config['smiletype']);
+        $bq_emotion = D('Smile')->getSmile($this->opts['ico_type']);
 
         $this->assign("bq_emotion",$bq_emotion);
-        $this->assign( 'smiletype',$config['smiletype'] );
         $this->assign( 'stringcount',$config['stringcount'] );
 
         //我的心情
-        $my_mini = D("Mini")->getOneMini($this->mid,$bq_emotion,$config['smiletype']);
+        $my_mini = D("Mini")->getOneMini($this->mid,$bq_emotion,$this->opts['ico_type']);
         $this->assign("my_mini",$my_mini);
     }
 
@@ -142,7 +141,21 @@ class HomeAction extends BaseAction {
         }
         return $fri_feeds;
     }
-
+    
+    public function doFeedDel(){
+    	$id = intval($_GET['fid']);
+    	if(empty($id) || 0 == $id){
+    		$this->error('错误的动态id');
+    	}
+    	$map['id'] = $id;
+    	$result = D('Feed')->where($map)->delete();
+    	if($result){
+    		$this->success("删除成功");
+    	}else{
+    		$this->error("删除失败");
+    	}
+    }
+    
     public function allFeed() {
     //得到所有好友分组
         $friends_group = D( 'FriendGroup' )->getOneGroup( $this->mid );

@@ -55,14 +55,14 @@
   	<form method="post" action="__APP__/Topic/editPost/" onSubmit="return checkform(this);">
     <ul class="pt10">
           <li class="li pt10">
-          	
-            <div class="left" style="width:95%"><textarea rows="10"  name="content" style="display:none;">{$post.content|stripslashes|stripslashes}</textarea>
-            <iframe id="Editor" name="Editor" src="__PUBLIC__/js/Editor/editor.html?id=content&amp;height=300&width=70" frameborder="0" marginheight="0" marginwidth="0" scrolling="No" style="width: 72%; height: 300px"></iframe>
+
+            <div class="left" style="width:95%">
+             {:W("Edit",array('smileList'=>$smileList,'smilePath'=>$smilePath,'height'=>'100px','width'=>'600px','content'=>$post['content']))}
               <div style="margin-top:10px;">
               <div class="alR left" style="width:5%"><strong>附件：</strong></div>
                <div class="left" style="width:95%">
                 <div id="attach_upload_data" class="mb5">
-               
+
                <php>if($post['attach']) { $attach = unserialize($post['attach']); </php>
 						<volist name="attach" id="data">
 						<php>$data = explode('|',$data);</php>
@@ -75,12 +75,12 @@
 				<php>}</php>
 				</div>
 			{:W( 'UploadAttach',array( 'uid'=>$mid , 'type'=>'group_topic' , 'callback'=>'attach_upload_success') )}
-            
+
               <input type="hidden" name="editsubmit" value="do" >
-              
+
 			  <input type="hidden" value="{$gid}" name="gid">
 			  <input type="hidden" value="{$post.id}" name="pid">
-			  
+
               <input name="button" type="submit" class="btn_b mt5" id="button" value="修改" />
               </div>
               </div>

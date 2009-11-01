@@ -61,10 +61,10 @@ class Log extends Base
      * @return void
      +----------------------------------------------------------
      */
-    static function record($message,$level=self::ERR,$record=false) {
-        //if($record || in_array($level,C('LOG_RECORD_LEVEL'))) {  // editby Nonant 09-09-24
-        $arr = array('EMERG','ALERT','CRIT','ERR');
-        if($record || in_array($level,$arr)) {
+    static function record($message,$level='ERR',$record=false) {
+        if($record || @in_array($level,C('LOG_RECORD_LEVEL'))) {  // editby Nonant 09-09-24
+        //$arr = array('EMERG','ALERT','CRIT','ERR');
+        //if($record || in_array($level,$arr)) {
             $now = date(self::$format);
             self::$log[] =   "{$now} {$level}: {$message}\r\n";
         }

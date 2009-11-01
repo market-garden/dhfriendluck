@@ -143,34 +143,38 @@ function insertBQ(_this,bid){
     $("#xq_con").val(new_con);
 }
 
-function post_mini(){
-    checkLogin();
-    var con = $.trim($("#xq_con").val());
-    if(!con) {Error("不能为空哦~~~");return;}
-    if(con.length>mini_zishu) {Error("不能多于mini_zishu个字哦~~~");return;}
-    $('.btn_big').attr('disabled',true);
-    $.post(APP+"/Feed/post_mini",{content:con},function(txt){
-        if(false == checkJsToken(txt)){
-             $('.btn_big').removeAttr('disabled');
-             return true;
-        }
-       if(txt){
-         
-            var span = $('<span class="mini_tip"/>').append(txt);
-            span.animate({opacity: 0.3}, 750).animate({opacity: 1}, 750);
-            window.setTimeout(function(){ span.removeClass("mini_tip");},1800);
+//添加心情
+function doAddMini(){
+  var content = $( '#xq_con' ).val();
+  //检测合法性
 
-           $("#my_mini").html(span);
-           $("#my_mini_time").html("刚刚");
-           $("#xq_con").val("");
-           $("#zishu").text(mini_zishu);
-           $("#smileylist").hide();
-           $('.btn_big').removeAttr('disabled');
-       }else{
-          Alert("发布失败!");
-          $('.btn_big').removeAttr('disabled');
-       }
-    });
+ if(!content) {alert("不能为空哦~~~");return;}
+ if(content.length>mini_zishu) {alert("不能多于mini_zishu个字哦~~~");return;}
+
+  $( '.btn_big' ).attr( 'disabled',true );
+      $(".phiz").hide();
+      $( ".jishuan" ).hide();
+
+  //POST提交
+  $.post( ROOT+"/apps/mini/index.php?s=Index/doAddMini/",{content:content},function( txt ){
+      if(false == checkJsToken(txt)){
+          $( '.btn_big').removeAttr('disabled');
+          return true;
+      }
+      if( txt ){
+          $( '#mini-content' ).html( txt );
+          $( '#mini-time' ).html( '刚刚' );
+          $( '#xq_con' ).val('');
+          $( '#mini-count' ).html( mini_zishu+"/"+mini_zishu );
+          $( '.btn_big').removeAttr('disabled');
+
+      }else{
+      alert( "提交失败" );
+            $(this).removeAttr('disabled');
+      }
+      });
+
+
 }
 
  //字数递减和限制字数

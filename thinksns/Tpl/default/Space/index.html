@@ -5,6 +5,7 @@
 <script type="text/javascript" src="../Public/feed.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/jquery.scrollTo.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/Share.js"></script>
+
 <style>
         .ta_wqfw {
                 background:transparent url(../Public/images/privacy_bg.gif) no-repeat scroll center top;
@@ -90,6 +91,7 @@
                                 <volist name="user_apps" id="vo">
                                         <php>$app_num = isset( $apps_num[$vo['enname']] )?$apps_num[$vo['enname']]:0;
 			   $vo['name'] = '相册' == $vo['name'] ? '相片':$vo['name'];
+			                                 if(empty($vo['uid_url'])) continue;
                                         </php>
                                         <span><img src="{$vo.icon}" /><a href="{$vo.uid_url}{$uid}">{$app_num}个{$vo.name}</a></span>
                                 </volist>
@@ -186,7 +188,7 @@
                                                 <div class="c"></div>
                                         </div>
                                 </volist>
-                                <php>if($my_walls['count']>=10){</php><div id="Pagination" class="pagination"><a href="__URL__/guestbook/uid/{$uid}">查看所有留言</a></div><php>}</php>
+                                <php>if($my_walls['count']>=10){</php><div class="alR"><a href="__URL__/guestbook/uid/{$uid}">查看所有留言</a></div><php>}</php>
                         </div>
                         <!-- 留言板 end  -->
                         <php>}</php>

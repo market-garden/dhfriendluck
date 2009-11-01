@@ -17,7 +17,7 @@ class IndexAction extends BaseAction{
     //菜单
 	function menu() {
         $pNode = D('SystemNode');
-        $list = $pNode->where("pid=0 AND type='admin' AND state=1")->findall();
+        $list = $pNode->where("pid=0 AND type='admin' AND state=1")->order('ordernum ASC')->findall();
         foreach ($list as $val){
         	$name = $val['name'];
         	$data[$name]['title'] = $val['title'];
@@ -53,23 +53,6 @@ class IndexAction extends BaseAction{
 			$data['Apps']['node'] = $open_apps;
     	}
     	exit(json_encode($data)); 
-	}
-	
-	//地区网络
-	public function network(){
-		//类型
-		$type = $_GET['type'];		
-		$this->assign('type',$type);
-		
-		//已选地区
-		$selectedArea = explode(',',$_GET['selected']);
-		if(!empty($selectedArea[0])){
-			$this->assign('selectedarea',$_GET['selected']);
-		}
-		$pNetwork = D('Network');
-		$list = $pNetwork->getNetworkList(0);
-		$this->assign('list',json_encode($list));
-		$this->display();	
 	}
 }
 ?>

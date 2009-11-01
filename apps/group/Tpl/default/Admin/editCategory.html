@@ -8,7 +8,7 @@
      <script type="text/javascript" src="../Public/Js/json2select.js" ></script>
 
 	<script type="text/javascript">
-     
+
 	</script>
 
   </head>
@@ -16,7 +16,7 @@
 <div id="main" class="main" >
 <div class="content">
 <div class="title">
-  <h1>修改分类 - <a href="__URL__">返回列表</a></h1>
+  <h3>修改分类 - <a href="__URL__">返回列表</a></h3>
 </div>
 <div id="result" class="none result"></div>
 <div id="upload" class="none"></div>
@@ -27,10 +27,6 @@
 	<TD width="228" class="tLeft"><INPUT TYPE="text" class="large bLeftRequire" NAME="title" value="{$vo.title}" ></TD>
 </TR>
 
-<TR>
-	<TD class="tRight" >上级分类：</TD>
-	<TD class="tLeft" ><div id="pid"></div></TD>
-</TR>
 <TR>
 	<TD ></TD>
 	<TD class="center">
@@ -45,12 +41,7 @@
 
 </div>
 </div>
-<!-- 城市下拉 -->
 
-<script type="text/javascript">
-var category_json	=	{:getCategorySelect(0)};
-$("#pid").json2select(category_json,[{:getCategoryTree($vo['id'],true)}],'pid');
-</script>
 
 </body>
 </html>

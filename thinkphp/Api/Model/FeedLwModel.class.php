@@ -35,9 +35,7 @@ class FeedLwModel extends LW_Model {
         $data["appid"]		=	$appid;
         $data["feedtype"]   =	$feedtype;
         $data["fid"]        =	$fid;
-
         $result = $this->add($data);
-
         //$data['id'] = $result;
         //$email      = array( $data );
         //$data = $this->__feedTemplate( $email );

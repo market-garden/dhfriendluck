@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>{&SITE_TITLE}</title>
 	<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
-	<link href="../Public/css/layout.css" rel="stylesheet" type="text/css" />
+	<link href="__PUBLIC__/admin/css/layout.css" rel="stylesheet" type="text/css" />
 	<link href="__PUBLIC__/js/pagination/pagination.css" rel="stylesheet" type="text/css" />	
 	<script type="text/javascript">
 		var ctrl = function(name){
@@ -107,6 +107,7 @@
 								
 					<tr>
 					<td colspan="5"><div style="float:left">全选<input type="checkbox" onclick="c.toggle(this)" class="checkbox"/>&nbsp;&nbsp;&nbsp;操作:<select name="type" style="margin-right:10px;" onchange="changeDoType(this);">
+						<option value="upcache">更新缓存</option>
 						<option value="commend">已启用</option>
 						<option value="uncommend">未启用</option>
 						<option value="del">删除</option>

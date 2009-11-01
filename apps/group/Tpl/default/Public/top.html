@@ -33,9 +33,10 @@ function sharePop(id,url,gid2){
         
     </div>
     <div class="rmenu left" style="width:150px;">
-      <if condition=" $mid ">
+      <if condition=" $mid "><php>if(isAddApp('share')) { </php>
 	    <a href="javascript:void(0)"
 			onclick="sharePop('{$gid}','__URL__','{$gid}')"  id="BtnShare_{$gid}">分享该群组</a>
+			<php> } </php>
     	<php>if(isadmin($mid,$gid)){</php>
     		<a href="__APP__/Manage/index/gid/{$groupinfo['id']}">管理该群</a>
     	<php>}else{</php>

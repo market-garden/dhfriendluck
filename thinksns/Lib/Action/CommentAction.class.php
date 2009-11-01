@@ -61,7 +61,7 @@
 
         public function doAddComment(){
             $com = D( 'Comment' );
-            $map['comment'] = trim(nl2br($_POST['comment']));
+            $map['comment'] = t($_POST['comment']);
             $map['type']    = t($_POST['type']);
             $map['appid']   = intval($_POST['appid']);
             $map['cTime']   = time();

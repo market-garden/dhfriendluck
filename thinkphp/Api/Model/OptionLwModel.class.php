@@ -7,7 +7,8 @@ class OptionLwModel extends LW_Model
         $opts = ts_cache("site_options");
 
         if(!$opts){
-			$data = $this->where("appname='thinksns'")->findAll();
+        	$map['appname'] = 'thinksns';
+			$data = $this->where($map)->findAll();
 
 			foreach($data as $k=>$v){
 				$opts[$v["name"]] = $v["value"];

@@ -37,8 +37,8 @@ class CategoryModel extends BaseModel
 				$list	.=	'
 					<li id="li_'.$id.'">
 					<span style="float:right;">
-						<a href="javascript:void(0)" onclick="edit(\''.$id.'\')" style="font-size:9px">修改</a>
-						<a href="javascript:void(0)" onclick="del(\''.$id.'\')" style="font-size:9px">删除</a>
+						<a href="__APP__/Admin/editCategory/id/'.$id.'" >修改</a>
+						<a href="__APP__/Admin/delCategory/id/'.$id.'" >删除</a>
 					</span> '.$title.'
 					</li>
 					<hr style="height:1px;color:#ccc" />';

@@ -16,16 +16,16 @@
 			alert('标题不能为空');
 			return false;
 		}
-		
+
 		if(getstrlen(v_form.title.value) >90) {
 			v_form.title.focus();
-			
+
 			alert('标题内容过长');
-			
+
 			return false;
 		}
-		
-		
+
+
 		if(getstrlen(v_form.content.value) == 0) {
 			v_form.content.focus();
 			alert('内容不能为空');
@@ -68,21 +68,22 @@
           <li class="li">
           	<div class="lh35 alR left" style="width:5%"><strong>主题：</strong></div>
             <div class="left" style="width:95%">
-              <input name="title" value="{$thread.title}" class="Text" style="padding: 8px; width: 70%;" onblur="this.className='Text'" onfocus="this.className='Text1'" type="text">
+              <input name="title" value="{$thread['title']|htmlspecialchars}" class="Text" style="padding: 8px; width: 70%;" onblur="this.className='Text'" onfocus="this.className='Text1'" type="text">
 
             </div>
        	  </li>
           <li class="li pt10">
           	<div class="left alR" style="width:5%"><strong>内容：</strong></div>
-            <div class="left" style="width:95%"><textarea rows="10"  name="content" style="display:none;">{$thread.content|stripslashes|stripslashes}</textarea>
-            <iframe id="Editor" name="Editor" src="__PUBLIC__/js/Editor/editor.html?id=content&amp;height=300&width=70" frameborder="0" marginheight="0" marginwidth="0" scrolling="No" style="width: 72%; height: 300px"></iframe>
-              <br />
+            <div class="left" style="width:95%">
+
+            <php>$content = $thread['content'];</php>
+               {:W("Edit",array('smileList'=>$smileList,'smilePath'=>$smilePath,'height'=>'100px','width'=>'600px','content'=>$content))}
               <div class="lh35 alR left" style="width:5%"><strong>附件：</strong>
-              
+
               </div>
                <div class="left" style="width:95%">
                <div id="attach_upload_data">
-               
+
                <php>if($thread['attach']) { $attach = unserialize($thread['attach']); </php>
 						<volist name="attach" id="data">
 						<php>$data = explode('|',$data);</php>
@@ -93,9 +94,9 @@
 					 </p>
 						</volist>
 				<php>}</php>
-               
-               
-					
+
+
+
 
 				</div>
 			{:W( 'UploadAttach',array( 'uid'=>$mid , 'type'=>'group_topic' , 'callback'=>'attach_upload_success') )}

@@ -7,7 +7,8 @@ class SystemAction extends BaseAction {
      *
      */
         public function index() {
-
+            $smiletype     =  D('Smile')->getSmileType() ;
+            $this->assign( 'smilelist' , $smiletype );
                 $opt = D("Option")->getOpts4Edit();
                 import('ORG.Io.Dir');
                 $pDir = new Dir(SITE_PATH.'/public/themes/');
@@ -24,7 +25,6 @@ class SystemAction extends BaseAction {
      *
      */
         function doIndex() {
-
                 $dao = D("Option");
 
 
@@ -34,17 +34,15 @@ class SystemAction extends BaseAction {
                         @unlink(THEME_PATH.'/images/logo.jpg');
                         $info		=	$this->api->attach_upload('photo',array('save_path'=>THEME_PATH.'/images/','save_name'=>'logo.jpg'));
                 }
+                $_POST['verify'] = serialize($_POST['verify']);
+                
                 foreach($_POST as $k=>$v) {
-                		if($dao->count("name='".$k."' AND appname='thinksns'")){
-                        	$dao->setField("value",$v,"name='".$k."' AND appname='thinksns'");
-                		}else{
-                			$data = array(
-                				'value' => $v,
-                				'name'  => $k,
-                				'appname'  => 'thinksns',
-                			);
-                			$dao->add($data);
-                		}
+                		$map['name'] = trim($k);
+                		$map['appname'] = 'thinksns';
+                		$dao->where($map)->delete();
+						$map['value'] = $v;
+                		$dao->add($map);
+                		unset($map);
                 }
 
                 //更新缓存
@@ -60,16 +58,12 @@ class SystemAction extends BaseAction {
      *
      */
         function privacy() {
-
-        // $xxx = ts_cache("site_options");
-
-
                 $opt = D("Option")->getOpts4Edit();
                 $this->assign("allow_ips",$opt["allow_ips"]);
                 $this->assign("deny_ips",$opt["deny_ips"]);
                 $this->assign("privacy",unserialize($opt["privacy"]));
 
-                // dump(unserialize($opt["privacy"]));
+
                 $this->display();
         }
 
@@ -139,7 +133,8 @@ class SystemAction extends BaseAction {
                 $this->assign( "reg_checkname",$opt['reg_checkname'] );
                 $this->assign('reg_relation_friend',$opt['reg_relation_friend']);
                 $this->assign('reg_relation_group',$opt['reg_relation_group']);
-
+                $this->assign('smileList',$this->getSmile($this->opts['ico_type']));
+                $this->assign('smilePath',$this->getSmilePath($this->opts['ico_type']));  
                 $this->display();
         }
 
@@ -150,16 +145,18 @@ class SystemAction extends BaseAction {
      */
         function doReg() {
 
-        // dump($_POST);
         //return;
         //存到库里
                 $dao = D("Option");
-
+                
                 foreach($_POST as $k=>$v) {
-                        $dao->setField("value",$v,"name='".$k."' AND appname='thinksns'");
+                		$map['name'] = trim($k);
+                		$map['appname'] = 'thinksns';
+                		$dao->where($map)->delete();
+						$map['value'] = $v;
+                		$dao->add($map);
+                		unset($map);
                 }
-
-
 
                 //更新缓存
                 $opt = D("Option")->updateCache();
@@ -179,7 +176,8 @@ class SystemAction extends BaseAction {
 
                 $opt = D("Option")->getOpts4Edit();
 
-
+                $this->assign('smileList',$this->getSmile($this->opts['ico_type']));
+                $this->assign('smilePath',$this->getSmilePath($this->opts['ico_type']));  
                 $this->assign("invite_content",$opt["invite_content"]);
 
 
@@ -353,6 +351,8 @@ class SystemAction extends BaseAction {
                 $opt = D("Option")->getOpts4Edit();
                 $this->assign("gonggao",$opt["gonggao"]);
                 $this->assign("gonggao_open",$opt["gonggao_open"]);
+                $this->assign('smileList',$this->getSmile($this->opts['ico_type']));
+                $this->assign('smilePath',$this->getSmilePath($this->opts['ico_type']));  
                 $this->display();
         }
 
@@ -401,7 +401,8 @@ class SystemAction extends BaseAction {
                         }
                         $this->assign("places",$places);
                 }
-
+                $this->assign('smileList',$this->getSmile($this->opts['ico_type']));
+                $this->assign('smilePath',$this->getSmilePath($this->opts['ico_type']));  
                 $this->display();
         }
 
@@ -607,7 +608,7 @@ class SystemAction extends BaseAction {
                 $data = $dao->where($map)->order("cTime desc")->findPage(10);
 
                 foreach ($data['data'] as $key=>$value) {
-                        $data['data'][$key]['url'] = $this->api->APP_getAppInfo($value['appid'],'APP_URL').$value['url'];
+                        $data['data'][$key]['url'] = $this->api->App_getAppInfo($value['appid'],'APP_URL').$value['url'];
                 }
 
                 $this->assign("reprots",$data["data"]);
@@ -677,11 +678,15 @@ class SystemAction extends BaseAction {
 
         public function doEditCategory() {
                 $category = D( 'FriendGroup' );
-                if( $result   = $category->editCategory( $_POST['name'] ) ) {
-                        $this->redirect('friend');
-                }else {
-                        $this->error( "修改失败" );
-                }
+                $result   = $category->editCategory( $_POST['name'] );
+                $this->redirect('friend');
+                         
+                
+//                if( $result   = $category->editCategory( $_POST['name'] ) ) {
+//                        $this->redirect('friend');
+//                }else {
+//                        $this->error( "修改失败" );
+//                }
 
         }
         function _uploadfile($inputname,$attachdir) {

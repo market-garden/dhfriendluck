@@ -63,7 +63,7 @@ class NotifyAction extends BaseAction{
         if($uid){
             $toUserFace = getUserFace($uid);
             $toUserName = getUserName($uid);
-
+			
             $this->assign("toUserFace",$toUserFace);
             $this->assign("toUserName",$toUserName); 
         }
@@ -81,12 +81,13 @@ class NotifyAction extends BaseAction{
         
         $toUserIds = explode(",",$_POST["fri_ids"]);
         //unset($_POST["fri_ids"]);
-
+		$_POST['subject'] = t($_POST['subject']);
+		$_POST['content'] = t($_POST['content']);
         $dao = D("Msg");
         
 		$r = $dao->create();
 		if(false === $r) $this->error($dao->getError());
-
+		
         $dao->cTime = time();
         $dao->fromUserId = $this->mid;
         

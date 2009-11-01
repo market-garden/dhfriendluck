@@ -133,7 +133,7 @@ function autosave(){
   }
   $( '#saveButton' ).attr( 'disabled',true );
   //TODO 更换编辑器，这里必须修改；
-  var content  = $( '#content' ).val();
+  var content  = KE.util.getData('content');
   var title    = $( "input[name='title']" ).val( );
   var category = $( "select[name='category']" ).val();
   var privacy  = $( "select[name='privacy']" ).val();

@@ -50,7 +50,10 @@ class UserLwModel extends LW_Model {
 		return $result["name"];
 	}
 
-
+    public function getUserReg($uid){
+    	$regTime = $this->where('id='.$uid)->field('cTime')->find();
+    	return $regTime['cTime'];
+    }
 
 
 	public function getLoggedInUserLevel() {

@@ -27,9 +27,10 @@ class FriendLwModel extends LW_Model {
 	//根据gid获取uids
 	public function getGroupUids($gid,$format="php") {
 
-		$map_g["uid"]	 =  $uid?$uid:TS_D("User")->getLoggedInUser();
+		$map_g["uid"]	 =  TS_D("User")->getLoggedInUser();
 		if($gid) $map_g["gid"]	 =	$gid;
 		
+		$fuids = array();
 		$fuids = TS_D("Fg")->where($map_g)->field("DISTINCT fuid")->findAll();
 
 		foreach($fuids as $k=>$v){

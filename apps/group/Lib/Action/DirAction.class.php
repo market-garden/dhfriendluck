@@ -50,6 +50,8 @@ class DirAction extends BaseAction {
 		}
 		
 		$usedSpace = $this->dir->where('gid='.$this->gid.' AND is_del=0')->sum('filesize'); //判读空间大小
+
+		
 		if($usedSpace > $this->config['spaceSize']*1024*1024) {$this->error('空间已经使用完！');} //如果使用完成，提示错误信息
 		
 		//设置上传文件大小

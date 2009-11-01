@@ -52,7 +52,7 @@
          <li class="btmline">
          <div class="left" style="width: 10%;"><span class="headpic50"><a href="__TS__/space/{$uid}"><img src="{$vo['uid']|getUserFace}" /></a></span></div>
           <div class="left" style="width: 90%;">
-            <h3 class="f14px lh30"><span class="right"> <input type="button" value="分享" class="BtnShare" onclick="ts_sharePop('{$vo.id}','__URL__')" id="BtnShare_{$vo.id}"/></span><a href="__URL__/show/id/{$vo['id']}/mid/{$vo['uid']}"><strong>{$vo['title']}</strong></a></h3>
+            <h3 class="f14px lh30"><span class="right"> <php>if(isAddApp('share')) { </php><input type="button" value="分享" class="BtnShare" onclick="ts_sharePop('{$vo.id}','__URL__')" id="BtnShare_{$vo.id}"/><php> } </php></span><a href="__URL__/show/id/{$vo['id']}/mid/{$vo['uid']}"><strong>{$vo['title']}</strong></a></h3>
             <p><a href="__TS__/space/$friends['uid']">{$vo['name']}</a> <span class="cGray2">{$vo['cTime']|friendlyDate}</span>
             &nbsp;(分类:
             <a href="__URL__/personal/uid/{$uid}/cateId/{$vo['category']['id']}">{$vo['category']['name']}</a>

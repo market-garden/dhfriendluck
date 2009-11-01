@@ -211,30 +211,11 @@ function decode64(input)
 }
 
 $(function(){
-        ///	$.areaopt.bind('#ts_area');
         showTips();
-        
-        $("[selectArea='true']").bind("click", function(){
-                var type = $(this).attr('areatype');
-                var typevalue = $("#ts_"+type).val();
-                ymPrompt.win({
-                        message:TS+'/Index/network/type/'+type+'/selected/'+typevalue,
-                        width:600,
-                      //  height:370,
-                        height:420,
-                        title:'选择地区',
-                        handler:function(){
-                                ymPrompt.close();
-                        },
-                        autoClose:false,
-                        iframe:true,
-                        allowRightMenu:true
-                });
-        });
+
         if(MID!=0){
                 getMsgCount();
         }
-//$('#regform').checkForm();
 });
 
 function setCookie(name,value,exp) {
@@ -400,4 +381,26 @@ function checkJsToken(txt) {
                 return false;
         }
         return true
+}
+
+//全局分享
+function ts_sharePop(id,url,type){
+	var classId = '#BtnShare_'+id;
+	$(classId).attr('disabled','true');
+	
+	$.post(url+"/addShare_check/", {aimId:id}, function(txt){
+			if(txt==1){
+					ymPrompt.win(url+'/addShare/aimId/'+id+'/type/'+type,500,'315','分享',null,null,null,{id:'a'});
+			}else if(txt==-1){
+					ymPrompt.errorInfo('请不要分享自己发布的东西!');
+			}else if(txt==-2){
+					ymPrompt.errorInfo('您已经分享过,请不要重复分享!');
+			}else if(txt==-3){
+					ymPrompt.errorInfo('您没有权限分享!');
+			}else{
+					ymPrompt.errorInfo('参数出错,请重试!');
+			}
+			
+			$(classId).attr('disabled','');
+	});
 }

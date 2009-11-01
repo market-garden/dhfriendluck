@@ -4,7 +4,6 @@
 <script src="../Public/JS/Share.js" type="text/javascript"></script>
 <link href="../Public/share.css" rel="stylesheet" type="text/css" />
 <link href="__PUBLIC__/js/pagination/pagination.css" rel="stylesheet" type="text/css" />
-<link href="../Public/style.css" rel="stylesheet" type="text/css" />
 <link href="__THEME__/layout.css" rel="stylesheet" type="text/css" />
 <div class="content"><!-- 内容 begin  -->
   <!-- 用户组件列表 begin -->
@@ -58,7 +57,7 @@
           </div>
           <div class="LC">
             <div class="MC">
-              <h4><span class="right"><input type="button" value="分享" class="BtnShare" onclick="sharePop('{$vo.id}','__URL__')" id="BtnShare_{$vo.id}"/></span>分享了一个{$vo.typeId|getTypeName}<span class="cGray2 ml10">{$vo.cTime|friendlyDate}</span></h4>
+              <h4><span class="right"><php>if(isAddApp('share')) { </php><input type="button" value="分享" class="BtnShare" onclick="sharePop('{$vo.id}','__URL__')" id="BtnShare_{$vo.id}"/><php> } </php></span>分享了一个{$vo.typeId|getTypeName}<span class="cGray2 ml10">{$vo.cTime|friendlyDate}</span></h4>
               {$vo.data}
               
               <php>if(!empty($vo['info'])&&$vo['info']!='&nbsp;') { </php>

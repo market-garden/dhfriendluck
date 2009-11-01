@@ -56,9 +56,11 @@ class ShareLwModel extends LW_Model {
 			$this->_updateCount($mid);
 			//增加积分
 			$this->_addScoure($mid,$data,$type);
-		}
+			return $result;
+		}else{
+			return 0;
+		}	
 		
-		return $result;
 	}
 	
 	function getShareNum($uid=null){

@@ -193,7 +193,7 @@
                 <li>
                     <div class="left alR" style="width: 15%;">居住城市：</div><div class="left" style="width: 50%;">
                                         <input type="hidden" name="ts_areaval" id="ts_areaval" value="{$info.ts_areaval}"/>
-						<input type="text" class="TextH20" style="width:200px;" onfocus="this.className='Text2'" onblur="this.className='TextH20'" value="{$info.area}" name="areaval" disabled  id="areaval" require="true" datatype="require" msg="请输入你的居住城市！"/> <input type="button" class="btn_b" value="选择地区" selectArea="true" areatype="areaval" >
+						<input type="text" class="TextH20" style="width:200px;" onfocus="this.className='Text2'" onblur="this.className='TextH20'" value="{$info.area}" name="areaval" disabled  id="areaval" /> <input type="button" class="btn_b" value="选择地区" selectArea="true" level="2" areatype="areaval" >
 
                    </div>
                     <div class="left" style="width: 20%;">
@@ -231,7 +231,7 @@
                 <li>
                     <div class="left alR" style="width: 15%;">家乡：</div><div class="left" style="width: 50%;">
                                         <input type="hidden" name="ts_hometown" id="ts_hometown" value="{$info.ts_hometown}"/>
-						<input type="text" class="TextH20" style="width:200px;" onfocus="this.className='Text2'" onblur="this.className='TextH20'" value="{$info.hometown}" disabled name="hometown" id="hometown"/>  <input type="button" class="btn_b" value="选择地区" selectArea="true" areatype="hometown" >
+						<input type="text" class="TextH20" style="width:200px;" onfocus="this.className='Text2'" onblur="this.className='TextH20'" value="{$info.hometown}"  disabled name="hometown" id="hometown"/>  <input type="button" class="btn_b" value="选择地区" selectArea="true" level="2" areatype="hometown" >
 
                    </div>
                     <div class="left" style="width: 20%;">
@@ -354,3 +354,5 @@ $("#bloodtype option[value='{$info['bloodtype']}']").attr('selected',true);
 <div class="c"></div>
 </div><!-- 内容 end -->
 <include file="__THEME__/footer" />
+
+{:W('Network')}

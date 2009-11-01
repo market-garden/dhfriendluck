@@ -21,9 +21,10 @@
 class SystemGroupLwModel extends LW_Model
 {
 	var $table_name = 'system_group';
-	
+
 	function getGroupType($groupId){
-		$info = $this->where('id='.$groupId)->find();
+		$groupId	=	intval($groupId);
+		$info = $this->where("id='".$groupId."'")->find();
 		return $info['type'];
 	}
 }
