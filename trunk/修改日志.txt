@@ -21,8 +21,12 @@ commit test!! from 冯志强
 修改\thinksns\Tpl\default\Chat\box.html  中的title
 2009。10.31
 更新为正式版，以上改动均已调整，现在就差地区选项框了，要重新调整
+<<<<<<< .mine
+2009.11.2
+修改\thinksns\Lib\Widget\Network.html第15，47行  修正地区选项框
+=======
 修改\public\js\ymPrompt\ymPrompt.js 391行
 2009。11.01
 文件define.inc.php中
      define("SITE_PATH"	,	'E:/wamp/www/thinksns/');
-改为define("SITE_PATH"	,	'E:/wamp/www/thinksns');
+改为define("SITE_PATH"	,	'E:/wamp/www/thinksns');>>>>>>> .r103
