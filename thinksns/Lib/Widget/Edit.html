@@ -1,0 +1,23 @@
+<script type="text/javascript" src="__PUBLIC__/js/kindeditor/kindeditor.js"></script>
+<script type="text/javascript" charset="utf-8">
+    KE.show({
+        id : '{$id}',
+        resizeMode : 1,
+        cssPath : './index.css',
+        smileList:{$smileList},
+        smilePath:'{$smilePath}',
+        items:['cut','copy','source','justifyleft','justifycenter','justifyright','fontname','fontsize','textcolor',
+              'bgcolor',
+                  'bold',
+                  'italic',
+                  'underline',
+                  'removeformat',
+                  'image',
+                  'emoticons',
+                  'link',
+                  'unlink']
+    });
+</script>
+<textarea id="{$id}" name="{$name}" cols="{$cols}" rows="{$rows}" style="width:{$width}; padding:8px;" class="Text" onBlur="this.className='Text'" onFocus="this.className='Text1'">
+{$content}
+</textarea>
