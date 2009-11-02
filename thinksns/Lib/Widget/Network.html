@@ -1,0 +1,131 @@
+<style type="text/css">
+.btm{
+	background-color: #eeeeee;
+	text-align: right;
+	padding: 5px;
+	clear: both;
+}
+.pop .pop_ullist{
+	height:auto;
+}
+
+.pop .con{
+	clear:both;
+	border-top:1px solid #D1D1D1;
+	height:130px;
+	margin:0px;
+	padding:0px;
+}
+
+.pop .ullist li{ margin:4px; float:left; list-style-type:none; white-space: nowrap; }
+.pop .ullist a{ border:1px solid #FFF; display: block; }
+.pop .ullist .on a{ border:1px solid #3385CA; display: block; }
+
+</style>
+<script type="text/javascript">
+	var arrArea = new Array();
+	var arrAreaTitle = new Array();
+	var arealevel = 2;  //调用城市的级别
+	var type;
+
+	$("[selectArea='true']").bind("click", function(){
+	    type = $(this).attr('areatype');
+	    if($(this).attr('level')){
+	    	arealevel = $(this).attr('level');
+	    }
+		var selected = $("#ts_"+type).val();
+		var selectarr = selected.split(',');
+		var selecttext = $("#"+type).val().split(' ');
+		
+	    var html = '<div class="pop" id="pop_network">'+
+	    		   '<div id="pop_ullist" class="pop_ullist"></div>'+
+	    		   '<div style="margin:3px;color:red;clear:both;text-align:left;" id="selectmessage">'+
+	               '&nbsp;</div></div><div class="btm" id="f_button">'+
+                   '<input name="input" type="button" class="btn_b" value="确 定"  onclick="save()"/>'+
+                   '<input name="input2" type="button" class="btn_w" value="取 消" onclick="ymPrompt.close();" /></div>'+
+                   '</div>';
+	    ymPrompt.win(html,625,arealevel*85+205,'选择地区');
+	    
+	    //添加级数
+	    for(var i=1;i<=arealevel;i++){   	
+	    	addUL(i);
+	    	addSelect(i);
+	    }	    
+	    
+	    if(selectarr.length>1){
+	    	for(var i=1;i<=selectarr.length;i++){
+	    		$("#select_"+i).html(selecttext[(i-1)]);
+	    		arrArea[i] = selectarr[(i-1)];
+	    	}
+	    	getLiList(selected,'init',arealevel);
+	    }else{
+		    getLiList(0,0,0);
+	    }
+	});
+	
+	//选择下级地区
+	function selectarea(id,level,title){
+		if(arrArea[level]){
+			$("#node_"+arrArea[level]).attr('class','noon');
+		}
+		arrArea[level]       = id;
+		arrAreaTitle[level]  = title;
+		
+		for(var i=1;i<=arealevel;i++){
+			if(i>level){
+				$("#list_"+i).html('');
+				$("#select_"+i).html('');
+			}
+		}		
+		
+		
+		$("#node_"+id).attr('class','on');
+		$("#select_"+level).html(title);
+		if(level < arealevel){
+			getLiList(arrArea.join(','),level,0);
+		}
+
+	}
+	
+	function getLiList(pid,level,arealevel){
+		if(pid!=0 && level!='init'){
+			var p = parseInt(level)+1;
+			 $("#list_"+p).html('<li><img src="__PUBLIC__/images/logging.gif></li>');
+		}
+	    $.post('__TS__/Index/getNetwork/', {pid:pid,level:level,arealevel:arealevel}, function(txt){
+	    	if(txt){
+	    		if(level=='init'){
+	    			$("#pop_ullist").html(txt);
+	    		}else{
+	    			level++;
+		    		 $("#list_"+level).html(txt);
+	    		}
+	    	}
+	    });		
+	}
+	
+	function addUL(level){
+		if(!$("#list_"+level).is('ul')){
+			$('#pop_ullist').append('<div class="con"><ul class="ullist" id="list_'+level+'">&nbsp;</ul></div>');
+		}
+	}
+	
+	function addSelect(i){
+		if(!$("#select_"+i).is('span')){
+			$("#selectmessage").append('<span id="select_'+i+'" style="margin-left:5px;">&nbsp;</span>');
+		}
+	}
+	
+	function save(){
+		if(arrArea.length==0){
+			alert('请选择地区');
+		}else{
+			$("#"+type).val($.trim(arrAreaTitle.join(' ')));
+			arrArea.splice(0,1);
+			$("#ts_"+type).val(arrArea);
+			ymPrompt.close();
+		}
+	}
+	
+
+</script>
